@@ -22,6 +22,9 @@ const base = import.meta.env.BASE_URL;
         <HeaderNavItem>
           <a href="">Join the discussion</a>
         </HeaderNavItem>
+        <HeaderNavItem>
+          <a href="posts">Create Projects Markdown</a>
+        </HeaderNavItem>
       
         <HeaderNavItem>
           <Menu id="menu-Home" menuTitle="Home" :disabledItems="['menuitem-1', 'menuitem-2', 'menuitem-people']" :isBordered="true" type="simple" >
