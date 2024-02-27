@@ -20,12 +20,14 @@ import "agnostic-vue/dist/index.css";
 import TAPDefaultLayout from "../layouts/default.astro";
 import ProjectSearch from "../components/ProjectSearch.vue";
 import { Input } from "agnostic-vue";
+import ProjectTemplate from '../components/ProjectTemplate.vue';
 ---
 <TAPDefaultLayout title="Outreach Projects">
 
     <h2>Search TAP Outreach Projects</h2>
 
     <ProjectSearch client:load />  
+    <ProjectTemplate client:load/>
 
 </TAPDefaultLayout>
 

@@ -11,8 +11,6 @@ import { getCollection } from 'astro:content';
 const projects = await getCollection('projects');  //list of projects
 function createOptions(projects, x) {
     let optionSet = new Set();
-    //Add default option
-    optionSet.add("Any");
     projects.forEach(arrayContainer =>{
         if(Array.isArray(arrayContainer.data[x])){
             arrayContainer.data[x].forEach(element =>{
@@ -23,21 +21,35 @@ function createOptions(projects, x) {
         }
         
     });
-    return optionSet;
+    return Array.from(optionSet);
 }
+let projectName = ref('');
+let projectDescrip = ref('');
+let github = ref('');
 
-let searchTech = ref('');
+//Tech related
+let searchTerm = ref('');
+let selectedTech = ref('');
 let techList = createOptions(projects, "techs");
 
+//Semester related
+let selectedSemester = ref('');
+
+//Duration related
+let duration = ref([]);
+let durationList = createOptions(projects, "durationMins").map((val) =>{})
+
+
 const searchTech = computed(() =>{
-    if(searchTech == ''){
+    if(searchTerm == ''){
         return [];
     }
 
     // we need to find matches 
     let matches = 0;
+    console.log(techList);
     return techList.filter(tech =>{
-        if(tech.toLowerCase().includes(searchText.value.toLowerCase()) && matches < 10){
+        if(tech.toLowerCase().includes(searchTerm.value.toLowerCase()) && matches < 10){
             matches++;
             return tech;
         }
@@ -45,6 +57,12 @@ const searchTech = computed(() =>{
     })
 
 });
+
+const selectTech = (tech) =>{
+    selectedTech.value = tech;
+    console.log(selectedTech.value);
+    searchTerm.value ='';
+}
 
 // let markdownFile = 
 // "---
@@ -70,16 +88,37 @@ const searchTech = computed(() =>{
 </script>
 <template>
     <section class="mbe40">
-        <label>Enter Project Name:</label>
-        <input type="text" id="tech" placeholder="Type tech" v-model="searchTerm">
-        <label>Enter Project Description</label>
-        <input>
+        <div>
+            <Input id="4" size="" label="Enter Project Name" placeholder="Example: Atomic Force Microscopy" type="text"></Input>
+        </div>
+        <div>
+            <Input size="medium" label="Enter Project Description" type="text"></Input>
+        </div>
+        <div>
+            <Input type="text" id="tech" label="Enter Tech" placeholder="Type tech" v-model="searchTerm">
+            </Input>
+            <ul v-if="searchTech.length">
+            <li>Showing {{ searchTech.length }} of {{ techList.length }} results</li>
+            <li v-for="tech in searchTech" :key="tech" @click="selectTech(tech)"> {{ tech }}</li>
+            </ul>
+        </div>
+        <div>
+            <Input type="text" label="Enter Github page" v-model="github"/>
+        </div>
+        <div>
+            <Select unique-id="dur" :options="durationList" :is-multiple="true" :multiple-size="3" @selected="(value) => { duration = value }"/>
+        </div>
+        
+
 
         <!--To get the students from dropdown menu or to manually enter the students by email-->
-        <label>Enter Students name</label>
+        
         <!--Autocomplete input form to show students available-->
-        <input>
-
+        <div>
+            
+        </div>
+        
+    
         
 
 
