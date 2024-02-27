@@ -48,13 +48,17 @@ const searchTech = computed(() =>{
     // we need to find matches 
     let matches = 0;
     console.log(techList);
-    return techList.filter(tech =>{
+    let optionsList = techList.filter(tech =>{
         if(tech.toLowerCase().includes(searchTerm.value.toLowerCase()) && matches < 10){
             matches++;
             return tech;
         }
 
-    })
+    });
+    return optionsList.map(val => ({value:val, label:val}));
+    //filter
+    //matches to 10
+    //populates the options with that
 
 });
 
@@ -89,14 +93,17 @@ const selectTech = (tech) =>{
 <template>
     <section class="mbe40">
         <div>
-            <Input id="4" size="" label="Enter Project Name" placeholder="Example: Atomic Force Microscopy" type="text"></Input>
+            <Input id="4" size="" v-model="projectName" label="Enter Project Name" placeholder="Example: Atomic Force Microscopy" type="text"></Input>
         </div>
         <div>
-            <Input size="medium" label="Enter Project Description" type="text"></Input>
+            <Input size="medium" v-model="projectDescrip" label="Enter Project Description" type="text"></Input>
         </div>
         <div>
-            <Input type="text" id="tech" label="Enter Tech" placeholder="Type tech" v-model="searchTerm">
+            <Input multiple type="text" id="tech" list="techData" label="Enter Tech" placeholder="Type tech" v-model="searchTerm">
             </Input>
+            <datalist id="techData">
+                <option v-for="tech of techList">{{ tech }}</option>
+            </datalist>
             <ul v-if="searchTech.length">
             <li>Showing {{ searchTech.length }} of {{ techList.length }} results</li>
             <li v-for="tech in searchTech" :key="tech" @click="selectTech(tech)"> {{ tech }}</li>
@@ -106,8 +113,13 @@ const selectTech = (tech) =>{
             <Input type="text" label="Enter Github page" v-model="github"/>
         </div>
         <div>
-            <Select unique-id="dur" :options="durationList" :is-multiple="true" :multiple-size="3" @selected="(value) => { duration = value }"/>
-        </div>
+            
+         </div>
+
+         <p>Project Name: {{ projectName }}</p>
+         <p>Project Description : {{ projectDescrip }}</p>
+         <p>Project Github Page: {{ github }}</p>
+         <p>Project Tech: {{ searchTerm }}</p>
         
 
 
