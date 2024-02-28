@@ -102,7 +102,7 @@ const selectTech = (tech) =>{
             <Input multiple type="text" id="tech" list="techData" label="Enter Tech" placeholder="Type tech" v-model="searchTerm">
             </Input>
             <datalist id="techData">
-                <option v-for="tech of techList">{{ tech }}</option>
+                <option v-for="tech of techList" :value="tech">{{ tech }}</option>
             </datalist>
             <ul v-if="searchTech.length">
             <li>Showing {{ searchTech.length }} of {{ techList.length }} results</li>
