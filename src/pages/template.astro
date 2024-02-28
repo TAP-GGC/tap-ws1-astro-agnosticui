@@ -1,0 +1,19 @@
+---
+import ProjectTemplate from "../components/ProjectTemplate.vue";
+
+import TAPDefaultLayout from "../layouts/default.astro";
+
+import "agnostic-vue/dist/index.css";
+import "agnostic-vue/dist/common.properties.min.css";
+import "agnostic-vue/dist/common.resets.min.css";
+import "agnostic-vue/dist/common.utilities.min.css";
+import "agnostic-vue/dist/opinions.min.css";
+
+// Style Imports
+import '../styles/global.css';
+---
+<TAPDefaultLayout title="Outreach Projects">
+
+    <ProjectTemplate client:load></ProjectTemplate>
+
+</TAPDefaultLayout>

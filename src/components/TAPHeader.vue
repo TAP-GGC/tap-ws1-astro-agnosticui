@@ -23,7 +23,7 @@ const base = import.meta.env.BASE_URL;
           <a href="">Join the discussion</a>
         </HeaderNavItem>
         <HeaderNavItem>
-          <a href="posts">Create Projects Markdown</a>
+          <a href="template">Create Projects Markdown</a>
         </HeaderNavItem>
       
         <HeaderNavItem>
