@@ -23,6 +23,7 @@ function createOptions(projects, x) {
     });
     return Array.from(optionSet);
 }
+
 let projectName = ref('');
 let projectDescrip = ref('');
 let github = ref('');
@@ -34,14 +35,24 @@ let techList = createOptions(projects, "techs");
 
 //Semester related
 let selectedSemester = ref('');
+let Semesters =[{value:'Any', label:'Any'},{value: 'fall', label:'Fall'}, {value: 'spring', label:'Spring'}, {value: 'summer', label:'Summer'}];
+
+//tag related
+const techTags = ref([]);
+const newTag = ref('');
+
+//year related
+let date = new Date();
+let year = date.getFullYear();
+let selectedYear = ref('');
+
+//difficulty related
+let difficulty = ref([]);
 
 //Duration related
 let duration = ref([]);
 let durationList = createOptions(projects, "durationMins").map((val) =>{})
 
-//tag related
-const techTags = ref([]);
-const newTag = ref('');
 
 const addTag = (tag) =>{
     if(tag != ''){
@@ -82,27 +93,6 @@ const selectTech = (tech) =>{
     searchTerm.value ='';
 }
 
-// let markdownFile = 
-// "---
-// title: {}
-// id: {}
-// desc: 
-// github: []
-// students: []
-// instructors: [ Anca Doloc-Mihu, Cindy Robertson]
-// techs: [sphero]
-// videos: []
-// tags: []
-// events: [CCSC-2023, S3-fall-2023]
-// semester: fall
-// year: 2023
-// levels: [ k-12, college ] 
-// difficulty: [ beginner, intermediate ]
-// durationMins: [ 30, 60, 90 ]
-// publishedDate: 2023-11-05
-// related-ids: []
-// ---
-// "
 </script>
 <template>
     <section class="mbe40">
@@ -137,13 +127,37 @@ const selectTech = (tech) =>{
             <Input type="text" label="Enter Github page" v-model="github"/>
         </div>
         <div>
-            
+            <Input type="text" label="Enter Student"/>
          </div>
+         <div> <!--Enter the videos. Once clicked, it should be pushed into an array-->
+            <Input type="text" label="Enter video url"/>
+         </div>
+         <div> <!--events-->
+            <Input/>
+         </div>
+         <div>
+            <Select :option="Semesters" @selected="(value) => { selectedSemester = value }">
+            </Select>
+         </div>
+         <div> <!--levels-->
+            <Input/>
+         </div>
+         <div> <!--difficulty-->
 
+         </div>
+         <p>---</p>
          <p>Project Name: {{ projectName }}</p>
          <p>Project Description : {{ projectDescrip }}</p>
          <p>Project Github Page: {{ github }}</p>
          <p>Project Tech: {{ searchTerm }}</p>
+         <p>Project Student: </p>
+         <p>Project video url: </p>
+         <p>Project tags: </p>
+         <p>Project events: </p>
+         <p>Project Semester: {{ selectedSemester }}</p>
+         <p>Project year: {{ selectedYear? selectedYear : year }}</p>
+         <p>Project levels: </p>
+         <p>Project difficulty: </p>
         
 
 
