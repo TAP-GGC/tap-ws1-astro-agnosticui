@@ -1,5 +1,5 @@
 ---
-title: Project 2
+title: Project 3
 id: project-2
 desc: This is project is about...
 github: https://github.com
@@ -16,7 +16,7 @@ difficulty: [ advanced ]
 durationMins: [ 30, 60, 90 ]
 publishedDate: 2023-11-05
 related-ids: []
-image: ./project3/Svelte-icon.svg
+image: ./Svelte-icon.svg
 ---
 
 # Project 2
@@ -29,4 +29,4 @@ Great project description here.
 
 Link.
 
-👀 Image
+👀 ![Svelte image](./Svelte-icon.svg)

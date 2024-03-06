@@ -16,6 +16,7 @@ difficulty: [ beginner, intermediate ]
 durationMins: [ 30, 60, 90 ]
 publishedDate: 2023-11-05
 related-ids: []
+image: ./project3/Svelte-icon.svg
 ---
 
 Great project description here.

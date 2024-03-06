@@ -28,14 +28,26 @@ let projectName = ref('');
 let projectDescrip = ref('');
 let github = ref('');
 
+//student related
+let selectedStudents = ref([]);
+let studentTerm = ref('');
+let studentList = createOptions(projects, "students");
+
+//instructors related
+let selectedInstructors = ref([]);
+let InstructorList = createOptions(projects, "instructors");
+
 //Tech related
 let techTerm = ref('');
 let selectedTech = ref('');
 let techList = createOptions(projects, "techs");
 
+//video url
+let vidUrl = ref('');
+
 //Semester related
 let selectedSemester = ref('');
-let Semesters =[{value:'Any', label:'Any'},{value: 'fall', label:'Fall'}, {value: 'spring', label:'Spring'}, {value: 'summer', label:'Summer'}];
+let semesters =[{value:'Any', label:'Any'},{value: 'fall', label:'Fall'}, {value: 'spring', label:'Spring'}, {value: 'summer', label:'Summer'}];
 
 //tag related
 const techTags = ref([]);
@@ -53,7 +65,15 @@ let difficulty = ref([]);
 let duration = ref([]);
 let durationList = createOptions(projects, "durationMins").map((val) =>{})
 
-
+const addItem = (inputField, category)=>{
+    if(inputField!= ''){
+        console.log(category);
+        return inputField ='';
+        category.push(inputField);
+        inputField="hello";
+    }
+    
+}
 const addTag = (tag) =>{
     if(tag != ''){
         techTags.value.push(tag);
@@ -87,12 +107,6 @@ const searchTech = computed(() =>{
 
 });
 
-const selectTech = (tech) =>{
-    selectedTech.value = tech;
-    console.log(selectedTech.value);
-    searchTerm.value ='';
-}
-
 </script>
 <template>
     <section class="mbe40">
@@ -109,12 +123,6 @@ const selectTech = (tech) =>{
             <datalist id="techData">
                 <option v-for="tech of techList" :value="tech">{{ tech }}</option>
             </datalist>
-
-            <!--Code for displaying the results from the filtered option-->
-            <ul v-if="searchTech.length">
-            <li>Showing {{ searchTech.length }} of {{ techList.length }} results</li>
-            <li v-for="tech in searchTech" :key="tech" @click="selectTech(tech)"> {{ tech }}</li>
-            </ul>
             <ul class="tagList">
                 <li v-for="(tag, index) in techTags" :key="tag" class="tag">{{ tag }}
                 <button @click="removeTag(index)" class="delete">x</button>
@@ -127,16 +135,17 @@ const selectTech = (tech) =>{
             <Input type="text" label="Enter Github page" v-model="github"/>
         </div>
         <div>
-            <Input type="text" label="Enter Student"/>
+            <Input type="text" list="studentData" label="Enter Student" v-model="studentTerm" @keydown.enter.stop="addItem({studentTerm}, {selectedStudents})"/>
+            <datalist id="studentData"><option v-for="student in studentList" :value="student">{{ student }}</option></datalist>
          </div>
          <div> <!--Enter the videos. Once clicked, it should be pushed into an array-->
-            <Input type="text" label="Enter video url"/>
+            <Input type="text" label="Enter video url" v-model="vidUrl"/>
          </div>
          <div> <!--events-->
-            <Input/>
+            <Input type="text" label="Enter Events"/>
          </div>
          <div>
-            <Select :option="Semesters" @selected="(value) => { selectedSemester = value }">
+            <Select :options="semesters" @selected="(value) => { selectedSemester = value }">
             </Select>
          </div>
          <div> <!--levels-->
@@ -147,17 +156,25 @@ const selectTech = (tech) =>{
          </div>
          <p>---</p>
          <p>Project Name: {{ projectName }}</p>
+         <!--Propose a id, User can write id, use a placeholder-->
+         <p>Project Id: {{ projectName.trim() }}</p>
          <p>Project Description : {{ projectDescrip }}</p>
          <p>Project Github Page: {{ github }}</p>
-         <p>Project Tech: {{ searchTerm }}</p>
-         <p>Project Student: </p>
-         <p>Project video url: </p>
+         <p>Project Student: {{ selectedStudents }}</p>
+         <p>Project Instructors: </p>
+         <p>Project Tech: {{ techTags }}</p>
+         <p>Project video url: {{ vidUrl }}</p>
          <p>Project tags: </p>
          <p>Project events: </p>
          <p>Project Semester: {{ selectedSemester }}</p>
          <p>Project year: {{ selectedYear? selectedYear : year }}</p>
          <p>Project levels: </p>
          <p>Project difficulty: </p>
+         <p>Project Duration: {{ duration }}</p>
+         <p>Project Published Date: {{ year }}</p>
+         <!--Input Dropdown, Value: id, label: project title-->
+         <p>Project Related Ids: </p>
+
         
 
 
