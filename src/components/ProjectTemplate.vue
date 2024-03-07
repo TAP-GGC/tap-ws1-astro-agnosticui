@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref} from "vue";
 // Components CSS
 import "agnostic-vue/dist/index.css";
 import "agnostic-vue/dist/common.min.css";
@@ -66,10 +66,15 @@ let duration = ref([]);
 let durationList = createOptions(projects, "durationMins").map((val) =>{})
 
 const addItem = (inputField, category)=>{
+    console.log(inputField);
+    console.log(typeof inputField);
+    console.log(category);
+    console.log(typeof category);
     if(inputField!= ''){
         console.log(category);
-        return inputField ='';
-        category.push(inputField);
+        inputField ='';
+        
+        category.category.target.value.push(inputField);
         inputField="hello";
     }
     
@@ -124,10 +129,12 @@ const searchTech = computed(() =>{
                 <option v-for="tech of techList" :value="tech">{{ tech }}</option>
             </datalist>
             <ul class="tagList">
-                <li v-for="(tag, index) in techTags" :key="tag" class="tag">{{ tag }}
+                <!-- <li v-for="(tag, index) in techTags" :key="tag" class="tag">{{ tag }}
                 <button @click="removeTag(index)" class="delete">x</button>
-                </li>
-                <Tag v-for="(tag, index) in techTags" :key="tag" class="mie6" shape="round" is-uppercase>{{tag}}</Tag>
+                </li> -->
+                <Tag v-for="(tag, index) in techTags" :key="tag" class="mie6" shape="round" type="info" is-uppercase>{{tag}}
+                    <button @click="removeTag(index)" class="delete">&#x2718;</button>
+                </Tag>
             </ul>
             
         </div>
@@ -135,7 +142,7 @@ const searchTech = computed(() =>{
             <Input type="text" label="Enter Github page" v-model="github"/>
         </div>
         <div>
-            <Input type="text" list="studentData" label="Enter Student" v-model="studentTerm" @keydown.enter.stop="addItem({studentTerm}, {selectedStudents})"/>
+            <Input type="text" list="studentData" label="Enter Student" v-model="studentTerm" @keydown.enter.stop="addItem(studentTerm, selectedStudents)"/>
             <datalist id="studentData"><option v-for="student in studentList" :value="student">{{ student }}</option></datalist>
          </div>
          <div> <!--Enter the videos. Once clicked, it should be pushed into an array-->
