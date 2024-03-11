@@ -63,6 +63,11 @@ let date = new Date();
 let year = date.getFullYear();
 let selectedYear = ref('');
 
+//level related
+let levelTerm = ref('');
+let selectedLevels = ref([]);
+const levelList = createOptions(projects,"levels");
+
 //difficulty related
 let difficulty = ref([]);
 
@@ -72,8 +77,12 @@ let durationList = createOptions(projects, "durationMins").map((val) =>{})
 
 //failed reusable method
 const addItem = (inputField, category)=>{
-    switch(inputField){
-        case ''
+    switch(category){
+        case 'student':
+            selectedStudents.value.push(inputField);
+            break;
+        case 'event':
+
     }
     console.log(inputField);
     console.log(typeof inputField);
@@ -83,11 +92,47 @@ const addItem = (inputField, category)=>{
         console.log(category);
         inputField ='';
         
-        category.category.target.value.push(inputField);
+        category.value.push(inputField);
         inputField="hello";
     }
     
 }
+
+function addTerm(termRef, inputField){
+    let category;
+    switch(termRef){
+        case "levelTerm":
+            category = selectedLevels;
+            break;
+        case "eventTerm":
+            category = selectedEvents;
+            break;
+        case "studentTerm":
+            category = selectedStudents;
+            break;
+    }
+    console.log("This is category: "+category);
+    console.log(category)
+    if(inputField != ''){
+        console.log(inputField);
+        category.value.push(inputField);
+        this[termRef] = '';
+    }
+}
+
+// const addTerm = (arrayRef, termRef) =>{
+//     return (item) => {
+//         if(item != ''){
+//             arrayRef.value.push(termRef);
+//             console.log(arrayRef.value);
+//             termRef.value ='';
+//         }
+//     };
+// };
+
+//Setters
+
+//const addLevel = addItem2(levelTerm, selectedLevels);
 
 const addStudent = (student) =>{
     if(student != ''){
@@ -154,7 +199,7 @@ const searchTech = computed(() =>{
                 <!-- <li v-for="(tag, index) in techTags" :key="tag" class="tag">{{ tag }}
                 <button @click="removeTag(index)" class="delete">x</button>
                 </li> -->
-                <Tag v-for="(tag, index) in techTags" :key="tag" class="mie6" shape="round" type="info" is-uppercase>{{tag}}
+                    <Tag v-for="(tag, index) in techTags" :key="tag" class="mie6" shape="round" type="info" is-uppercase>{{tag}}
                     <button @click="removeTag(index)" class="delete">&#x2718;</button>
                 </Tag>
             </ul>
@@ -164,26 +209,29 @@ const searchTech = computed(() =>{
             <Input type="text" label="Enter Github page" v-model="github"/>
         </div>
         <div>
-            <Input type="text" list="studentData" label="Enter Student" v-model="studentTerm" @keydown.enter.stop="addStudent(studentTerm )"/>
+            <Input type="text" list="studentData" label="Enter Student" v-model="studentTerm" @keydown.enter.stop="addTerm('studentTerm',studentTerm )"/>
             <datalist id="studentData"><option v-for="student in studentList" :value="student">{{ student }}</option></datalist>
          </div>
          <div> <!--Enter the videos. Once clicked, it should be pushed into an array-->
             <Input type="text" label="Enter video url" v-model="vidUrl"/>
          </div>
          <div> <!--events-->
-            <Input type="text" list="eventData" label="Enter Events" v-model="eventTerm" @keydown.enter="addEvent(eventTerm)"/>
+            <Input type="text" list="eventData" label="Enter Events" v-model="eventTerm" @keydown.enter="addTerm('eventTerm',eventTerm)"/>
             <datalist id="eventData"><option v-for="event in eventList" :value="event">{{ event }}</option></datalist>
+            <ul class="tagList"></ul>
          </div>
          <div>
             <Select :options="semesters" @selected="(value) => { selectedSemester = value }">
             </Select>
          </div>
          <div> <!--levels-->
-            <Input/>
+            <Input type="text" list="listData" label="Enter Level" v-model="levelTerm" @keydown.enter.stop="addTerm('levelTerm',levelTerm)"/>
+            <datalist id="listData"><option v-for="level in levelList" :value="level">{{ level }}</option></datalist>
          </div>
          <div> <!--difficulty-->
 
          </div>
+         
          <p>---</p>
          <p>Project Name: {{ projectName }}</p>
          <!--Propose a id, User can write id, use a placeholder-->
@@ -198,7 +246,7 @@ const searchTech = computed(() =>{
          <p>Project events: {{selectedEvents}}</p>
          <p>Project Semester: {{ selectedSemester }}</p>
          <p>Project year: {{ selectedYear? selectedYear : year }}</p>
-         <p>Project levels: </p>
+         <p>Project levels: {{ selectedLevels }} </p>
          <p>Project difficulty: </p>
          <p>Project Duration: {{ duration }}</p>
          <p>Project Published Date: {{ year }}</p>
@@ -230,6 +278,7 @@ const searchTech = computed(() =>{
 .tagList {
     list-style: none;
     display:flex;
+    flex-wrap:wrap;
     align-items: center;
     gap:7px;
     margin:0;
