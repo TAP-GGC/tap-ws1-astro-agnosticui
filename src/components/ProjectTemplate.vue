@@ -31,16 +31,16 @@ let github = ref('');
 //student related
 let selectedStudents = ref([]);
 let studentTerm = ref('');
-let studentList = createOptions(projects, "students");
+const studentList = createOptions(projects, "students");
 
 //instructors related
 let selectedInstructors = ref([]);
-let InstructorList = createOptions(projects, "instructors");
+const InstructorList = createOptions(projects, "instructors");
 
 //Tech related
 let techTerm = ref('');
 let selectedTech = ref('');
-let techList = createOptions(projects, "techs");
+const techList = createOptions(projects, "techs");
 
 //video url
 let vidUrl = ref('');
@@ -52,6 +52,11 @@ let semesters =[{value:'Any', label:'Any'},{value: 'fall', label:'Fall'}, {value
 //tag related
 const techTags = ref([]);
 const newTag = ref('');
+
+//event related
+let eventTerm = ref('');
+let selectedEvents = ref([]);
+const eventList = createOptions(projects, "events");
 
 //year related
 let date = new Date();
@@ -65,7 +70,11 @@ let difficulty = ref([]);
 let duration = ref([]);
 let durationList = createOptions(projects, "durationMins").map((val) =>{})
 
+//failed reusable method
 const addItem = (inputField, category)=>{
+    switch(inputField){
+        case ''
+    }
     console.log(inputField);
     console.log(typeof inputField);
     console.log(category);
@@ -78,6 +87,19 @@ const addItem = (inputField, category)=>{
         inputField="hello";
     }
     
+}
+
+const addStudent = (student) =>{
+    if(student != ''){
+        selectedStudents.value.push(student);
+        studentTerm.value = '';
+    }
+}
+const addEvent = (event) =>{
+    if(event != '' && !selectedEvents.value.includes(event)){
+        selectedEvents.value.push(event);
+        eventTerm.value='';
+    }
 }
 const addTag = (tag) =>{
     if(tag != ''){
@@ -142,14 +164,15 @@ const searchTech = computed(() =>{
             <Input type="text" label="Enter Github page" v-model="github"/>
         </div>
         <div>
-            <Input type="text" list="studentData" label="Enter Student" v-model="studentTerm" @keydown.enter.stop="addItem(studentTerm, selectedStudents)"/>
+            <Input type="text" list="studentData" label="Enter Student" v-model="studentTerm" @keydown.enter.stop="addStudent(studentTerm )"/>
             <datalist id="studentData"><option v-for="student in studentList" :value="student">{{ student }}</option></datalist>
          </div>
          <div> <!--Enter the videos. Once clicked, it should be pushed into an array-->
             <Input type="text" label="Enter video url" v-model="vidUrl"/>
          </div>
          <div> <!--events-->
-            <Input type="text" label="Enter Events"/>
+            <Input type="text" list="eventData" label="Enter Events" v-model="eventTerm" @keydown.enter="addEvent(eventTerm)"/>
+            <datalist id="eventData"><option v-for="event in eventList" :value="event">{{ event }}</option></datalist>
          </div>
          <div>
             <Select :options="semesters" @selected="(value) => { selectedSemester = value }">
@@ -171,8 +194,8 @@ const searchTech = computed(() =>{
          <p>Project Instructors: </p>
          <p>Project Tech: {{ techTags }}</p>
          <p>Project video url: {{ vidUrl }}</p>
-         <p>Project tags: </p>
-         <p>Project events: </p>
+         <!-- <p>Project tags: </p> -->
+         <p>Project events: {{selectedEvents}}</p>
          <p>Project Semester: {{ selectedSemester }}</p>
          <p>Project year: {{ selectedYear? selectedYear : year }}</p>
          <p>Project levels: </p>
