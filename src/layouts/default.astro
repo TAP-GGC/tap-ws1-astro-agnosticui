@@ -43,6 +43,16 @@ let bodyClass = Astro.props.class;
 	<title>{title}</title>
 
 	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+	<!-- Google tag (gtag.js) -->
+	<script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-L6HGVGHGF3"></script>
+	<script type="text/partytown">
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-L6HGVGHGF3');
+	</script>
 </head>
 
 <body class={bodyClass}>
