@@ -50,29 +50,53 @@ imageLogoDark: ./SOSquest-logo-dark.png
 imageTeam: ./ninjaturtlesGroupPhoto.png
 videoAd: ""
 ---
+import { Image } from "astro:assets";
+import Photo from '/src/components/astro/Photo.astro';
+import Logo from '/src/components/astro/Logo.astro';
+import ninjaturtlesGroupPhoto from './ninjaturtlesGroupPhoto.png';
+import makeyboardclip from './makeyboardclip.gif';
+import NinjaTurtlesASF2 from './NinjaTurtlesASF2.png';
+import NinjaTurtlesS3 from './NinjaTurtlesS3.png';
+import scratchlogo from './scratchlogo.png';
+import blockBase from './block-basedlanguage.png';
 
-<!--Right text block, Project description -->	
 
+
+{/* Right text block, Project description */}	
  The two primary goals of this project is teaching the students the basics of Scratch and giving them a crash course on algorithms.
-
  Scratch is a block-based programming language developed by the MIT Media Lab as an educational tool for children. Through our classroom workshops and outreach activities, students get to learn how to program character movement and sprite animation in Scratch, using the fundamental programming concepts such as variables, if-else statements, and loops. These experiences will help them develop problem-solving and logical reasoning skills that can be applied to other programming languages as well as other fields outside of computing. Through this project, we hope to increase interest and participation in STEM; and show that learning how to program can be fun and creative.
-
  The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) is a project-based class that provides a collaborative environment for students to work with their fellow classmates on a semester-long project using technologies of their choice. TAP strives to increase participation in IT through numerous outreach activities and workshops that are designed to showcase the creative and fun side of technology.
 
  <iframe width="560" class="youtube" src="https://www.youtube.com/embed/mA80Aa55t-U?si=e9hff-A35m2-NLSN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
- <!--content block, Activities, steps & materials -->
+<div style="text-align:center;">
+## Team members
+<Image src={ninjaturtlesGroupPhoto} alt="Ninja Turtles Photo" />
+#### From left to right: Anh Tang , Julissa Valdez-Ramos , Jean Makita Mbama
+<br />
+</div>
 
+{/* content block, Activities, steps & materials */}
 <div style="text-align: center ; justify-content: center; font-size: 1.125em;">
-
   ## Outreach Activities: 
-
   1. Tap Expo, February 29th, Georgia Gwinnett College - To promote IT field and the TAP program to college students.
   2. Atlanta Science Festival, March 23, Piedmont Park - To promote computing and technology to children.
   3. Super Saturday Series (S3), April 13, Georgia Gwinnett College - Middle school girls to promote IT and STEM career.
   4. Class Workshops on April 5, April 9, April 11, and April 12, to promote IT field to non-IT college students.
-
 </div>
+
+## Gallery
+<div style='text-align:center; display: grid; justify-content: center; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); grid-gap: 20px; font-size: 1.25em;'>
+<Photo src={NinjaTurtlesS3.src} alt="NinjaTurtlesS3" caption="Ninja Turtles at S3 photo" />
+<Photo src={NinjaTurtlesASF2.src} alt="NinjaturlesASF2" caption="Ninja Turles at Atlanta Science Festival" />
+</div>
+
+{/* <!--CONTENT BLOCK --> */}
+## Project Setup & Installation:
+- [Opening a blank Scratch page](https://github.com/TAP-GGC/NinjaTurtles/blob/main/Documents/tutorial/Opening%20a%20blank%20Scratch%20page.md)
+- [Getting to the game](https://github.com/TAP-GGC/NinjaTurtles/blob/main/Documents/tutorial/Getting%20to%20the%20Game.md)
+- [Short Demo Instructions](https://youtu.be/mA80Aa55t-U)
+- [Workshop Instructions](https://github.com/TAP-GGC/NinjaTurtles/blob/main/Documents/tutorial/Scratch%20Workshop%20Walkthrough.pdf)
 
 
 <div class="flex flex-row flex-wrap">
@@ -105,42 +129,13 @@ videoAd: ""
   </div>
 </div>
 
-<!-- Group Photo -->
-<div style="text-align:center;">
-  <br>
-  <br>
-  <br>
-
-![NinjaTurtlesPhoto](./ninjaturtlesGroupPhoto.png)
-  ##### From left to right: Anh Tang , Julissa Valdez-Ramos , Jean Makita Mbama 
-  <br>
-
-  ![Scarth Logo](./scratchlogo.png)
-  <br>
-  ![Makey board clip](./makeyboardclip.gif)
-  <br>
-  <br>
-  ![Block-based language](./block-basedlanguage.png)
+## Technology
+<div style='text-align:center; display: flex; justify-content: center; font-size: 1.25em'>
+<Logo src= {blockBase.src} alt="Block-based Language"  />
+<Logo src= {makeyboardclip.src} alt="Makey Board Clip"/>
+<Logo src={scratchlogo.src} link="https://scratch.mit.edu/"/>
 </div>
 
-<!--CONTENT BLOCK -->
-## Project Setup & Installation:
-- [Opening a blank Scratch page](https://github.com/TAP-GGC/NinjaTurtles/blob/main/Documents/tutorial/Opening%20a%20blank%20Scratch%20page.md)
-- [Getting to the game](https://github.com/TAP-GGC/NinjaTurtles/blob/main/Documents/tutorial/Getting%20to%20the%20Game.md)
-- [Short Demo Instructions](https://youtu.be/mA80Aa55t-U)
-- [Workshop Instructions](https://github.com/TAP-GGC/NinjaTurtles/blob/main/Documents/tutorial/Scratch%20Workshop%20Walkthrough.pdf)
 
 
-<!-- Group Photo -->
-## Photo Gallery
-![Ninja Turtles at ASF](./NinjaTurtlesASF2.png)
-##### Atlanta Science Festival
-<br>
-<br>
-
-![Ninja Turtles at S3](./NinjaTurtlesS3.png)
-##### S3
-<br>
-
-</div>
 

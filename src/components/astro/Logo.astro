@@ -1,0 +1,38 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  link: string;
+}
+const { src, alt, link} = Astro.props;
+---
+
+<section class="logo-section">
+    {link ? ( 
+        <a href={link} target="blank" rel="noopener noreferrer">
+            <img src={src} alt={alt} class="logo" />
+        </a>
+    ):(
+        <img src={src} alt={alt} class="logo"/>
+    )}
+    {<p class="caption">{alt}</p>}
+</section>
+
+<style>
+    .logo-section{
+        text-align: center;
+        margin: 1em 0.5em;
+    }
+    .logo{
+        height: 250px;
+        width: auto;
+        transition: transform 0.05s;
+    }
+    .caption {
+        font-size: 1em;
+        margin-top: 0.5em;
+    }
+    .logo:hover{
+        transform: scale(1.1);
+    }
+</style>

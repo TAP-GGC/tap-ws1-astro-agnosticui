@@ -1,0 +1,28 @@
+---
+import { h } from 'vue';
+import LightGallery from '../vue/LightGallery.vue';
+
+interface PhotoProps {
+  src: string;
+  alt: string;
+  link?: string;
+  caption?: string;
+}
+
+interface Props {
+  photos: PhotoProps[];
+}
+
+const { photos } = Astro.props;
+---
+
+<div id="light-gallery">
+  <LightGallery client:load>
+    {photos.slice(0, 9).map((Photo, index) => (
+        <a href={Photo.link || Photo.src}>
+          <img alt={Photo.alt} src={Photo.src} />
+          {Photo.caption && <p class="caption">{Photo.caption}</p>}
+        </a>
+      ))}
+  </LightGallery>
+</div>

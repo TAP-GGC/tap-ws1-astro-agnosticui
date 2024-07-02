@@ -43,8 +43,22 @@ imageLogoDark: ./foe-logo-dark.png
 imageTeam: ./FoeGroupPhoto.jpeg
 videoAd: "TSae0OkMVps"
 ---
+import { Image } from "astro:assets";
+import Photo from '/src/components/astro/Photo.astro';
+import Logo from '/src/components/astro/Logo.astro';
+import FoeGroupPhoto from './FoeGroupPhoto.jpeg';
+import vscLogo from './vscLogo.jpeg';
+import TapExpo1 from './TapExpo1.jpg';
+import TapExpo2 from './TapExpo2.jpg';
+import TapExpo3 from './TapExpo3.jpg';
+import ASF3 from './ASF3.jpg';
+import cssSample from './cssSample.png';
+import htmlSample from './htmlSample.png';
+import jsSample from './jsSample.png';
 
-<!--Right text block, Project description -->
+
+
+{/* Right text block, Project description */}	
 
 The goal of this project is to educate others about JavaScript basics while building a HTML/CSS webpage.
 
@@ -53,8 +67,16 @@ Foes is a web-hosted project. This project is curated to peak the interest of no
  The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to break the misconceptions of the IT field by providing fun workshops for students of all backgrounds. TAP students design engaging and fun outreach workshops to encourage interest in IT and STEM.
 
 
- 
- <!--content block, Activities, steps & materials -->
+ <div style="text-align:center;">
+
+## Team members
+{/* ![jediPhoto](./JediGroupPhoto.jpg) */}
+<Image src={FoeGroupPhoto} alt="foePhoto" />
+#### From left to right:  Alec Burns, Alex Shaklee
+<br />
+</div>
+
+ {/* content block, Activities, steps & materials */}
 
 <div style="text-align: center ; justify-content: center; font-size: 1.125em;">
 
@@ -67,7 +89,16 @@ Foes is a web-hosted project. This project is curated to peak the interest of no
 
 </div>
 
-<div class="flex flex-row flex-wrap">
+
+## Gallery
+<div style='text-align:center; display: grid; justify-content: center; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); grid-gap: 20px; font-size: 1.25em;'>
+<Photo src={TapExpo1.src} alt="TapExpo1" caption="Tap Expo 1" />
+<Photo src={TapExpo2.src} alt="TapExpo1" caption="Tap Expo 2" />
+<Photo src={TapExpo3.src} alt="TapExpo1" caption="Tap Expo 3" />
+<Photo src={ASF3.src} alt="ASF3" caption="Atlanta Science Festival" />
+</div>
+
+  <div class="flex flex-row flex-wrap">
 
   <div style="flex: 1; min-width: 25em;">
 
@@ -90,82 +121,29 @@ Foes is a web-hosted project. This project is curated to peak the interest of no
   14. To quit, close your browser.
   </div>
 
-</div>
-
-<!-- Group Photo -->
-
-<Div style="text-align:center;">
-  <br>
-  <br>
-  <br>
-
-  ![Foe Photo](./FoeGroupPhoto.jpeg)
-  ##### From left to right: Alec Burns, Alex Shaklee
-  <br>
-
-  
-  ![VSC logo](./vscLogo.jpeg)
-  ##### Visual Studio Code Logo
-  <br>
-  <br>
-  <br>
+  </div>
 
 
-  ![CSS Sample](./cssSample.png)
-  ##### CSS Code Sample
-  <br>
-  <br>
-  <br>
-
-  ![HTML Sample](./htmlSample.png)
-  ##### HTML Code Sample
-  <br>
-  <br>
-  <br>
-
-  ![JavaScript Sample](./jsSample.png)
-  ##### JavaScript Code Sample
-  <br>
-  <br>
-</div>
-
-
-<!--CONTENT BLOCK -->
+  ## Technology
+  <div style='text-align:center; display: flex; justify-content: center; font-size: 1.25em'>
+  <Logo src= {vscLogo.src} alt="Visual Code Studi" link="https://code.visualstudio.com/" />
+  </div>
+{/* 
+  ## code Sample
+  <div style='text-align:center; display: grid; justify-content: center; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); grid-gap: 20px; font-size: 1.25em;'>
+  <Photo src={cssSample.src} alt="cssSample" caption="CSS Code Sample" />
+  <Photo src={htmlSample.src} alt="htmlSample" caption="HTML Code Sample" />
+  <Photo src={jsSample.src} alt="jsSample" caption="JavaScript Code Sample" />
+  </div> */}
 
 ## Project Setup:
 - [Play game](https://github.com/TAP-GGC/Foe/blob/main/Documents/Installation%20Instructions/Play%20Foes.pdf)
 - [Work Shop 1: Review basic concept of HTML, CSS and JavaScipt](https://github.com/TAP-GGC/Foe/blob/main/Documents/Workshop%20Instructions/CodePen%20Workshop%20Instructions/Foes-Workshop1.pdf)
 - [Work shop 2: Focus on JavaScipt and how to create animation on 2D objects](https://github.com/TAP-GGC/Foe/blob/main/Documents/Workshop%20Instructions/CodePen%20Workshop%20Instructions/Foes-Workshop2.pdf)
 
-<br>
-<br>
-
-<Div style="text-align:center;">
-
-  ## Photo Gallery
-
-  ![Atlanta Science Festival](./ASF3.jpg)
-##### Atlanta Science Festival
-  <br>
-  <br>
-
-  ![Tap Expo 1](./TapExpo1.jpg)
-  ##### Tap Expo 1
-  <br>
-  <br>
-  <br>
-
-  ![Tap Expo 2](./TapExpo2.jpg)
-  ##### Tap Expo 2
-  <br>
-  <br>
-  <br>
-
-  ![Tap Expo 3](./TapExpo3.jpg)
-  ##### Tap Expo 3
-  <br>
-  <br>
-  <br>
-</div>
-
-
+## Code Samples
+  <div style="text-align:center;"> 
+  <Photo src={cssSample.src} alt="cssSample" caption="CSS Code Sample" />
+  <Photo src={htmlSample.src} alt="htmlSample" caption="HTML Code Sample" />
+  <Photo src={jsSample.src} alt="jsSample" caption="JavaScript Code Sample" />
+  </div>

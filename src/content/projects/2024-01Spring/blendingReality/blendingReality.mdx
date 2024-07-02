@@ -21,8 +21,16 @@ imageLogoDark: ./breality-logo-dark.png
 imageTeam: ./BrgroupPhoto_cropped.jpeg
 videoAd: "_pExIUQkeek"
 ---
+import { Image } from "astro:assets";
+import Photo from '/src/components/astro/Photo.astro';
+import Logo from '/src/components/astro/Logo.astro';
+import BrgroupPhoto from './BrgroupPhoto.jpeg';
+import aeroAppLogo from 'aeroAppLogo.jpg';
+import aeroDesktopLogo from 'aeroDesktopLogo.jpg';
+import blenderLogo from './blenderLogo.jpg';
 
-<!--Right text block, Project description -->	
+
+{/* Right text block, Project description */}	
 
 The primary goal of this project is educating others about Augmented Reality (AR) using Adobe Aero and 3D Modeling using Blender.
 
@@ -30,24 +38,47 @@ This project showcases how to build a 3D snowmen in Blender, and then how to imp
 
 The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to break the misconceptions of the IT field by providing fun workshops for students of all backgrounds. TAP students design engaging and fun outreach workshops to encourage interest in IT and STEM.
 
+## Workshop
 <iframe width="560" height="100%" src="https://www.youtube.com/embed/AOuorBHAStU?si=KyfqmvnR7CZnEDrS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width: 100%; height: 680px; margin-top: 2em;"></iframe>
 
-<!--content block, Activities, steps & materials -->
+{/* content block, Activities, steps & materials */}
+
+<div style="text-align:center; padding-top: 50px;">
+## Team members
+<Image src={BrgroupPhoto} alt="Blending Reality Group Photo" />
+#### From left to right: Carina George,  Kelechi Ariwodo and Thien Nghi Duong
+<br />
+</div>
 
 <div style="text-align: center ; justify-content: center; font-size: 1.125em;">
-
-## Outreach Activities: <!--TODO: Fix layout**-->
+## Outreach Activities: 
 
 1. Tap Expo, 2024, Georgia Gwinnett College
 2. [Atlanta Science Festivals](https://atlantasciencefestival.org/),2024, Piedmont Park
 3. Class Workshops – 2024, Georgia Gwinnett College
-
 </div>
 
-<!-- div ; style='float: left; margin-right: 15px; vertical-align: bottom; display: inline-block;font-size: 1.125em;'-->
 
-<div class="flex flex-row flex-wrap">
+## Technology
+<div style='text-align:center; display: flex; justify-content: center; font-size: 1.25em; top-margin: 50px'>
+<Logo src= {aeroAppLogo.src} alt="Adobe Aero" link="https://www.adobe.com/products/aero.html"/>
+{/* <Logo src= {aeroDesktopLogo.src} alt="Desktop Logo"/> */}
+<Logo src={blenderLogo.src} alt="Blender" link="https://www.blender.org/" />
+</div>
 
+## Project Setup & Installation:
+<div style='text-align:center; justify-content: center; font-size: 1em; top-margin: 50px; bottom-margin: 100px; ' >
+- [Download Blender & Aero(Desktop & Mobile) - PDF](https://github.com/TAP-GGC/QuantumQuirks/blob/main/Documents/How%20download%20Blender%20and%20Aero.pdf)
+- [Download Blender & Aero(Desktop & Mobile) - Video](https://youtu.be/mwFiZGFVci4?si=KqiPkp87MJ0s3GKK)
+<iframe style="width: 100%; max-width: 800px; height: 450px;" src="https://www.youtube.com/embed/mwFiZGFVci4?si=UC4UrMulwSZMUcl4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+- [Building a Snowman in Blender](https://youtu.be/NL7IVITbNt0?si=NV3Kq1guVl0LHK-f)
+<iframe style="width: 100%; max-width: 800px; height: 450px;" src="https://www.youtube.com/embed/NL7IVITbNt0?si=JeoQ4ZR0iSgjqpvb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+- [Augmented Reality Integration with Adobe Aero](https://github.com/TAP-GGC/Jedi/blob/main/Media/CreatingaClassroomandAddingStudentsinSpheroEdu.pdf)
+</div>
+
+
+<div  style='float: left; margin-right: 15px; vertical-align: bottom; display: inline-block;font-size: 1.125em;' >
+<div class="flex flex-row flex-wrap" >
 <div style="flex: 1; min-width: 25em; text-align: center">
 
 ## Steps:
@@ -57,13 +88,13 @@ The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to br
 2. Open the blender app, click General to begin modelling
 3. Click the cube already present on the canvas and press the delete/backspace key
 
-<br>
+<br />
 <b> STEP 2: ADD MESH - ICO SPHERE </b>
 
 1. Press Shift + A to open the Add menu.
 2. Select Mesh > Icosphere. This will add a regular-sized icosphere to your scene.
 
-<br>
+<br />
 <b> STEP 3: DUPLICATE ICO SPHERE (2x) </b>
 
 1. Select the icosphere you just added by left-clicking on it.
@@ -72,7 +103,7 @@ The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to br
 4. Press G then Z to move it along the Z-axis.
 5. Scroll your mouse up to move it higher above the first icosphere.
 
-<br>
+<br />
 <b> STEP 4: EYES OF THE BEHOLDER </b>
 
 1. Add another icosphere by pressing Shift + A and selecting Mesh > Icosphere.
@@ -82,7 +113,7 @@ The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to br
 5. Shift D to duplicate it.
 6. Press G, then X to move the duplicate eye beside the first.
 
-<br>
+<br />
 <b> STEP 5: BUTTONS BUTTONS BUTTONS </b>
 
 1. Add another icosphere by pressing Shift + A and selecting Mesh > Icosphere.
@@ -93,7 +124,7 @@ The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to br
 6. Shift D to duplicate it.
 7. Repeat steps until you’re satisfied with the number of buttons
 
-<br>
+<br />
 <b> STEP 6: A CONE FOR A NOSE </b>
 
 1. Add a cone by pressing Shift + A and selecting Mesh > Cone.
@@ -106,7 +137,7 @@ The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to br
 </div>
 
 
-<!--div ; style='float: right; margin-right: 15px; vertical-align: bottom; display: inline-block; font-size: 1.25em;'-->
+{/* <div style='float: right; margin-right: 15px; vertical-align: bottom; display: inline-block; font-size: 1.25em;'> */}
 
 <div style="flex: 1; min-width: 25em;">
 
@@ -119,106 +150,4 @@ The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to br
 
 </div>
 </div>
-
-<!--TODO: Photo Gallery -->
-<div style="text-align:center;">
-<br>
-<br>
-<br>
-
-
-
-![BR Photo](./BrgroupPhoto.jpeg)
-##### From left to right: Carina George,  Kelechi Ariwodo and Thien Nghi Duong, 
-<br>
-
-![Blender App Logo](./blenderLogo.jpg)
-![Adobe Aero(Desktop) Logo](./aeroDesktopLogo.jpg) 
-![Adobe Aero(Mobile) Logo](./aeroAppLogo.jpg) 
-
-
-<br>
-<br>
-<br>
-</div>
-
-<!--CONTENT BLOCK -->
-
-## Project Setup & Installation:
-- [Download Blender & Aero(Desktop & Mobile) - PDF](https://github.com/TAP-GGC/QuantumQuirks/blob/main/Documents/How%20download%20Blender%20and%20Aero.pdf)
-- [Download Blender & Aero(Desktop & Mobile) - Video](https://youtu.be/mwFiZGFVci4?si=KqiPkp87MJ0s3GKK)
-- [Building a Snowman in Blender](https://youtu.be/NL7IVITbNt0?si=NV3Kq1guVl0LHK-f)
-- [Augmented Reality Integration with Adobe Aero](https://github.com/TAP-GGC/Jedi/blob/main/Media/CreatingaClassroomandAddingStudentsinSpheroEdu.pdf)
-- 
-<br>
-<br>
-
-<!--[jediPhoto](./JediImage.jpg)-->
-##### S3 Workshop 
-
-
-
-
-<br>
-<br>
-
-
-<br>
-<br>
-<br>
-
-</div>
-
-<!--div style='text-align:center; display: inline-block; font-size: 1.25em'>
-
-## Sphero EDU Easy Portion
-<style='text-align:center; display: inline-block; font-size: 1.25em'>
-
-![easyCode](https://github.com/TechAmbassadors-GGC/Jedi/assets/150178791/6a1fa4e0-d42d-4d23-a1bd-4cdca06ca128) <br>
-`on start program`<br>
-`roll 0° at 75 speed for 2.1s`<br>
-`delay for 1.5s`<br>
-`roll 90° at 75 speed for 1.6s`<br>
-`delay for 1.5s`<br>
-</div>
-
-<div ; style='text-align:center; float: right; margin-left: 205px; vertical-align: bottom; display: inline-block;font-size: 1.125em;'>
-
-## Sphero EDU Hard Portion
-![hardCode1](https://github.com/TechAmbassadors-GGC/Jedi/assets/150178791/a27a312a-c283-401a-8de1-74c1e43dda30)
-<br>
-
-![hardCode2](https://github.com/TechAmbassadors-GGC/Jedi/assets/150178791/9b5b4073-b6d2-4522-b855-c7a69e5e9a64)<br>
-`on start program`<br>
-`roll 0° at 75 speed for 1.5s`<br>
-`delay for 1.5s`<br>
-`roll 90° at 75 speed for 0.5s`<br>
-`delay for 1.5s`<br>
-`roll 180° at 75 speed for 1.5s`<br>
-`delay for 1.5s`<br>
-`roll 90° at 75 speed for 0.7s`<br>
-`delay for 1.5s`<br>
-`roll 0° at 75 speed for 0.7s`<br>
-`delay for 1.5s`<br>
-`roll 90° at 75 speed for 0.5s`<br>
-`delay for 1.5s`<br>
-`roll 0° at 75 speed for 0.6s`<br>
-`delay for 1.5s`<br>
-`roll 270° at 75 speed for 0.6s`<br>
-`delay for 1.5s`<br>
-`roll 0° at 75 speed for 0.5s`<br>
-`delay for 1.5s`<br>
-`roll 90° at 75 speed for 0.6s`<br>
-`delay for 1.5s`<br>
-`roll 0° at 75 speed for 0.6s`<br>
-`delay for 1.5s`<br>
-
-<br>
-</div-->
-
-<div style='text-align:center; font-size: 1.5em'>
-<br>
-<br>
-<br>
-
 </div>
