@@ -70,6 +70,29 @@ const projectCollection = defineCollection({
   }),
 });
 
+const studentCollection = defineCollection({
+  type: 'content', // v2.5.0 and later
+  schema: z.object({
+    name: z.string(),
+    title: z.string(),
+    email: z.string().email(),
+    phone: z.string().optional(),
+    location: z.string().optional(),
+    website: z.string().url().optional(),
+    linkedin: z.string().url().optional(),
+    github: z.string().url().optional(),
+    image: z.string().optional(),
+    desc: z.string(),
+    graduationYear: z.string(),
+    relatedProjectIds: z.array(z.string()).optional(),
+    projects: z.array(z.object({
+      name: z.string(),
+      description: z.string(),
+      link: z.string().url().optional(),
+    })),
+  }),
+});
+
 const testCollection = defineCollection({
   type:'content',
   schema: z.object({

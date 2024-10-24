@@ -1,0 +1,49 @@
+---
+// Experience.astro
+
+export interface ExperienceProps {
+  role: string;
+  duration: string;
+  company: string;
+  location: string;
+  details: string[];
+}
+
+const { role, duration, company, location, details } = Astro.props;
+---
+
+<div class="experience-container">
+  <p class="experience-role"><b>{role}</b>, {duration}</p>
+  <p class="experience-company"><b>{company}</b> - {location}</p>
+  <ul class="experience-details">
+    {details.map(detail => (
+      <li>{detail}</li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .experience-container {
+    width: 90%;
+    margin-bottom: 2em;
+  }
+
+  .experience-role {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+
+  .experience-company {
+    margin-bottom: 1em;
+  }
+
+  .experience-details {
+    min-width: 25em;
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+
+  .experience-details li {
+    margin-bottom: 0.5em;
+  }
+</style>

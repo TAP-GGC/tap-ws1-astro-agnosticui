@@ -1,0 +1,66 @@
+---
+// Style Imports
+import '../styles/global.css';
+import '@fontsource/source-sans-pro';
+import '@fontsource/pixelify-sans';
+import '@fontsource/ibm-plex-mono';
+import '@fontsource/work-sans';
+import '@fontsource/cormorant-garamond';
+import '@fontsource/spectral';
+import '@fontsource/crimson-pro';
+import '@fontsource/alfa-slab-one';
+
+import "agnostic-vue/dist/common.properties.min.css";
+import "agnostic-vue/dist/common.resets.min.css";
+import "agnostic-vue/dist/common.utilities.min.css";
+import "agnostic-vue/dist/opinions.min.css";
+
+// Component Imports
+import "agnostic-vue/dist/index.css";
+
+// Read from content collection
+import { getCollection } from 'astro:content';
+import Crumbs from "../components/Crumbs.vue"
+import StudentSearch from '../components/StudentSearch.vue';
+import TAPDefaultLayout from "../layouts/default.astro";
+
+// export async function getStaticPaths() {
+//   const students = await getCollection('students');  
+//   let slugs = new Array();
+
+  
+//   // New algorithm: find unique tech combinations
+//   let projectStudent = {};
+//   projects.forEach(project => {
+//     project.data.students.forEach(student => {
+//       if (!projectStudent[student]) {
+//         projectStudent[student] = [];
+//       }
+//       projectStudent[student].push(project);
+//     });
+//   });
+
+//   Object.keys(projectStudent).forEach(student => {
+//     slugs.push({	
+//       params: { "projectStudent": `${student}` },
+//       props: { "student": student, "projects": projectStudent[student] }
+//     });
+//   });
+
+//   return slugs;  
+// }
+
+// read to pass to ProjectSearch
+const students = await getCollection('students');
+
+// 2. For your template, you can get the entry directly from the prop
+
+// Page title
+---
+<TAPDefaultLayout title="TAP Students">
+
+	<Crumbs pageType="students" pageUrl=`/students`/>
+
+	<StudentSearch client:load studentList={students}/>
+
+</TAPDefaultLayout> 

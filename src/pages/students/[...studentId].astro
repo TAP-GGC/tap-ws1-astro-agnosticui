@@ -1,0 +1,157 @@
+---
+import '../../styles/global.css';
+import '@fontsource/source-sans-pro';
+import '@fontsource/work-sans';
+import '@fontsource/cormorant-garamond';
+
+// Component Imports
+import "agnostic-vue/dist/index.css";
+import { Image } from "astro:assets";
+import TAPHeader from '../../components/TAPHeader.vue';
+import TAPFooter from '../../components/TAPFooter.vue';
+import { getCollection } from 'astro:content';
+import Crumbs from "../../components/Crumbs.vue";
+
+// 1. Generate a new path for every collection entry
+export async function getStaticPaths() {
+  const students = await getCollection('students');
+  return students.map(student => ({
+    params: { "studentId": `${student.data.id}`},
+    props: { student },
+  }));
+}
+
+const { student } = Astro.props;
+const { Content } = await student.render();
+
+// Page title
+let title = `${student.data.name} - Student Profile`;
+const studentImg = student.data.image;
+import TAPDefaultLayout from "../../layouts/default.astro";
+
+// Goal: Actually link from student page to project page
+// 1. Generate a new path for every collection entry
+// export async function getStaticPaths2() {
+//   const projects = await getCollection('projects');
+//   return projects.map(project => ({
+//     params: { "projectId": `${project.data.year}/${project.data.semester}/${project.data.id}` }, props: { project },
+//   }));
+  // TODO: add to list: years and semesters as search results pages; potentially add techs/ and students/ folders here or in the base
+// }
+// const { project } = Astro.props;
+// const { Content2 } = await project.render();
+
+// // BreadCrumb variables
+// const  projYear  = project.data.year;
+// const  projSemester  = project.data.semester;
+// const  projName  = project.data.title;
+
+---
+<TAPDefaultLayout title={title}>
+  <Crumbs pageType="student" pageUrl={`/students/${student.data.id}`}/>
+
+  <div class="body-student">
+    <h1 class="studentName">{student.data.name}</h1>
+    <h2 class="studentTitle">{student.data.title}</h2>
+
+    <div class="studentDetails">
+    <img src= {studentImg} alt="student Photo" class="studentImage"/>
+    <div class="col2">
+      <h3>About Me</h3>
+      {student.data.desc && <p>{student.data.desc}</p>}
+      {student.data.gradYear && <p><b>Graduation year: </b> {student.data.gradYear}</p>}
+
+      
+      <!-- Try this later {student.data.relatedProjectIds.map((projectId, index) => (
+				<>
+				<a href={`/projects/${projectId}`}>
+          {projectId}
+          </a>
+				{index < student.data.relatedProjectIds.length - 1 ? ", " : ""}
+				</>
+				))} -->
+      
+      <h3>Contact</h3>
+      <p><b>Email: </b> <a href={`mailto:${student.data.email}`}>{student.data.email}</a></p>
+      {student.data.phone && <p><b>Phone: </b> {student.data.phone}</p>}
+      {student.data.location && <p><b>Location: </b> {student.data.location}</p>}
+      {student.data.website && <p><b>Website: </b> <a href={student.data.website} target="_blank">{student.data.website}</a></p>}
+      {student.data.linkedin && <p><b>LinkedIn: </b> <a href={student.data.linkedin} target="_blank">{student.data.linkedin}</a></p>}
+      {student.data.github && <p><b>GitHub: </b> <a href={student.data.github} target="_blank">{student.data.github}</a></p>}
+      
+      <h3>Related Project</h3>
+      {student.data.relatedProjectIds && <p><b>Project: </b>{student.data.relatedProjectIds}</p>}
+
+    </div>
+    </div>
+    <Content />
+  </div>
+
+  
+</TAPDefaultLayout>
+
+<style>
+  .studentImage {
+    margin-right: 1em;
+		width: clamp(15em, 50%, 25em);
+		float: left;
+		padding-bottom: 0.5em;
+		padding-right: 0.5em;
+  }
+
+  .studentDetails{
+    font-size: 1.125em; 
+		text-align: left;
+		vertical-align: bottom; 			
+		display: inline-block;
+		margin-bottom: em;
+    height: 100%;
+  }
+
+  .col2{
+  display: flex;
+  flex-direction: column; /* Stack the content vertically */
+  justify-content: space-between; /* Ensure content takes the full height */
+  height: max-content;
+  }
+
+  .portfolio{
+  clear: both; /* Ensure portfolio is placed below floating content */
+  margin-top: 2em; 
+  margin-bottom: 2em;
+  }
+
+  .studentDetails p {
+    margin-bottom: 0.5em;
+  }
+
+  h1.studentName {
+    text-align: center;
+  }
+
+  h2.studentTitle {
+    text-align: center;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+
+  }
+
+  /* Media query for mobile devices */
+  @media (max-width: 768px) {
+    .studentImage {
+      float: none; /* Remove the float */
+      margin-right: 0;
+      width: 100%; /* Make the image take full width */
+      display: block;
+    }
+
+    .col2 {
+      display: block; /* Display as block for stacking */
+      width: 100%;
+    }
+
+    .studentDetails {
+      margin-bottom: 0; /* Remove extra margin */
+    }
+  }
+</style>
