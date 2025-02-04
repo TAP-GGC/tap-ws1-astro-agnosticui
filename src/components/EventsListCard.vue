@@ -5,18 +5,19 @@
             isStacked
             isShadow
             isAnimated
-
-            >
-            <div class="h4 p16">
+            class=card-main
+            style=" background-image: url('./images/list-cards/tap-events-board.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            <div class="overlay">
+              <div class="h4 p16 card-title">
                 Recent Events
-            </div>
+              </div>
             <ul> <!-- order recent projects by date? -->
-            <li v-for="event in events">
-            <!-- <a :href="`${base}/events/${event.data.year}/${event.data.month}/${event.data.day}`">{{ event.data.title }}</a> &nbsp; -->
-            <p> {{ event.name }}</p>
-            <p> {{ event.date.toDateString().slice(4) }}</p>
-            <!-- {{ event.data.date.toString() }} -->Hi
-            </li>
+              <li v-for="event in events">
+              <!-- <a :href="`${base}/events/${event.data.year}/${event.data.month}/${event.data.day}`">{{ event.data.title }}</a> &nbsp; -->
+              <p> {{ event.name }}</p>
+              <p> {{ event.date.toDateString().slice(4) }}</p>
+              <!-- {{ event.data.date.toString() }} -->Hi
+              </li>
             </ul>
         </Card>
     </div>

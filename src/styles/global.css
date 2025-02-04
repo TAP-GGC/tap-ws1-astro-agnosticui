@@ -14,26 +14,27 @@
   --agnostic-header-content-width: 95vw; /* set minimum size of header menu - set to percent of viewport width */
   
   /* light mode */
-  --agnostic-primary-modelight: #6c8d1b; /*button, tags color*/
+  --agnostic-primary-modelight: #1f450a; /*button, tags links color*/
   --agnostic-primary-hover-modelight: #f1bd50; /*link hover color*/
   --agnostic-light-modelight: #ffffff; /* head & foot background colour*/
   --agnostic-gray-light-modelight: #faf7f3; /* body background colour*/
+  --agnostic-gray-mid-modelight: #a7e478; /*card color*/
+  
+  --agnostic-font-color-modelight: #; /*font color; */
+
   --agnostic-dark-modelight: #000; /*font colour*/
-  --agnostic-gray-mid-modelight: #c6e478; /*card color*/
-  --agnostic-btn-primary-color-modelight: #000;
-  --agnostic-font-color-modelight: #708930; /*font color; */
+  --agnostic-btn-primary-color-modelight: #5b8930;
   --agnostic-gray-mid-dark-modelight: #dad9d7a5; /*overlay color*/
   /* --agnostic-link-color-modelight: #708930; */
 
 /* dark mode */
-  --agnostic-primary-modedark: #82af0f; /*button, tags color*/
+  --agnostic-primary-modedark: #57af0f; /*button, tags color*/
   --agnostic-primary-hover-modedark: #f1bd50; /*link hover color*/
   --agnostic-light-modedark: black; /* head & foot background colour*/
   --agnostic-gray-light-modedark: #111111; /* body background colour*/
-  --agnostic-gray-mid-modedark: #445321; /*card color*/
-  --agnostic-font-color-modedark: white; /*font color; */
+  --agnostic-gray-mid-modedark: #37630a; /*card color*/
   --agnostic-dark-modedark: #fff; /*font colour*/
-  --agnostic-btn-primary-color-modedark: #709a06;
+  --agnostic-btn-primary-color-modedark: #579a06;
   --agnostic-gray-mid-dark-modedark: #111111d7; /*overlay color*/
   /* --agnostic-link-color-modedark: #709a06; */
 
@@ -148,6 +149,7 @@ a, .header a{
 }
 a:hover, .header a:hover{
   color: var(--agnostic-primary-hover) !important;
+  font-weight: 700 !important;
 }
 
 .tag, .button{

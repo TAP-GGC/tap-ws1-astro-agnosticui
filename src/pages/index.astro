@@ -65,7 +65,8 @@ let title = 'GGC Technology Ambassadors Program';
 import { getCollection } from 'astro:content';
 import TAPFooter from '../components/TAPFooter.vue';
 import TAPDefaultLayout from "../layouts/default.astro";
-
+import Banner from '../components/vue/Banner.vue';
+import PhotoCarousel from '../components/vue/photoCarousel.vue';
 
 const blogEntries = await getCollection('events');
 
@@ -73,158 +74,34 @@ const blogEntries = await getCollection('events');
 ---
 <TAPDefaultLayout title={title}>
 
-  <section class="homepg-banner">
-		<img id="home-banner" src="" alt="TAP Gallery" style="" />
-		<div class="banner-text-overlay">
-			<h4 id="photoTitle" class="banner-text-overlay">Title Here</h4>
-			<p id="caption">caption here.</p>
-			<a id="prev" class="prev">&#10094;</a>
-			<a id="next" class="next">&#10095;</a>
-		</div>			
-	</section>
+	<PhotoCarousel client:load 
+	photos={[
+	{src: "/images/homepg-gallery/tap-homepage-banner.jpg",
+	alt: "TAP Gallery",
+	photoTitle:"TECHNOLOGY AMBASSADORS PROGRAM",
+	caption: "Georgia Gwinnett College"},
+	{src: "/images/homepg-gallery/tap-homepage-banner-2.jpg",
+	alt: "TAP Gallery",
+	photoTitle: "TECHNOLOGY AMBASSADORS PROGRAM",
+	caption: "Georgia Gwinnett College"},
+	{src: "/images/homepg-gallery/tap-homepage-banner-3.jpg",
+	alt: "TAP Gallery",
+	photoTitle: "TECHNOLOGY AMBASSADORS PROGRAM",
+	caption: "Georgia Gwinnett College"},
+	]}/>
 
-  <Heading />
+	<Banner/>
+	<Heading />
 
         <section class="card-container">
             <PostListCard client:load/>
             <ProjectListCard/>
-            <!--AwardsListCard client:load/>
-            <EventsListCard client:load/>
-            <PapersListCard client:load/-->
+            <AwardsListCard client:load/>
+            <!-- <EventsListCard client:load/> -->
+            <PapersListCard client:load/>
         </section>
 
-        	<!-- <section class="banner">
-		<h2> About TAP </h2>
-	</section> -->
   
 </TAPDefaultLayout>
 
-<style>
-	.homepg-banner {
-		display: block;
-		position: relative;
-		max-width: 800px; 
-		margin-left: auto;
-		margin-right: auto;
-		padding-bottom: 2rem;
-	}
-
-	.banner-text-overlay h4 {
-		font-family: 'Gagalin', Helvetica, Arial, sans-serif;
-		padding-bottom: 10rem;
-		padding-left: 3rem;
-	} 
-
-	.banner-text-overlay p {
-		/* margin: 0; */
-		padding-bottom: 8.5rem;
-		padding-left: 5rem;	
-	}
-
-	.banner-text-overlay {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		line-height: 1;
-		text-decoration: left;
-		color: var(--agnostic-font-color);
-		/* background: rgba(0, 0, 0, 0.5); */
-	}
-
-	.banner-text-overlay .prev,
-	.banner-text-overlay .next {
-		cursor: pointer;
-		position: absolute;
-		top: 50%;
-		width: auto;
-		/*padding: 1.5rem;*/
-		margin-top: -50px;
-		color: var(--agnostic-font-color);
-		font-weight: bold;
-		font-size: 84px;
-		border-radius: 0 3px 3px 0;
-		/* user-select: none; */
-		/* -webkit-user-select: none; */
-	}
-
-	/* Position the "next button" to the right */
-	.next {
-	right: 0;
-	border-radius: 3px 0 0 3px;
-	}
-
-	/* On hover, add a black background color with a little bit see-through */
-	.prev:hover,
-	.next:hover {
-	text-decoration: none;
-	}
-	.prev:disabled,
-	.next:disabled {
-	cursor: not-allowed;
-	text-decoration: none;
-	color: #2f2c2c
-	}
-
-</style>
-
-<script>
-	const gallery = [
-	  {
-		file: '/images/homepg-gallery/tap-homepage-banner.jpg',
-		photoTitle: 'TECHNOLOGY AMBASSADORS PROGRAM',
-		caption: 'Georgia Gwinnett College'
-	  },
-	  {
-		file: '/images/homepg-gallery/tap-homepage-banner-2.jpg',
-		photoTitle: 'TECHNOLOGY AMBASSADORS PROGRAM',
-		caption: 'Georgia Gwinnett College'
-	  },
-	  {
-		file: '/images/homepg-gallery/tap-homepage-banner-3.jpg',
-		photoTitle: 'TECHNOLOGY AMBASSADORS PROGRAM',
-		caption: 'Georgia Gwinnett College'
-	  }
-	];
-	
-	let cIndex = 0;
-  
-	const homeBanner = document.getElementById('home-banner');
-	const photoTitle = document.getElementById('photoTitle');
-	const caption = document.getElementById('caption');
-	const prevArrow = document.getElementById('prev');
-	const nxtArrow = document.getElementById('next');
-  
-	function updateGallery(index) {
-	  const photo = gallery[index]; 
-	  homeBanner.src = photo.file;
-	  photoTitle.textContent = photo.photoTitle;
-	  caption.textContent = photo.caption;
-  
-	}
-  
-	prevArrow.addEventListener('click', () => {
-	  if (cIndex > 0) {
-		cIndex--;
-	  }
-	  else cIndex = gallery.length -1;
-	  updateGallery(cIndex);
-
-	});
-  
-	nxtArrow.addEventListener('click', () => {
-	  if (cIndex < gallery.length - 1) {
-		cIndex++;
-	  }
-	  else cIndex = 0;
-	  updateGallery(cIndex);
-
-	});
-  
-	window.onload = () => {
-	  if (gallery.length > 0) {
-		updateGallery(cIndex);
-	   } 
-	};
-  </script>
   
