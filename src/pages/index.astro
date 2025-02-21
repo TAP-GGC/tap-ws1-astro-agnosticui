@@ -74,24 +74,25 @@ const blogEntries = await getCollection('events');
 ---
 <TAPDefaultLayout title={title}>
 
+	<Heading />
 	<PhotoCarousel client:load 
 	photos={[
 	{src: "/images/homepg-gallery/tap-homepage-banner.jpg",
 	alt: "TAP Gallery",
-	photoTitle:"TECHNOLOGY AMBASSADORS PROGRAM",
-	caption: "Georgia Gwinnett College"},
+	photoTitle:"Virtual Reality with Unity",
+	caption: "TAP Expo @ Georgia Gwinnett College"},
 	{src: "/images/homepg-gallery/tap-homepage-banner-2.jpg",
 	alt: "TAP Gallery",
-	photoTitle: "TECHNOLOGY AMBASSADORS PROGRAM",
-	caption: "Georgia Gwinnett College"},
+	photoTitle: "Cardboard Hero with Makey Makey",
+	caption: "TAP Expo @ Georgia Gwinnett College"},
 	{src: "/images/homepg-gallery/tap-homepage-banner-3.jpg",
 	alt: "TAP Gallery",
-	photoTitle: "TECHNOLOGY AMBASSADORS PROGRAM",
-	caption: "Georgia Gwinnett College"},
+	photoTitle: "Scratch with Playdoh and Makey Makey",
+	caption: "Super Saturday Series @ Georgia Gwinnett College"},
 	]}/>
 
 	<Banner/>
-	<Heading />
+	
 
         <section class="card-container">
             <PostListCard client:load/>

@@ -1,7 +1,7 @@
 <template>
     <section class = "banner">
         <div class="banner-content">
-            <h3> The Technology Ambassadors Program (TAP) aligns with GGC’s four pillars – <em>scholarship, leadership, service and creativity </em> – with a focused commitment to service learning. 
+            <h3> The Technology Ambassadors Program (TAP) aims to increase the number of students who persist in technology fields, particularly those underrepresented in computing. We provide fun and engaging technology activities for K-12 and college classrooms and outreach events. These activities were developed in a college-level service learning course that provides <em>scholarship, leadership, service, and creativity</em> skills. 
             <a href="https://www.ggc.edu/academics/school-of-science-and-technology/research-internships-service-learning/technology-ambassador-program" class="click" target="_blank">Read more...</a></h3>
         </div>
     </section>
@@ -38,7 +38,7 @@ export default{
 }
 .banner h3{
     font-weight: 300 !important;
-    font-size: 1rem;
+    font-size: 150%; /* 1rem */
 }
 
 </style>
