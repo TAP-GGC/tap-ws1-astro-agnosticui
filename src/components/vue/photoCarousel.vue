@@ -38,18 +38,6 @@
 
 	let cIndex = ref(0);
   
-	// const homeBanner = document.getElementById('slide-gallery');
-	// const photoTitle = document.getElementById('photoTitle');
-	// const caption = document.getElementById('caption');
-	// const prevArrow = document.getElementById('prev');
-	// const nxtArrow = document.getElementById('next');
-  
-	// function updateGallery(index) {
-	//   const photo = photos[index]; 
-	//   homeBanner.src = photo.file;
-	//   photoTitle.textContent = photo.photoTitle;
-	//   caption.textContent = photo.caption;
-  
     function prev() {
      cIndex.value = cIndex.value == 0 ? photos.length - 1 : cIndex.value - 1;
     }

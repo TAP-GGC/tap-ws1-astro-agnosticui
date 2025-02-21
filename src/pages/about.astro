@@ -1,0 +1,58 @@
+---
+//Style Imports
+import '../styles/global.css';
+
+// Import the MDX file
+import {Content as AboutContent} from '../content/pages/about.mdx';
+
+//agnostic imports
+import "agnostic-vue/dist/common.properties.min.css";
+import "agnostic-vue/dist/common.resets.min.css";
+import "agnostic-vue/dist/common.utilities.min.css";
+import "agnostic-vue/dist/opinions.min.css";
+
+//Component Imports
+import "agnostic-vue/dist/index.css";
+import TAPDefaultLayout from "../layouts/default.astro";
+import Crumbs from '../components/Crumbs.vue';
+import PhotoCarousel from '../components/vue/photoCarousel.vue';
+
+---
+<TAPDefaultLayout title= "The Technology Ambassadors Program" class="blog">
+
+   <Crumbs pageType="post" pageUrl="/about" />
+
+   <PhotoCarousel client:load 
+     photos={[
+      {src: "/images/about-pg-gallery/gallery-1.jpg",
+      alt: "Spring 2024 Tap Expo",
+      photoTitle: "Spring '24 TAP EXPO"},
+      {src: "/images/about-pg-gallery/gallery-2.png",
+      alt: "TAP Assistants with Professors",
+      photoTitle: "Fall 2023 TAP Career Fair"},
+      {src: "/images/about-pg-gallery/gallery-3.jpg",
+      alt: "TAP Assistants with Professors",
+      photoTitle: "Spring 2024 TAP Career Fair"},
+      {src: "/images/about-pg-gallery/gallery-4.jpg",
+      alt: "Scratch/makey-makey Demo at Tap Expo",
+      photoTitle: "Scratch/Makey-makey Demo at Tap Expo"},
+      {src: "/images/about-pg-gallery/gallery-5.jpg",
+      alt: "2019 Spring TAP class",
+      photoTitle: "2019 Spring TAP class"},
+      {src: "/images/about-pg-gallery/gallery-6.jpg",
+      alt: "Dr. Anca Doloc-Mihu & Dr. Cindy Robertson",
+      photoTitle: "Dr. Anca Doloc-Mihu & Dr. Cindy Robertson"},
+      {src: "/images/about-pg-gallery/gallery-7.jpg",
+      alt: "Dr.Cengiz Gunay & Students",
+      photoTitle: "2022 TAPIA Festival"},
+      {src: "/images/about-pg-gallery/gallery-8.jpg",
+      alt: "Students presenting TAP Research at 2023 STARS",
+      photoTitle: "2023 STARS"},
+      {src: "/images/about-pg-gallery/gallery-9.jpg",
+      alt: "Augmented Reality Demo at Spring 2022 Tap Expo",
+      photoTitle: "Spring 2022 TAP Expo"},
+   ]}/>
+
+   <AboutContent/>
+
+</TAPDefaultLayout> 
