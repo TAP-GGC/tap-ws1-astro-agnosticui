@@ -1,7 +1,7 @@
 ---
 shortTitle: Pixel Arcade
 title: "Teaching Binary: A Comparison of Game-Based Learning Online vs In-Person"
-id: PixelArcade
+id: pixelarcade
 desc: Pixel Arcade is an interactive 2D game that will instruct students about the basics of binary. It was built using Unity and C#. Binary is the basis of how computers, photo editing, RGB, audio, and many other technologies work, which is why we wanted to get students familiar with it early on. Participants will play a tutorial and then 3 mini-games.
 github: https://github.com/TAP-GGC/Pixel8
 students: ["Celeste Echols", "Shianne Lesure", "Seohyeon Kim", "Zuberi Thompson"]
@@ -9,13 +9,13 @@ instructors: ["Dr. Cindy Robertson", "Dr. Cengiz Gunay"]
 techs: ["unity", "canva", "aesprite"]
 videos: []
 events: ["super saturday series (s3)", "tap expo", "class workshops", "CCSC", "CREATE"]
-semester: "Fall"
+semester: "fall"
 year: 2024
 levels: ["middle-school", "college", "non-stem", "undergraduate"]
 difficulty: ["beginner"]
 durationMins: [60, 90]
 publishedDate: 2024-11-24
-relatedIds: ["pizza heist", "slice it"]
+relatedIds: ["pizzaheist", "slice-IT"]
 images:
   [
     { src: "./Tap Expo.jpg", alt: "Tap Expo" },
@@ -29,8 +29,13 @@ images:
   ]
 imageLogoLight: ./Pixel ArcadeTransparent.png
 ---
+import { Image } from "astro:assets";
+import Photo from '/src/components/astro/Photo.astro';
+import Logo from '/src/components/astro/Logo.astro';
+import Gallery from '/src/components/astro/Gallery.astro';
+import Clip from '/src/components/astro/Clip.astro';
 
-import unity from "./UnityLogo.png";
+import unity from "./Unity-Logo.png";
 import aesprite from "./Aseprite.png";
 import canva from "./canva.png";
 import team from "./Pixel8_Team_Logo.jpg";
@@ -79,7 +84,7 @@ The Technology Ambassador Program (TAP) at GGC strives to break the misconceptio
 <br />
 ## Instructions:
 
-1. Go to [our Itch.io page](https://slesure.itch.io/pixel-arcade)
+1. Go to the [Pixel Arcade Website](https://slesure.itch.io/pixel-arcade)
 
 2. Read the description under the game to understand the details.​
 
@@ -91,54 +96,30 @@ The Technology Ambassador Program (TAP) at GGC strives to break the misconceptio
 
 6. If you finish early, feel free to explore and play the RGB paint game.
 
+<br/>
+
+[Click here for more detail workshop instructions](https://github.com/TAP-GGC/Pixel8/blob/main/documents/tutorial%20materials/Workshop%20Instructions.pdf)
+
+[Click here to see a game demo](https://github.com/TAP-GGC/Pixel8?tab=readme-ov-file#game-demo)
 <br />
-## Technology:{" "}
 
-<table>
-  <tr>
-    <td>
-      <img
-        src={unity.src}
-        width="200"
-        alt="Unity Logo"
-        link="https://sphero.com"
-      />
-    </td>
-
-    <td>
-      <img
-        src={canva.src}
-        width="200"
-        alt="Canva Logo"
-        link="https://sphero.com"
-      />
-    </td>
-
-    <td>
-      <img
-        src={aesprite.src}
-        width="200"
-        alt="Aesprite Logo"
-        link="https://sphero.com"
-      />
-    </td>
-
-  </tr>
-  <tr>
-    <th>[Unity](https://unity.com/)</th>
-    <th>[Canva](https://www.canva.com/)</th>
-    <th>[Aesprite](https://www.aseprite.org/)</th>
-  </tr>
-</table>
-
-## Project Setup:
-
-[Unity Installation](https://youtu.be/DCd296jpmJo)
-
-[Uploading game to itch.io](https://www.youtube.com/watch?v=skBEu32hGTg)
+## Technology:
+<div class='gallery-list'>
+<Logo src= {unity.src} alt="Unity" link="https://unity.com/"/>
+<Logo src= {canva.src} alt="Canva" link="https://www.canva.com/"/>
+<Logo src= {aesprite.src} alt="Aesprite" link="https://www.aseprite.org/"/>
+</div>
 
 ## Similar Projects:
 
 [Slice It!](https://tapggc.org/projects/2022/fall/slice-IT/)
 
 [Pizza Heist](https://tapggc.org/projects/2024/fall/pizzaheist/)
+
+## Project Setup:
+
+[Project Installation](https://youtu.be/DCd296jpmJo)
+
+[Uploading game to itch.io](https://www.youtube.com/watch?v=skBEu32hGTg)
+
+[Project Usage](https://github.com/TAP-GGC/Pixel8?tab=readme-ov-file#project-usage)
