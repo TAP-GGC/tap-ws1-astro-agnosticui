@@ -95,15 +95,15 @@ function matches(project) {
             return true;
         }else
         if(
-            project.data.shortTitle.toLowerCase().includes(searchText) ||
-            project.data.title.toLowerCase().includes(searchText) ||
-            project.data.levels.some(level => level.includes(searchText)) ||
+            project.data.shortTitle?.toLowerCase().includes(searchText) ||
+            project.data.title?.toLowerCase().includes(searchText) ||
+            project.data.levels?.some(level => level.includes(searchText)) ||
             project.data.semester == searchText ||
             `${project.data.year}`.includes(searchText) ||
-            project.data.techs.some(tech => tech.includes(searchText))||
-            project.data.instructors.some(inst => inst.toLowerCase().includes(searchText))||
-            project.data.students.some(stu => stu.toLowerCase().includes(searchText))||
-            project.data.curator.some(stu => stu.toLowerCase().includes(searchText))
+            project.data.techs?.some(tech => tech.includes(searchText))||
+            project.data.instructors?.some(inst => inst.toLowerCase().includes(searchText))||
+            project.data.students?.some(stu => stu.toLowerCase().includes(searchText))||
+            project.data.curator?.some(stu => stu.toLowerCase().includes(searchText))
             ){
             return true;
         }else{
