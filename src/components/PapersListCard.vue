@@ -1,24 +1,25 @@
 <template>    
-    <div class= card-main >
       <Card
       isStacked
       isShadow
       isAnimated
-      
-    >
-    <div class="h4 p16">
+      class="card-main"
+      style=" background-image: url('./images/list-cards/tap-papers-board.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="overlay">
+          <div class="h4 p16 card-title">
       TAP Publications
-    </div>
-      <ul>
-        <li v-for="blogPostEntry in blogEntries">
-        <a :href="`${base}/posts/${blogPostEntry.slug}`">{{ blogPostEntry.data.title }}</a> &nbsp;
-        <time datetime={{ blogPostEntry.data.eventDate.toISOString() }}>
-          {{ blogPostEntry.data.eventDate.toDateString() }}
-        </time>
-        </li>
-      </ul>
-    </Card>
-    </div>
+          </div>
+          <div>
+            <ul>
+              <li v-for="blogPostEntry in blogEntries">
+                <a :href="`${base}/posts/${blogPostEntry.slug}`">{{ blogPostEntry.data.title }}</a> &nbsp;
+                <time datetime={{ blogPostEntry.data.eventDate.toISOString() }}> {{ blogPostEntry.data.eventDate.toDateString() }}
+                </time>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </Card>
   
 </template>
 

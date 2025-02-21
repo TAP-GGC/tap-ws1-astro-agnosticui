@@ -28,8 +28,9 @@ const base = import.meta.env.BASE_URL;
         </HeaderNavItem>
       
         <HeaderNavItem>
-          <Menu id="menu-More" menuTitle="More" :disabledItems="['menuitem-about', 'menuitem-2', 'menuitem-people']" :isBordered="true" type="simple" :isItemsRight="true">
-            <template #menuitem-about>About</template>
+          <Menu id="menu-More" menuTitle="More" :disabledItems="['menuitem-disabled']" :isBordered="true" type="simple" :isItemsRight="true">
+            <!--template #menuitem-disabled><a :href="`${base == '/' ? '' : base}/about`">About</a></template-->
+            <template #menuitem-about><a :href="`${base == '/' ? '' : base}/about`">About</a></template>
             <template #menuitem-instructors><a :href="`${base == '/' ? '' : base}/instructors`">Instructors</a></template>
             <template #menuitem-students><a :href="`${base == '/' ? '' : base}/students`">Students</a></template>
             <template #menuitem-techs><a :href="`${base == '/' ? '' : base}/techs`">Technologies</a></template>

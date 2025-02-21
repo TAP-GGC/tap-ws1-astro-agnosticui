@@ -5,7 +5,7 @@
       isShadow
       isAnimated
       class=card-main
-      style=" background-image: url('/images/tap-news-board.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; "
+      style=" background-image: url('/images/list-cards/tap-news-board.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; "
     >
     <div class="overlay">
       <div class="h4 p16 card-title">TAP News</div>
