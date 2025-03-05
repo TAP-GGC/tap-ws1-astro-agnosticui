@@ -33,6 +33,9 @@ import ProjectCard from '../../components/ProjectCard.vue';
 
 // Read from content collection
 import { getCollection } from 'astro:content';
+import FacultyCard from '../../components/FacultyCard.vue';
+import facultyIds from '../../components/astro/FacultyIds';
+import Instructors from '../instructors.astro';
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const blogEntries = await getCollection('events');
@@ -44,7 +47,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { postId } = Astro.params;
 const { Content } = await entry.render();
-const projects = await getCollection('projects');        
+   
 
 //BreadCrumb variables
 const postName = entry.data.title;
@@ -70,11 +73,16 @@ let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC 
 
     {entry.data?.instructors && (
       <h2>Faculty Facilitators</h2>
-      <ul>
+      <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
         {entry.data.instructors.map((instructor) => (      
-          <li><a href={`/instructors/${instructor}`}>{instructor}</a></li> 
+          <FacultyCard item={instructor}/>
         ))}
-      </ul>
+      </section>
+      // <ul>
+      //   {entry.data.instructors.map((instructor) => (      
+      //     <li><a href={`/instructors/${instructor}`}>{instructor}</a></li> 
+      //   ))}
+      // </ul>
     )}
 
     {entry.data?.students && (
