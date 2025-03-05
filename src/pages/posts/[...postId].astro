@@ -27,16 +27,22 @@ import "agnostic-vue/dist/index.css";
 import TAPHeader from '../../components/TAPHeader.vue';
 import TAPDefaultLayout from "../../layouts/default.astro";
 import Crumbs from '../../components/Crumbs.vue';
-import Gallery from '../../components/astro/Gallery.astro';
-import projectIds from '../../components/astro/ProjectIds';
-import ProjectCard from '../../components/ProjectCard.vue';
-
 // Read from content collection
 import { getCollection } from 'astro:content';
+//gallery
+import Gallery from '../../components/astro/Gallery.astro';
+//projects
+import projectIds from '../../components/astro/ProjectIds';
+import ProjectCard from '../../components/ProjectCard.vue';
+//faculty
 import FacultyCard from '../../components/FacultyCard.vue';
 import facultyIds from '../../components/astro/FacultyIds';
-import Instructors from '../instructors.astro';
+import instructors from '../instructors.astro';
+//students
+import studentIds from '../../components/astro/StudentIds';
+import students from '../students.astro';
 import StudentCard from '../../components/StudentCard.vue';
+import FacultySearch from '../../components/FacultySearch.vue';
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const blogEntries = await getCollection('events');
@@ -72,32 +78,45 @@ let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC 
       </section>
     )}
 
-    {entry.data?.faculty && (
+    {entry.data?.instructors && (
       <h2>Faculty Facilitators</h2>
       <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
-        {entry.data.faculty.map((instructors) => (      
-          <FacultyCard item={instructors}/>
+                {/* shows the cards but not the data */}
+
+         {entry.data.projects.map((instructor) => (      
+          <FacultyCard item={projectIds[instructor]} />
         ))}
+        {/*rework (breaking the page)>>>>>
+         {entry.data.instructors.map((instructor) => (      
+          <FacultyCard item={facultyIds[instructor]}/>
+        ))} */}
       </section>
-      <ul>
-        {entry.data.instructors.map((instructor) => (      
-          <li><a href={`/instructors/${instructor}`}>{instructor}</a></li> 
-        ))}
-      </ul>
+      //original: 
+      // <ul>
+      //   {entry.data.instructors.map((instructor) => (      
+      //     <li><a href={`/instructors/${instructor}`}>{instructor}</a></li> 
+      //   ))}
+      // </ul>
     )}
 
     {entry.data?.students && (
       <h2>Students</h2>
-      // <section>
-      // {entry.data.students.map((student) => (      
-      //     <StudentCard item={[student]}/>
+      <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
+        {/* shows the cards but not the data */}
+         {entry.data.projects.map((student) => (      
+          <StudentCard item={projectIds[student]} />
+        ))}
+      {/*rework (breaking the page)>>>>>
+       {entry.data.projects.map((student) => (      
+          <StudentCard item={projectIds[student]}/>
+        ))} */}
+      </section>
+      // original: 
+      // <ul>
+      //   {entry.data.students.map((student) => (      
+      //     <li><a href={`/students/${student}`}>{student}</a></li> 
       //   ))}
-      // </section>
-    //   <ul>
-    //     {entry.data.students.map((student) => (      
-    //       <li><a href={`/students/${student}`}>{student}</a></li> 
-    //     ))}
-    //   </ul>
+      // </ul>
      )}
 
     {entry.data?.images && (

@@ -8,6 +8,10 @@
             ".vscode/**",
             "**/*.scss",
             "**/*.sass"
+    ],
+    "cSpell.words": [
+        "fontsource",
+        "pixelify"
     ]
 
 }
