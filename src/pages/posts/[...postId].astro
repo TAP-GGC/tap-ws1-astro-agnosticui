@@ -36,6 +36,7 @@ import { getCollection } from 'astro:content';
 import FacultyCard from '../../components/FacultyCard.vue';
 import facultyIds from '../../components/astro/FacultyIds';
 import Instructors from '../instructors.astro';
+import StudentCard from '../../components/StudentCard.vue';
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const blogEntries = await getCollection('events');
@@ -71,28 +72,33 @@ let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC 
       </section>
     )}
 
-    {entry.data?.instructors && (
+    {entry.data?.faculty && (
       <h2>Faculty Facilitators</h2>
       <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
-        {entry.data.instructors.map((instructor) => (      
-          <FacultyCard item={instructor}/>
+        {entry.data.faculty.map((instructors) => (      
+          <FacultyCard item={instructors}/>
         ))}
       </section>
-      // <ul>
-      //   {entry.data.instructors.map((instructor) => (      
-      //     <li><a href={`/instructors/${instructor}`}>{instructor}</a></li> 
-      //   ))}
-      // </ul>
+      <ul>
+        {entry.data.instructors.map((instructor) => (      
+          <li><a href={`/instructors/${instructor}`}>{instructor}</a></li> 
+        ))}
+      </ul>
     )}
 
     {entry.data?.students && (
       <h2>Students</h2>
-      <ul>
-        {entry.data.students.map((student) => (      
-          <li><a href={`/students/${student}`}>{student}</a></li> 
-        ))}
-      </ul>
-    )}
+      // <section>
+      // {entry.data.students.map((student) => (      
+      //     <StudentCard item={[student]}/>
+      //   ))}
+      // </section>
+    //   <ul>
+    //     {entry.data.students.map((student) => (      
+    //       <li><a href={`/students/${student}`}>{student}</a></li> 
+    //     ))}
+    //   </ul>
+     )}
 
     {entry.data?.images && (
       <h2>Gallery</h2>
