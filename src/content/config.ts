@@ -11,8 +11,22 @@ const eventCollection = defineCollection({
     semester: z.string(),
     year: z.number(),
     eventDate: z.string().datetime().transform((str) => new Date(str)),
-    students: z.array(z.string()).optional(), /* do a refine check like in projects */
-    instructors: z.array(z.string()).optional(), /* do a refine check like in projects */
+    students: z.array(z.string().refine(
+      async (studentId) =>{
+        const students = await getCollection('students');
+
+        return students.some(student => student.data.id == studentId)
+      },
+      (studentId) => ({message: `Student '${studentId}' not found.`})
+    )).optional(), /* do a refine check like in projects */
+    instructors: z.array(z.string().refine(
+      async (facultyId) =>{
+        const instructors = await getCollection('instructors');
+
+        return instructors.some(instructor => instructor.data.id.toLowerCase() == facultyId)
+      },
+      (facultyId) => ({message: `Faculty '${facultyId}' not found.`})
+    )).optional(),
     projects: z.array(z.string().refine(
       async (projectId) => {
         const projects = await getCollection('projects');

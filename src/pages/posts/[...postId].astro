@@ -45,7 +45,7 @@ import StudentCard from '../../components/StudentCard.vue';
 import FacultySearch from '../../components/FacultySearch.vue';
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('events');
+  const blogEntries = await getCollection('events')
   return blogEntries.map(entry => ({
     params: { postId: `${entry.data.year}/${entry.data.semester}/${entry.data.id}` }, props: { entry },
   }));
@@ -81,42 +81,20 @@ let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC 
     {entry.data?.instructors && (
       <h2>Faculty Facilitators</h2>
       <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
-                {/* shows the cards but not the data */}
-
-         {entry.data.projects.map((instructor) => (      
-          <FacultyCard item={projectIds[instructor]} />
+        {entry.data.instructors.map((instructor) => (      
+          <FacultyCard item={facultyIds[instructor]} />
         ))}
-        {/*rework (breaking the page)>>>>>
-         {entry.data.instructors.map((instructor) => (      
-          <FacultyCard item={facultyIds[instructor]}/>
-        ))} */}
       </section>
-      //original: 
-      // <ul>
-      //   {entry.data.instructors.map((instructor) => (      
-      //     <li><a href={`/instructors/${instructor}`}>{instructor}</a></li> 
-      //   ))}
-      // </ul>
     )}
 
     {entry.data?.students && (
       <h2>Students</h2>
       <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
-        {/* shows the cards but not the data */}
-         {entry.data.projects.map((student) => (      
-          <StudentCard item={projectIds[student]} />
+        {entry.data.students.map((student) => (      
+          <StudentCard item={studentIds[student]}/>
         ))}
-      {/*rework (breaking the page)>>>>>
-       {entry.data.projects.map((student) => (      
-          <StudentCard item={projectIds[student]}/>
-        ))} */}
+
       </section>
-      // original: 
-      // <ul>
-      //   {entry.data.students.map((student) => (      
-      //     <li><a href={`/students/${student}`}>{student}</a></li> 
-      //   ))}
-      // </ul>
      )}
 
     {entry.data?.images && (
