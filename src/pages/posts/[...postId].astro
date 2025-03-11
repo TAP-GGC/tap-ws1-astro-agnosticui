@@ -64,8 +64,9 @@ const postTag = entry.data.tags;
 let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC Technology Ambassadors Program`;
 
 ---
-<TAPDefaultLayout title={title} class="blog">
+<TAPDefaultLayout title={title}>
 	<Crumbs pageType="post" pageUrl=`/posts/${postId}` />
+  <div class="blog">
 
     <Content />
 
@@ -101,5 +102,7 @@ let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC 
       <h2>Gallery</h2>
       <Gallery photos={entry.data.images} />
     )}
-    
+
+  </div>
+  
 </TAPDefaultLayout>
