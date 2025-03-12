@@ -37,21 +37,21 @@ const facultyImg = faculty.data.image?.src || EmptyImage.src;
 ---
 <TAPDefaultLayout title={title}>
   <Crumbs pageType="faculty" pageUrl={`/instructors/${faculty.data.id}`} />
-
   <div class="body-faculty">
+
     { faculty.data.name &&   <h1 class="facultyName">{faculty.data.name}</h1>}
-    { faculty.data.title && <h2 class="facultyTitle">{faculty.data.title}</h2>}
-    <div class="facultyDetails">
-    { facultyImg &&  <img src={facultyImg} alt="Faculty Photo" class="facultyImage" />}      
-    <div class="col2">
-        {faculty.data.desc && <h3>About Me</h3>}
-        {faculty.data.desc && <p>{faculty.data.desc}</p>}
+    { faculty.data.title && <h3 class="facultyTitle">{faculty.data.title}</h3>}
+    <div class="facultyText">
+    { facultyImg &&  <img src={facultyImg} alt="Faculty Photo" class="facultyImage" />}  
+  <!-- <div class="col2"> removed because aligning center-->
+    <h3 class="about">About Me</h3>
         {faculty.data.email && <p><strong>Email: </strong><a href={`mailto:${faculty.data.email}`}>{faculty.data.email}</a></p>}
         {faculty.data.phone && <p><strong>Phone: </strong>{faculty.data.phone}</p>}
         {faculty.data.website && <p><strong>Website: </strong><a href={faculty.data.website} target="_blank">{faculty.data.website}</a></p>}
         {faculty.data.linkedin && <p><strong>LinkedIn: </strong><a href={faculty.data.linkedin} target="_blank">{faculty.data.linkedin}</a></p>}
         {faculty.data.github && <p><strong>GitHub: </strong><a href={faculty.data.github} target="_blank">{faculty.data.github}</a></p>}
-      </div>
+        {faculty.data.desc && <p>{faculty.data.desc}</p>}
+      <!-- </div>     -->
     </div>
     <Content />
     {faculty.data?.projects && faculty.data.projects.length > 0 &&(
@@ -63,21 +63,23 @@ const facultyImg = faculty.data.image?.src || EmptyImage.src;
       </section>
     )}
   </div>
+<!-- </div> -->
+
 </TAPDefaultLayout>
 
 <style>
   .facultyImage {
+    margin-top: 1.125em;
     margin-right: 1em;
     width: clamp(15em, 50%, 25em);
     float: left;
-    padding-bottom: 0.5em;
     padding-right: 0.5em;
   }
 
-  .facultyDetails {
-    font-size: 1.125em;
+  .facultyText {
+    font-size: 1.25em;
     text-align: left;
-    display: inline-block;
+    display: inline;
     margin-bottom: 1em;
     height: 100%;
   }
@@ -85,11 +87,12 @@ const facultyImg = faculty.data.image?.src || EmptyImage.src;
   .col2 {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-between; /* Ensure content takes the full height */
+    text-align: left;
     height: max-content;
   }
 
-  .facultyDetails p {
+  .facultyText p {
     margin-bottom: 0.5em;
   }
 
@@ -101,7 +104,10 @@ const facultyImg = faculty.data.image?.src || EmptyImage.src;
     text-align: center;
     margin: 0.5em 0 1em;
   }
-
+h3.about{
+  text-align: left;
+  margin: 0.5em 0;
+}
   /* Media query for mobile devices */
   @media (max-width: 768px) {
     .facultyImage {
@@ -116,7 +122,7 @@ const facultyImg = faculty.data.image?.src || EmptyImage.src;
       width: 100%;
     }
 
-    .facultyDetails {
+    .facultyText {
       margin-bottom: 0;
     }
   }
