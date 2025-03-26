@@ -1,0 +1,179 @@
+---
+shortTitle: Makey's Race
+title: Using Scratch to Teach Event-Driven Coding Skills
+id: makeys-race
+desc: A fun pool game that uses Scratch programming to teach students basic coding skills such as "if-statements" and "while loops". The MaKey MaKey circuit board is used in place of the computer mouse/keyboard mousepad.
+github: https://github.com/TAP-GGC/makey-makey-pool
+students: [
+  "Samuel Groom",
+  "Asho Issak",
+  "Johnson Ngao",
+  "Taylor Williams"
+]
+instructors: [
+  "Dr. Anca Doloc-Mihu",
+  "Dr. Cindy Robertson"
+] 
+techs: [
+  "scratch",
+  "makey-makey"
+]
+videos: [
+  {src: "v-GUbj7DMEE", caption: "Guide to Use Scratch"},
+  {src: "Level1.mp4", caption: "Level 1 Gameplay"},
+  {src: "Level_2.mkv", caption: "Level 2 Gameplay"},
+  {src: "Level3.mp4", caption: "Level 3 Gameplay"}
+]
+events: [
+  "tap expo",
+  "class workshops"
+]
+semester: spring
+year: 2020
+levels: [
+  "middle-school",
+  "high-school",
+  "college"
+] 
+difficulty: [
+  "intermediate"
+] 
+durationMins: [60, 90]
+publishedDate: 2025-03-25
+relatedIds: [
+  "monster-makey",
+  "scratchathon",
+  "leap-for-mankind",
+  "ninja-turtler",
+  "planimals",
+  "lightup"
+]
+images: [
+   { src: './Scratch_02.png', alt: 'Scratch Logo'},
+   { src: './MakeyMakey.jpg', alt: 'Makey Makey Board'},
+   { src: './ScratchGuideThumbnail.png', alt: 'Scratch Guide Thumbnail'}
+]
+imageLogoLight: ./TAP_Project_Logos_-_makeys-race-logo-light.png
+imageLogoDark: ./TAP_Project_Logos_-_makeys-race-logo-dark.png
+imageTeam: ./ScratchGuideThumbnail.png
+curator: ["Thanh Tran"]
+---
+
+import { Image } from "astro:assets";
+import Photo from '/src/components/astro/Photo.astro';
+import Logo from '/src/components/astro/Logo.astro';
+import Gallery from '/src/components/astro/Gallery.astro';
+import Clip from '/src/components/astro/Clip.astro';
+
+import ScratchLogo from './Scratch_02.png';
+import MakeyMakeyBoard from './MakeyMakey.jpg';
+import ScratchGuideThumbnail from './ScratchGuideThumbnail.png';
+
+{/* Project description */}
+
+Makey Makey Pool is a fun pool game that uses Scratch programming to teach students basic coding skills such as "if-statements" and "while loops". The MaKey MaKey circuit board will be used in place of the computer mouse/keyboard mousepad. The project was created by Makey Your Shot, a group of students a part of the Technology Ambassadors Program at Georgia Gwinnett College.
+
+The [Technology Ambassadors Program](https://www.ggc.edu/academics/school-of-science-and-technology/research-internships-service-learning/technology-ambassador-program) is a program that offers students opportunities to learn more about technology, and helps them develop creativity, leadership, communication, and teamwork skills, while also giving them the opportunity to do community outreach. This project was created with the goal of attracting non-technical people to like and get excited about technology. The students that participate in the outreach events will be able to learn these basic coding skills through demonstrations and hands-on activities (making their own changes to the game).
+
+{/* Videos of Each Level */}
+## Game Levels Short Demo
+
+<div className="video-container">
+<h3>Level 1</h3>
+  <video width="90%" controls>
+    <source src="https://raw.githubusercontent.com/TAP-GGC/makeysrace/master/archive/videos/Level1.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <h3>Level 2 Gameplay</h3>
+  <video width="90%" controls>
+    <source src="https://raw.githubusercontent.com/TAP-GGC/makeysrace/master/archive/videos/archive_videos_Level_2.mkv" type="video/webm" />
+    Your browser does not support the video tag.
+  </video>
+
+  <h3>Level 3 Gameplay</h3>
+  <video width="90%" controls>
+    <source src="https://raw.githubusercontent.com/TAP-GGC/makeysrace/master/archive/videos/Level3.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+
+{/* Team members */}
+## Team members
+- Samuel Groom
+- Asho Issak
+- Johnson Ngao
+- Taylor Williams
+<br />
+
+{/* Outreach Activities */}
+## Outreach Activities:
+1. **TAP Expo**, April 28, GGC – To promote IT field and the TAP program to college students
+2. **Class Workshops**, April 9 and April 13 (2 workshops each day) - to promote IT field to non-IT college students
+
+## Project Information
+* **Difficulty Level**: Medium
+* **Target Audience**: 6th Grade - College
+* **Duration of workshop**: 60-90 minutes
+* **Needed Materials**: MakeyMakey circuit boards, objects to use as input devices for the MakeyMakey
+* **Learning outcomes**: The primary goal of this project is to educate and create interest in the IT field for non STEM majors. By engaging in our workshops, students will create a pool game using block coding and using a MakeyMakey as a controller to learn about fundamental coding principles such as "if-statements" and "while-loops".
+
+## Game Description
+The project is used to educate others about "if-statements", "while-loops", and block coding by creating a fun pool game using Scratch. MakeyMakey is a circuit board that can use any object as an input device.
+
+The workshop has three progressive levels:
+1. **Level 1**: Program the White and Yellow ball to allow them to collide with each other.
+2. **Level 2**: Program the rest of the balls to be able to collide with each other.
+3. **Level 3**: Program the balls and obstacles to be able to make contact with each other.
+
+## Technology
+<div className='gallery-list'>
+<Logo src={ScratchLogo.src} alt="Scratch Logo" link="https://scratch.mit.edu/" />
+<Logo src={MakeyMakeyBoard.src} alt="Makey Makey Board" link="https://makeymakey.com/products/makey-makey-kit" />
+</div>
+
+* **Scratch** is a block-based visual programming language and website targeted primarily at children to help learn code concepts.
+* **MakeyMakey** is a circuit board that can use any object as an input device, turning everyday objects into touchpads.
+
+## Similar Projects
+* [Monster Makey (Scratch with MakeyMakey and Audcity)](https://github.com/TAP-GGC/MonsterMakey)
+* [Scratchathon (Scratch)](https://github.com/TAP-GGC/scratchathon)
+* [Leap for Mankind (Scratch)](https://github.com/TAP-GGC/leapformankind)
+* [NinjaTurtler (Scratch with Makey-Makey)](https://github.com/TAP-GGC/NinjaTurtles)
+* [Planimals (Scratch)](https://github.com/TAP-GGC/planimals)
+* [LightUp (Scratch)](https://github.com/TAP-GGC/LightUp-Teaching-Programming-Basics-with-Scratch)
+
+## Project Setup/Installation
+
+### Guide to Use Scratch
+<Clip src="v-GUbj7DMEE" showIframe={true} />
+
+## Workshop Materials
+
+* [Workshop step-by-step](https://github.com/TAP-GGC/makeysrace/blob/master/documents/Using%20Scratch%20to%20Teach%20Event-Driven%20Coding%20Skills%20Step-By-Step.pdf)
+* [Commented Code](https://github.com/TAP-GGC/makeysrace/blob/master/documents/Using%20Scratch%20to%20Teach%20Event-Driven%20Coding%20Skills%20Commented%20Code.pdf)
+* [Workshop Powerpoint](https://github.com/TAP-GGC/makeysrace/blob/master/documents/MakeysraceWorkshop.pptx)
+
+### Workshop Levels (Incomplete Code for Student Use)
+* [Level 1](https://github.com/TAP-GGC/makeysrace/blob/master/code/Workshop/PoolLevel1.sb3) - Yellow and White ball
+* [Level 2](https://github.com/TAP-GGC/makeysrace/blob/master/code/Workshop/PoolLevel2.sb3) - All balls
+* [Level 3](https://github.com/TAP-GGC/makeysrace/blob/master/code/Workshop/PoolLevel3.sb3) - Obstacles
+
+### Workshop Levels (Complete Code for Teacher Answer Key)
+* [Level 1](https://github.com/TAP-GGC/makeysrace/blob/master/code/Teacher/PoolLevel1TeacherCode.sb3) - Yellow and White Ball
+* [Level 2](https://github.com/TAP-GGC/makeysrace/blob/master/code/Teacher/PoolLevel2TeacherCode.sb3) - All balls
+* [Level 3](https://github.com/TAP-GGC/makeysrace/blob/master/code/Teacher/PoolLevel3TeacherCode.sb3) - Obstacles
+
+## Usage
+
+### Playing or Editing This Project
+1. Download any of these files to play the level or make changes to it!
+   * [Level 1](code/Workshop/PoolLevel1.sb3) - Program the White and Yellow ball to allow them to collide with each other
+   * [Level 2](code/Workshop/PoolLevel2.sb3) - Program the rest of the balls to be able to collide with each other
+   * [Level 3](code/Workshop/PoolLevel3.sb3) - Program the balls and obstacles to be able to make contact with each other
+2. Click **File** and then **Load from your computer** to import the files from your computer
+3. Click the green flag, read the instructions, and then press **P** to play!
+
+### Scratch Resources
+**Tutorials**: Click [here](https://scratch.mit.edu/ideas) to watch tutorials of the many ways you can create a Scratch project.
