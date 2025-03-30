@@ -27,15 +27,25 @@ import "agnostic-vue/dist/index.css";
 import TAPHeader from '../../components/TAPHeader.vue';
 import TAPDefaultLayout from "../../layouts/default.astro";
 import Crumbs from '../../components/Crumbs.vue';
-import Gallery from '../../components/astro/Gallery.astro';
-import projectIds from '../../components/astro/ProjectIds';
-import ProjectCard from '../../components/ProjectCard.vue';
-
 // Read from content collection
 import { getCollection } from 'astro:content';
+//gallery
+import Gallery from '../../components/astro/Gallery.astro';
+//projects
+import projectIds from '../../components/astro/ProjectIds';
+import ProjectCard from '../../components/ProjectCard.vue';
+//faculty
+import FacultyCard from '../../components/FacultyCard.vue';
+import facultyIds from '../../components/astro/FacultyIds';
+import instructors from '../instructors.astro';
+//students
+import studentIds from '../../components/astro/StudentIds';
+import students from '../students.astro';
+import StudentCard from '../../components/StudentCard.vue';
+import FacultySearch from '../../components/FacultySearch.vue';
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('events');
+  const blogEntries = await getCollection('events')
   return blogEntries.map(entry => ({
     params: { postId: `${entry.data.year}/${entry.data.semester}/${entry.data.id}` }, props: { entry },
   }));
@@ -44,7 +54,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { postId } = Astro.params;
 const { Content } = await entry.render();
-const projects = await getCollection('projects');        
+   
 
 //BreadCrumb variables
 const postName = entry.data.title;
@@ -54,8 +64,9 @@ const postTag = entry.data.tags;
 let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC Technology Ambassadors Program`;
 
 ---
-<TAPDefaultLayout title={title} class="blog">
+<TAPDefaultLayout title={title}>
 	<Crumbs pageType="post" pageUrl=`/posts/${postId}` />
+  <div class="blog">
 
     <Content />
 
@@ -70,25 +81,28 @@ let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC 
 
     {entry.data?.instructors && (
       <h2>Faculty Facilitators</h2>
-      <ul>
+      <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
         {entry.data.instructors.map((instructor) => (      
-          <li><a href={`/instructors/${instructor}`}>{instructor}</a></li> 
+          <FacultyCard item={facultyIds[instructor]} />
         ))}
-      </ul>
+      </section>
     )}
 
     {entry.data?.students && (
       <h2>Students</h2>
-      <ul>
+      <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
         {entry.data.students.map((student) => (      
-          <li><a href={`/students/${student}`}>{student}</a></li> 
+          <StudentCard item={studentIds[student]}/>
         ))}
-      </ul>
-    )}
+
+      </section>
+     )}
 
     {entry.data?.images && (
       <h2>Gallery</h2>
       <Gallery photos={entry.data.images} />
     )}
-    
+
+  </div>
+  
 </TAPDefaultLayout>

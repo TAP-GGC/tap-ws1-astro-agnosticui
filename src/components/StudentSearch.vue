@@ -96,7 +96,7 @@ const base = import.meta.env.BASE_URL;
 
             <!-- Input for searching students -->
             <Input id="7" is-underlined is-underlined-with-background 
-                placeholder="Enter student name, gradution year or related projects" 
+                placeholder="Enter student name, graduation year or related projects" 
                 label="Search for students" 
                 type="text" 
                 v-model="search_text" />

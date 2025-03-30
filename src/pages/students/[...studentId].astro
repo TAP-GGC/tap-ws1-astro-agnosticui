@@ -43,7 +43,7 @@ import TAPDefaultLayout from "../../layouts/default.astro";
 
     <div class="studentDetails">
       {studentImg && <Image src={studentImg} alt="student Photo" class="studentImage" />}
-      <div class="col2">
+      <!-- <div class="col2"> removed because aligning center -->
         {student.data.desc && <h3>About Me</h3>}
         {student.data.desc && <p>{student.data.desc}</p>}
         {student.data.gradYear && <p><b>Graduation year: </b> {student.data.gradYear}</p>}
@@ -54,7 +54,7 @@ import TAPDefaultLayout from "../../layouts/default.astro";
         {student.data.linkedin && <p><b>LinkedIn: </b> <a href={student.data.linkedin} target="_blank">{student.data.linkedin}</a></p>}
         {student.data.github && <p><b>GitHub: </b> <a href={student.data.github} target="_blank">{student.data.github}</a></p>}
 
-      </div>
+      <!-- </div> -->
     </div>
     <Content />
     {student.data?.projects && student.data.projects.length > 0 && (
@@ -92,6 +92,7 @@ import TAPDefaultLayout from "../../layouts/default.astro";
   display: flex;
   flex-direction: column; /* Stack the content vertically */
   justify-content: space-between; /* Ensure content takes the full height */
+  text-align: left;
   height: max-content;
   }
 
@@ -103,6 +104,8 @@ import TAPDefaultLayout from "../../layouts/default.astro";
 
   .studentDetails p {
     margin-bottom: 0.5em;
+    text-align: left;
+
   }
 
   h1.studentName {

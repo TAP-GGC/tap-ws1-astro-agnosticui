@@ -76,20 +76,28 @@ body {
   width: 100%;
   
 }
-.blog, .body-prj, .body-student{
+.blog, .body-prj, .body-student, .body-faculty{
   background-color: var(--agnostic-light);
   max-width: 1440px;
+  min-height: 890px;
+  max-height: auto;
   margin: 1rem;
   padding: 3rem;
 }
 
 /* Make all markdown paragraphs in the blog and projects sections in a centered box */
-.blog p, .body-prj p, .body-prj ol {
+.blog p, .body-prj p, .body-student p, .body-faculty p{
   margin: 0 auto 0;
 }
+.body-prj ol, .body-prj ul, .blog ol, .blog ul, .body-student ol, .body-student ul, .body-faculty ol, .body-faculty ul{
+  font-size: 1.25em; /*needed to set here because there's font differences in instructor & student pages*/
+  margin: 0 auto 0;
 
+}
 
-.blog h1, .blog h2, .blog h3, .blog h4 {
+.blog h1, .blog h2, .blog h3, .blog h4, 
+.body-student h1, .body-student h2, .body-student h3, .body-student h4, 
+.body-faculty h1, .body-faculty h2, .body-faculty h3, .body-faculty h4 {
   text-align: center;
 }
 
@@ -99,13 +107,11 @@ body {
 }
 
 /* Project and blog pages show list bullets again, and also centered. */
-.body-prj ul, .blog ul {
+.body-prj ol, .body-prj ul, .blog ol, .blog ul, .body-student ol, .body-student ul, .body-faculty ol, .body-faculty ul {
   display: inline-block;
   text-align: left;
   list-style: inside disc;
-  font-family: 'Work Sans', medium; 
-  /*font-size: 1.25em; do not use fixed sizes, instead rely on Agnostic scalable size above */
-  /*display: inline-block; if we make the whole project page centered, then lists can float to middle */    
+  font-family: 'Work Sans', medium;    
   max-width: 60em;
   margin-left: auto;
   margin-right: auto;
