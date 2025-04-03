@@ -79,7 +79,7 @@ body {
 .blog, .body-prj, .body-student, .body-faculty{
   background-color: var(--agnostic-light);
   max-width: 1440px;
-  min-height: 890px;
+  min-width: 800px;
   max-height: auto;
   margin: 1rem;
   padding: 3rem;
@@ -115,6 +115,18 @@ body {
   max-width: 60em;
   margin-left: auto;
   margin-right: auto;
+}
+
+.body-student div{
+  margin-left:1em; 
+  margin-bottom:2em
+}
+
+.body-student ul{
+  list-style-type: disc;
+  width: 90%;
+  margin-left:1em; 
+  margin-bottom:2em
 }
 
 .body-prj iframe.youtube {
@@ -161,6 +173,10 @@ a:hover, .header a:hover{
 .tag, .button{
   background-color: var(--agnostic-primary);
   color: var(--agnostic-light) !important;
+}
+
+._menu-item-selected_17rak_74 {
+  background-color: var(--agnostic-light) !important; /*removes primary color from menu selection in header*/
 }
 .project-cards-flex {  /*Project search page cards container */
 justify-content: space-around;
@@ -259,7 +275,7 @@ justify-content: space-around;
   display: none;
 }
 .imageLight {
-  display: flex; /* Kelechi changed this, not sure why */
+  display: flex; /* Kelechi changed this  so that logos grow with page - each component has different size specs (header, footer, logos ) this way we can set them in their components*/
 }
 @media (prefers-color-scheme: dark) {
   .imageDark {
