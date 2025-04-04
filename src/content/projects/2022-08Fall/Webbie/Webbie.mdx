@@ -1,0 +1,151 @@
+---
+shortTitle: Webbie
+title: Interactive Web Development Learning Platform
+id: webbie
+desc: Introduces students to HTML and CSS through an interactive platform that shows them step-by-step how to design the structure of a website and how to add customizations such as changing font size or font color, adding buttons, and embedding links or images.
+github: https://github.com/TAP-GGC/Webbie
+students: [
+  "Holly Boaz",
+  "April Factor",
+  "Thien Trung (Trump) Dong Dong"
+]
+instructors: [
+  "Dr. Wei Jin",
+  "Dr. Xin Xu"
+] 
+techs: [
+  "html",
+  "css"
+]
+videos: [
+  
+]
+events: [
+  "tap expo",
+  "explore your future career",
+  "create symposium"
+]
+semester: fall
+year: 2022
+levels: [
+  "k-12",
+  "elementary",
+  "middle-school",
+  "high-school",
+  "college"
+] 
+difficulty: [
+  "beginner"
+] 
+durationMins: [60]
+publishedDate: 2025-03-25
+relatedIds: [
+  "foe",
+  "space-mechanic"
+]
+images: [
+   { src: './webbieGroupP.png', alt: 'Team Photo'},
+   { src: './HTML.png', alt: 'HTML Logo'},
+   { src: './CSS.png', alt: 'CSS Logo'},
+   { src: './codepen.png', alt: 'CodePen Logo'}
+]
+imageLogoLight: ./webbie_logo_light.png
+imageLogoDark: ./webbie_logo-dark.png
+imageTeam: ./webbieGroupP.png
+curator: ["Thanh Tran"]
+---
+
+import { Image } from "astro:assets";
+import Photo from '/src/components/astro/Photo.astro';
+import Logo from '/src/components/astro/Logo.astro';
+import Gallery from '/src/components/astro/Gallery.astro';
+import Clip from '/src/components/astro/Clip.astro';
+
+import TeamPhoto from './webbieGroupP.png';
+import HTMLLogo from './HTML.png';
+import CSSLogo from './CSS.png';
+import CodePenLogo from './codepen.png';
+
+{/* Project description */}
+
+This project, <a href="https://tap-ggc.github.io/Webbie/Scene%201/mainPage.html" target="_blank" rel="noopener noreferrer">Webbie</a>, is about teaching the basics of web development in a fun and engaging way. We want to introduce students to HTML and CSS through an interactive platform that shows them step-by-step how to design the structure of a website and how to add customizations such as changing font size or font color, adding buttons, and embedding links or images. Moreover, Webbie was also developed using HTML and CSS, so it is both an interactive guide and an example that demonstrates what tools like HTML and CSS are capable of!
+
+The Technology Ambassador Program ([TAP](https://ggc.edu/academics/school-of-science-and-technology/research-internships-service-learning/technology-ambassador-program)) is a project-based class that provides a collaborative environment for students to work with their fellow classmates on a semester-long project using technologies of their choice. TAP strives to increase participation in IT through numerous outreach activities and workshops that are designed to showcase the creative and fun side of technology.
+
+{/* Commercial Video */}
+## Project Demo Video
+<div className="video-container">
+  <iframe 
+    width="560" 
+    class="youtube"
+    src="https://github.com/user-attachments/assets/f3876054-5480-45ac-bf06-b36a356564ec" 
+    title="Webbie Commercial Video" 
+    frameBorder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowFullScreen>
+  </iframe>
+</div>
+
+### Click <a href="https://tap-ggc.github.io/Webbie/Scene%201/mainPage.html" target="_blank" rel="noopener noreferrer">here</a> to try the game.
+
+{/* Team members */}
+## Team members
+<Image src={TeamPhoto} alt="Webbie Team Photo" />
+#### From left to right: April Factor, Holly Boaz, Trump Dong Dong
+<br />
+
+{/* Outreach Activities */}
+## Outreach Activities:
+1. **TAP Expo**, Georgia Gwinnett College, October 11th, 2022 - Promote IT fields among college students.
+2. **Explore Your Future Career** event organized by the Gwinnett County Public Schools, October 15th, 2022, Discovery High School - Project Demo.
+3. **CREATE Symposium**, Georgia Gwinnett College, November 11th, 2022.
+
+## Publications
+1. Holly Boaz, April Factor, Thien Trung Dong Dong. "Webbie", CREATE Symposium, November 11th, 2022, Georgia Gwinnett College.
+
+
+## Game Description
+Webbie provides an interactive environment in which students can complete a series of activities that teaches them the basics of front-end development using HTML and CSS. With its vivid design, colorful theme, and most importantly, the drag-and-drop user interface that turns the learning process into a fun and stress-free experience.
+
+The website comprises of 7 webpages, each with a different activity related to web development:
+* First page: Changing the background color (CSS)
+* Second page: Creating a top-level heading (HTML)
+* Third page: Adding a paragraph of text to a webpage (HTML)
+* Fourth page: Choosing font colors (CSS)
+* Fifth page: Creating and designing a button (HTTML & CSS)
+* Sixth page: Embedding a link (HTML)
+* Seventh page: Adding a background image (CSS)
+
+## Technology
+<div class='gallery-list'>
+<Logo src={HTMLLogo.src} alt="HTML Logo" />
+<Logo src={CSSLogo.src} alt="CSS Logo" />
+<Logo src={CodePenLogo.src} alt="CodePen Logo" link="https://codepen.io/" />
+</div>
+
+* HTML (Hypertext Markup Language) is the standard markup language for structuring and defining the content of a webpage or a website, which is a collection of webpages.
+* CSS (Cascading Style Sheet) is a style sheet language used for designing visual elements of a webpage or website such as background color, text color, or font size.
+* <a href="https://codepen.io/" target="_blank" rel="noopener noreferrer">CodePen</a> is a online code editor for front-end development that supports HTML, CSS, and JavaScript.
+
+## Similar Projects
+If you're interested in other projects that are related to webpage development, you can check out <a href="https://github.com/TAP-GGC/Foe" target="_blank" rel="noopener noreferrer">Foe</a> which teaches the basics of JavaScript!
+
+<a href="https://github.com/TAP-GGC/SpaceMechanic/blob/main/README.md" target="_blank" rel="noopener noreferrer">Space Mechanic</a> is another intro-level programming project (using Scratch) you may want to check out.
+
+## Project Setup/Installation
+
+### Hosting the website locally on your device
+1. Click on the green Code button at the top of this page. Select Download ZIP.
+2. Once the folder is finished downloading, choose the option to extract all.
+3. Navigate to the subfolder Webbie-Website-main. Click on the subfolder Scene 1.
+4. Select the Microsoft Edge HTML Document file. The main screen should pop up on your browser after this.
+
+### Using CodePen
+1. Go to [CodePen](https://codepen.io/).
+2. Click on Start coding. Note that you don't need to create an account to try the online editor, unless you would like to save your work.
+
+## Workshop Instruction
+<a href="https://github.com/TAP-GGC/Webbie/blob/main/Documents/workshop_materials/Webbie%20workshop.pdf" target="_blank" rel="noopener noreeferrer">Click here to view the workshop presentation slides</a>
+
+## Usage
+Use the mouse or the keyboard to control the cursor without a mouse to drag and drop the codes to the HTML and CSS consoles.
