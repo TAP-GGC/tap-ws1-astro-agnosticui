@@ -93,7 +93,7 @@ const date_options = {
 
 .projectCard {
   min-width: 30rem !important;
-  max-width: 40rem;
+  max-width: 35rem;
   margin: 0.5em;
   padding: 1em 1em 1em;
   /*flex: 1; since .card-link  is now the flex component */
