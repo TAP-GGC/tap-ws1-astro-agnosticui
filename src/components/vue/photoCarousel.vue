@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-    import { ref } from "vue";
+    import { ref, onMounted, onBeforeUnmount } from "vue";
     import '/src/styles/global.css';
 
 
@@ -68,6 +68,19 @@
         cIndex.value = cIndex.value == photos.length - 1 ? 0 : cIndex.value + 1;
 		updateVisiblePhoto();
     }
+
+	let intervalId: number;
+
+	onMounted(() => {
+  		intervalId = setInterval(() => {
+    	next(); 
+  		}, 5000);
+	});
+
+	onBeforeUnmount(() => {
+  		clearInterval(intervalId); 
+	});
+
 
 </script>
 
