@@ -21,7 +21,7 @@ const { photos } = Astro.props as Props;
     <div class="photo-container">
       {photos.map((photo, index) => (
         <div class="photo-item" data-index={index} style={index === 0 ? "" : "display: none;"}>
-          <Photo 
+          <Photo
             src={photo.src}
             alt={photo.alt}
           />
@@ -43,6 +43,8 @@ const { photos } = Astro.props as Props;
   }
   
   .photo-item {
+    height: auto;
     width: 100%;
+    display: block;
   }
 </style>

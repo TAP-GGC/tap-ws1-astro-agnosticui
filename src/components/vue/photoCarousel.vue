@@ -41,13 +41,9 @@
 	let cIndex = ref(0);
 	
 	function updateVisiblePhoto() {
-      console.log('Updating visible photo to index:', cIndex.value);
-      
       // Get all photo items
       const photoItems = document.querySelectorAll('.photo-item');
-      console.log('Found photo items:', photoItems.length);
       
-      // Hide all photos
       photoItems.forEach((item, index) => {
         (item as HTMLElement).style.display = 'none';
         console.log('Hiding photo item', index);
@@ -56,7 +52,6 @@
       // Show only the current photo
       const currentPhoto = document.querySelector(`.photo-item[data-index="${cIndex.value}"]`);
       if (currentPhoto) {
-        console.log('Found current photo, showing it');
         (currentPhoto as HTMLElement).style.display = 'block';
       } else {
         console.log('Could not find current photo with index:', cIndex.value);
