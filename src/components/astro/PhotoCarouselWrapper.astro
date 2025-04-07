@@ -1,0 +1,48 @@
+---
+import PhotoCarousel from '../vue/photoCarousel.vue';
+import Photo from './Photo.astro';
+
+interface PhotoProps {
+  src: string;
+  alt: string;
+  photoTitle?: string;
+  caption?: string;
+}
+
+interface Props {
+  photos: PhotoProps[];
+}
+
+const { photos } = Astro.props as Props;
+---
+
+<div class="photo-carousel-wrapper">
+  <PhotoCarousel client:load photos={photos}>
+    <div class="photo-container">
+      {photos.map((photo, index) => (
+        <div class="photo-item" data-index={index} style={index === 0 ? "" : "display: none;"}>
+          <Photo 
+            src={photo.src}
+            alt={photo.alt}
+          />
+        </div>
+      ))}
+    </div>
+  </PhotoCarousel>
+</div>
+
+<style>
+  .photo-carousel-wrapper {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  
+  .photo-container {
+    width: 100%;
+  }
+  
+  .photo-item {
+    width: 100%;
+  }
+</style>
