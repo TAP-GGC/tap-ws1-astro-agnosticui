@@ -98,6 +98,7 @@ body {
 .blog h1, .blog h2, .blog h3, .blog h4, 
 .body-student h1, .body-student h2, .body-student h3, .body-student h4, 
 .body-faculty h1, .body-faculty h2, .body-faculty h3, .body-faculty h4 {
+  padding-top: 0.75em;
   text-align: center;
 }
 

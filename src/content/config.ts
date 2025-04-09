@@ -55,13 +55,13 @@ const projectCollection = defineCollection({
     desc: z.string(),
     github: z.string().optional(),
     students: z.array(z.string()
-    .refine(
-      async (StudentName) => {
-        const students = await getCollection('students');
+    // .refine(
+    //   async (StudentName) => {
+    //     const students = await getCollection('students');
 
-        return students.some(student => student.data.name == StudentName)        
-      },
-      (StudentName) => ({ message: `student Name '${StudentName}' not found.` }))
+    //     return students.some(student => student.data.name == StudentName)        
+    //   },
+    //   (StudentName) => ({ message: `student Name '${StudentName}' not found.` }))
       ),
     instructors: z.array(z.string()
     // .refine(
