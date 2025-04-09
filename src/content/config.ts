@@ -54,9 +54,33 @@ const projectCollection = defineCollection({
     id: z.string(),
     desc: z.string(),
     github: z.string().optional(),
-    students: z.array(z.string()),
-    instructors: z.array(z.string()),
-    curator: z.array(z.string()).optional(),
+    students: z.array(z.string()
+    .refine(
+      async (StudentName) => {
+        const students = await getCollection('students');
+
+        return students.some(student => student.data.name == StudentName)        
+      },
+      (StudentName) => ({ message: `student Name '${StudentName}' not found.` }))
+      ),
+    instructors: z.array(z.string()
+    // .refine(
+    //   async (FacultyName) => {
+    //     const instructors = await getCollection('instructors');
+
+    //     return instructors.some(instructor => instructor.data.name == FacultyName)        
+    //   },
+    //   (FacultyName) => ({ message: `instructor Name '${FacultyName}' not found.` }))
+    ),
+    curator: z.array(z.string()
+    // .refine(
+    //   async (StudentName) => {
+    //     const students = await getCollection('students');
+
+    //     return students.some(student => student.data.name == StudentName)        
+    //   },
+    //   (StudentName) => ({ message: `student Name '${StudentName}' not found.` })
+    ).optional(),
     techs: z.array(z.string()),
     videos: z.array(z.object({
       src: z.string(), 

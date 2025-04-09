@@ -59,7 +59,7 @@ const  projSemester  = project.data.semester;
 const  projName  = project.data.title;
 
 // Page title
-let title = `${project.data.title} - Projects`;
+let title = `${projName} - Projects`;
 import TAPDefaultLayout from "../../layouts/default.astro";
 import { Debug } from 'astro:components';
 
@@ -73,6 +73,11 @@ import githubLogo from '/public/assets/github.svg';
 import VideoAd from '../../components/astro/VideoAd.astro';
 import Gallery from '../../components/astro/Gallery.astro';
 import VideoCarousel from '../../components/vue/VideoCarousel.vue';
+import Students from '../students.astro';
+import studentIds from '../../components/astro/StudentIds';
+import studentNames from '../../components/astro/StudentIds';
+
+import facultyIds from '../../components/astro/FacultyIds';
 
 
 // Logos
@@ -83,6 +88,7 @@ const imageLogoTrans = project.data.imageLogoTrans?.src;
 imageLogoLight = imageLogoTrans ? imageLogoTrans : imageLogoLight;
 imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 ---
+
 <TAPDefaultLayout title={title}>
 	<Crumbs pageType="project" pageUrl=`/projects/${projYear}/${projSemester}/${project.data.id}`/>
 	<div class="body-prj">
@@ -100,14 +106,21 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 		
 		<!-- TODO: link to publications? or Github -->
 		
-		<h5><b> TEAM MEMBERS: </b>
 		{project.data.students.map((student, index) => (
 		<>
-		<a href={`/students/${student}`}>{student}</a>
+		<a href={`/students/${studentIds[student]}`}>{studentNames[student]}</a>
 		{index < project.data.students.length - 1 ? ", " : ""}
 		</>
 		))}
-		</h5>
+		<!-- {project.data?.students && (
+			<h5><b> TEAM MEMBERS: </b>
+			{project.data.students.map((student) =>(
+				<a href={`/students/${studentIds[student]}`}>{student.name}</a>
+			))}
+			</h5>
+
+		)} -->
+		
 		
 		<h5><b> ADVISORS: </b>  
 			{project.data.instructors.map((instructor, index) => (
