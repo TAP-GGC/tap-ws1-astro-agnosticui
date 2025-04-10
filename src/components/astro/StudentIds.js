@@ -14,4 +14,4 @@ students.forEach(student => {
   studentIds[student.data.id] = student;
 });
 
-export default { studentIds}
+export default studentIds;
