@@ -1,5 +1,5 @@
 // 1. Import utilities from `astro:content`
-import { z, defineCollection, getCollection } from 'astro:content';
+import { z, defineCollection, getCollection, reference } from 'astro:content';
 
 // 2. Define your collection(s)
 const eventCollection = defineCollection({
@@ -54,8 +54,8 @@ const projectCollection = defineCollection({
     id: z.string(),
     desc: z.string(),
     github: z.string().optional(),
-    students: z.array(z.string()),
-    instructors: z.array(z.string()),
+    students: z.array(reference("students")).optional(),
+    instructors: z.array(reference("instructors")).optional(),
     curator: z.array(z.string()).optional(),
     techs: z.array(z.string()),
     videos: z.array(z.object({

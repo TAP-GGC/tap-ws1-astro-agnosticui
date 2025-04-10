@@ -31,7 +31,7 @@ import TAPFooter from '../../components/TAPFooter.vue';
 
 
 // Read from conten collection
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry, getEntries } from 'astro:content';
 import Crumbs from "../../components/Crumbs.vue"
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
@@ -43,14 +43,13 @@ export async function getStaticPaths() {
 }
 
 
-
 // Goal 1: Make it redirect to the projects.astro page, using the parameters as values for 
 
 
 // Goal 2: Actually  
 // 2. For your template, you can get the entry directly from the prop
 // const { slug } = Astro.params;
-const { project } = Astro.props;
+const { project} = Astro.props;
 const { Content } = await project.render();
 
 // BreadCrumb variables
@@ -66,6 +65,12 @@ import { Debug } from 'astro:components';
 // VideoAd
 const visible = true; // Define visibility for videoAD
 const showIframe = project.data.videoAd ? true : false; // Check if videoAd exists
+
+
+//get student & instructor collections
+const studentData = project.data.students.slug ? await getEntries(project.data.students) : "Student-tbd";
+const instructorData = project.data.instructors.slug ? await getEntries(project.data.instructors) : "Instructor-tbd";
+
 
 // Github button
 import { Button, ButtonGroup } from 'agnostic-vue';
@@ -105,14 +110,17 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 	<div class="projectText">
 		
 		<!-- TODO: link to publications? or Github -->
-		<h5><b> TEAM MEMBERS: </b>
+		<!-- <h5><b> TEAM MEMBERS: </b>
 			{project.data.students.map((student, index) => (
 				<>
 					<a href={`/students/${student}`}>{student}</a>
 					{index < project.data.students.length - 1 ? ", " : ""}
 				</>
 			))}
-		</h5>
+		</h5> -->
+		{studentData && studentData.map((student) =>(
+			<a href={`/students/${student.slug}`}>{student}</a>
+		))}
 
 		<!-- {project.data?.students && (
 			{project.data.students.map((student) =>(
