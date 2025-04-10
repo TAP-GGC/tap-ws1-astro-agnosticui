@@ -105,19 +105,19 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 	<div class="projectText">
 		
 		<!-- TODO: link to publications? or Github -->
-		
-		{project.data.students.map((student, index) => (
-		<>
-		<a href={`/students/${studentIds[student]}`}>{studentNames[student]}</a>
-		{index < project.data.students.length - 1 ? ", " : ""}
-		</>
-		))}
+		<h5><b> TEAM MEMBERS: </b>
+			{project.data.students.map((student, index) => (
+				<>
+					<a href={`/students/${student}`}>{student}</a>
+					{index < project.data.students.length - 1 ? ", " : ""}
+				</>
+			))}
+		</h5>
+
 		<!-- {project.data?.students && (
-			<h5><b> TEAM MEMBERS: </b>
 			{project.data.students.map((student) =>(
 				<a href={`/students/${studentIds[student]}`}>{student.name}</a>
 			))}
-			</h5>
 
 		)} -->
 		

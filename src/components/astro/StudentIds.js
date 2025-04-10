@@ -6,15 +6,14 @@ const base = import.meta.env.BASE_URL == '/' ? '' : import.meta.env.BASE_URL;
 // Fetch the projects and build the tech counts
 const students = await getCollection('students');
 let studentIds = {};
-let studentNames = {};
+const studentName = "";
 
 // Build tech counts from the projects
 students.forEach(student => {
   // Add the computed slug here
   student.data.slug = `${base}/students/${student.data.id}`;
-  const studentName = student.data.name;
-  studentIds[student.data.id] = student;
-  studentNames[student.data.name] = studentName;
+
+  student = studentIds[student.data.id];
 });
 
-export default studentIds; studentNames;
+export default { studentIds}
