@@ -62,12 +62,12 @@ const truncatedDescription = computed(() => {
 }
 
 .studentTitle {
-    text-align: center;
+    text-align: left;
 }
 
 .studentCard {
   min-width: 30rem !important;
-  max-width: 40rem;
+  max-width: 35rem; /** */
   margin: 0.5em;
   padding: 1em 1em 1em;
   background-color: var(--agnostic-gray-mid);

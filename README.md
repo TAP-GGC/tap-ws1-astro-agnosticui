@@ -5,6 +5,7 @@ Website for browsing TAP projects and blog posts. Built with static and dynamic 
 
 Hosted at [tapggc.org](https://tapggc.org) using [Github Pages](https://pages.github.com), which is automatically deployed from this repository on each commit to `main` branch.
 
+
 ## How to Build and Deploy
 
 All commands are run from the root of the project, from a terminal:
@@ -16,29 +17,33 @@ All commands are run from the root of the project, from a terminal:
 | `npm run build`   | Build your production site to `./dist/`      |
 | `npm run preview` | Preview your build locally, before deploying |
 
+
+## Creating a Git Codespace (no npm install)
+Start a Github Codespace to see previews of your changes (alternatively you can clone and run npm locally)
+
+1. Click on the Code button, and select the Codespaces tab
+![]()
+
+2. Click on the “+” button to create a new codespace. This will open a browser tab with VS Code running in it. 
+![]()
+
+3. Make sure to install the “Live Server” plugin that will pop up as recommended. If you miss it, click on the Extensions button on the left sidebar and search and install it.
+![]()
+When you install the Live Server extension, you should see that it will install NPM and then run steps to build the project. If this does not happen, you can type “npm i” for the first time you create your codespace. 
+
+4. 
+![]()
+
+# Adding content
+
 ## How to Add a Blog Entry
 
-Create a Markdown file under `/src/content/posts/`, under the appropriate semester directory. Check metadata of other posts to set field appropriately (TODO: specify details).
+Create a mdx file under `/src/content/posts/`, under the appropriate semester directory. Check metadata of other posts to set field appropriately. 
 
 ## 👀 How to Create a Project
 
-Navigate to Create Projects Markdown
-![Project Markdownpage](./README_photo/CreateMarkdownPage.png)
+See [instructions](docs/projects/README.md)
 
-Complete the form and copy the markdown template below
-![Markdown Template](./README_photo/mdtemplate.png)
+## 👀 How to Create a Student Profile
 
-Create a folder for desired project with respect to {year}-{month}{semester} (use camelCase)
-![Create Directory](./README_photo/mkdirProject.png)
-
-Create a Markdown file within the folder (using camelCase)
-![Create Markdown File](./README_photo/createMDfile.png)
-
-[VERY IMPORTANT!] Every Project requires an image. Attach desired image within folder as well
-![Add Image ](./README_photo/addImg.png)
-
-Add the Image Path to the Image portion
-![Add Image Path](./README_photo/imgPath.png)
-
-All Setup! Now add as much information as you need
-![Complete MD](./README_photo/completeMD.png)
+See [instructions](docs/student-profiles/README.md)

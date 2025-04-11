@@ -18,9 +18,10 @@ import Crumbs from '../components/Crumbs.vue';
 import PhotoCarousel from '../components/vue/photoCarousel.vue';
 
 ---
-<TAPDefaultLayout title= "The Technology Ambassadors Program" class="blog">
+<TAPDefaultLayout title= "The Technology Ambassadors Program">
 
    <Crumbs pageType="post" pageUrl="/about" />
+<div class="blog">
 
    <PhotoCarousel client:load 
      photos={[
@@ -54,5 +55,7 @@ import PhotoCarousel from '../components/vue/photoCarousel.vue';
    ]}/>
 
    <AboutContent/>
+</div>
+
 
 </TAPDefaultLayout> 

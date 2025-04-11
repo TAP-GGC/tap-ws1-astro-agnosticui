@@ -49,24 +49,28 @@
 </script>
 
 <style scoped>
+
 	section.slide-gallery {
 		display: block;
 		position: relative;
 		max-width: 1240px; 
+		min-width: 573px;
 		margin-left: auto;
 		margin-right: auto;
 		padding-bottom: 2rem;
+		height: auto;
 	}
 
 	.gallery-text-overlay h4 {
 		font-family: 'Gagalin', Helvetica, Arial, sans-serif;
-		padding-bottom: 10rem;
+		padding-bottom: 6rem;
 		padding-left: 3rem;
+		font-size: clamp(var(--agnostic-h4), 1vw, var(--agnostic-h6));
 	} 
 
 	.gallery-text-overlay p {
 		/* margin: 0; */
-		padding-bottom: 8.5rem;
+		padding-bottom: 4.5rem;
 		padding-left: 5rem;	
 	}
 
@@ -78,6 +82,7 @@
 		line-height: 1;
 		text-decoration: left;
 		color: var(--agnostic-font-color);
+		text-shadow: 2px 2px 4px var(--agnostic-gray-mid-dark);
 		/* background: rgba(0, 0, 0, 0.5); */
 	}
 
@@ -85,16 +90,15 @@
 	.gallery-text-overlay .next {
 		cursor: pointer;
 		position: absolute;
-		top: 50%;
-		width: auto;
+		top: 50;
+		transform: translateY(-50%);
 		/*padding: 1.5rem;*/
-		margin-top: -350px;
+		margin-top: -250px;
 		color: var(--agnostic-font-color);
 		font-weight: bold;
 		font-size: 84px;
 		border-radius: 0 3px 3px 0;
-		/* user-select: none; */
-		/* -webkit-user-select: none; */
+		z-index: 10;
 	}
 
 	/* Position the "next button" to the right */
