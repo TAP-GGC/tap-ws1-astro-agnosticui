@@ -1,8 +1,10 @@
 <template>
  <section class="slide-gallery">
     <div>
-            <!-- Images 4 display -->
-		<img :src="photos[cIndex].src" :alt="photos[cIndex].alt" />
+            <!-- Images display using slot -->
+		<div>
+        	<slot></slot>
+      	</div>
 
             <!-- caption overlay -->
         <div v-if="photos" class="gallery-text-overlay">
@@ -17,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-    import { ref } from "vue";
+    import { ref, onMounted, onBeforeUnmount } from "vue";
     import '/src/styles/global.css';
 
 
@@ -37,14 +39,48 @@
     const { photos } = props;
 
 	let cIndex = ref(0);
+	
+	function updateVisiblePhoto() {
+      // Get all photo items
+      const photoItems = document.querySelectorAll('.photo-item');
+      
+      photoItems.forEach((item, index) => {
+        (item as HTMLElement).style.display = 'none';
+        console.log('Hiding photo item', index);
+      });
+      
+      // Show only the current photo
+      const currentPhoto = document.querySelector(`.photo-item[data-index="${cIndex.value}"]`);
+      if (currentPhoto) {
+        (currentPhoto as HTMLElement).style.display = 'block';
+      } else {
+        console.log('Could not find current photo with index:', cIndex.value);
+      }
+    }
   
+
     function prev() {
      cIndex.value = cIndex.value == 0 ? photos.length - 1 : cIndex.value - 1;
+	 updateVisiblePhoto();
     }
 
     function next() {
         cIndex.value = cIndex.value == photos.length - 1 ? 0 : cIndex.value + 1;
+		updateVisiblePhoto();
     }
+
+	let intervalId: number;
+
+	onMounted(() => {
+  		intervalId = setInterval(() => {
+    	next(); 
+  		}, 5000);
+	});
+
+	onBeforeUnmount(() => {
+  		clearInterval(intervalId); 
+	});
+
 
 </script>
 
