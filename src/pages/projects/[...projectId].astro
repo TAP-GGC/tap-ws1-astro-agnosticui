@@ -33,6 +33,7 @@ import TAPFooter from '../../components/TAPFooter.vue';
 // Read from conten collection
 import { getCollection } from 'astro:content';
 import Crumbs from "../../components/Crumbs.vue"
+import studentIds from '../../components/astro/StudentIds.js';
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -101,12 +102,18 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 		<!-- TODO: link to publications? or Github -->
 		
 		<h5><b> TEAM MEMBERS: </b>
-		{project.data.students.map((student, index) => (
 		<>
-		<a href={`/students/${student}`}>{student}</a>
-		{index < project.data.students.length - 1 ? ", " : ""}
+		{project.data.students.map((student, index) => {
+  			const matched = Object.values(studentIds).find(s => s.data.name === student);
+  			const href = matched ? matched.data.slug : `/students/default?name=${(student)}`;
+  			return (
+    			<>
+      				<a href={href}>{student}</a>
+      				{index < project.data.students.length - 1 ? ", " : ""}
+   				</>
+  			);
+		})}
 		</>
-		))}
 		</h5>
 		
 		<h5><b> ADVISORS: </b>  
