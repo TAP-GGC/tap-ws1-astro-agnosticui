@@ -5,9 +5,12 @@ Website for browsing TAP projects and blog posts. Built with static and dynamic 
 
 Hosted at [tapggc.org](https://tapggc.org) using [Github Pages](https://pages.github.com), which is automatically deployed from this repository on each commit to `main` branch.
 
+
 ## How to Build and Deploy
 
-All commands are run from the root of the project, from a terminal:
+### On your local computer
+
+Clone this repo and any of the following commands from the root of the project, from a terminal:
 
 | Command           | Action                                       |
 |:----------------  |:-------------------------------------------- |
@@ -16,29 +19,22 @@ All commands are run from the root of the project, from a terminal:
 | `npm run build`   | Build your production site to `./dist/`      |
 | `npm run preview` | Preview your build locally, before deploying |
 
-## How to Add a Blog Entry
+### On a cloud IDE using Github Codespaces
 
-Create a Markdown file under `/src/content/posts/`, under the appropriate semester directory. Check metadata of other posts to set field appropriately (TODO: specify details).
+Start a Github Codespace to see previews of your changes by following these [instructions](docs/github-codespace/README.md).
 
-## 👀 How to Create a Project
+## Adding content
 
-Navigate to Create Projects Markdown
-![Project Markdownpage](./README_photo/CreateMarkdownPage.png)
+Use one of the build methods above for doing any of the below options.
 
-Complete the form and copy the markdown template below
-![Markdown Template](./README_photo/mdtemplate.png)
+### How to Add a Blog Entry
 
-Create a folder for desired project with respect to {year}-{month}{semester} (use camelCase)
-![Create Directory](./README_photo/mkdirProject.png)
+Create a mdx file under `/src/content/posts/`, under the appropriate semester directory. Check metadata of other posts to set field appropriately. 
 
-Create a Markdown file within the folder (using camelCase)
-![Create Markdown File](./README_photo/createMDfile.png)
+### 👀 How to Create a Project
 
-[VERY IMPORTANT!] Every Project requires an image. Attach desired image within folder as well
-![Add Image ](./README_photo/addImg.png)
+See [instructions](docs/projects/README.md).
 
-Add the Image Path to the Image portion
-![Add Image Path](./README_photo/imgPath.png)
+### 👀 How to Create a Student Profile
 
-All Setup! Now add as much information as you need
-![Complete MD](./README_photo/completeMD.png)
+See [instructions](docs/student-profiles/README.md).
