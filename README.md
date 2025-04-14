@@ -8,7 +8,9 @@ Hosted at [tapggc.org](https://tapggc.org) using [Github Pages](https://pages.gi
 
 ## How to Build and Deploy
 
-All commands are run from the root of the project, from a terminal:
+### On your local computer
+
+Clone this repo and any of the following commands from the root of the project, from a terminal:
 
 | Command           | Action                                       |
 |:----------------  |:-------------------------------------------- |
@@ -17,33 +19,22 @@ All commands are run from the root of the project, from a terminal:
 | `npm run build`   | Build your production site to `./dist/`      |
 | `npm run preview` | Preview your build locally, before deploying |
 
+### On a cloud IDE using Github Codespaces
 
-## Creating a Git Codespace (no npm install)
-Start a Github Codespace to see previews of your changes (alternatively you can clone and run npm locally)
+Start a Github Codespace to see previews of your changes by following these [instructions](docs/github-codespace/README.md).
 
-1. Click on the Code button, and select the Codespaces tab
-![]()
+## Adding content
 
-2. Click on the “+” button to create a new codespace. This will open a browser tab with VS Code running in it. 
-![]()
+Use one of the build methods above for doing any of the below options.
 
-3. Make sure to install the “Live Server” plugin that will pop up as recommended. If you miss it, click on the Extensions button on the left sidebar and search and install it.
-![]()
-When you install the Live Server extension, you should see that it will install NPM and then run steps to build the project. If this does not happen, you can type “npm i” for the first time you create your codespace. 
-
-4. 
-![]()
-
-# Adding content
-
-## How to Add a Blog Entry
+### How to Add a Blog Entry
 
 Create a mdx file under `/src/content/posts/`, under the appropriate semester directory. Check metadata of other posts to set field appropriately. 
 
-## 👀 How to Create a Project
+### 👀 How to Create a Project
 
-See [instructions](docs/projects/README.md)
+See [instructions](docs/projects/README.md).
 
-## 👀 How to Create a Student Profile
+### 👀 How to Create a Student Profile
 
-See [instructions](docs/student-profiles/README.md)
+See [instructions](docs/student-profiles/README.md).
