@@ -20,9 +20,9 @@ export async function getStaticPaths() {
   // const students = await getCollection('students');
   // add collection calls for projects 
   //project pages for student (a script that replaces space in names with '-')
-  return studentIds.keys().map(student => ({
-    params: { "studentId": `${student}`},
-    props: studentIds[student] 
+  return studentIds.keys().map(studentId => ({
+    params: { "studentId": `${studentId}`},
+    props: studentIds[studentId] 
   }));
 }
 
