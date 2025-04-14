@@ -35,16 +35,17 @@ import { getCollection, getEntry, getEntries } from 'astro:content';
 import Crumbs from "../../components/Crumbs.vue"
 
 // 1. Generate a new path for every collection entry
+// Goal 1: Make it redirect to the projects.astro page, using the parameters as values for 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
+  
   return projects.map(project => ({
-    params: { "projectId": `${project.data.year}/${project.data.semester}/${project.data.id}` }, props: { project },
+    params: { "projectId": `${project.data.year}/${project.data.semester}/${project.data.id}` }, 
+	props: { project },
   }));
-  // TODO: add to list: years and semesters as search results pages; potentially add techs/ and students/ folders here or in the base
+  
 }
 
-
-// Goal 1: Make it redirect to the projects.astro page, using the parameters as values for 
 
 
 // Goal 2: Actually  
@@ -52,6 +53,8 @@ export async function getStaticPaths() {
 // const { slug } = Astro.params;
 const { project} = Astro.props;
 const { Content } = await project.render();
+
+
 
 // BreadCrumb variables
 const  projYear  = project.data.year;
@@ -69,7 +72,7 @@ const showIframe = project.data.videoAd ? true : false; // Check if videoAd exis
 
 
 //get student & instructor collections
-const studentData = project.data.students.slug ? await getEntries(project.data.students) : "Student-tbd";
+const studentData = project.data.students ? await getEntries(project.data.students) : [];
 const instructorData = project.data.instructors.slug ? await getEntries(project.data.instructors) : "Instructor-tbd";
 
 
@@ -81,8 +84,6 @@ import Gallery from '../../components/astro/Gallery.astro';
 import VideoCarousel from '../../components/vue/VideoCarousel.vue';
 import Students from '../students.astro';
 import studentIds from '../../components/astro/StudentIds';
-import studentNames from '../../components/astro/StudentIds';
-
 import facultyIds from '../../components/astro/FacultyIds';
 
 
@@ -120,7 +121,7 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 			))}
 		</h5> -->
 		{studentData && studentData.map((student) =>(
-			<a href={`/students/${student.slug}`}>{student}</a>
+			<a href={`/students/${studentIds[student]}`}>{student}</a>
 		))}
 
 		<!-- {project.data?.students && (

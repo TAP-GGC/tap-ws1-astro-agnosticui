@@ -4,8 +4,8 @@ title: Publication title
 id: group name
 desc: short summary of project
 github: https://github.com/TAP-GGC/
-students: [ Tony Lam, Etienne Laccruche, Ammar Mehicevic ]
-instructors: [Dr. Cindy Robertson, Dr. Anca Doloc-Mihu]
+students: [ tony-lam, etienne-laccruche, ammar-mehicevic ]
+instructors: [cindy-robertson,anca-doloc-mihu]
 techs: [sphero]
 videos: [https://youtu.be/W7AJaQqIAE0]
 tags: []

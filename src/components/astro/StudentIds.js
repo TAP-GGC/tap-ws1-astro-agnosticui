@@ -6,15 +6,34 @@ const base = import.meta.env.BASE_URL == '/' ? '' : import.meta.env.BASE_URL;
 // Fetch the projects and build the tech counts
 const students = await getCollection('students');
 let studentIds = {};
-let studentNames = {};
+// let studentNames = {};
 
 // Build tech counts from the projects
 students.forEach(student => {
   // Add the computed slug here
   student.data.slug = `${base}/students/${student.data.id}`;
   studentIds[student.data.id] = student;
-  studentNames[student.data.name] = student;
+  // studentNames[student.data.name] = student;
 
 });
 
-export default {studentIds, studentNames};
+
+// Fetch the projects and build the tech counts
+const projects = await getCollection('projects');
+let projectIds = {};
+
+
+projects.forEach(project => {
+  //search every project for studentIDs
+  project.data.students.forEach(studentId => {
+    if (!(studentId in studentIds)){
+      //name variable needs to be fixed 
+      studentIds[studentId] = {data: {id: studentId, slug: `${base}/students/${studentId}`, name: studentId}}
+    }
+
+  })
+});
+
+
+export default studentIds;
+
