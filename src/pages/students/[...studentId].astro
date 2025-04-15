@@ -20,14 +20,18 @@ export async function getStaticPaths() {
   // const students = await getCollection('students');
   // add collection calls for projects 
   //project pages for student (a script that replaces space in names with '-')
-  return studentIds.keys().map(studentId => ({
-    params: { "studentId": `${studentId}`},
-    props: studentIds[studentId] 
+  return Object.keys(studentIds).map(studentId => ({
+    params: { studentId },
+    props:  {student: studentIds[studentId]} 
   }));
 }
 
 const { student } = Astro.props;
-const { Content } = await student.render();
+const { Content } = student.body? await student.render() : { Content: () => null };
+
+// TODO : Find a way to map projects for students without pages
+const projects = await getCollection('projects'); 
+// const studentProjects = projects.filter(project => project.data.students?.includes(studentIds));
 
 // Page title
 let title = `${student.data.name} - Student Profile`;

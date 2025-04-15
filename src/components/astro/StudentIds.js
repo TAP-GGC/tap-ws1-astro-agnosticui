@@ -20,17 +20,26 @@ students.forEach(student => {
 
 // Fetch the projects and build the tech counts
 const projects = await getCollection('projects');
-let projectIds = {};
 
 
 projects.forEach(project => {
   //search every project for studentIDs
-  project.data.students.forEach(studentId => {
+  project.data.students?.forEach(studentId => {
     if (!(studentId in studentIds)){
       //name variable needs to be fixed 
-      studentIds[studentId] = {data: {id: studentId, slug: `${base}/students/${studentId}`, name: studentId}}
+      studentIds[studentId] = { 
+        id: studentId,
+        slug: `students/${studentId}`,
+        collection: 'students',
+        data: {
+          id: studentId,
+          slug: `${base}/students/${studentId}`,
+          name: studentId.replace(/-/g, ' '), // Convert ID back to readable name
+          projects: { project }
+        },
+        body: '', 
+      }
     }
-
   })
 });
 

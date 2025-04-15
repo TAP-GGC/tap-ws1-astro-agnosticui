@@ -72,8 +72,8 @@ const showIframe = project.data.videoAd ? true : false; // Check if videoAd exis
 
 
 //get student & instructor collections
-const studentData = project.data.students ? await getEntries(project.data.students) : [];
-const instructorData = project.data.instructors.slug ? await getEntries(project.data.instructors) : "Instructor-tbd";
+// const studentData = project.data.students ? await getEntries(project.data.students) : [];
+// const instructorData = project.data.instructors.slug ? await getEntries(project.data.instructors) : "Instructor-tbd";
 
 
 // Github button
@@ -85,7 +85,7 @@ import VideoCarousel from '../../components/vue/VideoCarousel.vue';
 import Students from '../students.astro';
 import studentIds from '../../components/astro/StudentIds';
 import facultyIds from '../../components/astro/FacultyIds';
-
+import { formatIDtoName } from '../../components/astro/formatNames';
 
 // Logos
 let imageLogoLight = project.data.imageLogoLight?.src;
@@ -112,30 +112,20 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 	<div class="projectText">
 		
 		<!-- TODO: link to publications? or Github -->
-		<!-- <h5><b> TEAM MEMBERS: </b>
+		<h5><b> TEAM MEMBERS: </b>
 			{project.data.students.map((student, index) => (
 				<>
-					<a href={`/students/${student}`}>{student}</a>
+					<a href={`/students/${student}`}>{formatIDtoName(student)}</a>
 					{index < project.data.students.length - 1 ? ", " : ""}
 				</>
 			))}
-		</h5> -->
-		{studentData && studentData.map((student) =>(
-			<a href={`/students/${studentIds[student]}`}>{student}</a>
-		))}
+		</h5>
 
-		<!-- {project.data?.students && (
-			{project.data.students.map((student) =>(
-				<a href={`/students/${studentIds[student]}`}>{student.name}</a>
-			))}
-
-		)} -->
-		
 		
 		<h5><b> ADVISORS: </b>  
 			{project.data.instructors.map((instructor, index) => (
 				<>
-				<a href={`/instructors/${instructor}`}>{instructor}</a>
+				<a href={`/instructors/${instructor}`}>{formatIDtoName(instructor)}</a>
 				{index < project.data.instructors.length - 1 ? ", " : ""}
 				</>
 				))}
@@ -172,7 +162,15 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 		
 		<h5><b> DURATION: </b> {project.data.durationMins.join(" - ")} minutes</h5>
 
-		<h5><b> CURATOR(S): </b> {project.data.curator?.join(", ")} </h5>
+		<!-- <h5><b> CURATOR(S): </b> {project.data.curator?.join(", ")} </h5> -->
+		<h5><b> CURATOR(S): </b>
+			{project.data.curator?.map((student, index) => (
+				<>
+					<a href={`/students/${student}`}>{formatIDtoName(student)}</a>
+					{index < project.data.students.length - 1 ? ", " : ""}
+				</>
+			))}
+		</h5>
 
 		<h5><b> PUBLISHED DATE:</b> {project.data.publishedDate.toDateString().slice(4)} </h5>
 		<!-- TODO: change format of date -->
