@@ -140,6 +140,13 @@ function addTerm(termRef, inputField){
             break;
     }
     inputField = inputField.toLowerCase(); // Convert input to lowercase
+
+    if (termRef === "studentTerm" && /\s/.test(inputField)) {
+        //alert("Student name must not contain spaces. Use hyphens or camelCase (e.g., alex-lee or alexLee).");
+        inputField = inputField.replace(/\s+/g, '-');
+        //return;
+    }
+
     if(inputField != ''&& !category.value.includes(inputField)){
         console.log(typeof inputField);
         category.value.push(inputField);
@@ -257,7 +264,7 @@ const searchTech = computed(() =>{
          </div>
         <div>
             <Input type="text" list="studentData" label="Enter student names" v-model="studentTerm" @keydown.enter.stop="addTerm('studentTerm',studentTerm )"
-                    placeholder="Type student name to complete from list or insert a new one. Press enter to add it to add it to the list."/>
+                    placeholder="Type student name to complete from list or insert a new one. Press enter to add it to add it to the list. Use hyphens or camelCase. No spaces allowed"/>
             <datalist id="studentData"><option v-for="student in studentList" :value="student">{{ student }}</option></datalist>
             <ul class="tagList">
                 <Tag v-for="(tag, index) in selectedStudents" :key="tag" class="mie6" shape="round" type="info" is-uppercase>{{tag}}
