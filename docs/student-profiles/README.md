@@ -1,6 +1,7 @@
 
 # TAP Student Profiles
 
+First, make sure you selected an appropriate method to build and run the project either by [cloning](../../README.md) or using [Github codespaces](../github-codespace/README.md).
 
 ### How to Add a Student Profile
 Create a folder and a mdx file under `/src/content/students/` under the appropriate semester directory with the name convention Student ProfileName (e.g. JohnDoe, John-DoeJohn). Check metadata of other Student Profiles to set fields appropriately.
