@@ -1,0 +1,42 @@
+---
+name: "My Tran"
+id: "my-tran"
+title: "Student"
+email: "mtran25@ggc.edu"
+graduationYear: "2026"
+linkedin: "https://www.linkedin.com/in/my-tran-xyz263"
+github: "https://github.com/aeristran"
+image: ./mytran.jpeg
+desc: "This is an example student profile. This profile will show you how each field populates the page. :)"
+
+projects: ["foes"]
+---
+import Experience from '/src/components/astro/Experience.astro';
+
+### Education  - OPTIONAL
+<div>
+- B.Sc. in Software Development Georgia Gwinnett College
+</div>
+
+### Skills & Certifications - OPTIONAL
+<ul>
+  <li> Programming Languages: Java, Python</li>
+</ul>
+
+### Experience - OPTIONAL
+<Experience 
+  role="Web Development Internship" 
+  duration="04/2024 - present" 
+  company="Georgia Gwinnett College" 
+  location="Lawrenceville, GA"
+  details={[
+    "something something something else",
+    "some more impressive mombo jumbo",
+  ]}
+/>
+
+### Technical Experience, Project - OPTIONAL
+<ul>
+<li>Technology Ambassador (Ai Diva): Worked with a team of three in developing *project details here* for the Technology Ambassadors Program (TAP). Represented the TAP program at the Atlanta Science Festival, engaging in workshops, expos, and community events.</li>
+
+</ul>
