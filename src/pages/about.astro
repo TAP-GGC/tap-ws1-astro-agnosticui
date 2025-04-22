@@ -18,49 +18,42 @@ import Crumbs from '../components/Crumbs.vue';
 import PhotoCarousel from '../components/vue/photoCarousel.vue';
 import Photo from '../components/astro/Photo.astro';
 import PhotoCarouselWrapper from '../components/astro/PhotoCarouselWrapper.astro';
+import Image from 'astro/components/Image.astro';
+import img1 from '../images/about-pg-gallery/gallery-1.jpg';
+import img2 from '../images/about-pg-gallery/gallery-2.png';
+import img3 from '../images/about-pg-gallery/gallery-3.jpg';
+import img4 from '../images/about-pg-gallery/gallery-4.jpg';
+import img5 from '../images/about-pg-gallery/gallery-5.jpg';
+import img6 from '../images/about-pg-gallery/gallery-6.jpg';
+import img7 from '../images/about-pg-gallery/gallery-7.jpg';
+import img8 from '../images/about-pg-gallery/gallery-8.jpg';
+import img9 from '../images/about-pg-gallery/gallery-9.jpg';
 
 const galleryPhotos = [
-      {src: "/images/about-pg-gallery/gallery-1.jpg",
-      alt: "Spring 2024 Tap Expo",
-      photoTitle: "Spring '24 TAP EXPO"},
-
-      {src: "/images/about-pg-gallery/gallery-2.png",
-      alt: "TAP Assistants with Professors",
-      photoTitle: "Fall 2023 TAP Career Fair"},
-
-      {src: "/images/about-pg-gallery/gallery-3.jpg",
-      alt: "TAP Assistants with Professors",
-      photoTitle: "Spring 2024 TAP Career Fair"},
-
-      {src: "/images/about-pg-gallery/gallery-4.jpg",
-      alt: "Scratch/makey-makey Demo at Tap Expo",
-      photoTitle: "Scratch/Makey-makey Demo at Tap Expo"},
-
-      {src: "/images/about-pg-gallery/gallery-5.jpg",
-      alt: "2019 Spring TAP class",
-      photoTitle: "2019 Spring TAP class"},
-
-      {src: "/images/about-pg-gallery/gallery-6.jpg",
-      alt: "Dr. Anca Doloc-Mihu & Dr. Cindy Robertson",
-      photoTitle: "Dr. Anca Doloc-Mihu & Dr. Cindy Robertson"},
-
-      {src: "/images/about-pg-gallery/gallery-7.jpg",
-      alt: "Dr.Cengiz Gunay & Students",
-      photoTitle: "2022 TAPIA Festival"},
-
-      {src: "/images/about-pg-gallery/gallery-8.jpg",
-      alt: "Students presenting TAP Research at 2023 STARS",
-      photoTitle: "2023 STARS"},
-
-      {src: "/images/about-pg-gallery/gallery-9.jpg",
-      alt: "Augmented Reality Demo at Spring 2022 Tap Expo",
-      photoTitle: "Spring 2022 TAP Expo"}
+  { src: img1, alt: "Spring 2024 Tap Expo", title: "Spring '24 TAP EXPO" },
+  { src: img2, alt: "TAP Assistants with Professors", title: "Fall 2023 TAP Career Fair" },
+  { src: img3, alt: "TAP Assistants with Professors", title: "Spring 2024 TAP Career Fair" },
+  { src: img4, alt: "Scratch/makey-makey Demo at Tap Expo", title: "Scratch/Makey-makey Demo" },
+  { src: img5, alt: "2019 Spring TAP class", title: "2019 Spring TAP class" },
+  { src: img6, alt: "Dr. Anca Doloc-Mihu & Dr. Cindy Robertson", title: "Dr. Anca & Dr. Cindy" },
+  { src: img7, alt: "Dr.Cengiz Gunay & Students", title: "2022 TAPIA Festival" },
+  { src: img8, alt: "Students presenting TAP Research at 2023 STARS", title: "2023 STARS" },
+  { src: img9, alt: "Augmented Reality Demo", title: "Spring 2022 TAP Expo" },
 ];
 ---
 <TAPDefaultLayout title= "The Technology Ambassadors Program" class="blog">
 
    <Crumbs pageType="post" pageUrl="/about" />
-   <PhotoCarouselWrapper photos={galleryPhotos} />
+   <PhotoCarousel client:load photos={galleryPhotos}>
+      <div class="photo-container">
+        {galleryPhotos.map((photo, index) => (
+          <div class="photo-item" data-index={index} style={index === 0 ? "" : "display: none;"}>
+            <Image src={photo.src} alt={photo.alt} class="photo" />
+            <p class="caption">{photo.title}</p>
+          </div>
+        ))}
+      </div>
+    </PhotoCarousel>
 
    <AboutContent/>
 

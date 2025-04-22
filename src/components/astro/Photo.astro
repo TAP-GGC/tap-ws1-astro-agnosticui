@@ -1,4 +1,6 @@
 ---
+import {Image} from 'astro:assets';
+
 interface Props {
   src: string;
   alt: string;
@@ -10,12 +12,12 @@ const { src, alt, link,caption} = Astro.props;
 
 <section class="photo-section">
     {link ? ( 
-        <a href={link} target="blank" rel="noopener noreferrer">
-            <img src={src} alt={alt} class="photo" />
+        <a href={link} target="_blank" rel="noopener noreferrer">
+            <Image src={src} alt={alt} class="photo" />
         </a>
     ):(
         <a href={src}>
-        <img src={src} alt={alt} class="photo"/>
+        <Image src={src} alt={alt} class="photo"/>
         </a>
     )}
     {caption && <p class="caption">{caption}</p>}
