@@ -39,7 +39,7 @@ Add the image path to the new entries `imageLogoLight` or `imageLogoDark` for li
 
 ## 👀 New! Video and image carousels
 
-Other new requirements: the `videos` entry now takes the following format and displays as a video carousel at the bottom of your project page.
+Other new requirements: the `videos` entry now takes the following format and displays as a video carousel at the bottom of your project page. The videos need to be hosted in the TAP YouTube account. Instructors will do that for you. Once they are in there, the `src` entry is the embed code you get from Youtube when you click on share. Until then, you could put the names of the files as `src` temporarily until we upload your videos.
 
 ```yaml
 videos: [
