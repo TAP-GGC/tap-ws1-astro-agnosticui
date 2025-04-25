@@ -26,7 +26,7 @@ projects.forEach(project => {
   //search every project for studentIDs
   project.data.students?.forEach(studentId => {
     if (!(studentId in studentIds)){
-      //name variable needs to be fixed 
+      //name convection if id doesn't exit
       studentIds[studentId] = { 
         id: studentId,
         slug: `students/${studentId}`,
@@ -34,7 +34,7 @@ projects.forEach(project => {
         data: {
           id: studentId,
           slug: `${base}/students/${studentId}`,
-          name: studentId.replace(/-/g, ' '), // Convert ID back to readable name
+          name: studentId.replace(/-/g, ' '), // Convert ID back to readable name if id doesn't exist
           projects: { project }
         },
         body: '', 
