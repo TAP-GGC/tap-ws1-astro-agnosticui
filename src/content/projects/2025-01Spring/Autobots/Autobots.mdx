@@ -46,18 +46,40 @@ relatedIds: [
 ]
 images:
   [
-    { src: "./teamautobots.jpg", alt: "Project Members" },
+    { src: "./teamautobots.jpg", alt: "Team Members" },
+    { src: "./WorkshopSS1.jpg", alt: "Workshop1" },
+    { src: "./WorkshopSS3.jpg", alt: "Workshop2" },
+    { src: "./WorkshopSS4.jpg", alt: "Workshop3" },
+    { src: "./ExpoSS1.jpg", alt: "Tap Expo" },
+    
   ]
 imageLogoLight: ./3dcnn.png
 
 ---
 
-## Project Information
-  Use Mblock and Mbot to create a Convolutional Neural Network through Google's Teachable Machine! This project 
-  will go through the steps on how image recognition works and to an extent, how artificial intelligence works.
+import { Image } from "astro:assets";
 
 
-  See Github for more details!
+import GroupPhoto from './teamautobots.jpg';
+import Logo from 'mBlockLogo.png';
+
+#### **Team Members:**  
+<Image src={GroupPhoto} alt="AutoBots Team Photo" />
+*Left to Right: Jonathan Tran, Krishan Bhalsod, Isaiah Gorman*
+
+## Advisors
+
+* Dr. Cengiz Gunay  
+* Dr. Cindy Robertson  
+
+{/* CONTENT BLOCK */}
+<iframe width="560" height="100%" src="https://www.youtube.com/embed/i8M-fz3YTgQ?si=19amS7EnPj4rOAeG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width: 100%; height: 680px; margin-top: 2em;"></iframe>
+
+
+## About
+  Autobots introduces students to the exciting world of artificial intelligence, with a special focus on how machines learn to "see" using image recognition. Using Google's TeachableMachine, students train their own AI models by creating unique hand gestures that control a robot's movements. This hands-on challenge not only makes learning fun, but also shows students some of the real-world difficulties AI faces—like telling apart gestures that look very similar.
+
+Behind the scenes, these models often rely on Convolutional Neural Networks (CNNs), a special type of AI architecture that mimics how our brains process visual information. CNNs help the computer pick out patterns, edges, and shapes in images so it can learn the difference between a peace sign and a thumbs-up. By experimenting with gesture control, students get a glimpse into how technologies like Tesla’s self-driving system work—and understand the challenges that come with training machines to interpret the visual world.
 
 
 ## Requirements
@@ -66,7 +88,21 @@ imageLogoLight: ./3dcnn.png
   * Source Code
   * Mbot
 
+{/* CONTENT BLOCK */}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oV6r2fmOg98?si=2WouGrz4BYaPluQ3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width: 100%; height: 680px; margin-top: 2em;"></iframe>
 
 
+## Outreach Activities
+<li>Tap Expo, 2025, Georgia Gwinnett College </li>
+<li>[Atlanta Science Festival](https://atlantasciencefestival.org/) (At Georgia Gwinnett College and Piedmont Park) </li>
+<li>Class Workshops, 2025, Georgia Gwinnett College</li>
 
+## Technology
+<Image src={Logo} alt="mBlock Logo" />
 
+## Project Setup and Installation
+[Building mBot Mega Instructions](https://support.makeblock.com/hc/en-us/articles/1500009896321-Build-mBot-Mega)
+
+[Workshop PDF Instructions](https://github.com/TAP-GGC/AutoBots/blob/main/documents/tutorial%20materials/Workshop%20PDF.pdf)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nPc_onJ8ggs?si=HB9EN36hapILZ6l2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width: 100%; height: 680px; margin-top: 2em;"></iframe>
