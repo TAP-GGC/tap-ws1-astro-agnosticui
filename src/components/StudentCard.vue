@@ -3,7 +3,7 @@ import { computed, ref } from "vue";
 import "agnostic-vue/dist/common.min.css";
 import "agnostic-vue/dist/index.css";
 import { Card } from "agnostic-vue";
-import EmptyImage from '/src/content/students/empty.png';
+import EmptyImage from '/src/content/students/JohnDoe/johndoe.jpg';
 
 // Remove single slash as it causes double slashes in card
 const base = import.meta.env.BASE_URL == '/' ? '' : import.meta.env.BASE_URL;
