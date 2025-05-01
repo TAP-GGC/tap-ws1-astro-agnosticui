@@ -35,7 +35,8 @@ projects.forEach(project => {
           id: studentId,
           slug: `${base}/students/${studentId}`,
           name: studentId.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase()), // Convert ID back to readable name
-          projects: [project.data.id] 
+          projects: [project.data.id],
+          fallback: true
         },
         body: '', 
       }
