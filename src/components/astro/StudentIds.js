@@ -13,8 +13,6 @@ students.forEach(student => {
   // Add the computed slug here
   student.data.slug = `${base}/students/${student.data.id}`;
   studentIds[student.data.id] = student;
-  studentIds[student.data.name] = student;
-
 });
 
 
