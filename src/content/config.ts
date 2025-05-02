@@ -1,5 +1,6 @@
 // 1. Import utilities from `astro:content`
-import { z, defineCollection, getCollection } from 'astro:content';
+import { z, defineCollection, getCollection, reference } from 'astro:content';
+import { withCtx } from 'vue';
 
 // 2. Define your collection(s)
 const eventCollection = defineCollection({
