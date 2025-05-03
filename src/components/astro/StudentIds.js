@@ -18,7 +18,7 @@ students.forEach(student => {
 });
 
 
-// Fetch the projects and build the tech counts
+// Fetch the projects
 const projects = await getCollection('projects');
 
 
