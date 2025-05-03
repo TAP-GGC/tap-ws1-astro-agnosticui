@@ -13,7 +13,6 @@ instructors.forEach(instructor => {
   // Add the computed slug here
   instructor.data.slug = `${base}/instructors/${instructor.data.id}`;
   facultyIds[instructor.data.id] = instructor;
-  facultyIds[instructor.data.name] = instructor
 });
 
 // const projects = await getCollection('projects');
