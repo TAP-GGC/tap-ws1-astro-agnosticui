@@ -4,7 +4,7 @@ id: project-3
 desc: This is project is about...
 github: https://github.com
 students: [ d, e, f]
-instructors: [ Anca Doloc-Mihu, Cindy Robertson]
+instructors: [cindy-robertson, anca-doloc-mihu]
 techs: [makey-makey]
 videos: []
 tags: []

@@ -13,19 +13,25 @@ import { getCollection } from 'astro:content';
 import Crumbs from "../../components/Crumbs.vue";
 import projectIds from '../../components/astro/ProjectIds';
 import ProjectCard from '../../components/ProjectCard.vue';
-
+import studentIds  from '../../components/astro/StudentIds';
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
-  const students = await getCollection('students');
-  return students.map(student => ({
-    params: { "studentId": `${student.data.id}`},
-    props: { student },
+  // const students = await getCollection('students');
+  // add collection calls for projects 
+  //project pages for student (a script that replaces space in names with '-')
+  return Object.keys(studentIds).map(studentId => ({
+    params: { studentId },
+    props:  {student: studentIds[studentId]} 
   }));
 }
 
 const { student } = Astro.props;
-const { Content } = await student.render();
+const { Content } = student.body? await student.render() : { Content: () => null };
+
+// TODO : Find a way to map projects for students without pages
+const projects = await getCollection('projects'); 
+// const studentProjects = projects.filter(project => project.data.students?.includes(studentIds));
 
 // Page title
 let title = `${student.data.name} - Student Profile`;

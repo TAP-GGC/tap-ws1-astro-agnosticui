@@ -1,5 +1,6 @@
 /* Component for making project searches faster and easier. Returns dictionary/hash of projects by their IDs */
 import { getCollection } from 'astro:content';
+import { collections } from '../../content/config';
 
 const base = import.meta.env.BASE_URL == '/' ? '' : import.meta.env.BASE_URL;
 
@@ -13,5 +14,36 @@ instructors.forEach(instructor => {
   instructor.data.slug = `${base}/instructors/${instructor.data.id}`;
   facultyIds[instructor.data.id] = instructor;
 });
+
+// const projects = await getCollection('projects');
+
+// projects.forEach(project => {
+//   project.data.instructors?.forEach(facultyId =>{
+//     if(facultyId in facultyIds){
+//       facultyIds[facultyId] = {
+//         id: facultyId,
+//         slug: `instructors/${facultyId}`,
+//         collection: 'instructors',
+//         data: {
+//           id: facultyId,
+//           slug: `${base}/instructors/${facultyId}`,
+//           name: facultyId.data.name
+//         }
+//       }
+//     }else{
+//       facultyIds[facultyId] = {
+//         id: facultyId,
+//         slug: `instructors/${facultyId}`,
+//         collection: 'instructors',
+//         data: {
+//           id: facultyId,
+//           slug: `${base}/instructors/${facultyId}`,
+//           name: facultyId.replace(/-/g, ' ')
+//         }
+//       }
+//     }
+   
+//   })
+// });
 
 export default facultyIds;
