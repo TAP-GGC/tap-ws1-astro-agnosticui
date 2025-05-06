@@ -38,6 +38,16 @@
   --agnostic-gray-mid-dark-modedark: #111111d7; /*overlay color*/
   /* --agnostic-link-color-modedark: #709a06; */
 
+  /* for tables */
+  --table-bg: var(--agnostic-light) !important;
+  --table-accent-bg: var(--agnostic-gray-light) !important;
+  --table-striped-color: var(--agnostic-dark) !important;
+  --table-striped-bg: var(--agnostic-gray-mid) !important;
+  --table-active-color: var(--agnostic-dark) !important;
+  --table-active-bg: var(--agnostic-primary) !important;
+  --table-hoverable-color: var(--agnostic-light) !important;
+  --table-hoverable-bg: var(--agnostic-primary-hover) !important;
+
 
 
   --user-font-scale: 1.3em; /* Scale to apply to all fonts - slightly bigger for teachers' eyes */

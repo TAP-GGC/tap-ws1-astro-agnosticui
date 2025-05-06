@@ -2,9 +2,9 @@
 <template>
   <section class="mbe40">
     <div class="h4 mbe32 flex items-center">
-      <img width="24" height="24" src="/assets/Vue-icon.svg" alt="Vue logo" class="mie12" />Events Calendar
+      <img :src= "`${base}/logos/calendar-icon.svg`" alt="" class="mie12" />TAP Events Calendar
     </div>
-    <Table :rows="rows" :headers="headers" :isHoverable="true" caption="My caption test" />
+    <Table :rows="rows" :headers="headers" :isHoverable="true" />
   </section>
 </template>
 
@@ -33,7 +33,7 @@ let dayNum = date.getDay();
 
 
 
-var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 const createRow = (date, EVENTS) => ({
   date,
@@ -48,7 +48,7 @@ let rows = [];
 
 //find a way to change eventDate to actual human Date for comparison
 
-for(let i = dayNum; i<dayNum+7; i++){
+for(let i = 0; i<=dayNum+5; i++){
 
   //if currentDate == the date inside the events list
 
@@ -77,15 +77,24 @@ for(let i = dayNum; i<dayNum+7; i++){
 
 const headers = [
   {
-    label: "Upcoming Events",
-    key: "day",
-    width: "35%",
-    sortable: true,
+    label: `${monthName} ${year}`,
+    key: "date",
+    width: "25%",
+    // sortable: true,
   },
   {
-    label: `${monthName} ${year}`,
+    label: `Upcoming Events`,
     key: "event",
     width: "65%",
   },
 ];
 </script>
+
+<style scoped>
+ .table_1endp_2 {
+  --table-accent-bg-: #5b8930 !important;
+  --table-striped-color: var(--agnostic-gray-light) !important;
+  --table-hoverable-bg: var(--agnostic-primary-hover) !important;
+}
+
+</style>

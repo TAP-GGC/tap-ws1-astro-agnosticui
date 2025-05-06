@@ -9,33 +9,15 @@ const eventCollection = defineCollection({
     title: z.string(),
     id: z.string(),
     tags: z.array(z.string()),
+    techs: z.array(z.string()).optional(),
     semester: z.string(),
     year: z.number(),
     eventDate: z.string().datetime().transform((str) => new Date(str)),
-    students: z.array(z.string().refine(
-      async (studentId) =>{
-        const students = await getCollection('students');
-
-        return students.some(student => student.data.id == studentId)
-      },
-      (studentId) => ({message: `Student '${studentId}' not found.`})
-    )).optional(), /* do a refine check like in projects */
-    instructors: z.array(z.string().refine(
-      async (facultyId) =>{
-        const instructors = await getCollection('instructors');
-
-        return instructors.some(instructor => instructor.data.id.toLowerCase() == facultyId)
-      },
-      (facultyId) => ({message: `Faculty '${facultyId}' not found.`})
-    )).optional(),
-    projects: z.array(z.string().refine(
-      async (projectId) => {
-        const projects = await getCollection('projects');
-
-        return projects.some(project => project.data.id.toLowerCase() == projectId)        
-      },
-      (projectId) => ({ message: `Project ID '${projectId}' not found.` }))).optional(),
-    image: z.string().optional(),
+    students: z.array(z.string()).optional(), /* do a refine check like in projects */
+    instructors: z.array(z.string()).optional(),
+    projects: z.array(z.string()).optional(),
+    desc: z.string().optional().nullable(),
+    imageEvent: z.string().optional(),
     images: z.array(z.object({
       src: image().refine((img) => img.width <= 1500, {
           message: "Image too large! Convert images to be less than 1500 pixels wide.",
