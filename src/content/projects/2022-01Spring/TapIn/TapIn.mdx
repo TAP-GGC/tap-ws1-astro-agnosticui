@@ -34,15 +34,19 @@ durationMins: [
   30,
   60
 ]
-publishedDate: 2025-5-5
+publishedDate: 2025-05-05
 relatedIds: []
 image: ""
 imageLogoLight: ./whitebackground.png
-imageLogoDark: ./blackbackground.png
+imageLogoDark: ./removelogo.png
 curator: ["my-tran"]
+teamPhoto: './TapInTeam.jpg'
 ---
-
-import GroupPhoto from './TapInTeam';
+import { Image } from "astro:assets";
+import GroupPhoto from './TapInTeam.jpg';
+import GlitchLogo from './glitchlogo.png';
+import NFCChip from './NFCChip.jpg';
+import TechLogo from './techlogo.jpg';
 
 {/* Right text block, Project description */}	
 This project introduces students to the basics of static web development through the creation of a digital business card.
@@ -53,7 +57,7 @@ The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to br
 <div class="prj-txt">
 ## Team members
 <Image src={GroupPhoto} alt="TapIn group photo" />
-#### Cameron Ventimiglia, Michelle Watson, Jesscia Simao, Micheal Murillo Martinez
+#### Team members: Cameron Ventimiglia, Michelle Watson, Jesscia Simao, Micheal Murillo Martinez
 </div>
 
 <div class="prj-txt">
@@ -63,4 +67,12 @@ The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to br
 3. STaRS Poster Presentation (April 14) - Display our poster and explain the data we collected to the judges.
 4. Title One Workshops (April 23) - Walk middle school students through our workshop to give them hands-on experience.
 5. Super Saturday Series (April 30) - Host a day of fun at GGC for middle school students.
+</div>
+
+<div class="prj-txt">
+## Technology:
+<Image src={NFCChip} alt="NFC Chip" />
+#### NFC (Near Field Communication) chips are small integrated circuits that enable short-range wireless communication between devices, facilitating contactless data transfer and transactions.
+<Image src={TechLogo} alt="HTML, CSS, JS" />
+#### Programming languages where HTML defines the content and structure of a webpage, CSS styles its presentation and layout, while JavaScript provides interactivity and dynamic functionality.
 </div>
