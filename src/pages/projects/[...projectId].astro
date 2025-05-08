@@ -70,6 +70,13 @@ import { Debug } from 'astro:components';
 const visible = true; // Define visibility for videoAD
 const showIframe = project.data.videoAd ? true : false; // Check if videoAd exists
 
+// Returns the display name for a given ID.
+// If the name exists in the corresponding collection (students or instructors), use it; otherwise, format the ID to a readable name.
+function getNameFromID(id, type = 'student') {
+	const collection = type === 'student' ? studentIds : facultyIds;
+	const match = Object.values(collection).find(entry => entry?.data?.id === id);
+	return match?.data?.name || formatIDtoName(id);
+}
 
 //get student & instructor collections
 // const studentData = project.data.students ? await getEntries(project.data.students) : [];
@@ -115,7 +122,7 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 		<h5><b> TEAM MEMBERS: </b>
 			{project.data.students.map((student, index) => (
 				<>
-					<a href={`/students/${student}`}>{formatIDtoName(student)}</a>
+					<a href={`/students/${student}`}>{getNameFromID(student, 'student')}</a>
 					{index < project.data.students.length - 1 ? ", " : ""}
 				</>
 			))}
@@ -125,7 +132,7 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 		<h5><b> ADVISORS: </b>  
 			{project.data.instructors.map((instructor, index) => (
 				<>
-				<a href={`/instructors/${instructor}`}>{formatIDtoName(instructor)}</a>
+				<a href={`/instructors/${instructor}`}>{getNameFromID(instructor, 'instructor')}</a>
 				{index < project.data.instructors.length - 1 ? ", " : ""}
 				</>
 				))}
@@ -166,7 +173,7 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 		<h5><b> CURATOR(S): </b>
 			{project.data.curator?.map((student, index) => (
 				<>
-					<a href={`/students/${student}`}>{formatIDtoName(student)}</a>
+					<a href={`/students/${student}`}>{getNameFromID(student, 'student')}</a>
 					{index < project.data.students.length - 1 ? ", " : ""}
 				</>
 			))}
