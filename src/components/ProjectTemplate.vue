@@ -26,6 +26,7 @@ function createOptions(projects, x) {
     return Array.from(optionSet);
 }
 
+let projectShortTitle = ref('');
 let projectName = ref('');
 let projectDescrip = ref('');
 let github = ref('');
@@ -346,7 +347,7 @@ const searchTech = computed(() =>{
 ---
 shortTitle: {{ projectShortTitle }}
 title: {{ projectName }}
-id: {{ projectName.trim() }}
+id: {{ projectShortTitle.trim().toLowerCase().replace(/\s+/g, '-') }}
 desc : {{ projectDescrip }}
 github: {{ github }}
 students: {{ selectedStudents }}
