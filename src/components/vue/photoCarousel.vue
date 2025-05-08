@@ -51,27 +51,29 @@
 <style scoped>
 
 	section.slide-gallery {
-		display: block;
+		display: flex;
 		position: relative;
+		width: 100%;
 		max-width: 1240px; 
-		min-width: 573px;
 		margin-left: auto;
 		margin-right: auto;
-		padding-bottom: 2rem;
+		padding-bottom: 0 1rem 2rem;
 		height: auto;
+		overflow: hidden;
 	}
 
 	.gallery-text-overlay h4 {
 		font-family: 'Gagalin', Helvetica, Arial, sans-serif;
-		padding-bottom: 6rem;
-		padding-left: 3rem;
-		font-size: clamp(var(--agnostic-h4), 1vw, var(--agnostic-h6));
+		padding-bottom: 3.5rem;
+  		padding-left: 1rem;
+  		font-size: clamp(0.875rem, 4vw, 1.5rem);
 	} 
 
 	.gallery-text-overlay p {
 		/* margin: 0; */
-		padding-bottom: 4.5rem;
-		padding-left: 5rem;	
+		padding-bottom: 0.75rem;
+		padding-left: 0.75rem;	
+		font-size: clamp(0.75rem, 3vw, 1.125rem);
 	}
 
 	.gallery-text-overlay {
@@ -81,8 +83,9 @@
 		width: 100%;
 		line-height: 1;
 		text-decoration: left;
-		color: var(--agnostic-font-color);
-		text-shadow: 2px 2px 4px var(--agnostic-gray-mid-dark);
+		color: #fff;
+		text-shadow: 2px 2px 4px #000 !important;
+		padding: 1rem;
 		/* background: rgba(0, 0, 0, 0.5); */
 	}
 
@@ -90,21 +93,29 @@
 	.gallery-text-overlay .next {
 		cursor: pointer;
 		position: absolute;
-		top: 50;
+		top: 50% !important;
 		transform: translateY(-50%);
-		/*padding: 1.5rem;*/
+		padding: 0.5rem;
 		margin-top: -250px;
-		color: var(--agnostic-font-color);
+		color: #57af0f !important;
 		font-weight: bold;
-		font-size: 84px;
-		border-radius: 0 3px 3px 0;
+		font-size: clamp(2rem, 10vw, 4rem); /* Responsive font size */
+		border-radius: 3px 0 0 3px;
 		z-index: 10;
+		height: 2.5rem;
+  		width: 2.5rem;
+  		display: flex;
+  		align-items: center;
+  		justify-content: center;
+  		line-height: 1;
 	}
 
 	/* Position the "next button" to the right */
 	.next {
-	right: 0;
-	border-radius: 3px 0 0 3px;
+		right: 1rem;
+	}
+	.prev {
+		left: 1rem;
 	}
 
 	/* On hover, add a black background color with a little bit see-through */
@@ -118,5 +129,16 @@
 	text-decoration: none;
 	color: #2f2c2c
 	}
+	
+	@media (max-width: 680px) {
+		.gallery-text-overlay .prev,
+  		.gallery-text-overlay .next {
+    		font-size: 1.5rem;
+    		height: 2rem;
+    		width: 2rem;
+			margin-top: -98px;
+
+  	}
+}
 
 </style>
