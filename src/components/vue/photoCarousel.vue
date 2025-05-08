@@ -1,122 +1,117 @@
 <template>
- <section class="slide-gallery">
-    <div>
-            <!-- Images 4 display -->
-		<img :src="photos[cIndex].src" :alt="photos[cIndex].alt" />
-
-            <!-- caption overlay -->
-        <div v-if="photos" class="gallery-text-overlay">
-            <h4 v-if="photos[cIndex].photoTitle" class="gallery-text-overlay">{{photos[cIndex].photoTitle}}</h4>
-            <p v-if="photos[cIndex].caption" class="caption">{{photos[cIndex].caption}}</p>
-            <!-- navigation -->
-            <a @click="prev()" class="prev">&#10094;</a>
-            <a @click="next()" class="next">&#10095;</a>
-        </div>
-    </div>		
- </section>
+	<div class="photo-carousel">
+		<vueper-slides 
+			class="photo-carousel-inner" 
+			:bullets="true" 
+			:arrows="true" 
+			:autoplay="true"
+			:pause-on-hover="true" 
+			:lazy="true" 
+			:touchable="true" 
+			:fixed-height="true" 
+			:dragging-distance="70"
+			:visible-slides="1" 
+			:gap="0" 
+			:bullets-outside="true">
+			<vueper-slide 
+				v-for="(photo, index) in photos" 
+				:key="index" 
+				:title="photo.photoTitle">
+				<template v-slot:content>
+					<div class="slide-content">
+						<img :src="photo.src" :alt="photo.alt || ''" class="full-image" />
+						<div v-if="photo.photoTitle" class="slide-title">
+							{{ photo.photoTitle }}
+						</div>
+					</div>
+				</template>
+			</vueper-slide>
+		</vueper-slides>
+	</div>
 </template>
 
 <script setup lang="ts">
-    import { ref } from "vue";
-    import '/src/styles/global.css';
+import { ref } from "vue";
+import '/src/styles/global.css';
+import 'vueperslides/dist/vueperslides.css'
+import { VueperSlides, VueperSlide } from 'vueperslides'
 
+interface PhotoProps {
+	src: string;
+	alt: string;
+	photoTitle?: string;
+	caption?: string;
+}
 
-    interface PhotoProps{
-        src: string;
-        alt: string;
-        photoTitle?: string;
-        caption?: string;
-    }
+interface Props {
+	photos: PhotoProps[];
+}
 
-    interface Props{
-        photos: PhotoProps[];
-    }
-
-    const props = defineProps<Props>();
-
-    const { photos } = props;
-
-	let cIndex = ref(0);
-  
-    function prev() {
-     cIndex.value = cIndex.value == 0 ? photos.length - 1 : cIndex.value - 1;
-    }
-
-    function next() {
-        cIndex.value = cIndex.value == photos.length - 1 ? 0 : cIndex.value + 1;
-    }
-
+const props = defineProps<Props>();
 </script>
 
 <style scoped>
+.photo-carousel {
+	max-width: 1240px;
+	margin: 0 auto;
+	padding: 2rem 1rem;
+}
 
-	section.slide-gallery {
-		display: block;
-		position: relative;
-		max-width: 1240px; 
-		min-width: 573px;
-		margin-left: auto;
-		margin-right: auto;
-		padding-bottom: 2rem;
-		height: auto;
-	}
+/* Set fixed height for the carousel */
+:deep(.vueperslides) {
+	height: 800px !important;
+}
+/*
+:deep(.vueperslides__inner) {
+	height: 100% !important;
+}
 
-	.gallery-text-overlay h4 {
-		font-family: 'Gagalin', Helvetica, Arial, sans-serif;
-		padding-bottom: 6rem;
-		padding-left: 3rem;
-		font-size: clamp(var(--agnostic-h4), 1vw, var(--agnostic-h6));
-	} 
+:deep(.vueperslides__track) {
+	height: 100% !important;
+}
 
-	.gallery-text-overlay p {
-		/* margin: 0; */
-		padding-bottom: 4.5rem;
-		padding-left: 5rem;	
-	}
+:deep(.vueperslides__track-inner) {
+	height: 100% !important;
+}
 
-	.gallery-text-overlay {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		line-height: 1;
-		text-decoration: left;
-		color: var(--agnostic-font-color);
-		text-shadow: 2px 2px 4px var(--agnostic-gray-mid-dark);
-		/* background: rgba(0, 0, 0, 0.5); */
-	}
+:deep(.vueperslide) {
+	height: 100% !important;
+}
 
-	.gallery-text-overlay .prev,
-	.gallery-text-overlay .next {
-		cursor: pointer;
-		position: absolute;
-		top: 50;
-		transform: translateY(-50%);
-		/*padding: 1.5rem;*/
-		margin-top: -250px;
-		color: var(--agnostic-font-color);
-		font-weight: bold;
-		font-size: 84px;
-		border-radius: 0 3px 3px 0;
-		z-index: 10;
-	}
+:deep(.vueperslide__content-wrapper) {
+	height: 100% !important;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+	*/
 
-	/* Position the "next button" to the right */
-	.next {
-	right: 0;
-	border-radius: 3px 0 0 3px;
-	}
+.slide-content {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
 
-	/* On hover, add a black background color with a little bit see-through */
-	.prev:hover,
-	.next:hover {
-	text-decoration: none;
-	}
-	.prev:disabled,
-	.next:disabled {
-	cursor: not-allowed;
-	text-decoration: none;
-	color: #2f2c2c
-	}
+.full-image {
+	max-width: 100%;
+	max-height: 90%;
+	object-fit: contain;
+	border-radius: 12px;
+	background-color: #000;
+}
 
+.slide-title {
+	margin-top: 10px;
+	text-align: center;
+	font-weight: bold;
+}
+
+/* Ensure bullets are below the image */
+:deep(.vueperslides__bullets) {
+	margin-top: 10px;
+}
 </style>
