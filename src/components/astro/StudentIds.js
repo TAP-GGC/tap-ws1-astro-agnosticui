@@ -13,12 +13,10 @@ students.forEach(student => {
   // Add the computed slug here
   student.data.slug = `${base}/students/${student.data.id}`;
   studentIds[student.data.id] = student;
-  // studentNames[student.data.name] = student;
-
 });
 
 
-// Fetch the projects and build the tech counts
+// Fetch the projects
 const projects = await getCollection('projects');
 
 
