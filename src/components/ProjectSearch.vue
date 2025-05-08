@@ -3,7 +3,7 @@ import { computed, ref } from "vue";
 // Components CSS
 import "agnostic-vue/dist/index.css";
 import "agnostic-vue/dist/common.min.css";
-import { Input, Card, Select } from "agnostic-vue";
+import { Input, Card, Select, Tag } from "agnostic-vue";
 import { Button, ButtonGroup } from 'agnostic-vue';
 
 
@@ -120,6 +120,26 @@ const filteredProjects = computed(() => {
 
 const base = import.meta.env.BASE_URL;
 
+
+const searchTerm = ref("");  // Model for the search input field
+const searchTags = ref([]);  // Array to store all search terms (tech, projectID, etc.)
+
+// This list can contain predefined search suggestions (optional)
+const searchList = ref([]);
+
+// Function to add a new search term as a tag
+function addTag(term) {
+    term = term.toLowerCase(); // Convert to lowercase
+  if (term != ''&& !searchTags.value.includes(term)) {
+    searchTags.value.push(term);  // Add the search term to the tag list
+    searchTerm.value = '';        // Clear the input field
+  }
+}
+
+// Function to remove a tag
+function removeTag(searchTags,index) {
+  searchTags.value.splice(index, 1);  // Remove the tag by index
+}
 </script>
 
 <template>
@@ -127,8 +147,25 @@ const base = import.meta.env.BASE_URL;
     
     <section class="mbe40">
 
-        <Input id="7" is-underlined is-underlined-with-background placeholder="Enter project name, student, technology…"
-            label="Search for projects" type="text" v-model="search_text" />
+        <!-- <Input id="7" is-underlined is-underlined-with-background placeholder="Enter project name, student, technology…"
+            label="Search for projects" type="text" v-model="search_text" /> -->
+
+        <div>
+            <Input id="7" is-underlined is-underlined-with-background placeholder="Enter project name, student, technology…"
+            label="Search for projects" 
+            type="text" 
+            v-model="search_text" 
+            list="searchData"
+            @keydown.enter.stop.prevent="addTag(search_text.value)"
+            @keydown.delete="searchTerm.length=== 0 && removeTag(searchTags, searchTags.length - 1)"
+            />
+            <datalist id="searchData"><option v-for="term in searchList" :value="term" :key="term">{{ term }}</option></datalist>
+            <ul class="tagList">
+                <Tag v-for="(tag, index) in searchTags" :key="tag" class="mie6" shape="round" type="info" is-uppercase>{{tag}}
+                    <button @click="removeTag(searchTags,index)" class="delete">&#x2718;</button>
+                </Tag>
+            </ul>
+        </div>
         
         <div class="project-filter-container">            
             <div class="project-filter-dropdown">
@@ -154,7 +191,7 @@ const base = import.meta.env.BASE_URL;
                 <Select unique-id="dur" :options="durationOptions" :is-multiple="true" :multiple-size="3" @selected="(value) => { duration = value }">
                 </Select>
             </div>
-            <div class="project-filter-dropdown">
+            <!-- <div class="project-filter-dropdown">
                 <label>Semester</label>
                 <Select name="semester" unique-id="sem" @selected="(value) => { semester = value }" 
                     label-copy="Select a semester to filter results" 
@@ -165,7 +202,7 @@ const base = import.meta.env.BASE_URL;
                 <Select name="year" unique-id="year" @selected="(value) => { year = value }" 
                     label-copy="Select a year to filter results" 
                     :options="yearOptions" :is-multiple="true" :multiple-size="3"></Select>
-            </div>
+            </div> -->
             <div class="project-filter-dropdown">
                 <a :href="`${base == '/' ? '' : base}/projects`">
 			<Button mode="primary" isRounded>Reset</button>
@@ -205,6 +242,31 @@ const base = import.meta.env.BASE_URL;
     margin: 0 auto;
     padding: 1em;
     flex: 1;
+}
+
+.tagList {
+    list-style: none;
+    display:flex;
+    flex-wrap:wrap;
+    align-items: center;
+    gap:7px;
+    margin:0;
+    padding:0;
+}
+.tag{
+    background: rgb(250,104,104);
+    padding: 5px;
+    border-radius: 4px;
+    color:white;
+    white-space: nowrap;
+    transition: 0.1s ease backgroung;
+}
+.delete{
+    color:white;
+    background:none;
+    outline:none;
+    border:none;
+    cursor: pointer;
 }
 
 </style>  
