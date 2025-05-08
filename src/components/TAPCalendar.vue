@@ -2,7 +2,7 @@
 <template>
   <section class="mbe40">
     <div class="h4 mbe32 flex items-center">
-      <img :src= "`${base}/logos/calendar-icon.svg`" alt="" class="mie12" />TAP Events Calendar
+      <img :src= "`${base}/public/logos/calendar-icon.svg`" alt="" class="mie12" />TAP Events Calendar
     </div>
     <Table :rows="rows" :headers="headers" :isHoverable="true" />
   </section>

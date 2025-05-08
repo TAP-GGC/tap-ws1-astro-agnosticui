@@ -51,13 +51,13 @@
 <style scoped>
 
 	section.slide-gallery {
-		display: flex;
+		display: block;
 		position: relative;
 		width: 100%;
 		max-width: 1240px; 
 		margin-left: auto;
 		margin-right: auto;
-		padding-bottom: 0 1rem 2rem;
+		padding: 0 0 1rem;
 		height: auto;
 		overflow: hidden;
 	}

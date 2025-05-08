@@ -13,11 +13,11 @@ const eventCollection = defineCollection({
     semester: z.string(),
     year: z.number(),
     eventDate: z.string().datetime().transform((str) => new Date(str)),
-    students: z.array(z.string()).optional(), /* do a refine check like in projects */
+    students: z.array(z.string()).optional(),
     instructors: z.array(z.string()).optional(),
     projects: z.array(z.string()).optional(),
     desc: z.string().optional().nullable(),
-    imageEvent: z.string().optional(),
+    imageEvent:  image().refine(eventPhotoValidator, eventPhotoValidatorMsg).optional(),
     images: z.array(z.object({
       src: image().refine((img) => img.width <= 1500, {
           message: "Image too large! Convert images to be less than 1500 pixels wide.",
@@ -25,6 +25,11 @@ const eventCollection = defineCollection({
       alt: z.string() })).optional(),
   }),
 });
+const eventPhotoValidator = (img) => img.width && Math.abs(img.width / img.height - 0.75) < 0.2;
+const eventPhotoValidatorMsg = (img) => ({
+  message: `Event photo image must 2x3 portrait aspect ratio!\n${img.src} is ${img.width}x${img.height}.`,
+});
+
 const imageLogoValidator = (img) => Math.abs(img.width / img.height - 1) < 0.2;
 const imageLogoValidatorMsg = (img) => ({
   message: `Logo image must be close to square aspect ratio!\n${img.src} is ${img.width}x${img.height}.`,

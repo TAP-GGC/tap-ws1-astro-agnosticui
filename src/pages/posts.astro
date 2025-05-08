@@ -23,11 +23,11 @@ import TAPCalendar from "../components/TAPCalendar.vue";
 import { Input } from "agnostic-vue";
 import Crumbs from '../components/Crumbs.vue';
 import { getCollection } from 'astro:content';
-const events = await getCollection('events');  //list of news/events
+const events = (await getCollection('events')).sort((e1, e2) => e2.data.eventDate - e1.data.eventDate);  //list of news/events in most recent order
 ---
 <TAPDefaultLayout title="All News & Events">
 
-    <Crumbs pageType="news" pageUrl="/news" />
+    <Crumbs pageType="posts" pageUrl="/posts" />
 
     <NewsSearch client:load eventsList={events}/>
 

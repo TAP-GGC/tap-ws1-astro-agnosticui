@@ -1,10 +1,13 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, onMounted } from "vue";
 // Components CSS
 import "agnostic-vue/dist/common.min.css";
 import "agnostic-vue/dist/index.css";
 import { Card } from "agnostic-vue";
 import { formatIDtoName } from './astro/formatNames';
+
+import placeholderLight from '../../public/images/tap-news-placeholder-light.png';
+import placeholderDark from '../../public/images/tap-news-placeholder-dark.png';
 
 // Remove single slash as it causes double slashes in card
 const base = import.meta.env.BASE_URL == '/' ? '' : import.meta.env.BASE_URL;
@@ -13,17 +16,34 @@ const eventProp = defineProps({
         item: Object
     });
 
-// Logos
-const eventPhoto = eventProp.item.data.imageEvent;
-const eventPhotoBU = eventProp.item.data.images?.[0]?.src || 'public/images/placeholder.png';
-const finalEventPhoto = eventPhoto? eventPhoto : eventPhotoBU;
+    // Dark mode detection
+// const isDarkMode = ref(false);
+
+// onMounted(() => {
+//   // Check for dark mode preference
+//   isDarkMode.value = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+//   // Listen for changes
+//   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+//     isDarkMode.value = e.matches;
+//   });
+// });
+
+
+// Event Photos
+let eventPhoto = eventProp.item.data.imageEvent?.src;
+const eventPhotoLight = placeholderLight
+const eventPhotoDark = placeholderDark/* change placeholder based on light mode or dark isn't working*/
+
+// const finalEventPhoto = computed(() => eventPhoto? eventPhoto : eventPhotoLight.value || eventPhotoDark.value);
+
 
 // Truncate description to a fixed number of characters
-const maxDescriptionLength = 100; // Adjust the length as needed
+const maxDescriptionLength = 125; // Adjust the length as needed
 const truncatedDescription = computed(() => {
   const desc = eventProp.item.data.desc || '';
   return desc.length > maxDescriptionLength
-    ? desc.substring(0, maxDescriptionLength) + '...'
+    ? desc.substring(0, maxDescriptionLength) + '. Read more'
     : desc;
 });
 
@@ -40,72 +60,78 @@ const date_options = {
       <a :href="`/posts/${item.data.year}/${item.data.semester}/${item.data.id}`" class="card-link" isShadow></a>
        <div class="eventText">                        
 
-          <img :src="finalEventPhoto" alt="event Image" class="eventImage imageLight">
-    
-        <div class="card-header">
-          <h4 class="eventTitle">{{ item.data.title }}</h4>
+          <img :src="eventPhoto? eventPhoto: eventPhotoLight" alt="Event Image" class="eventImage imageLight">
+          <img :src="eventPhoto? eventPhoto : eventPhotoDark" alt="Event Image" class="eventImage imageDark">
 
-          <p class="dateStamp">
-            {{ item.data.semester.charAt(0).toUpperCase() + item.data.semester.slice(1) }} {{ item.data.year }} <br />
-            Updated {{ item.data.eventDate.toLocaleDateString(undefined, date_options) }}
-          </p> 
-        </div>
-              
+          <div class="card-header">
+            <div class="header-content">
+              <h4 class="eventTitle">{{ item.data.title }}</h4>
+              <h6 class="dateStamp">
+                {{ item.data.semester.charAt(0).toUpperCase() + item.data.semester.slice(1) }} {{ item.data.year }} <br />
+                Event Date: {{ item.data.eventDate.toLocaleDateString(undefined, date_options) }}
+              </h6> 
+            </div>
+          </div>
 
-
-            <!-- Display Techs as Tags -->
-            <!-- <p><em>Techs:</em></p>
-            <div class="tag-container">
-                <a v-for="(tech, index) in item.data.techs" :key="index" :href="`/techs/${tech}`" class="tag" >{{ tech }}</a>
-            </div> -->
-
+          <div class="card-body">
             <p class="description">{{ truncatedDescription }}</p>
 
-            <!-- Display students as Tags (disable for now) -->
+            <!-- Display students as Tags -->
             <div class="tag-container">
-                <a v-for="(student, index) in item.data.students" :key="index" :href="`/students/${student}`"> {{ formatIDtoName(student) }}</a>
-                <a v-for="(instructor, index) in item.data.instructors" :key="index" :href="`/instructors/${instructor}`"> {{ formatIDtoName(instructor) }}</a>
+              <a v-for="(student, index) in item.data.students" :key="index" :href="`/students/${student}`"> {{ formatIDtoName(student) }}</a>
 
             </div>
-        
-
-
-        </div>
+          </div>
+      </div>
     </Card>
-    
 </template>
 
 
 <style scoped>
 
 .eventImage {
-    --event-logo-width: 14em;
+    --project-logo-width: 14em;
     float: left;
     margin-right: 1em;
-    width: var(--event-logo-width);
+    width: var(--project-logo-width);
 }
 
 .eventText {
-    text-align: left; /* or justify? */
-    width: calc(100% ); /* - var(--event-logo-width) - 1em  */
+    text-align: left;
+    width: calc(100% ); 
 }
 
-.eventText p {
+.card-header {
     margin-top: 1em;
+    margin-bottom: 1em;
+    position: relative;
 }
+/* .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+} */
+
 
 .eventTitle {
     text-align: left;
+    margin: 0;
+    flex: 1;
+    padding-right: 1em; /* Prevents title from touching date */
+    max-width: calc(100% - 2em); /* Prevents title from being too long */
+    /* clear: both; */
 }
 
 .eventCard {
   min-width: 30rem !important;
-  max-width: 35rem;
-  margin: 0.5em;
-  padding: 1em 1em 1em;
+  max-width: 45rem;
+  margin: 0.5em auto;
+  padding: 1em;
   /*flex: 1; since .card-link  is now the flex component */
   background-color: var(--agnostic-gray-mid);
   transition: transform 0.2s ease-in;
+  position: relative;
 }
 
 .eventCard:hover{
@@ -132,8 +158,8 @@ const date_options = {
   color: var(--agnostic-btn-primary-color, var(--agnostic-light));
   border-radius: var(--agnostic-btn-radius, var(--agnostic-radius, .25rem));
   transition: background-color 0.3s ease, color 0.3s ease;
-  text-decoration: none; /* Remove underline from links */
-  z-index: 1; /* needed to take precedence over the card link */
+  text-decoration: none;
+  /* z-index: 1; */
 }
 
 /* Save this until we can have links for each tag */
@@ -166,12 +192,14 @@ const date_options = {
 
 /* Date shown to the right and small */
 .dateStamp {
-  text-align: left;
+  text-align: right;
   font-style: italic;
   font-size: small;
-  height: 0;
-  margin: 0;
+  position: relative;
+  white-space: nowrap;
+  clear: none;
   float: right;
+  clear: left;
 }
 </style>
 

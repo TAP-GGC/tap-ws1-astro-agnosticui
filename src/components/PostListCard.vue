@@ -18,11 +18,11 @@
             </time>
           </li>
           <li>
-            <a :href="`${base}/news/`"> VIEW ALL NEWS</a>
+            <a :href="`${base}/posts/`">More News . . .</a>
           </li>
-          <li>
+          <!-- <li>
             <a :href="`${base}/events/`">Upcoming Events . . .</a>
-          </li>
+          </li> -->
         </ul>
       </div>  
     </div>
