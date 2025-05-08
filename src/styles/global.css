@@ -95,7 +95,7 @@
   max-width: 1440px;
   min-width: 800px;
   max-height: auto;
-  margin: 1rem;
+  margin: 1.5rem auto; /* don't remove centers body*/
   padding: 3rem;
 }
 
