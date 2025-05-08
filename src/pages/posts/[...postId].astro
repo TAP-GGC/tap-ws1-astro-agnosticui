@@ -70,7 +70,7 @@ let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC 
 
     <Content />
 
-    {entry.data?.projects && (
+    {entry.data?.projects?.length > 0 && (
       <h2>Outreach Projects Included</h2>
       <section class="sectionCards">
         {entry.data.projects.map((project_id) => (      
@@ -79,7 +79,7 @@ let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC 
       </section>
     )}
 
-    {entry.data?.instructors && (
+    {entry.data?.instructors?.length > 0 && (
       <h2>Faculty Facilitators</h2>
       <section class="sectionCards">
         {entry.data.instructors.map((instructor) => (      
@@ -88,7 +88,7 @@ let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC 
       </section>
     )}
 
-    {entry.data?.students && (
+    {entry.data?.students?.length > 0 && (
       <h2>Students</h2>
       <section class="sectionCards">
         {entry.data.students.map((student) => (      
@@ -98,7 +98,7 @@ let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC 
       </section>
      )}
 
-    {entry.data?.images && (
+    {entry.data?.images?.length > 0 && (
       <h2>Gallery</h2>
       <Gallery photos={entry.data.images} />
     )}
