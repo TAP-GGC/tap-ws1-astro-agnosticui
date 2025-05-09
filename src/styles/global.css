@@ -11,7 +11,7 @@
 
 :root {
 	font-size: clamp(0.575rem, 0.4626rem + 1.0309rem + var(--user-font-scale), 1.125rem);
-  --agnostic-header-content-width: 95vw; /* set minimum size of header menu - set to percent of viewport width */
+  --agnostic-header-content-width: 95vw; /*set minimum size of header menu - set to percent of viewport width*/
   
   /* light mode */
   --agnostic-primary-modelight: #1f450a; /*button, tags links color*/
@@ -38,6 +38,16 @@
   --agnostic-gray-mid-dark-modedark: #111111d7; /*overlay color*/
   /* --agnostic-link-color-modedark: #709a06; */
 
+  /* for tables */
+  --table-bg: var(--agnostic-light) !important;
+  --table-accent-bg: var(--agnostic-gray-light) !important;
+  --table-striped-color: var(--agnostic-dark) !important;
+  --table-striped-bg: var(--agnostic-gray-mid) !important;
+  --table-active-color: var(--agnostic-dark) !important;
+  --table-active-bg: var(--agnostic-primary) !important;
+  --table-hoverable-color: var(--agnostic-light) !important;
+  --table-hoverable-bg: var(--agnostic-primary-hover) !important;
+
 
 
   --user-font-scale: 1.3em; /* Scale to apply to all fonts - slightly bigger for teachers' eyes */
@@ -55,25 +65,29 @@
  .footer{
   background-color: var(--agnostic-light);
   color: var(--agnostic-dark);
-  width: 100%;
+  /* width: 100%; */
  }
 
-body {
-  display: grid; /* need to remove this */
-  font-family: 'Work Sans', medium; 
-  /*font-size: 1em; unused, see root definition above. set --user-font-scale for changes*/ 
+ html, body{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; 
+}
 
+ body {
+  display: block; 
+  font-family: 'Work Sans', medium; 
   /* Change the min and max sizing based on available space */
-  grid-template-columns: flex(auto-fit, minmax(100px,1fr)); /* need to remove this */
-  grid-auto-rows: minmax(100px, auto); /* need to remove this */
-  
+/*  grid-template-columns: flex(auto-fit, minmax(100px,1fr)); 
+  /*grid-auto-rows: minmax(100px, auto);  
+  /*flex-direction: column; */
   align-content: space-evenly;
-  /*justify-content: space-between;*/
+  justify-content: space-between;
   align-items: center;
   justify-items: center;
   background: var(--agnostic-gray-light);
   color: var(--agnostic-font-color);
-  width: 100%;
   
 }
 .blog, .body-prj, .body-student, .body-faculty{
@@ -81,7 +95,7 @@ body {
   max-width: 1440px;
   min-width: 800px;
   max-height: auto;
-  margin: 1rem;
+  margin: 1.5rem auto; /* don't remove centers body*/
   padding: 3rem;
 }
 
@@ -141,12 +155,13 @@ main {
   margin-left: 0;
   margin-right: 0;
   align-content: space-evenly;
+  /* padding: 0;
   /* leftover from grid demo
   justify-content: space-evenly;
   align-items: center;
   justify-items: center;
-  */
-  /* width: clamp(26ch, 90%, 100%); */
+  */ 
+  width: clamp(26ch, 100%, 100%);
   position: relative;
 }
 
@@ -216,6 +231,7 @@ justify-content: space-around;
   z-index: 3;
   display: inline-block;
   text-align: left;
+  padding: 0.5rem;
 }
 
 .card-title { /*Card titles  */
@@ -286,6 +302,8 @@ justify-content: space-around;
     display: none; 
   }
 }
+
+
 
 /* TODO -- we'll need to revisit this once AgnosticUI properly supports dark mode. Breadcrumb links
 aren't accessible in terms of contrast in dark mode at the moment. */
