@@ -27,6 +27,7 @@ export async function getStaticPaths() {
 }
 
 const { student } = Astro.props;
+const isFallbackStudent = student.data.fallback === true;
 const { Content } = student.body? await student.render() : { Content: () => null };
 
 // TODO : Find a way to map projects for students without pages
@@ -35,9 +36,12 @@ const projects = await getCollection('projects');
 
 // Page title
 let title = `${student.data.name} - Student Profile`;
-import EmptyImage from '../../content/students/empty.png'
-const studentImg = student.data.image || EmptyImage;
+import JohnDoeImage from '../../content/students/JohnDoe/johndoe.jpg'
+const studentImg = student.data.image || JohnDoeImage;
 import TAPDefaultLayout from "../../layouts/default.astro";
+const studentProjects = projects.filter(project => 
+  student.data.projects?.includes(project.data.id)
+);
 
 ---
 <TAPDefaultLayout title={title}>
@@ -63,6 +67,53 @@ import TAPDefaultLayout from "../../layouts/default.astro";
       <!-- </div> -->
     </div>
     <Content />
+    {isFallbackStudent && studentProjects.length > 0 && (
+      <>
+        <h2>Courses Taken</h2>
+          <ul class="no-bullets">
+            {studentProjects.map(project => {
+                const semester = project.data.semester?.toUpperCase();
+                const year = project.data.year;
+                const advisors = project.data.instructors?.map(name =>
+                          `Dr. ${name.split('-').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')}`);
+                const techs = project.data.techs?.join(', ');
+                const difficulty = project.data.difficulty?.join(', ');
+                const levels = project.data.levels?.join(', ');
+                const durations = project.data.durationMins?.map(d => `${d} minutes`)?.join(', ');
+
+            return (
+              <li>
+                <div class="course-info">
+                  <div>
+                    <b>
+                    {semester && <span>{semester}</span>} 
+                    {year && ` ${year}`}
+                    </b>
+                    {advisors?.length > 0 && <> : <span class="green-text">{advisors.join(', ')}</span></>}
+                  </div>
+                  {techs && <div><b>TECH:</b> <span class="green-text">{techs}</span></div>}
+                  {difficulty && <div><b>DIFFICULTY:</b> <span class="green-text">{difficulty}</span></div>}
+                  {levels && <div><b>TARGET AUDIENCE:</b> <span class="green-text">{levels}</span></div>}
+                  {durations && <div><b>DURATION:</b> <span class="green-text">{durations}</span></div>}
+                </div>
+              </li>
+              );
+            })}
+          </ul>
+    
+        {studentProjects.some(p => p.data.events?.length > 0) && (
+          <>
+            <h2>Events Attended</h2>
+            <ul>
+              {studentProjects.flatMap(p =>
+                p.data.events?.map(event => <li>{event}</li>) || []
+              )}
+            </ul>
+          </>
+        )}
+      </>
+    )}
+
     {student.data?.projects && student.data.projects.length > 0 && (
       <h2>Related Projects Included</h2>
       <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
@@ -77,6 +128,25 @@ import TAPDefaultLayout from "../../layouts/default.astro";
 </TAPDefaultLayout>
 
 <style>
+  .no-bullets {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .course-info {
+  font-size: 1.125em;
+  line-height: 1.6em;
+  margin-bottom: 2em;
+  }
+
+  .course-info div {
+    margin-bottom: 0.4em;
+  }
+
+  .green-text {
+    color: limegreen;
+  }
+
   .studentImage {
     margin-right: 1em;
 		width: clamp(15em, 50%, 25em);

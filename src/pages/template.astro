@@ -13,7 +13,16 @@ import "agnostic-vue/dist/opinions.min.css";
 import '../styles/global.css';
 ---
 <TAPDefaultLayout title="Outreach Projects">
-
-    <ProjectTemplate client:load></ProjectTemplate>
+    <div class="main-container">
+        <ProjectTemplate client:load></ProjectTemplate>
+    </div>
 
 </TAPDefaultLayout>
+
+<style>
+    .main-container {
+	  max-width: 80%;
+	  margin: 0 auto;
+	  padding: 1rem;
+	}
+</style>
