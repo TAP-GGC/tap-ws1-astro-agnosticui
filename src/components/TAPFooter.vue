@@ -85,7 +85,7 @@ const year = ref(new Date().getFullYear());
           </div> 
         </div> 
       </div> 
-      <!--end of footer colums -->
+      <!--end of footer columns -->
      
 
       <div class="copyright">
