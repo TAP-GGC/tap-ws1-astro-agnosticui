@@ -3,7 +3,7 @@ import { computed, ref } from "vue";
 import "agnostic-vue/dist/common.min.css";
 import "agnostic-vue/dist/index.css";
 import { Card } from "agnostic-vue";
-import EmptyImage from '/src/content/students/empty.png';
+import EmptyImage from '/src/content/students/JohnDoe/johndoe.jpg';
 
 // Remove single slash as it causes double slashes in card
 const base = import.meta.env.BASE_URL == '/' ? '' : import.meta.env.BASE_URL;
@@ -35,9 +35,9 @@ const truncatedDescription = computed(() => {
             <p class="description">{{ truncatedDescription }}</p>
             <div class="tag-container">
                 <!-- Check if the link exists before rendering it -->
-                <a v-if="item.data.website" :href="item.data.website" class="tag">Website</a>
-                <a v-if="item.data.github" :href="item.data.github" class="tag">GitHub</a>
-                <a v-if="item.data.linkedin" :href="item.data.linkedin" class="tag">LinkedIn</a>
+                <a v-if="item.data.website" :href="item.data.website" class="tag" target="_blank">Website</a>
+                <a v-if="item.data.github" :href="item.data.github" class="tag" target="_blank">GitHub</a>
+                <a v-if="item.data.linkedin" :href="item.data.linkedin" class="tag" target="_blank">LinkedIn</a>
             </div>
         </div> 
     </Card>
