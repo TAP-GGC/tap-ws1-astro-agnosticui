@@ -85,7 +85,7 @@ const props = defineProps<Props>();
 	align-items: center;
 	justify-content: center;
 }
-	*/
+*/
 
 .slide-content {
 	width: 100%;
