@@ -37,7 +37,8 @@ const facultyImg = faculty.data.image?.src || EmptyImage.src;
 const projects = await getCollection('projects');
 
 const relatedProjects = projects.filter(project =>
-  project.data.instructors?.includes(faculty.data.id)
+  project.data.instructors?.includes(faculty.data.id) ||
+  project.data.instructors?.includes(faculty.data.name)
 );
 
 const groupedProjects = {};
