@@ -34,6 +34,25 @@ let title = `${faculty.data.name} - Faculty Profile`;
 import EmptyImage from '/public/techs/empty.png'
 const facultyImg = faculty.data.image?.src || EmptyImage.src;
 
+const projects = await getCollection('projects');
+
+const relatedProjects = projects.filter(project =>
+  project.data.instructors?.includes(faculty.data.id)
+);
+
+const groupedProjects = {};
+
+relatedProjects.forEach(project => {
+  const semester = project.data.semester?.toUpperCase() || "UNKNOWN";
+  const year = project.data.year || "UNKNOWN";
+  const key = `${semester} ${year}`;
+
+  if (!groupedProjects[key]) {
+    groupedProjects[key] = [];
+  }
+
+  groupedProjects[key].push(project);
+});
 ---
 <TAPDefaultLayout title={title}>
   <Crumbs pageType="faculty" pageUrl={`/instructors/${faculty.data.id}`} />
@@ -54,11 +73,26 @@ const facultyImg = faculty.data.image?.src || EmptyImage.src;
       <!-- </div>     -->
     </div>
     <Content />
-    {faculty.data?.projects && faculty.data.projects.length > 0 &&(
+    {Object.keys(groupedProjects).length > 0 && (
+      <>
+        <h2>TAP Classes Taught</h2>
+        {Object.entries(groupedProjects).map(([term, projects]) => {
+          const projectTitles = projects.map(p => p.data.shortTitle).join(', ');
+          return (
+            <div class="tap-class-line">
+              <b>{term}</b> : <span class="green-text">{projectTitles}</span>
+            </div>
+          );
+        })}
+      </>
+    )}
+
+    <div style="clear: both;"></div>
+    {relatedProjects.length > 0 &&(
       <h2>Related Projects Included</h2>
       <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
-        {faculty.data.projects.map((project_id) => (      
-          <ProjectCard item={projectIds[project_id]} />
+        {relatedProjects.map(project => (      
+          <ProjectCard item={projectIds[project.data.id]} />
         ))}
       </section>
     )}
@@ -126,4 +160,13 @@ h3.about{
       margin-bottom: 0;
     }
   }
+
+.tap-class-line {
+  font-size: 1.15em;
+  margin-bottom: 0.75em;
+}
+
+.green-text {
+  color: limegreen;
+}
 </style>
