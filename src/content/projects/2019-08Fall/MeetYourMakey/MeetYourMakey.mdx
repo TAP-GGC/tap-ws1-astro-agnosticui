@@ -1,0 +1,137 @@
+---
+shortTitle: Meet Your Makey
+title: Using Makey Makey to Teach Music and Coding
+id: meet-your-makey
+desc: Introduces students to the basics of circuits and coding by using the Makey Makey invention kit. Students build custom instruments layouts that interact with a computer, helping them understand inputs, outputs, and creative programming.
+github: https://github.com/TAP-GGC/meet-your-makey
+students: [
+  "James Broome",
+  "Khadijah Nixon",
+  "Alex Smyntyna",
+  "Hieu Dinh"
+]
+instructors: [
+  "Anca-Doloc-Mihu",
+  "Cindy-Robertson"
+]
+techs: [
+  "Makey-Makey",
+  "Godot"
+]
+videos: [
+]
+events: [
+  "Super Saturday Series (S3)",
+  "Tap Expo",
+  "Class workshops"
+]
+semester: fall
+year: 2019
+levels: [
+  "K-12",
+  "Middle-school",
+  "High-school",
+  "College"
+]
+difficulty: [
+  "Intermediate"
+]
+durationMins: [60]
+publishedDate: 2025-05-12
+relatedIds: [
+  "Project M"
+]
+images: [
+  { src: './MeetYourMakeyTeam.jpg', alt: 'Team Photo'},
+  { src: './MakeyMakeyVisual.png', alt: 'Game Layout'},
+  { src: './MakeySuperSaturday.jpg', alt: 'Super Saturday Series showcase'}
+]
+imageLogoLight: ./MeetYourMakeyPlaceHolderLogo.png
+imageLogoDark: ./MeetYourMakeyPlaceHolderLogo.png
+imageTeam: ./MeetYourMakeyTeam.jpg
+curator: ["Elijah Santiago"]
+---
+
+import { Image } from "astro:assets";
+import Photo from '/src/components/astro/Photo.astro';
+import Logo from '/src/components/astro/Logo.astro';
+import Gallery from '/src/components/astro/Gallery.astro';
+import Clip from '/src/components/astro/Clip.astro';
+
+import GroupPhoto from './MeetYourMakeyTeam.jpg';
+import GameLayout from './MakeyMakeyVisual.png';
+import SuperSaturdaySeriesShowcase from './MakeySuperSaturday.jpg';
+import GodotLogo from "./godot.png"
+import MakeyLogo from "./makey.png"
+
+
+
+{/* Project description */}	
+
+Our project uses the **Makey Makey** invention kit to teach the basics of circuits and programming in a fun and creative way.  
+Students design custom instrument layouts (e.g. banana piano, playdough drums) that connect to their computer and interact with our Godot application. 
+This hands-on activity helps them explore electrical circuits, user input, and the logic of event-driven programming.
+
+The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) aims to make IT accessible and engaging for all students through creative outreach workshops.
+
+{/* Team photo */}	
+
+## Team members
+<Image src={GroupPhoto} alt="Team Photo" />
+#### James Broome, Khadijah Nixon, Alex Smyntyna, Hieu Dinh  
+<br />
+
+{/* Activities section */}	
+
+## Outreach Activities:
+1. **Super Saturday Series** – November 9, 2019, GGC: Workshop for middle and high school girls to promote IT and STEM.
+2. **TAP Expo** – October 10, 2019, GGC: Outreach to college students about IT and the TAP program.
+3. **Class Workshops** – November 11, 13, and 15, 2019, GGC: In-class demos and coding with Makey Makey for college non-IT majors.
+
+## Materials List:
+| Amount | Materials                     |
+|--------|-------------------------------|
+| 1      | Collection of Makey Makey Kits|
+| 1      | PlayDough Collection          |
+
+## Technology
+<div class='gallery-list'>
+<Logo src={GodotLogo.src} alt="Godot Logo" />
+<Logo src={MakeyLogo.src} alt="Makey Logo" />
+</div>
+
+{/*Commercial Video*/}	
+
+<video width="90%" controls><source src="https://github.com/user-attachments/assets/4fb8e135-8cc1-4bc3-bc4d-fd2f2204923b" type="video/mp4" /></video>
+
+
+## Project Setup & Installation:
+- [Makey Makey Step-by-Step Workshop Guide](ONEDRIVE VIDEO)
+- [Makey Makey Step-by-Step Setup Guide](ONEDRIVE VIDEO)
+
+{/* How to play the game */}
+
+## Usage
+
+### Instrument Controls
+- W, A, S, D, F, G, Left Arrow, Right Arrow — Play instrument notes and animate icons  
+- Pressing a key triggers a sound and visual response
+
+### Volume & Pitch Control
+- Up Arrow / Down Arrow — Rotate icons and shift pitch
+
+### Music Player
+- Play — Starts music from the Music.gd script  
+- Next Song — Moves to the next track  
+- Reset — Stops music and resets the timer
+
+### Recorder Functions
+- Record — Captures key input with note, time, and duration  
+- Clear — Clears the recorded data
+
+### Instrument Tab
+- Cello — Switch to cello  
+- Drum — Switch to drum  
+- Violin — Switch to violin  
+- Piano — Switch to piano
+  
