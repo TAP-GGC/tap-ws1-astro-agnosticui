@@ -78,7 +78,7 @@ relatedProjects.forEach(project => {
       <>
         <h2>TAP Classes Taught</h2>
         {Object.entries(groupedProjects).map(([term, projects]) => {
-          const projectTitles = projects.map(p => p.data.shortTitle).join(', ');
+          const projectTitles = (projects as typeof relatedProjects).map(p => p.data.shortTitle).join(', ');
           return (
             <div class="tap-class-line">
               <b>{term}</b> : <span class="green-text">{projectTitles}</span>
