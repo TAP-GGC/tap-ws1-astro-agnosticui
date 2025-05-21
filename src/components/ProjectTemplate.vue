@@ -9,6 +9,7 @@ import { Input, Card, Select, Tag } from "agnostic-vue";
 // load blog content: news, etc.
 import { getCollection } from 'astro:content';
 import studentIds from "./astro/StudentIds";
+import facultyIds from "./astro/FacultyIds";
 const projects = await getCollection('projects');  //list of projects
 
 function createOptions(projects, x) {
@@ -42,7 +43,11 @@ const studentList = Array.from(new Set(
 //instructors related
 let instructorTerm = ref('');
 let selectedInstructors = ref([]);
-const instructorList = createOptions(projects, "instructors");
+const instructorList = Array.from(new Set(
+                            Object.values(facultyIds).map(inst => ({
+                                name: inst.data.name,
+                                id: inst.data.id.toLowerCase()}))
+        )).sort();
 
 //Tech related
 let techTerm = ref('');
@@ -151,6 +156,20 @@ function addTerm(termRef, inputField){
         inputField = inputField.replace(/\s+/g, '-');
     }
 
+    if (termRef === "instructorTerm") {
+        const match = this.instructorList.find(inst =>
+            inst.name.toLowerCase() === inputField.trim().toLowerCase()
+        );
+
+        if (match) {
+            inputField = match.id;
+        } else {
+            console.warn(`Instructor not found for input: ${inputField}`);
+            return;
+        }
+    }
+
+    //this is a debug code, ask for removal?
     if(inputField != ''&& !category.value.includes(inputField)){
         console.log(typeof inputField);
         category.value.push(inputField);
@@ -263,7 +282,7 @@ const searchTech = computed(() =>{
         <div>
             <Input type="text" list="instructorData" label="Enter instructors" v-model="instructorTerm" @keydown.enter.stop="addTerm('instructorTerm',instructorTerm )"
                     placeholder="Type instructor name to complete from list or insert a new one. Press enter to add it to add it to the list."/>
-            <datalist id="instructorData"><option v-for="instructor in instructorList" :value="instructor">{{ instructor }}</option></datalist>
+            <datalist id="instructorData"><option v-for="instructor in instructorList" :key="instructor.id" :value="instructor.name">{{ instructor.name }}</option></datalist>
             <ul class="tagList">
                 <Tag v-for="(tag, index) in selectedInstructors" :key="tag" class="mie6" shape="round" type="info" is-uppercase>{{tag}}
                     <button @click="removeTag2(selectedInstructors,index)" class="delete">&#x2718;</button>
