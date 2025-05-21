@@ -55,27 +55,6 @@ relatedProjects.forEach(project => {
 
   groupedProjects[key].push(project);
 });
-
-const itemsPerPage = 4;
-const currentPage = ref(1);
-
-const totalPages = computed(() =>
-  Math.ceil(relatedProjects.length / itemsPerPage)
-);
-
-// 👇 The fix: pages must be an array of { value } objects!
-const pages = computed(() =>
-  Array.from({ length: totalPages.value }, (_, i) => ({ value: i + 1 }))
-);
-
-const paginatedProjects = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage;
-  return relatedProjects.slice(start, start + itemsPerPage);
-});
-
-const onPageChange = (newPage) => {
-  currentPage.value = newPage;
-};
 ---
 <TAPDefaultLayout title={title}>
   <Crumbs pageType="faculty" pageUrl={`/instructors/${faculty.data.id}`} />
@@ -96,55 +75,46 @@ const onPageChange = (newPage) => {
       <!-- </div>     -->
     </div>
     <Content />
+    
+    <div style="clear: both;"></div>
+
     {Object.keys(groupedProjects).length > 0 && (
-      <>
         <Disclose isBackground title="TAP Classes Taught">
         {Object.entries(groupedProjects).map(([term, projects]) => {
           const projectTitles = (projects as typeof relatedProjects).map(p => p.data.shortTitle).join(', ');
           return (
             <div class="tap-class-line">
-              <b>{term}</b> : <span class="green-text">{projectTitles}</span>
+              <b>{term}</b> :{" "} 
+              <span class="green-text">
+                {(projects as typeof relatedProjects).map((p, index) => {
+                  const year = p.data.year;
+                  const semester = p.data.semester?.toLowerCase();
+                  const id = p.data.id;
+                  const url = `/projects/${year}/${semester}/${id}`; 
+                  return (
+                    <>
+                      <a href={url} target="_blank" rel="noopener noreferrer">
+                        {p.data.shortTitle}
+                      </a>
+                      {index < (projects as typeof relatedProjects).length - 1 && ", "}
+                    </>
+                  );
+                })}
+              </span>
             </div>
           );
         })}
         </Disclose>
-      </>
     )}
 
-    <div style="clear: both;"></div>
-    {relatedProjects.length > 0 && (
-  <>
-    <h2>Related Projects Included</h2>
-
-    <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
-      {paginatedProjects.value.map(project => (
-        <ProjectCard item={projectIds[project.data.id]} />
-      ))}
-    </section>
-
-    <div style="margin-top: 1rem;">
-      <div class="pagination-controls">
-  <button :disabled="currentPage === 1" @click="onPageChange(currentPage - 1)">
-    Previous
-  </button>
-
-  <button
-    v-for="page in Array.from({ length: totalPages.value }, (_, i) => i + 1)"
-    :key="page"
-    :class="{ active: page === currentPage }"
-    @click="onPageChange(page)"
-  >
-    {{ page }}
-  </button>
-
-  <button :disabled="currentPage === totalPages" @click="onPageChange(currentPage + 1)">
-    Next
-  </button>
-</div>
-
-    </div>
-  </>
-)}
+    {relatedProjects.length > 0 &&(
+      <h2>Related Projects Included</h2>
+      <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
+        {relatedProjects.map(project => (      
+          <ProjectCard item={projectIds[project.data.id]} />
+        ))}
+      </section>
+    )}
   </div>
 <!-- </div> -->
 
