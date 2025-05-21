@@ -16,6 +16,7 @@ import TAPDefaultLayout from "../../layouts/default.astro";
 import projectIds from '../../components/astro/ProjectIds';
 import ProjectCard from '../../components/ProjectCard.vue';
 import { date } from 'astro:schema';
+import { Disclose } from 'agnostic-vue';
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
@@ -54,6 +55,27 @@ relatedProjects.forEach(project => {
 
   groupedProjects[key].push(project);
 });
+
+const itemsPerPage = 4;
+const currentPage = ref(1);
+
+const totalPages = computed(() =>
+  Math.ceil(relatedProjects.length / itemsPerPage)
+);
+
+// 👇 The fix: pages must be an array of { value } objects!
+const pages = computed(() =>
+  Array.from({ length: totalPages.value }, (_, i) => ({ value: i + 1 }))
+);
+
+const paginatedProjects = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage;
+  return relatedProjects.slice(start, start + itemsPerPage);
+});
+
+const onPageChange = (newPage) => {
+  currentPage.value = newPage;
+};
 ---
 <TAPDefaultLayout title={title}>
   <Crumbs pageType="faculty" pageUrl={`/instructors/${faculty.data.id}`} />
@@ -76,7 +98,7 @@ relatedProjects.forEach(project => {
     <Content />
     {Object.keys(groupedProjects).length > 0 && (
       <>
-        <h2>TAP Classes Taught</h2>
+        <Disclose isBackground title="TAP Classes Taught">
         {Object.entries(groupedProjects).map(([term, projects]) => {
           const projectTitles = (projects as typeof relatedProjects).map(p => p.data.shortTitle).join(', ');
           return (
@@ -85,18 +107,44 @@ relatedProjects.forEach(project => {
             </div>
           );
         })}
+        </Disclose>
       </>
     )}
 
     <div style="clear: both;"></div>
-    {relatedProjects.length > 0 &&(
-      <h2>Related Projects Included</h2>
-      <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
-        {relatedProjects.map(project => (      
-          <ProjectCard item={projectIds[project.data.id]} />
-        ))}
-      </section>
-    )}
+    {relatedProjects.length > 0 && (
+  <>
+    <h2>Related Projects Included</h2>
+
+    <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
+      {paginatedProjects.value.map(project => (
+        <ProjectCard item={projectIds[project.data.id]} />
+      ))}
+    </section>
+
+    <div style="margin-top: 1rem;">
+      <div class="pagination-controls">
+  <button :disabled="currentPage === 1" @click="onPageChange(currentPage - 1)">
+    Previous
+  </button>
+
+  <button
+    v-for="page in Array.from({ length: totalPages.value }, (_, i) => i + 1)"
+    :key="page"
+    :class="{ active: page === currentPage }"
+    @click="onPageChange(page)"
+  >
+    {{ page }}
+  </button>
+
+  <button :disabled="currentPage === totalPages" @click="onPageChange(currentPage + 1)">
+    Next
+  </button>
+</div>
+
+    </div>
+  </>
+)}
   </div>
 <!-- </div> -->
 
