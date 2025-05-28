@@ -8,6 +8,8 @@ import { Input, Card, Select, Tag } from "agnostic-vue";
 
 // load blog content: news, etc.
 import { getCollection } from 'astro:content';
+import studentIds from "./astro/StudentIds";
+import facultyIds from "./astro/FacultyIds";
 const projects = await getCollection('projects');  //list of projects
 
 function createOptions(projects, x) {
@@ -25,6 +27,7 @@ function createOptions(projects, x) {
     return Array.from(optionSet);
 }
 
+let projectShortTitle = ref('');
 let projectName = ref('');
 let projectDescrip = ref('');
 let github = ref('');
@@ -32,12 +35,19 @@ let github = ref('');
 //student related
 let selectedStudents = ref([]);
 let studentTerm = ref('');
-const studentList = createOptions(projects, "students");
+const studentList = Array.from(new Set(
+                                Object.values(studentIds).map(student => student.data.id.toLowerCase())
+                            )
+                        ).sort();
 
 //instructors related
 let instructorTerm = ref('');
 let selectedInstructors = ref([]);
-const instructorList = createOptions(projects, "instructors");
+const instructorList = Array.from(new Set(
+                            Object.values(facultyIds).map(inst => ({
+                                name: inst.data.name,
+                                id: inst.data.id.toLowerCase()}))
+        )).sort();
 
 //Tech related
 let techTerm = ref('');
@@ -135,11 +145,31 @@ function addTerm(termRef, inputField){
         case "relatedIdTerm":
             category = selRelatedIds;
             break;
-        case "vidUrl":
-            category = selectedVids;
-            break;
+        // case "vidUrl":
+        //     category = selectedVids;
+        //     break;
     }
     inputField = inputField.toLowerCase(); // Convert input to lowercase
+
+    if (termRef === "studentTerm" && /\s/.test(inputField)) {
+        //alert("Student name must not contain spaces. Use hyphens or camelCase (e.g., alex-lee or alexLee).");
+        inputField = inputField.replace(/\s+/g, '-');
+    }
+
+    if (termRef === "instructorTerm") {
+        const match = this.instructorList.find(inst =>
+            inst.name.toLowerCase() === inputField.trim().toLowerCase()
+        );
+
+        if (match) {
+            inputField = match.id;
+        } else {
+            console.warn(`Instructor not found for input: ${inputField}`);
+            return;
+        }
+    }
+
+    //this is a debug code, ask for removal?
     if(inputField != ''&& !category.value.includes(inputField)){
         console.log(typeof inputField);
         category.value.push(inputField);
@@ -218,12 +248,16 @@ const searchTech = computed(() =>{
                 <li>Some boxes allow entering multiple items. Start typing or press the down arrow to see options. 
                     Make sure to press Enter in the input boxes to save them. 
                     They will show up as tags below the input box. You can click on the X to remove tags.</li>
-                <li>Once you're done, make sure all the fields in the block is filled. Then copy-paste it into the top of your project Markdown file.</li>
+                <li>Once you're done, make sure all the fields in the block is filled. Then copy-paste it into the top of your project Markdown (.mdx) file.</li>
             </ul>
         
         </div>
+        <br />
         <div>
-            <Input id="4" size="" v-model="projectName" label="Enter project name" placeholder="Example: Atomic Force Microscopy" type="text"></Input>
+            <Input id="4" size="" v-model="projectShortTitle" label="Enter project short name" placeholder="The short name of the project. Example: Ball is Life" type="text"></Input>
+        </div>
+        <div>
+            <Input id="4" size="" v-model="projectName" label="Enter project name" placeholder="Complete titile as research page title. Example: Using Sphero to Teach Programming Fundamentals" type="text"></Input>
         </div>
         <div>
             <Input size="medium" v-model="projectDescrip" label="Enter project description" placeholder="One or two phrases that succinctly describe the project" type="text"></Input>
@@ -248,7 +282,7 @@ const searchTech = computed(() =>{
         <div>
             <Input type="text" list="instructorData" label="Enter instructors" v-model="instructorTerm" @keydown.enter.stop="addTerm('instructorTerm',instructorTerm )"
                     placeholder="Type instructor name to complete from list or insert a new one. Press enter to add it to add it to the list."/>
-            <datalist id="instructorData"><option v-for="instructor in instructorList" :value="instructor">{{ instructor }}</option></datalist>
+            <datalist id="instructorData"><option v-for="instructor in instructorList" :key="instructor.id" :value="instructor.name">{{ instructor.name }}</option></datalist>
             <ul class="tagList">
                 <Tag v-for="(tag, index) in selectedInstructors" :key="tag" class="mie6" shape="round" type="info" is-uppercase>{{tag}}
                     <button @click="removeTag2(selectedInstructors,index)" class="delete">&#x2718;</button>
@@ -257,7 +291,7 @@ const searchTech = computed(() =>{
          </div>
         <div>
             <Input type="text" list="studentData" label="Enter student names" v-model="studentTerm" @keydown.enter.stop="addTerm('studentTerm',studentTerm )"
-                    placeholder="Type student name to complete from list or insert a new one. Press enter to add it to add it to the list."/>
+                    placeholder="Type student name to complete from list or insert a new one. Press enter to add it to add it to the list. Use hyphens or camelCase. No spaces allowed"/>
             <datalist id="studentData"><option v-for="student in studentList" :value="student">{{ student }}</option></datalist>
             <ul class="tagList">
                 <Tag v-for="(tag, index) in selectedStudents" :key="tag" class="mie6" shape="round" type="info" is-uppercase>{{tag}}
@@ -265,14 +299,7 @@ const searchTech = computed(() =>{
                 </Tag>
             </ul>
          </div>
-         <div> <!--Enter the videos. Once clicked, it should be pushed into an array-->
-            <Input type="text" label="Enter video link (make sure it's uploaded to the TAP Youtube account)" v-model="vidUrl" @keydown.enter.stop="addTerm('vidUrl',vidUrl )"/>
-            <ul class="tagList">
-                <Tag v-for="(tag, index) in selectedVids" :key="tag" class="mie6" shape="round" type="info" is-uppercase>{{tag}}
-                    <button @click="removeTag2(selectedVids,index)" class="delete">&#x2718;</button>
-                </Tag>
-            </ul>
-         </div>
+         
          <br>
          <div> <!--events-->
             <label>Select events that are associated with this project (TAP Expo, conferences, etc). First create a blog post if not listed.</label>
@@ -337,14 +364,14 @@ const searchTech = computed(() =>{
          <h4>Resulting Markdown File:</h4>
          <pre>
 ---
+shortTitle: {{ projectShortTitle }}
 title: {{ projectName }}
-id: {{ projectName.trim() }}
+id: {{ projectShortTitle.trim().toLowerCase().replace(/\s+/g, '-') }}
 desc : {{ projectDescrip }}
 github: {{ github }}
 students: {{ selectedStudents }}
 instructors: {{ selectedInstructors }} 
 techs: {{ techTags }}
-videos: {{ selectedVids }}
 events: {{selectedEvents}}
 semester: {{ selectedSemester }}
 year: {{ selectedYear? selectedYear : year }}

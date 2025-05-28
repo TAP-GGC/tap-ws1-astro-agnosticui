@@ -34,8 +34,9 @@ projects.forEach(project => {
         data: {
           id: studentId,
           slug: `${base}/students/${studentId}`,
-          name: studentId.replace(/-/g, ' '), // Convert ID back to readable name if id doesn't exist
-          projects: { project }
+          name: studentId.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase()), // Convert ID back to readable name
+          projects: [project.data.id],
+          fallback: true
         },
         body: '', 
       }
@@ -45,4 +46,3 @@ projects.forEach(project => {
 
 
 export default studentIds;
-
