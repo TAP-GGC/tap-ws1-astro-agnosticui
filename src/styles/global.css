@@ -11,7 +11,7 @@
 
 :root {
 	font-size: clamp(0.575rem, 0.4626rem + 1.0309rem + var(--user-font-scale), 1.125rem);
-  --agnostic-header-content-width: 95vw; /* set minimum size of header menu - set to percent of viewport width */
+  --agnostic-header-content-width: 95vw; /*set minimum size of header menu - set to percent of viewport width*/
   
   /* light mode */
   --agnostic-primary-modelight: #1f450a; /*button, tags links color*/
@@ -55,25 +55,31 @@
  .footer{
   background-color: var(--agnostic-light);
   color: var(--agnostic-dark);
-  width: 100%;
+  /* width: 100%; */
  }
 
-body {
-  display: grid; /* need to remove this */
+ html, body{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; 
+}
+
+ body {
+  display: block; /* used to be grid */
   font-family: 'Work Sans', medium; 
   /*font-size: 1em; unused, see root definition above. set --user-font-scale for changes*/ 
 
   /* Change the min and max sizing based on available space */
-  grid-template-columns: flex(auto-fit, minmax(100px,1fr)); /* need to remove this */
-  grid-auto-rows: minmax(100px, auto); /* need to remove this */
-  
+/*  grid-template-columns: flex(auto-fit, minmax(100px,1fr)); /* need to remove this */
+  /*grid-auto-rows: minmax(100px, auto);  /* need to remove this */
+  /*flex-direction: column; */
   align-content: space-evenly;
-  /*justify-content: space-between;*/
+  /*justify-content: space-between; only works for grid */
   align-items: center;
   justify-items: center;
   background: var(--agnostic-gray-light);
   color: var(--agnostic-font-color);
-  width: 100%;
   
 }
 .blog, .body-prj, .body-student, .body-faculty{
@@ -141,6 +147,7 @@ main {
   margin-left: 0;
   margin-right: 0;
   align-content: space-evenly;
+  padding: 0;
   /* leftover from grid demo
   justify-content: space-evenly;
   align-items: center;
@@ -216,6 +223,7 @@ justify-content: space-around;
   z-index: 3;
   display: inline-block;
   text-align: left;
+  padding: 0.5rem;
 }
 
 .card-title { /*Card titles  */
@@ -286,6 +294,8 @@ justify-content: space-around;
     display: none; 
   }
 }
+
+
 
 /* TODO -- we'll need to revisit this once AgnosticUI properly supports dark mode. Breadcrumb links
 aren't accessible in terms of contrast in dark mode at the moment. */

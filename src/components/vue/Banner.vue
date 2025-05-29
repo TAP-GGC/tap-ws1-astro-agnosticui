@@ -19,7 +19,7 @@ export default{
     color: var(--agnostic-dark);
     text-align: center;
     padding: 2rem 3rem;
-    width: 100vw;
+    /* width: 100vw; - causing the left alignment problem in mobile*/
 }
 .banner-content{
     width: 70%;
