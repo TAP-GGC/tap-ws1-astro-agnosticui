@@ -38,7 +38,8 @@ export default{
 }
 .banner h3{
     font-weight: 300 !important;
-    font-size: 150%; /* 1rem */
+    /*font-size: 125%;*/ /* 1rem */
+    font-size: clamp(var(--agnostic-h5), 3vw, var(--agnostic-h3));
 }
 
 </style>
