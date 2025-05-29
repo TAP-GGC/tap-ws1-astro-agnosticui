@@ -3,7 +3,7 @@ name: Build Astro following official Github Actions beta
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: [ release-spr24-tw ] # change to main once done (added teachers' workshop branch)
+    branches: [ main ] # publish from main branch since we have dev repo
     tags: [ gh-publish ]
 
   # Allows you to run this workflow manually from the Actions tab
