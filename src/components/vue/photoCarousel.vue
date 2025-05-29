@@ -59,33 +59,14 @@ const props = defineProps<Props>();
 
 /* Set fixed height for the carousel */
 :deep(.vueperslides) {
-	height: 800px !important;
-}
-/*
-:deep(.vueperslides__inner) {
-	height: 100% !important;
+	height: 60vh !important;
 }
 
-:deep(.vueperslides__track) {
-	height: 100% !important;
+@media (max-width: 960px) {
+  :deep(.vueperslides) {
+    height: 30vh !important;
+  }
 }
-
-:deep(.vueperslides__track-inner) {
-	height: 100% !important;
-}
-
-:deep(.vueperslide) {
-	height: 100% !important;
-}
-
-:deep(.vueperslide__content-wrapper) {
-	height: 100% !important;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-*/
 
 .slide-content {
 	width: 100%;
@@ -112,6 +93,6 @@ const props = defineProps<Props>();
 
 /* Ensure bullets are below the image */
 :deep(.vueperslides__bullets) {
-	margin-top: 10px;
+	margin-top: 5px;
 }
 </style>

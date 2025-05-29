@@ -1,0 +1,106 @@
+---
+title: TapIn
+id: TapIn
+desc : This project involves students creating digital business cards containing information about their academic courses, personal details, work or project experiences, goals, and preferred social media platforms for sharing.
+github: https://github.com/TAP-GGC/TapIn
+students: [
+  "cameron-ventimiglia",
+  "michelle-watson",
+  "jesscia-simao",
+  "micheal-murillo martinez"
+]
+instructors: [
+  "cengiz-gunay",
+  "rahaf-barakat"
+] 
+techs: [
+  "html",
+  "css",
+  "javascript",
+  "nfc",
+  "glitch"
+]
+videos: []
+events: []
+semester: spring
+year: 2025
+levels: [
+  "middle-school",
+  "high-school",
+  "college"
+] 
+difficulty: [
+  "beginner"
+] 
+durationMins: [
+  30,
+  60
+]
+publishedDate: 2025-05-05
+relatedIds: []
+
+images: [
+  {src: './workshop.jpg',alt: 'TAP class 1'},
+  {src: './TapExpo.jpg',alt: 'TAP Expo'},
+  {src: './STARS.jpg',alt: 'STaRS Competition - The TAPIN Project poster won an award at the 2022 STaRS competition for its innovative use of NFC technology to simplify student digital identity sharing.'},
+  {src: './workshop2.jpg',alt: 'Tap class 2'}
+]
+imageLogoLight: ./whitebackground.png
+imageLogoDark: ./removelogo.png
+curator: ["my-tran"]
+teamPhoto: './teamphoto.png'
+---
+import { Image } from "astro:assets";
+import Photo from '/src/components/astro/Photo.astro';
+import Logo from '/src/components/astro/Logo.astro';
+import Gallery from '/src/components/astro/Gallery.astro';
+
+import GroupPhoto from './teamphoto.jpg';
+import GlitchLogo from './glitchlogo.png';
+import NFCChip from './NFCChip.jpg';
+import TechLogo from './techlogo.jpg';
+
+
+The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to break the misconceptions of the IT field by providing fun workshops for students of all backgrounds. TAP students design engaging and fun outreach workshops to encourage interest in IT and STEM.
+
+## About
+
+This project introduces students to the basics of static web development through the creation of a digital business card. Using Glitch as the development platform and NFC chips for easy sharing, students will build personalized web pages that showcase their academic background, personal info, work or project experiences, goals, and social links. The result is a smart, modern way to network and share professional profiles with a simple tap — perfect for students looking to boost their digital presence.
+
+## Project Information
+* **Difficulty Level:** Easy
+* **Target Audience:** 6th Grade - College
+* **Duration of Workshop:** 30-60 mins
+* **Needed Material:** NFC Chip, Mobile App capable of reading and writing to NFC Chip
+* **Goal:** The primary goal of this project is educating others about static web development by creating a digital business card using NFC technology
+
+## TapIn
+
+#### **Team Members:**  
+<Image src={GroupPhoto} alt="TapIn group photo" />
+*Professors: Top row from left: Dr. Chavonda Mills, Dr. Cengiz Gunay, Dr. Rahaf Barakat*
+
+*Team members: Middle row from left: Micheal Murillo Martinez, Cameron Ventimiglia. Bottom row from left: Jesscia Simao, Michelle Watson*
+
+## Outreach Activities:
+1. TAP Expo (March 17) - Test our builds and to introduce TAP to other students.
+2. Class Workshops (April 6, April 11, and April 27) - Walk students through a guided workshop.
+3. STaRS Poster Presentation (April 14) - Display our poster and explain the data we collected to the judges.
+4. Title One Workshops (April 23) - Walk middle school students through our workshop to give them hands-on experience.
+5. Super Saturday Series (April 30) - Host a day of fun at GGC for middle school students.
+
+## Technology
+<div class='gallery-list'>
+<Logo src={NFCChip.src} alt="NFC Chip" />
+<Logo src={TechLogo.src} alt="HTML, CSS, JS" />
+<Logo src={GlitchLogo.src} alt="Glitch Website" />
+</div>
+NFC Chip - NFC (Near Field Communication) chips are small integrated circuits that enable short-range wireless communication between devices, facilitating contactless data transfer and transactions.
+
+HTML, CSS, JS - Programming languages where HTML defines the content and structure of a webpage, CSS styles its presentation and layout, while JavaScript provides interactivity and dynamic functionality.
+
+Glitch - is a web-based platform that lets users build, remix, and share full-stack web apps directly in the browser. It’s beginner-friendly, supports real-time collaboration, and is great for quickly prototyping or learning to code with HTML, CSS, JavaScript, and Node.js.
+
+## Project Setup & Installation:
+- [Create your Website on Glitch](https://github.com/TAP-GGC/TapIn/blob/main/documents/Create%20your%20Website%20on%20Glitch.pdf)
+- [NFC Setup Instruction](https://github.com/TAP-GGC/TapIn/blob/main/documents/NFC%20Reader%20Instructions.pdf)

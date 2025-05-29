@@ -39,10 +39,17 @@ let title = `${student.data.name} - Student Profile`;
 import JohnDoeImage from '../../content/students/JohnDoe/johndoe.jpg'
 const studentImg = student.data.image || JohnDoeImage;
 import TAPDefaultLayout from "../../layouts/default.astro";
-const studentProjects = projects.filter(project => 
-  student.data.projects?.includes(project.data.id)
+const studentProjects = projects.filter(project =>
+  project.data.students?.includes(student.data.id) ||
+  project.data.curator?.includes(student.data.id) ||
+  project.data.students?.includes(student.data.name) ||
+  project.data.curator?.includes(student.data.name)
 );
 
+const studentOnlyProjects = studentProjects.filter(project =>
+  project.data.students?.includes(student.data.id) ||
+  project.data.students?.includes(student.data.name)
+);
 ---
 <TAPDefaultLayout title={title}>
   <Crumbs pageType="student" pageUrl={`/students/${student.data.id}`}/>
@@ -67,11 +74,11 @@ const studentProjects = projects.filter(project =>
       <!-- </div> -->
     </div>
     <Content />
-    {isFallbackStudent && studentProjects.length > 0 && (
+    {studentOnlyProjects.length > 0 && (
       <>
         <h2>Courses Taken</h2>
           <ul class="no-bullets">
-            {studentProjects.map(project => {
+            {studentOnlyProjects.map(project => {
                 const semester = project.data.semester?.toUpperCase();
                 const year = project.data.year;
                 const advisors = project.data.instructors?.map(name =>
@@ -101,11 +108,11 @@ const studentProjects = projects.filter(project =>
             })}
           </ul>
     
-        {studentProjects.some(p => p.data.events?.length > 0) && (
+        {studentOnlyProjects.some(p => p.data.events?.length > 0) && (
           <>
             <h2>Events Attended</h2>
             <ul>
-              {studentProjects.flatMap(p =>
+              {studentOnlyProjects.flatMap(p =>
                 p.data.events?.map(event => <li>{event}</li>) || []
               )}
             </ul>
@@ -114,11 +121,11 @@ const studentProjects = projects.filter(project =>
       </>
     )}
 
-    {student.data?.projects && student.data.projects.length > 0 && (
+    {studentProjects.length > 0 && (
       <h2>Related Projects Included</h2>
       <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
-        {student.data.projects.map((project_id) => (      
-          <ProjectCard item={projectIds[project_id]} />
+        {studentProjects.map((project) => (      
+          <ProjectCard item={projectIds[project.data.id]} />
         ))}
       </section>
     )}
