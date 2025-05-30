@@ -13,8 +13,8 @@ const projectProp = defineProps({
     });
 
 // Logos
-let imageLogoLight = projectProp.item.data.imageLogoLight?.src;
-const imageLogoDark = projectProp.item.data.imageLogoDark ? projectProp.item.data.imageLogoDark.src : imageLogoLight;
+let imageLogoLight = computed(() => projectProp.item.data.imageLogoLight?.src);
+const imageLogoDark = computed(() => projectProp.item.data.imageLogoDark ? projectProp.item.data.imageLogoDark.src : imageLogoLight);
 imageLogoLight = imageLogoLight ? imageLogoLight : imageLogoDark; // in case only dark is provided
 
 // Truncate description to a fixed number of characters
