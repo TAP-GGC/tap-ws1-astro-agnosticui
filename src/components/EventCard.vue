@@ -6,8 +6,8 @@ import "agnostic-vue/dist/index.css";
 import { Card } from "agnostic-vue";
 import { formatIDtoName } from './astro/formatNames';
 
-import placeholderLight from '../../public/images/tap-news-placeholder-light.png';
-import placeholderDark from '../../public/images/tap-news-placeholder-dark.png';
+// import placeholderLight from '/src/images/tap-news-placeholder-light.png';
+// import placeholderDark from '/src/images/tap-news-placeholder-dark.png';
 
 // Remove single slash as it causes double slashes in card
 const base = import.meta.env.BASE_URL == '/' ? '' : import.meta.env.BASE_URL;
@@ -32,9 +32,13 @@ const eventProp = defineProps({
 
 // Event Photos
 let eventPhoto = eventProp.item.data.imageEvent?.src;
-const eventPhotoLight = placeholderLight
-const eventPhotoDark = placeholderDark/* change placeholder based on light mode or dark isn't working*/
+let placeholderLight = {src: "./images/tap-news-placeholder-light.png"}
+let placeholderDark = {src: "./images/tap-news-placeholder-dark.png"}
 
+let eventPhotoLight = eventPhoto? eventPhoto : placeholderLight.src
+let eventPhotoDark = eventPhoto? eventPhoto : placeholderDark.src
+
+ /* change placeholder based on light/dark mode if there's no eventPhoto - isn't working :( */
 // const finalEventPhoto = computed(() => eventPhoto? eventPhoto : eventPhotoLight.value || eventPhotoDark.value);
 
 
@@ -59,21 +63,19 @@ const date_options = {
     <Card css="eventCard" isShadow>
       <a :href="`/posts/${item.data.year}/${item.data.semester}/${item.data.id}`" class="card-link" isShadow></a>
        <div class="eventText">                        
+        
 
-          <img :src="eventPhoto? eventPhoto: eventPhotoLight" alt="Event Image" class="eventImage imageLight">
-          <img :src="eventPhoto? eventPhoto : eventPhotoDark" alt="Event Image" class="eventImage imageDark">
+          <img :src= "eventPhotoLight" alt="Event Image" class="eventImage imageLight">
+          <img :src= "eventPhotoDark" alt="Event Image" class="eventImage imageDark">
 
-          <div class="card-header">
-            <div class="header-content">
-              <h4 class="eventTitle">{{ item.data.title }}</h4>
-              <h6 class="dateStamp">
-                {{ item.data.semester.charAt(0).toUpperCase() + item.data.semester.slice(1) }} {{ item.data.year }} <br />
-                Event Date: {{ item.data.eventDate.toLocaleDateString(undefined, date_options) }}
-              </h6> 
-            </div>
-          </div>
+          <h4 class="eventTitle">{{ item.data.title }}</h4>
 
-          <div class="card-body">
+          <h6 class="dateStamp">
+            {{ item.data.semester.charAt(0).toUpperCase() + item.data.semester.slice(1) }} {{ item.data.year }} <br />
+            Event Date: {{ item.data.eventDate.toLocaleDateString(undefined, date_options) }}
+          </h6> 
+
+
             <p class="description">{{ truncatedDescription }}</p>
 
             <!-- Display students as Tags -->
@@ -81,7 +83,6 @@ const date_options = {
               <a v-for="(student, index) in item.data.students" :key="index" :href="`/students/${student}`"> {{ formatIDtoName(student) }}</a>
 
             </div>
-          </div>
       </div>
     </Card>
 </template>
@@ -94,6 +95,8 @@ const date_options = {
     float: left;
     margin-right: 1em;
     width: var(--project-logo-width);
+    padding-top: 0.5em;
+		padding-right: 0.5em;
 }
 
 .eventText {
@@ -101,18 +104,9 @@ const date_options = {
     width: calc(100% ); 
 }
 
-.card-header {
-    margin-top: 1em;
-    margin-bottom: 1em;
-    position: relative;
+.description{
+  font-size: larger;
 }
-/* .header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-} */
-
 
 .eventTitle {
     text-align: left;
@@ -124,10 +118,10 @@ const date_options = {
 }
 
 .eventCard {
-  min-width: 30rem !important;
-  max-width: 45rem;
-  margin: 0.5em auto;
-  padding: 1em;
+  min-width: 20rem !important;
+  max-width: 40rem;
+  margin: 0.75em auto;
+  padding: 1.25em;
   /*flex: 1; since .card-link  is now the flex component */
   background-color: var(--agnostic-gray-mid);
   transition: transform 0.2s ease-in;
@@ -154,12 +148,10 @@ const date_options = {
   display: inline-block;
   padding: 0.25em 0.75em;
   font-size: 0.875em;
-  /* background-color: var(--agnostic-primary); */
   color: var(--agnostic-btn-primary-color, var(--agnostic-light));
   border-radius: var(--agnostic-btn-radius, var(--agnostic-radius, .25rem));
   transition: background-color 0.3s ease, color 0.3s ease;
   text-decoration: none;
-  /* z-index: 1; */
 }
 
 /* Save this until we can have links for each tag */
@@ -186,22 +178,14 @@ const date_options = {
   inset: 0; 
 }
 
-/* .eventCard {
-  pointer-events: auto; 
-} */
-
 /* Date shown to the right and small */
 .dateStamp {
-  text-align: right;
+  text-align: left;
   font-style: italic;
   font-size: small;
-  position: relative;
   white-space: nowrap;
   clear: none;
-  float: right;
-  clear: left;
 }
 </style>
 
-// Export the Card components for each event
 export { Card };

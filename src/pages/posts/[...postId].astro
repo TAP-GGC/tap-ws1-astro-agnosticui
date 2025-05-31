@@ -24,7 +24,6 @@ import "agnostic-vue/dist/opinions.min.css";
 
 // Component Imports
 import "agnostic-vue/dist/index.css";
-import TAPHeader from '../../components/TAPHeader.vue';
 import TAPDefaultLayout from "../../layouts/default.astro";
 import Crumbs from '../../components/Crumbs.vue';
 // Read from content collection
@@ -37,12 +36,10 @@ import ProjectCard from '../../components/ProjectCard.vue';
 //faculty
 import FacultyCard from '../../components/FacultyCard.vue';
 import facultyIds from '../../components/astro/FacultyIds';
-import instructors from '../instructors.astro';
 //students
 import studentIds from '../../components/astro/StudentIds';
-import students from '../students.astro';
 import StudentCard from '../../components/StudentCard.vue';
-import FacultySearch from '../../components/FacultySearch.vue';
+
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const blogEntries = await getCollection('events')
