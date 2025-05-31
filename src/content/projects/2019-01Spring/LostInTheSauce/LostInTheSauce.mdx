@@ -1,0 +1,189 @@
+---
+shortTitle: Lost In The Sauce
+title: A hands on experience with Unity and programming fundamentals
+id: lost-in-the-sauce
+desc: Lost In The Sauce is an unity made game that aims to teach basic coding fundamentals such as if and else statements as well as for loops and game development within the unity engine.
+github: https://github.com/TAP-GGC/LostInTheSauce
+students: [
+  "taisann-kham",
+  "brittany-giordano", 
+  "edgar-alvarez"
+]
+instructors: ["wei-jin","xin-xu"]
+techs: [
+  "unity"
+]
+videos: [
+  
+]
+events: [
+  "tap expo",
+  "atlanta science festival",
+  "super saturday series",
+  "class workshops"
+]
+semester: Spring
+year: 2019
+levels: [
+    "K12", 
+    "College"
+]
+difficulty: [ 
+    "Intermediate"
+]
+durationMins: [120]
+publishedDate: 2025-05-08
+relatedIds: [
+  "ball-is-life",
+  "slice-it"
+]
+images: [
+    { src: './STaRS 2019.JPG', alt: 'Team Demo at STaRS Event'},
+    { src: './TAPExpoSpring 2019_5892.JPG', alt: 'TAP Expo 2019'},
+    { src: './TAPExpoSpring 2019_5894.JPG', alt: 'TAP Expo 2019'}
+]
+imageLogoLight: ./Logo.png
+imageLogoDark: ./Logo.png
+imageTeam: ./STaRS 2019.JPG
+curator: ["Adis Mahmic"]
+
+---
+import { Image } from "astro:assets";
+import Photo from '/src/components/astro/Photo.astro';
+import Logo from '/src/components/astro/Logo.astro';
+import Gallery from '/src/components/astro/Gallery.astro';
+import Clip from '/src/components/astro/Clip.astro';
+
+import UnityLogo from './Unity.png';
+
+
+
+{/* About the project */}
+
+Lost In The Sauce is an unity made game that aims to teach basic coding fundamentals such as if and else statements as well as for 
+loops and game development within the unity engine. This workshop has participants do .. Lost In The Sauce is an unity made game that 
+aims to teach basic coding fundamentals such as if and else statements as well as for loops and game development within the unity engine.
+
+[Technology Ambassador Program](https://tapggc.org/) <b>(TAP)</b> is a project-based class that provides a collaborative environment for students to work with their fellow classmates on a semester-long project using technologies of their choice. TAP strives to increase participation in IT through numerous outreach activities and workshops that are designed to showcase the creative and fun side of technology.
+
+{/* Commercial Video */}
+<div className="video-container">
+  <h3>Lost In The Sauce Commercial Video</h3>
+    <video width="100%" controls>
+      <source src="https://github.com/user-attachments/assets/b74bc19d-e149-4517-9abf-ab1174eb6517" 
+        type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+  {/*cannot embed the video directly from sharepoint- waiting for this video to be uploaded on Youtube (Lost In The Sauce Commercial Video)
+  <iframe src="https://ggcedu-my.sharepoint.com/:v:/g/personal/adolocmihu_ggc_edu/EcNU3glgVK1JqUpWByHE9nwBMh-b2P65libPe637sZ7JLQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=bWGRdT&embed=true" 
+          width = "100%"
+          frameborder= "0"
+          allowfullscreen >
+    
+  </iframe>
+  */}
+</div>
+
+{/* Team photo and member names */}
+
+## Team: The Sauce Team
+
+- Taisann Kham 
+- Brittany Giordano
+- Edgar Alvarez
+
+{/* Right text block, Project description */}
+
+## Project Description
+
+Lost In The Sauce is an interactive 2D platformer that aims to teach students about the fundamentals of coding such as if and else statements and relating it to game development within the unity engine. In the game the player will have to jump along walls and platforms in order to progress through the upward scrolling level. As the player moves through the game, their task will be to collect as many points as they can (collect the falling ice cream cones) before they reach the bottom of the screen which ends the game. Before students get to play the game, they must first import the games files into Unity Hub and run the code. This project is meant to teach students the basics of C# coding including basic if/else statements as well as for loops. This game will help students understand how games are developed with the use of coding, and is meant to inspire the students to try and create their own Unity games with the coding and unity knowledge learned.
+
+{/* Outreach events and impact */}
+
+## Outreach
+
+1. <b>TAP Expo</b>, April 1 – April 30, 2019. Georgia Gwinnett College. Class Workshops: Conducted workshops in general education IT courses to promote IT field to GGC students 
+2. <b>STaRS 2019</b>, April 9, 2019, Georgia Gwinnett College. Poster Presentation: Lost In the Sauce which summarized the game project and presented the preliminary survey results from the  workshops.  
+ 
+
+{/* Related or similar TAP projects */}
+
+## Similar Projects
+
+If you're interested in more workshops that utilize Unity, check out [Slice-IT!](https://github.com/TAP-GGC/SliceIT)!
+
+{/* Tools and technologies used */}
+
+## Technology
+
+<Logo src={UnityLogo.src} alt="Unity Logo" />
+
+- [Unity](https://Unity.com/games) is a powerful, cross-platform game engine used for creating 2D, 3D, augmented reality (AR), and virtual reality (VR) experiences. It offers a user-friendly development environment with a robust set of features including real-time rendering, physics engines, animation, and audio systems, making it suitable for both beginners and advanced developers. Unity supports a wide range of platforms, such as mobile, desktop, web, and consoles, allowing developers to build and deploy applications across various devices seamlessly. Additionally, it has a large asset store, extensive documentation, and an active community, which makes it easier to find resources, assets, and support for projects of any size. It's widely used in gaming but is also popular in other fields like education, architecture, simulation, and interactive media.
+
+{/* Setup instructions */}
+
+## Project Setup/Installation
+
+### Installing Unity Hub
+{/* The link for video setup is broken.
+<div className="video-container">
+  <video width="90%" controls>
+    <source 
+      src="https://github.com/user-attachments/assets/00514202-8540-42b9-94b1-b793dbd76e12" 
+      type="video/mp4" 
+    />
+    Your browser does not support the video tag.
+  </video>
+</div>
+*/}
+
+[Click here to view PDF instructions](https://github.com/user-attachments/files/17636777/Installing.Unity.Hub.pdf) 
+
+### Setting up game in Unity Hub 
+[Click here to view PDF instructions](https://github.com/user-attachments/files/17842940/UnityHub.Game.Setup.2.pdf)
+
+
+{/* How to play the game */}
+
+## How To Play
+
+1. Press the Left arrow key to move to the left.
+2. Press the Right arrow key to move to the right.
+3. Press the Space key to move up.
+
+{/* Short demonstration of gameplay */}
+
+## Short Code Walkthrough Demo Instructions
+<div className="video-container">
+<video width="90%" controls>
+    <source src="https://raw.githubusercontent.com/TAP-GGC/LostInTheSauce/main/media/videos/Code%20Walkthrough-1.mp4"  
+      type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</div>
+{/* Full workshop materials and guide */}
+
+
+
+### Workshop PowerPoint
+<a href="https://github.com/TAP-GGC/LostInTheSauce/blob/360f68cb3828e12504ace5fe394b3877f163eba1/documents/tutorial%20materials/Lost%20in%20the%20Sauce%20Workshop.pptx" target="_blank" rel="noopener noreferrer">
+Lost in the Sauce Workshop PowerPoint
+</a>
+
+
+For additional help with code, please view "Code Walkthrough Instructions" below:
+
+### Code Walkthrough Tutorial Videos
+{/*need to change to videoCarousel after uploading all to YouTube*/}
+<a href="https://ggcedu-my.sharepoint.com/:v:/g/personal/adolocmihu_ggc_edu/ETZzjhhcoKJLodLIf7jYiuIBaYO2DHmD0VS8tPaq3sGHXg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=Jt8bYJ" target="_blank" rel="noopener noreferrer">
+Code Walkthrough Part 1
+</a> 
+
+<a href="https://ggcedu-my.sharepoint.com/:v:/g/personal/adolocmihu_ggc_edu/EX0UjgbL6pdOjJ2GXS5Iub0B4JPY703TgH-G7Ca5oSd_0w?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=WjdUn3" target="_blank" rel="noopener noreferrer">
+Code Walkthrough Part 2
+</a>
+
+<a href="https://ggcedu-my.sharepoint.com/:v:/g/personal/adolocmihu_ggc_edu/EdWdHY_IhutIowWH1GLcNhwBMwBasgJOgURknpJULO78Nw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=VdTHep" target="_blank" rel="noopener noreferrer">
+Code Walkthrough Part 3
+</a>
