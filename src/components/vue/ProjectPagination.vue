@@ -1,11 +1,7 @@
 <template>
   <div>
     <section class="project-cards-flex flex flex-wrap">
-      <ProjectCard
-        v-for="(project, index) in paginatedProjects"
-        :key="index"
-        :item="projectIds[project.data.id]"
-      />
+      <slot name="item" v-for="(item, index) in paginatedItems" :item="item" :index="index" :key="index" />
     </section>
 
     <section>
@@ -29,35 +25,35 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import ProjectCard from '../ProjectCard.vue';
-import projectIds from '../astro/ProjectIds';
 
-const {projects} = defineProps<{projects: any[]}>();
 
-const itemsPerPage = 4;
+
+const props = defineProps<{
+  items: unknown[];
+  itemsPerPage?: number;
+}>();
 const currentPage = ref(1);
+const itemsPerPage = props.itemsPerPage || 4;
+
 
 const totalPages = computed(() =>
-  Math.ceil(projects.length / itemsPerPage)
+  Math.ceil(props.items.length / itemsPerPage)
 );
 
-const paginatedProjects = computed(() => {
+const paginatedItems = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage;
-  return projects.slice(start, start + itemsPerPage);
+  return props.items.slice(start, start + itemsPerPage);
 });
 
 function goToPage(page: number) {
-  console.log(page);
   currentPage.value = page;
 }
 
 function prevPage() {
-  console.log("clicked");
   if (currentPage.value > 1) currentPage.value--;
 }
 
 function nextPage() {
-  console.log("clicked");
   if (currentPage.value < totalPages.value) currentPage.value++;
 }
 </script>

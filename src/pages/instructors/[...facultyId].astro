@@ -111,7 +111,16 @@ relatedProjects.forEach(project => {
     {relatedProjects.length > 0 &&(
       <h2>Related Projects Included</h2>
       
-        <ProjectPagination client:load projects={relatedProjects} />
+        <ProjectPagination client:load items={relatedProjects} itemsPerPage={4}>
+          <template v-slot:item="{item }">
+            <div>
+              {item}
+            <script>
+              console.log("Slot item:", { item });
+            </script>
+            </div>
+          </template>
+        </ProjectPagination>
       
     )}
   </div>
