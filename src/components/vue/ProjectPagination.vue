@@ -32,18 +32,21 @@ import { ref, computed } from 'vue';
 import ProjectCard from '../ProjectCard.vue';
 import projectIds from '../astro/ProjectIds';
 
-const {projects} = defineProps<{projects: any[]}>();
+const props = defineProps<{
+  projects: any[];          
+  itemsPerPage?: number;    
+}>();
 
-const itemsPerPage = 4;
+const itemsPerPage = props.itemsPerPage ?? 4; 
 const currentPage = ref(1);
 
 const totalPages = computed(() =>
-  Math.ceil(projects.length / itemsPerPage)
+  Math.ceil(props.projects.length / itemsPerPage)
 );
 
 const paginatedProjects = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage;
-  return projects.slice(start, start + itemsPerPage);
+  return props.projects.slice(start, start + itemsPerPage);
 });
 
 function goToPage(page: number) {
