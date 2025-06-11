@@ -16,13 +16,14 @@ const eventCollection = defineCollection({
     students: z.array(z.string()).optional(),
     instructors: z.array(z.string()).optional(),
     projects: z.array(z.string()).optional(),
+    awards: z.array(z.string()).optional(),
     desc: z.string().optional().nullable(),
     imageEvent:  image().refine(eventPhotoValidator, eventPhotoValidatorMsg).optional(),
     images: z.array(z.object({
-      src: image().refine((img) => img.width <= 1500, {
-          message: "Image too large! Convert images to be less than 1500 pixels wide.",
-        }), 
-      alt: z.string() })).optional(),
+    src: image().refine((img) => img.width <= 1500, {
+      message: `Image is too large! Convert images to be less than 1500 pixels wide.`,
+    }),
+    alt: z.string() })).optional(),
   }),
 });
 const eventPhotoValidator = (img) => img.width && Math.abs(img.width / img.height - 0.75) < 0.2;
@@ -135,6 +136,7 @@ const awardCollection = defineCollection({
     year: z.number(),
     postDate: z.date().default(() => new Date()),
     updateDate: z.date().optional(),
+    events: z.array(z.string()).optional(),
     students: z.array(z.string().refine(
       async (studentId) =>{
         const students = await getCollection('students');
