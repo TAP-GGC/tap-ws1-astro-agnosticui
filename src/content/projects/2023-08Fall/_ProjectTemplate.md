@@ -1,7 +1,7 @@
 ---
 shortTitle: short hand title
 title: Publication title
-id: group name
+id: group-name
 desc: short summary of project
 github: https://github.com/TAP-GGC/
 students: [ tony-lam, etienne-laccruche, ammar-mehicevic ]
