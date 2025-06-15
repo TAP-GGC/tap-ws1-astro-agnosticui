@@ -1,15 +1,21 @@
 ---
 title: Anh Tang shines at SITE Conference
-id: site-award-spring25
+id: site-spring25
 semester: spring
 year: 2025
 slug: site-conference-Spring25
 tags: [nsf, tap-awards]
-# updateDate: 
+eventDate: "2025-06-14T00:25:14Z"
 projects: ["space-mechanic"]
-instructors: [ "anca-doloc-mihu", "cindy-robertson", "cengiz-gunay"]
+instructors: [ "anca-doloc-mihu", "cindy-robertson", ]
 students: [ "anh-tang",]
-events: ["site-spring25"]
+images: [ 
+    { src: "./photos/20250321_124211.jpg", alt: '' },
+    { src: "./photos/anca at front desk.jpg", alt: '' },
+    { src: "./photos/Anh award photo.jpg", alt: '' },
+    { src: "./photos/group_photo.jpg", alt: '' },
+    { src: "./photos/sanaa volunteering at front desk.jpg", alt: '' },]
+imageEvent: "./site_Spring25Cover.JPG"
 ---
 import { Image } from "astro:assets";
 
@@ -17,6 +23,8 @@ import Photo from '/src/components/astro/Photo.astro';
 import Logo from '/src/components/astro/Logo.astro';
 import Gallery from '/src/components/astro/Gallery.astro';
 import Clip from '/src/components/astro/Clip.astro';
+import ProjectCard from '/src/components/ProjectCard.vue';
+import projectIds from '/src/components/astro/ProjectIds.js';
 
 import site_Spring25Cover from "./photos/Anh award photo_COVER.jpg";
 

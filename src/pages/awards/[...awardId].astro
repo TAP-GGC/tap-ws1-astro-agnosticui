@@ -40,11 +40,15 @@ import facultyIds from '../../components/astro/FacultyIds';
 import studentIds from '../../components/astro/StudentIds';
 import StudentCard from '../../components/StudentCard.vue';
 
+import EventCard from '../../components/EventCard.vue';
+import eventIds from '../../components/astro/EventIds';
+
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const awardEntries = await getCollection('awards')
   return awardEntries.map(entry => ({
-    params: { awardId: `${entry.data.year}/${entry.data.semester}/${entry.data.id}` }, props: { entry },
+    params: { awardId: `${entry.data.year}/${entry.data.semester}/${entry.data.id}` }, 
+    props: { entry },
   }));
 }
 // 2. For your template, you can get the entry directly from the prop
@@ -67,8 +71,8 @@ let title = `${entry.data.title} (${entry.data.updateDate? entry.data.updateDate
 
     <Content />
 
-    {entry.data?.students && (
-      <h2>Student(s) Profiles:</h2>
+    {entry.data?.students?.[0] && (
+      <h2>Student Profiles:</h2>
       <section class="sectionCards">
         {entry.data.students.map((student) => (      
           <StudentCard item={studentIds[student]}/>
@@ -77,7 +81,7 @@ let title = `${entry.data.title} (${entry.data.updateDate? entry.data.updateDate
       </section>
      )}
 
-    {entry.data?.projects && (
+    {entry.data?.projects?.[0] && (
       <h2>Outreach Projects Included</h2>
       <section class="sectionCards">
         {entry.data.projects.map((project_id) => (      
@@ -86,7 +90,7 @@ let title = `${entry.data.title} (${entry.data.updateDate? entry.data.updateDate
       </section>
     )}
 
-    {entry.data?.instructors && (
+    {entry.data?.instructors?.[0] && (
       <h2>Faculty Facilitators</h2>
       <section class="sectionCards">
         {entry.data.instructors.map((instructor) => (      
@@ -95,12 +99,21 @@ let title = `${entry.data.title} (${entry.data.updateDate? entry.data.updateDate
       </section>
     )}
 
-    
+    {entry.data?.events?.[0] && (
+      <h3>Read More:</h3>
+      <section class="sectionCards">
+        {entry.data.events.map((event) =>(
+          <EventCard item={eventIds[event]} />
+        ))}
+      </section>
+    )}
 
-    {entry.data?.images && (
+    {entry.data?.images?.[0] && (
       <h2>Gallery</h2>
       <Gallery photos={entry.data.images} />
     )}
+
+
 
   </div>
   

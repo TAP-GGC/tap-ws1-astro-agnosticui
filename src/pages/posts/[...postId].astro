@@ -67,7 +67,7 @@ let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC 
 
     <Content />
 
-    {entry.data?.projects?.length > 0 && (
+    {entry.data?.projects?.[0] && (
       <h2>Outreach Projects Included</h2>
       <section class="sectionCards">
         {entry.data.projects.map((project_id) => (      
@@ -76,7 +76,7 @@ let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC 
       </section>
     )}
 
-    {entry.data?.instructors?.length > 0 && (
+    {entry.data?.instructors?.[0] && (
       <h2>Faculty Facilitators</h2>
       <section class="sectionCards">
         {entry.data.instructors.map((instructor) => (      
@@ -85,7 +85,7 @@ let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC 
       </section>
     )}
 
-    {entry.data?.students?.length > 0 && (
+    {entry.data?.students?.[0] && (
       <h2>Students</h2>
       <section class="sectionCards">
         {entry.data.students.map((student) => (      
@@ -95,7 +95,7 @@ let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC 
       </section>
      )}
 
-    {entry.data?.images?.length > 0 && (
+    {entry.data?.images?.[0] && (
       <h2>Gallery</h2>
       <Gallery photos={entry.data.images} />
     )}
@@ -106,7 +106,6 @@ let title = `${entry.data.title} (${entry.data.eventDate.toDateString()}) - GGC 
 
 <style>
 .sectionCards{
-  /* margin-block-end: var(--fluid-40) !important; */
   flex-wrap: wrap;
   flex-shrink: 1;
   flex-grow: 1;
