@@ -39,6 +39,10 @@ imageTeam: ./aidivateam.jpg
 ---
 
 import { Image } from "astro:assets";
+import Photo from '/src/components/astro/Photo.astro';
+import Logo from '/src/components/astro/Logo.astro';
+import Gallery from '/src/components/astro/Gallery.astro';
+import Clip from '/src/components/astro/Clip.astro';
 import GroupPhoto from './aidivateam.jpg';
 import OpenAI from './openailogo.png'
 
@@ -63,17 +67,10 @@ See Github for more details!
 
 
 ### Team Members:
+<Photo src={GroupPhoto.src} alt="Ai Diva Group Photo" caption="Left to Right: Gabe Sosa, Rebecca Rahim, My Tran"/>
 
-<Image src={GroupPhoto} alt="Ai Diva Group Photo" />
-*Left to Right: Gabe Sosa, Rebecca Rahim, My Tran*
-
-## Advisors
-
-* Dr. Cengiz Gunay
-* Dr. Cindy Robertson
 
 ## Outreach
-
 1. **TAP Expo**
 February 25, 2025, Georgia Gwinnett College: Promoted the IT field and encouraged students to join TAP.
 2. **Atlanta Science Festival**
@@ -87,13 +84,12 @@ March 13, 2025 - April 9, 2025, Georgia Gwinnett College: Engaged non-IT student
 ## Technology
 
 #### OpenAI API
-<Image src={OpenAI} alt="OpenAILogo"/>
+<Logo src={OpenAI.src} alt="OpenAILogo"/>
 [OpenAI](https://openai.com/) is an artificial intelligence research organization that develops advanced AI models, including the powerful language model ChatGPT. Its API allows developers to integrate natural language processing, image understanding, and code generation into their own applications using simple and scalable endpoints.
 
 ## Project Setup
 
 #### Game Access
-
 Computer with Internet Access. No installation or download required.
 Our workshop game is hosted on a public website:
 #### [Ai Diva](https://tap-ggc.github.io/AiDiva/)

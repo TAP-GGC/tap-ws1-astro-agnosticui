@@ -112,13 +112,13 @@
 .blog h1, .blog h2, .blog h3, .blog h4, 
 .body-student h1, .body-student h2, .body-student h3, .body-student h4, 
 .body-faculty h1, .body-faculty h2, .body-faculty h3, .body-faculty h4 {
-  padding-top: 0.75em;
+  padding-top: 0.85em;
   text-align: center;
 }
 
 .body-prj h3{
-  text-align: center;
-  padding-bottom: 0.5em;
+  text-align: left;
+  padding-top: 0.65em;
 }
 
 /* Project and blog pages show list bullets again, and also centered. */

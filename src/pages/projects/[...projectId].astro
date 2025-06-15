@@ -196,17 +196,17 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 	
 
     <Content />
-<div class="prj-setup-section">
-	{project.data?.videos && project.data.videos.length > 0 && (
-		// <h2>Project Setup & Installation:</h2>
-		<VideoCarousel client:load videos={project.data.videos} showIframe={true}/>
-		)
+	<div class="prj-setup-section">
+		{project.data?.videos?.[0] && (
+			// <h2>Project Setup & Installation:2</h2>
+			<VideoCarousel client:load videos={project.data.videos} showIframe={true}/>
+			)
 
-	}
+		}
 	</div>
 
 	{project.data?.images && (
-		<h2>Gallery</h2>
+		<h2 style="text-align: center;">Gallery</h2>
 		<Gallery photos={project.data.images} />
 	  )}
 </div>

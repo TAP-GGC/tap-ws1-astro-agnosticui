@@ -23,19 +23,12 @@ year: 2025
 levels: [
   "k-12", "college", "middle-school"
 ] 
-difficulty: [
-  "beginner"
-] 
-durationMins: [
-  30, 60, 90
-]
-
+difficulty: [  "beginner"] 
+durationMins: [  30, 60, 90]
 publishedDate: 2025-04-28
-
 relatedIds: [
   "mbot-adventures", "autobots"
 ]
-
 images: [
     { src: './Gallery1.jpeg', alt: 'Classroom photo'},
     { src: './Gallery2.jpeg', alt: 'STARS'},
@@ -43,14 +36,17 @@ images: [
     { src: './Workshop2.jpeg', alt: 'Classroom Workshop2'},
     { src: './TeamPhoto1.jpeg', alt: 'Team Photo'},
 ]
-
 imageLogoLight: './LightModeLogo.png'
 curator: ["kelechi-ariwodo"]
 
 ---
 
 import { Image } from "astro:assets";
+import Photo from '/src/components/astro/Photo.astro';
+import Logo from '/src/components/astro/Logo.astro';
 import Gallery from '/src/components/astro/Gallery.astro';
+import Clip from '/src/components/astro/Clip.astro';
+
 import GroupPhoto from './TeamPhoto1.jpeg';
 import mBotImage from './mbot.png';
 
@@ -76,8 +72,7 @@ Students will be divided into groups focused on RGB lights, speed/distance, and 
 ## Code-Nator
 
 #### **Team Members:**  
-<Image src={GroupPhoto} alt="Code-Nator team photo" />
-*Left to Right: Fredy Quintanilla, Joel Erulu, Danique Holt*
+<Photo src={GroupPhoto.src} alt="Code-Nator team photo" caption="Left to Right: Fredy Quintanilla, Joel Erulu, Danique Holt"/>
 
 ## Outreach
 
@@ -95,7 +90,7 @@ Students will be divided into groups focused on RGB lights, speed/distance, and 
 ## Technology
 
 #### mBot Mega  
-<Image src={mBotImage} alt="mBot Mega robot" />
+<Logo src={mBotImage.src} alt="mBot Mega robot" />
 [mBot Mega](https://www.makeblock.com/steam-kits/mbot-mega) is a programmable robot car with mechanical wheels capable of omni-directional movement. Great for teaching coding and robotics.
 
 

@@ -10,24 +10,22 @@ instructors: [
   "cengiz-gunay", "cindy-robertson"
 ] 
 techs: [
-  "mbot mega",
-  "mblock",
-  "ai",
-  "artificial intelligence"
+  "mbot mega",  "mblock",
+  "ai",  "artificial intelligence"
 ]
-videos: []
+videos: [
+  {src: "nPc_onJ8ggs?si=HB9EN36hapILZ6l2", caption: ""} ,
+  {src: "oV6r2fmOg98?si=2WouGrz4BYaPluQ3", caption: ""} ,
+]
 events: []
 semester: spring
 year: 2025
 levels: ["k-12","college","middle-school"]  
 difficulty: ["intermediate"]
-durationMins: [
-  30, 60, 90
-]
+durationMins: [  30, 60, 90]
 publishedDate: 2025-04-28
 relatedIds: [
-  "jedi-sphero", "dancing sphero", "mbot mega", "mblock", "thebeepbops", "ai-diva", "wanda", "code-nator", "artify-ai", "drone-reality", "ball-is-life",
-  "tech-gold-fish"
+  "jedi-sphero", "dancing sphero", "mbot mega", "mblock", "thebeepbops", "ai-diva", "wanda", "code-nator", "artify-ai", "drone-reality", "ball-is-life",  "tech-gold-fish"
 ]
 images:
   [
@@ -40,24 +38,22 @@ images:
   ]
 imageLogoLight: ./3dcnn.png
 curator: ["kelechi-ariwodo"]
+videoAd: "oV6r2fmOg98?si=2WouGrz4BYaPluQ3"
 ---
 
 import { Image } from "astro:assets";
-
-
+import Photo from '/src/components/astro/Photo.astro';
 import GroupPhoto from './teamautobots.jpg';
-import Logo from 'mBlockLogo.png';
+import Logo from '/src/components/astro/Logo.astro';
+import mLogo from 'mBlockLogo.png';
 
 #### **Team Members:**  
-<Image src={GroupPhoto} alt="AutoBots Team Photo" />
-*Left to Right: Jonathan Tran, Krishan Bhalsod, Isaiah Gorman*
+<Photo src={GroupPhoto.src} alt="AutoBots Team Photo" caption="Left to Right: Jonathan Tran, Krishan Bhalsod, Isaiah Gorman"/>
 
 {/* CONTENT BLOCK */}
-<iframe width="560" height="100%" src="https://www.youtube.com/embed/i8M-fz3YTgQ?si=19amS7EnPj4rOAeG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width: 100%; height: 680px; margin-top: 2em;"></iframe>
-
 
 ## About
-  Autobots introduces students to the exciting world of artificial intelligence, with a special focus on how machines learn to "see" using image recognition. Using Google's TeachableMachine, students train their own AI models by creating unique hand gestures that control a robot's movements. This hands-on challenge not only makes learning fun, but also shows students some of the real-world difficulties AI faces—like telling apart gestures that look very similar.
+Autobots introduces students to the exciting world of artificial intelligence, with a special focus on how machines learn to "see" using image recognition. Using Google's TeachableMachine, students train their own AI models by creating unique hand gestures that control a robot's movements. This hands-on challenge not only makes learning fun, but also shows students some of the real-world difficulties AI faces—like telling apart gestures that look very similar.
 
 Behind the scenes, these models often rely on Convolutional Neural Networks (CNNs), a special type of AI architecture that mimics how our brains process visual information. CNNs help the computer pick out patterns, edges, and shapes in images so it can learn the difference between a peace sign and a thumbs-up. By experimenting with gesture control, students get a glimpse into how technologies like Tesla’s self-driving system work—and understand the challenges that come with training machines to interpret the visual world.
 
@@ -69,7 +65,6 @@ Behind the scenes, these models often rely on Convolutional Neural Networks (CNN
   * Mbot
 
 {/* CONTENT BLOCK */}
-<iframe width="560" height="315" src="https://www.youtube.com/embed/oV6r2fmOg98?si=2WouGrz4BYaPluQ3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width: 100%; height: 680px; margin-top: 2em;"></iframe>
 
 
 ## Outreach Activities
@@ -78,11 +73,10 @@ Behind the scenes, these models often rely on Convolutional Neural Networks (CNN
 <li>Class Workshops, 2025, Georgia Gwinnett College</li>
 
 ## Technology
-<Image src={Logo} alt="mBlock Logo" />
+<Logo src={mLogo.src} alt="mBlock Logo" />
 
 ## Project Setup and Installation
 [Building mBot Mega Instructions](https://support.makeblock.com/hc/en-us/articles/1500009896321-Build-mBot-Mega)
 
 [Workshop PDF Instructions](https://github.com/TAP-GGC/AutoBots/blob/main/documents/tutorial%20materials/Workshop%20PDF.pdf)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/nPc_onJ8ggs?si=HB9EN36hapILZ6l2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width: 100%; height: 680px; margin-top: 2em;"></iframe>

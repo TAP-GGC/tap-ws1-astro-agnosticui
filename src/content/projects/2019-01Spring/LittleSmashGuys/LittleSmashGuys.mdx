@@ -5,37 +5,25 @@ id: little-smash-guys
 desc: Introduces participants to game development using Unity and C#, providing a solid foundation for creating interactive experiences.
 github: https://github.com/TAP-GGC/Little-Smash-Guys
 students: [
-  "Ephraim Kim",
-  "Anderson Molter",
-  "Ariel Thomas"
+  "Ephraim Kim",  "Anderson Molter",  "Ariel Thomas"
 ]
 instructors: ["Dr. Wei Jin","Dr. Xin Xu"]
-techs: [
-  "unity"
-]
+techs: [  "unity"]
 videos: [
-  
 ]
 events: [
-  "tap expo",
-  "atlanta science festival",
-  "super saturday series",
-  "class workshops"
+  "tap expo",  "atlanta science festival",
+  "super saturday series",  "class workshops"
 ]
 semester: Spring
 year: 2019
 levels: [
-    "K12", 
-    "College"
+    "K12", "College"
 ]
-difficulty: [ 
-    "Advanced"
-]
+difficulty: [   "Advanced"]
 durationMins: [60]
 publishedDate: 2025-03-25
-relatedIds: [
-  "slice-it"
-]
+relatedIds: [  "slice-it"]
 images: [
     { src: './TeamPhoto.png', alt: 'Team Photo'},
     { src: './LittleSmashGuysGameplay.png', alt: 'Gameplay Image'},
@@ -44,7 +32,7 @@ images: [
 imageLogoLight: ./lsg_logo_TRANSPARENT.png
 imageLogoDark: ./lsg_logo_TRANSPARENT.png
 imageTeam: ./TeamPhoto.png
-curator: ["Elijah Santiago", "Thanh Tran"]
+curator: ["Elijah Santiago", "Thanh Tran", "kelechi-ariwodo"]
 
 ---
 import { Image } from "astro:assets";
@@ -67,30 +55,24 @@ This workshop has participants follow along with hands-on activities, where they
 
 [Technology Ambassador Program](https://tapggc.org/) <b>(TAP)</b> is a project-based class that provides a collaborative environment for students to work with their fellow classmates on a semester-long project using technologies of their choice. TAP strives to increase participation in IT through numerous outreach activities and workshops that are designed to showcase the creative and fun side of technology.
 
-{/* Commercial Video */}
-<div className="video-container">
+{/* Commercial Video  broken src*/} 
+{/* <div className="video-container">
   <h3>Little Smash Guys Commercial Video</h3>
   <video width="90%" controls>
     <source src="https://github-production-user-asset-6210df.s3.amazonaws.com/143032298/388862328-421b5aea-a36b-400e-93c7-dc2d9db7a9a9.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250326T220034Z&X-Amz-Expires=300&X-Amz-Signature=f763fdb6541a8fbecc3b6d26c6fd5f764217942fa83629f270c7fe5ab9243380&X-Amz-SignedHeaders=host" 
       type="video/mp4" />
     Your browser does not support the video tag.
   </video>
-</div>
+</div> */}
 
-{/* Team photo and member names */}
 
 ## Team: Little Smash Guys
 
-<Image src={TeamPhoto} alt="Team Photo" />
-#### From left to right: Ephraim Kim, Anderson Molter, Ariel Thomas.
-
-{/* Right text block, Project description */}
+<Photo src={TeamPhoto.src} caption="From left to right: Ephraim Kim, Anderson Molter, Ariel Thomas" />
 
 ## Project Description
 
 Participants start by playing Little Smash Guys, a fast-paced 2-4 player battle royale game. It emphasizes multiplayer interactions, strategic gameplay, and competitive fun. Participants learn game mechanics, player controls, and Unity’s features before creating their own Flappy Bird-inspired game using Unity tools.
-
-{/* Outreach events and impact */}
 
 ## Outreach
 
@@ -113,7 +95,7 @@ If you're interested in more workshops that utilize Unity, check out [Slice-IT!]
 
 - [Unity](https://Unity.com/games) is a versatile game engine for creating interactive experiences using C# scripting and real-time rendering.
 
-<Image src={GameplayImage} alt="Gameplay Screenshot" />
+<Photo src={GameplayImage.src} alt="Gameplay Screenshot" />
 
 {/* Setup instructions */}
 

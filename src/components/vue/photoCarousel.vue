@@ -52,19 +52,19 @@ const props = defineProps<Props>();
 
 <style scoped>
 .photo-carousel {
-	max-width: 1240px;
+	max-width: 1540px;
 	margin: 0 auto;
 	padding: 2rem 1rem;
 }
 
 /* Set fixed height for the carousel */
 :deep(.vueperslides) {
-	height: 60vh !important;
+	height: 75vh !important;
 }
 
 @media (max-width: 960px) {
   :deep(.vueperslides) {
-    height: 30vh !important;
+    height: 45vh !important;
   }
 }
 
