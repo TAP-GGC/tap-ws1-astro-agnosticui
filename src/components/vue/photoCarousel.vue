@@ -52,7 +52,7 @@ const props = defineProps<Props>();
 
 <style scoped>
 .photo-carousel {
-	max-width: 1540px;
+	max-width: 1640px;
 	margin: 0 auto;
 	padding: 2rem 1rem;
 }
