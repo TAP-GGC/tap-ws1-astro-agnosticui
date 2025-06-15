@@ -12,9 +12,9 @@
                 </div>
                 <div>
                     <ul> <!-- order recent projects by date? -->
-                        <li v-for="award in awards">
-                            <a :href="`${base}/awards/${award.data.year}/${award.data.semester}/${award.data.id}`">{{ award.data.title }}</a> &nbsp;
-                            {{ award.data.students.toString() }}
+                        <li v-for="awardEntry in awardEntries">
+                            <a :href="`${base}/awards/${awardEntry.data.year}/${awardEntry.data.semester}/${awardEntry.data.id}`">{{ awardEntry.data.title }}</a> &nbsp;
+                            {{ awardEntry.data.postDate.toDateString() }}
                         </li>
                     </ul>
                 </div>
@@ -31,7 +31,7 @@
   
   // load blog content: news, etc.
   import { getCollection } from 'astro:content';
-  const projects = await getCollection('awards');
+  const awardEntries = await getCollection('awards');
   // Remove single slash as it causes double slashes in card
   const base = import.meta.env.BASE_URL == '/' ? '' : import.meta.env.BASE_URL;
   </script>

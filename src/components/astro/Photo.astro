@@ -24,10 +24,11 @@ const { src, alt, link,caption} = Astro.props;
 <style>
     .photo-section{
         text-align: center;
-        margin: 1em 0.5em;
+        margin: 1em auto;
     }
     .photo{
-        max-width: 500px;
+        max-width: 750px;
+        min-width: 350px;
         height: auto;
         transition: transform 0.05s ease-in-out;
 
@@ -37,6 +38,26 @@ const { src, alt, link,caption} = Astro.props;
         margin-top: 0.5em;
     }
     .photo:hover{
-        transform: scale(1.2);
+        transform: scale(1.05);
+    }
+
+    /* Don't remove makes adjusts for mobile - was not responding to flex, will inspect later */
+
+    @media (max-width: 885px){
+        .photo{
+            max-width: 500px;
+            min-width: 150px;
+            height: auto;
+            transition: transform 0.05s ease-in-out;
+
+        }
+    }
+     @media (max-width: 500px){
+        .photo{
+            max-width: 350px;
+            height: auto;
+            transition: transform 0.05s ease-in-out;
+
+        }
     }
 </style>

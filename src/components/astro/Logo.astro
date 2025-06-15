@@ -2,37 +2,52 @@
 interface Props {
   src: string;
   alt: string;
-  link: string;
+  link?: string;
 }
-const { src, alt, link} = Astro.props;
+const { src, alt, link } = Astro.props;
 ---
-
-<section class="logo-section">
-    {link ? ( 
-        <a href={link} target="blank" rel="noopener noreferrer">
-            <img src={src} alt={alt} class="logo" />
-        </a>
-    ):(
-        <img src={src} alt={alt} class="logo"/>
-    )}
-    {<p class="caption">{alt}</p>}
-</section>
+<!-- allow logos to appear inline -->
+<div class="logo-group">
+  {link ? (
+    <a href={link} target="_blank" rel="noopener noreferrer">
+      <img src={src} alt={alt} class="logo" />
+    </a>
+  ) : (
+    <img src={src} alt={alt} class="logo" />
+  )}
+  {link? (
+    <a href={link} target="_blank" rel="noopener noreferrer"> 
+        <p class="caption">{alt}</p>
+    </a>
+  ):(
+    <p class="caption">{alt}</p>
+  )}
+</div>
 
 <style>
-    .logo-section{
-        text-align: center;
-        margin: 1em 0.5em;
-    }
-    .logo{
-        height: 250px;
-        width: auto;
-        transition: transform 0.05s;
-    }
-    .caption {
-        font-size: 1em;
-        margin-top: 0.5em;
-    }
-    .logo:hover{
-        transform: scale(1.1);
-    }
+  .logo-group {
+    display: inline-block;  
+    text-align: center;     
+    margin: 1em 0.5em;  
+}
+
+  .logo {
+    height: 250px;
+    width: auto;
+    transition: transform 0.05s;
+  }
+
+  .caption {
+    font-size: 1em;
+    margin-top: 0.5em;
+  }
+
+  .logo:hover {
+    transform: scale(1.05);
+  }
+
+  .a .caption:hover{
+  color: var(--agnostic-primary-hover) !important;
+  font-weight: 700 !important;
+}
 </style>
