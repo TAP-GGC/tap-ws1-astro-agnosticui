@@ -82,7 +82,7 @@
   color: var(--agnostic-font-color);
   
 }
-.blog, .body-prj, .body-student, .body-faculty{
+.blog, .body-prj, .body-student, .body-faculty, .body-tech{
   background-color: var(--agnostic-light);
   max-width: 1440px;
   min-width: 800px;
