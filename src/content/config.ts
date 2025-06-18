@@ -138,6 +138,18 @@ const facultyCollection = defineCollection({
   }),
 });
 
+//Define technology collections
+const technologyCollection = defineCollection({
+  type: 'content',
+  schema: ({ image }) => z.object({
+    id: z.string(),
+    name: z.string(),
+    description: z.string(),
+    image: image().optional().nullable(),
+  }),
+});
+
+
 // 3. Export a single `collections` object to register your collection(s)
 //    This key should match your collection directory name in "src/content"
 export const collections = {
@@ -145,4 +157,5 @@ export const collections = {
   'projects': projectCollection,
   'students': studentCollection,
   'instructors': facultyCollection,
+  'technologies': technologyCollection,
 };
