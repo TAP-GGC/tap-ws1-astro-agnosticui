@@ -22,9 +22,10 @@ import ProjectSearch from "../components/ProjectSearch.vue";
 import { Input } from "agnostic-vue";
 import Crumbs from '../components/Crumbs.vue';
 import { getCollection } from 'astro:content';
-import TechTable from '../components/vue/TechTable.vue';
+import TechSearch from '../components/TechSearch.vue';
 
 // Fetch the projects and build the tech counts
+const techEntries = await getCollection('technologies');
 const projects = await getCollection('projects');
 let techCounts = {};
 
@@ -38,13 +39,14 @@ projects.forEach(project => {
   });
 });
 
-// Prepare the data for TechTable
-const techProjectsData = Object.keys(techCounts).map(tech => ({
-  tech,
-  count: techCounts[tech],
-  projects: projects.filter(project => project.data.techs.includes(tech)),
-}));
-
+// Prepare the full list to pass into TechSearch
+const techList = techEntries.map(entry => {
+  const techId = entry.data.id;
+  return {
+    tech: entry.data,
+    projectCount: techCounts[techId] || 0
+  };
+});
 ---
 <TAPDefaultLayout title="Technologies">
   <Crumbs pageType="techs" pageUrl="/techs" />
@@ -52,6 +54,6 @@ const techProjectsData = Object.keys(techCounts).map(tech => ({
   <h2>Technologies Used in Projects</h2>
   
   <!-- Pass the combined tech and project data to TechTable -->
-  <TechTable client:load projects={techProjectsData} />
+  <TechSearch client:load techList={techList} />
 
 </TAPDefaultLayout>
