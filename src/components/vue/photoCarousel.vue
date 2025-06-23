@@ -55,6 +55,7 @@ const props = defineProps<Props>();
 	max-width: 1640px;
 	margin: 0 auto;
 	padding: 2rem 1rem;
+	box-shadow: none !important;
 }
 
 /* Set fixed height for the carousel */
@@ -75,6 +76,7 @@ const props = defineProps<Props>();
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	box-shadow: none !important;
 }
 
 .full-image {
