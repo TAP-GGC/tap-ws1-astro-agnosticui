@@ -9,9 +9,9 @@
           <div class="h4 p16 card-title"> TAP Publications </div>
           <div>
             <ul>
-              <li v-for="blogPostEntry in blogEntries">
-                <a :href="`${base}/posts/${blogPostEntry.slug}`">{{ blogPostEntry.data.title }}</a> &nbsp;
-                <time datetime={{ blogPostEntry.data.eventDate.toISOString() }}> {{ blogPostEntry.data.eventDate.toDateString() }}
+              <li v-for="paperPostEntry in paperEntries">
+                <a :href="`${base}/posts/${paperPostEntry.slug}`">{{ paperPostEntry.data.title }}</a> &nbsp;
+                <time datetime={{ paperPostEntry.data.eventDate.toISOString() }}> {{ paperPostEntry.data.eventDate.toDateString() }}
                 </time>
               </li>
             </ul>
@@ -27,9 +27,9 @@ import { computed, ref } from "vue";
 import "agnostic-vue/dist/index.css";
 import { Card } from "agnostic-vue";
 
-// load blog content: news, etc.
+// load paper content: news, etc.
 import { getCollection } from 'astro:content';
-const blogEntries = await getCollection('events');
+const paperEntries = await getCollection('post');
 
 // Remove single slash as it causes double slashes in card
 const base = import.meta.env.BASE_URL == '/' ? '' : import.meta.env.BASE_URL;

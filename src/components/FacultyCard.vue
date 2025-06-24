@@ -66,10 +66,10 @@ const truncatedDescription = computed(() => {
 }
 
 .facultyCard {
-  min-width: 30rem !important;
+  min-width: 20rem !important;
   max-width: 35rem;
   margin: 0.5em;
-  padding: 1em 1em 1em;
+  padding: 1em ;
   background-color: var(--agnostic-gray-mid);
   transition: transform 0.2s ease-in;
 }
@@ -118,6 +118,26 @@ const truncatedDescription = computed(() => {
   content: '';
   position: absolute;
   inset: 0; 
+}
+
+/* Don't remove makes adjusts for mobile */
+@media (max-width: 800px) {
+    .facultyCard {
+    min-width: 10rem !important;
+    max-width: 20rem;
+    margin: 0.5em auto;
+    padding: 1em 1em 1em;
+    background-color: var(--agnostic-gray-mid);
+    transition: transform 0.2s ease-in;
+  }
+  .facultyImage {
+      --project-logo-width: 7em;
+      float: left;
+      margin-right: 0.5em;
+      width: var(--project-logo-width);
+      height: 8em;
+  }
+  
 }
 
 </style>

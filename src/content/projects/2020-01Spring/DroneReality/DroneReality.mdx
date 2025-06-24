@@ -5,35 +5,27 @@ id: drone-reality
 desc : Using CoDrones, the aim of this project is to teach others about basic programming concepts through changing the behavior of the drones with block coding.
 github: https://github.com/TAP-GGC/dronereality
 students: [
-  "chenanniah-mac-cephas",
-  "phillip-chazares",
-  "vi-nguyen",
-  "zachary-idrees"
+  "chenanniah-mac-cephas",  "phillip-chazares",
+  "vi-nguyen",  "zachary-idrees"
 ]
 instructors: [
-  "cindy-robertson",
-  "anca-doloc-mihu"
+  "cindy-robertson",  "anca-doloc-mihu"
 ] 
-techs: [
-  "drone"
+techs: [  "drone"]
+videos: [
+  {src: 'VeJIbEyXcyA', caption: "TheDroneBros"},
+  {src: '11Bljd7Lohs', caption: "Codrone run"}
+
 ]
-videos: []
-events: [
-  "class workshops"
-]
+events: [  "class workshops"]
 semester: spring
 year: 2020
 levels: [
   "middle-school",
-  "high-school",
-  "college"
+  "high-school",  "college"
 ] 
-difficulty: [
-  "intermediate"
-] 
-durationMins: [
-  60
-]
+difficulty: [  "intermediate"] 
+durationMins: [  60]
 publishedDate: 2024-09-13
 relatedIds: []
 image: ""
@@ -41,8 +33,6 @@ imageLogoLight: ./drone-reality-logo-light.png
 imageLogoDark: ./drone-reality-logo-dark.png
 curator: ["trung-dao","kelechi-ariwodo"]
 ---
-
-/* TODO: this page doesn't look good, needs to be fixed */
 
 import { Image } from "astro:assets";
 import Photo from '/src/components/astro/Photo.astro';
@@ -62,30 +52,20 @@ CoDrones are small and simple drones that are designed to be programmable in var
 The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to break the misconceptions of the IT field by providing fun workshops for students of all backgrounds. TAP students design engaging and fun outreach workshops to encourage interest in IT and STEM.
 
 {/* content block, Activities, steps & materials */}
-<div class="prj-list">
 ## Outreach Activities:
 1. Classroom Workshops on Apr 14, Apr 20, and Apr 20, 2020: workshop demo to 1001 level IT students at GGC, to spark interests in IT and STEM
-</div>
 
 ## Technology
-<div class='gallery-list'>
 <Logo src= {Drone.src} alt="CoDrone by RoboLink" link="https://www.robolink.com/codrone/" />
 <Logo src= {RokitBrick.src} alt="RokitBrick for CoDrone" link="https://learn.robolink.com/course/codrone-with-blockly/" />
 
-</div>
 
 ## Project Setup & Installation:
-<div class="prj-list">
 - [Download RokitBrick for CoDrone](https://robolink.co.kr/download_eng.html)
-<Clip src="VeJIbEyXcyA" showIframe={true}/> 
-<Clip src="11Bljd7Lohs" showIframe={true}/>
-</div>
 
 ## Usage
-<div class="prj-list">
-<Image src={Rokit} alt="Usage Example" />
+<Photo src={Rokit.src} caption="Usage Example" />
 - This window contains motion coding blocks that can be dragged and dropped in box 2.
 - This is a programming script used to control the arrow pointer in box 3.
 - This window contains the area of movement for the programmable arrow pointer.
 - This window contains coding tabs to changing box 1 and contains tabs for RokitBrick settings.
-</div>
