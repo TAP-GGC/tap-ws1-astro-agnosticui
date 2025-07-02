@@ -32,10 +32,11 @@ let techCounts = {};
 // Build tech counts from the projects
 projects.forEach(project => {
   project.data.techs.forEach(tech => {
-    if (!techCounts[tech]) {
-      techCounts[tech] = 0;
+    const techId = tech.toLowerCase();
+    if (!techCounts[techId]) {
+      techCounts[techId] = 0;
     }
-    techCounts[tech]++;
+    techCounts[techId]++;
   });
 });
 

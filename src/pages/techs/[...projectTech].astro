@@ -27,7 +27,7 @@ const { Content } = await tech.render();
 const allProjects = await getCollection('projects');
 
 const relatedProjects = allProjects.filter(project =>
-  project.data.techs?.includes(tech.data.id)
+  project.data.techs?.some(techId => techId.toLowerCase() === tech.data.id.toLowerCase())
 );
 
 const groupedProjects = {};
