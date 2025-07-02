@@ -53,8 +53,8 @@ const sortBy = ref("name-asc")
 const sortOptions = [
     { value: 'name-asc', label: 'Name A–Z' },
     { value: 'name-desc', label: 'Name Z–A' },
-    { value: 'count-desc', label: 'Most Projects' },
-    { value: 'count-asc', label: 'Least Projects' }
+    { value: 'count-desc', label: 'Most Used' },
+    { value: 'count-asc', label: 'Least Used' }
 ]
 
 const filteredAndSortedTechs = computed(() => {
