@@ -13,9 +13,13 @@ const projectProp = defineProps({
     });
 
 // Logos
-let imageLogoLight = computed(() => projectProp.item.data.imageLogoLight?.src);
-const imageLogoDark = computed(() => projectProp.item.data.imageLogoDark ? projectProp.item.data.imageLogoDark.src : imageLogoLight);
-imageLogoLight = imageLogoLight ? imageLogoLight : imageLogoDark; // in case only dark is provided
+const imageLogoLight = computed(() =>
+  projectProp.item.data.imageLogoLight?.src || projectProp.item.data.imageLogoDark?.src
+);
+
+const imageLogoDark = computed(() =>
+  projectProp.item.data.imageLogoDark?.src || projectProp.item.data.imageLogoLight?.src
+);
 
 // Truncate description to a fixed number of characters
 const maxDescriptionLength = 100; // Adjust the length as needed
@@ -39,8 +43,8 @@ const date_options = {
         <a :href="`/projects/${item.data.year}/${item.data.semester}/${item.data.id}`" class="card-link" isShadow></a>
         <div class="projectText">                        
 
-            <img :src="imageLogoLight" alt="Project Image" class="projectImage imageLight">
-            <img :src="imageLogoDark" alt="Project Image" class="projectImage imageDark">
+            <img :src="imageLogoLight" alt="Project Image Light" class="projectImage imageLight">
+            <img :src="imageLogoDark" alt="Project Image Dark" class="projectImage imageDark">
 
             <h4 class="projectTitle">{{ item.data.shortTitle ? item.data.shortTitle : item.data.title }}</h4>
 
