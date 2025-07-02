@@ -1,6 +1,6 @@
 <template>
     <section class="mbe40">
-        <div class="d-flex flex-column align-center gap2 mbe20 w-100">
+        <div class="d-flex flex-column align-center gap2 mbe20 vw-100">
             <Input
                 v-model="searchQuery"
                 placeholder="Search by tech name"
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class="d-flex flex-wrap justify-center gap2 w-100">
+        <div class="tech-card-container">
         <TechCard
             v-for="item in filteredAndSortedTechs"
             :key="item.tech.id"
@@ -93,6 +93,13 @@ const resetFilters = () => {
 </script>
 
 <style scoped>
+.tech-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
 .sort-button {
     margin: 8px;
     background-color: #44e449;
