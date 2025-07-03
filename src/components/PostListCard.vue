@@ -40,7 +40,7 @@ import { Card } from "agnostic-vue";
 
 // load blog content: news, etc.
 import { getCollection } from 'astro:content';
-const blogEntries = (await getCollection('events')).sort( (p1, p2) => p2.data.eventDate - p1.data.eventDate ).slice(0,4);
+const blogEntries = (await getCollection('events')).sort( (p1, p2) => p2.data.eventDate - p1.data.eventDate ).slice(0,6);
 
 // Remove single slash as it causes double slashes in card
 const base = import.meta.env.BASE_URL == '/' ? '' : import.meta.env.BASE_URL;
