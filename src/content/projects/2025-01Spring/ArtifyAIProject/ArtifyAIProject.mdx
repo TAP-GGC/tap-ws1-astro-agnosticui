@@ -1,52 +1,45 @@
 ---
 shortTitle: Artify AI
 title: An Interactive Artistic Experience powered by AI
-id: ArtifyAI
+id: artify-ai
 desc : Artify AI is a digital art platform that transforms user-generated text prompts into outline-based images using AI.
 github: https://github.com/TAP-GGC/ArtifyAI
 students: [
-  "claudio-sandrio",
-  "francis-bolay",
-  "magaly-guillen"
+  "claudio-sandrio", "francis-bolay", "magaly-guillen"
 ]
 instructors: [
-  "cengiz-gunay",
-  "cindy-robertson"
+  "cengiz-gunay", "cindy-robertson"
 ] 
 techs: [
-  "dall e",
-  "processing",
-  "java"
+  "dall-e", "processing", "java"
 ]
-videos: []
+videos: [
+  {src: "5eAuQSZGzNE?si=s9O5tZ66q4hGWKVa", caption: " Artify AI Processing setup " },
+]
 events: [
-  "create symposium",
-  "classroom workshop",
-  "stars",
-  "atlanta science festival",
-  "tap expo"
+  "create symposium", "classroom workshop", "stars", "atlanta science festival", "tap expo"
 ]
 semester: spring
 year: 2025
 levels: [
-  "k-12",
-  "college",
-  "non-stem",
-  "stem"
+  "k-12", "college", "non-stem", "stem"
 ] 
-difficulty: [
-  "beginner"
-] 
-durationMins: [
-  30,
-  60
-]
+difficulty: [  "beginner"] 
+durationMins: [  30,  60]
 publishedDate: 2025-04-22
 imageLogoLight: './logo.png'
 teamPhoto: './Team picture.jpg'
+curator: ["kelechi-ariwodo"]
+videoAd: "pBZapna9R4M?si=TBjQS3hNX2k5bvjk"
+
 ---
 
 import { Image } from "astro:assets";
+import Photo from '/src/components/astro/Photo.astro';
+import Logo from '/src/components/astro/Logo.astro';
+import Gallery from '/src/components/astro/Gallery.astro';
+import Clip from '/src/components/astro/Clip.astro';
+
 import GroupPhoto from './Team picture.jpg';
 import DrawingPage from './drawing page.png';
 import ProcessingLogo from './processingLogo.png';
@@ -70,39 +63,24 @@ This interactive workshop allows participants to explore the combination of crea
 * **Main Technology:** JAVA, Processing, DALL-E  
 * [Technology Ambassador Program](https://tapggc.org/) (TAP) is a project-based class fostering a collaborative environment for students to develop semester-long projects. TAP promotes IT participation through outreach activities and workshops designed to showcase the creative and fun side of technology.
 
-<iframe width="560" class="youtube" src="https://www.youtube.com/watch?v=EQ5pVtZgng4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## Artify AI
 
 #### **Team Members:**  
-<Image src={GroupPhoto} alt="Artify AI team photo" />
-*Left to Right: Francis,  Claudio, and Maggie*
-
-## Advisors
-
-* Dr. Cengiz Gunay  
-* Dr. Cindy Robertson  
+<Photo src={GroupPhoto.src} alt="Artify AI team photo" caption="Left to Right: Francis,  Claudio, and Maggie"/>
 
 ## Outreach
-
 1. **TAP Expo**  
    February 25, 2025, Georgia Gwinnett College: Promoted the IT field and encouraged students to join TAP.   
 2. **Atlanta Science Festival at GGC**  
    March 15, 2025, Atlanta Science Festival: Science festival that promoted science and technology to kids and family.  
-3. **Atlanta Science Festival at Piedmot Park**  
+3. **Atlanta Science Festival at Piedmont Park**  
    March 22, 2025, Atlanta Science Festival: Science festival that promoted science and technology to kids and family.
 4. **Class Workshops**  
    March 31 - April 4, 2025, Georgia Gwinnett College: Engaged non-IT students in exploring IT through interactive workshops. 
 
 ## Technology
-
-#### Processing
-<Image src={ProcessingLogo} alt="UnityLogo"/>
-[Processing](https://processing.org/) uses Java programming language and is used for making visuals and interactive graphics.
-
-#### Aesprite
-<Image src={DallELogo} alt="AsepriteLogo"/>
-[DALL-E](https://help.openai.com/en/articles/8555480-dall-e-3-api) is an AI model that generates images from textual descriptions. It will be used to create art templates based on participant-provided prompts.
+<Logo src={ProcessingLogo.src} alt="UnityLogo" link="https://processing.org/"/>
+<Logo src={DallELogo.src} alt="AsepriteLogo" link="https://help.openai.com/en/articles/8555480-dall-e-3-api"/>
 
 
 Why we chose Processing: It is easy to use and helps participants create interactive and visual art while learning programming concepts. This makes it ideal for engaging participants in both art and coding.
