@@ -1,36 +1,30 @@
 ---
-// Style Imports
-import '../styles/global.css';
+// src/pages/projects.astro
 
-// common.min.css is distributed with agnostic-react
-// and agnostic-svelte too. But, since we're using all
-// of these together, we only need to import global CSS
-// once and in one place.
-// common.min.css combines properties, resets, utilities
-// import "agnostic-vue/dist/common.min.css";
-// But!! Rob much prefers individual modular import ;)
+import "../styles/global.css";
 import "agnostic-vue/dist/common.properties.min.css";
 import "agnostic-vue/dist/common.resets.min.css";
 import "agnostic-vue/dist/common.utilities.min.css";
 import "agnostic-vue/dist/opinions.min.css";
-
-
-// Component Imports
 import "agnostic-vue/dist/index.css";
+
 import TAPDefaultLayout from "../layouts/default.astro";
 import ProjectSearch from "../components/ProjectSearch.vue";
-import { Input } from "agnostic-vue";
 import Crumbs from '../components/Crumbs.vue';
 import { getCollection } from 'astro:content';
-const projects = await getCollection('projects');  //list of projects
+
+const projects = await getCollection('projects');
+const currentPage = Number(Astro.url.searchParams.get("page")) || 1;
+const pageSize = 10;
 ---
+
 <TAPDefaultLayout title="Outreach Projects">
+  <Crumbs pageType="projects" pageUrl="/projects" />
 
-    <Crumbs pageType="projects" pageUrl="/projects" />
-    <!-- <h2>Search TAP Outreach Projects</h2> -->
-    <!-- Image src={ tapLogo } alt="TAP logo"/ -->
-
-    <ProjectSearch client:load projectList={projects}/>
-
+  <ProjectSearch 
+    client:load 
+    projectList={projects} 
+    currentPage={currentPage} 
+    pageSize={pageSize} 
+  />
 </TAPDefaultLayout>
-

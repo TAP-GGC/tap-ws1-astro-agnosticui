@@ -1,210 +1,221 @@
 <script setup>
-import { computed, ref } from "vue";
-// Components CSS
+import { computed, ref, watchEffect, watch } from "vue";
 import "agnostic-vue/dist/index.css";
 import "agnostic-vue/dist/common.min.css";
 import { Input, Card, Select } from "agnostic-vue";
-import { Button, ButtonGroup } from 'agnostic-vue';
+import { Button } from 'agnostic-vue';
 
-
-
-// Component Imports
 import ProjectCard from "./ProjectCard.vue";
+import Pagination from "./Pagination.vue";
 
-// load content from props
+// Props
 const props = defineProps({
-        projectList: Object,
-        filter: Object
-    });
-const projects = props.projectList;
+  projectList: Object,
+  filter: Object,
+  currentPage: {
+    type: Number,
+    default: 1
+  },
+  pageSize: {
+    type: Number,
+    default: 10
+  }
+});
+
+// Reactive state
+const currentPage = ref(props.currentPage);
+const pageSize = ref(props.pageSize);
+
 const search_text = ref("");
 const student = props.filter?.student ? ref([props.filter.student]) : ref(['Any']);
 const instructor = props.filter?.instructor ? ref([props.filter.instructor]) : ref(['Any']);
 const level = props.filter?.level ? ref([props.filter.level]) : ref(['Any']);
-const year =  props.filter?.year ? ref([props.filter.year]) : ref(['Any']);
-const semester =  props.filter?.semester ? ref([props.filter.semester]) : ref(['Any']);
+const year = props.filter?.year ? ref([props.filter.year]) : ref(['Any']);
+const semester = props.filter?.semester ? ref([props.filter.semester]) : ref(['Any']);
 const tech = props.filter?.tech ? ref([props.filter.tech]) : ref(['Any']);
 const duration = ref(['Any']);
 const difficulty = props.filter?.difficulty ? ref([props.filter.difficulty]) : ref(['Any']);
 
-//Step 1 => get list of instructors in a set to avoid duplication
-//Step 2 => place them in an object {value = ?, label = ?} to feed into a select option
-//Insert into three select/dropdown menus
-//Add onclick listener to each dropdown
-//Instructor selected, search through the list of only instructors
+// Static semester list
+const semesterList = ref([
+  { value: 'Any', label: 'Any' },
+  { value: 'fall', label: 'Fall' },
+  { value: 'spring', label: 'Spring' },
+  { value: 'summer', label: 'Summer' }
+]);
 
-// Semester list constant
-const semesterList = ref([{value:'Any', label:'Any'},{value: 'fall', label:'Fall'}, {value: 'spring', label:'Spring'}, {value: 'summer', label:'Summer'}]);
-
-function createOptions(projects, x) {
-    let optionSet = new Set();
-    //Add default option
-    optionSet.add("Any");
-    projects.forEach(arrayContainer =>{
-        if(Array.isArray(arrayContainer.data[x])){
-            arrayContainer.data[x].forEach(element =>{
-            optionSet.add(element);
-        });
-        }else{
-            optionSet.add(arrayContainer.data[x]);
-        }
-        
-    });
-    return Array.from(optionSet).map(option =>({value:option, label:option}));
-}
-
-const yearOptions = createOptions(projects, "year");
-const levelOptions = createOptions(projects, "levels");
-const techOptions = createOptions(projects, "techs");
-const durationOptions = createOptions(projects, "durationMins");
-const difficultyOptions = createOptions(projects, "difficulty");
-
-function matches(project) {
-    //semester: consider this as ref variable 
-    let isMatch = false;
-    if(search_text.value || semester.value!='Any' || level.value!='Any' || tech!== 'Any' || duration.value != 'Any' || difficulty.value !== 'Any'){   //If Fall semester
-
-        //check filters (dropdown menus)
-        //if dropdown value does not match with project data, it fails match immediately
-        if(year.value != 'Any' && !year.value.includes(project.data.year.toString())){
-            return false;
-        }
-        if(semester.value != 'Any' && !semester.value.includes(project.data.semester)){
-            return false;
-        }
-        if(level.value != 'Any' && !level.value.some(level => project.data.levels.includes(level))){
-            return false;
-        }
-        if(tech.value != 'Any' && !tech.value.some(tech => project.data.techs.includes(tech))){
-            return false;
-        }
-        //duration.value is an array contains String values. project.data.durationMins contains Number values
-        if(duration.value != 'Any' && !duration.value.some(durationString => project.data.durationMins.some(durationNumber => durationString == String(durationNumber)))){
-            return false;
-        }
-        if(difficulty.value != 'Any' && !difficulty.value.some(diff => project.data.difficulty.includes(diff))){
-            return false;
-        }
-        let searchText = search_text.value.toLowerCase();
-        
-        //if no search Text, then return true;
-        
-        //actual filtering
-        //Now if it passes the search filter, it passes immediately
-        if(searchText == ''){
-            return true;
-        }else
-        if(
-            project.data.shortTitle?.toLowerCase().includes(searchText) ||
-            project.data.title?.toLowerCase().includes(searchText) ||
-            project.data.levels?.some(level => level.includes(searchText)) ||
-            project.data.semester == searchText ||
-            `${project.data.year}`.includes(searchText) ||
-            project.data.techs?.some(tech => tech.includes(searchText))||
-            project.data.instructors?.some(inst => inst.toLowerCase().includes(searchText))||
-            project.data.students?.some(stu => stu.toLowerCase().includes(searchText))||
-            project.data.curator?.some(stu => stu.toLowerCase().includes(searchText))
-            ){
-            return true;
-        }else{
-            return false;
-        }
+// Generate filter options from data
+function createOptions(projects, field) {
+  let optionSet = new Set(["Any"]);
+  projects.forEach(project => {
+    const fieldData = project.data[field];
+    if (Array.isArray(fieldData)) {
+      fieldData.forEach(item => optionSet.add(item));
+    } else if (fieldData) {
+      optionSet.add(fieldData);
     }
-    //otherwise, always return true
-    return true;  
+  });
+  return Array.from(optionSet).map(option => ({ value: option, label: option }));
 }
 
+const yearOptions = createOptions(props.projectList, "year");
+const levelOptions = createOptions(props.projectList, "levels");
+const techOptions = createOptions(props.projectList, "techs");
+const durationOptions = createOptions(props.projectList, "durationMins");
+const difficultyOptions = createOptions(props.projectList, "difficulty");
+
+// Filter function
+function matches(project) {
+  if (year.value != 'Any' && !year.value.includes(project.data.year.toString())) return false;
+  if (semester.value != 'Any' && !semester.value.includes(project.data.semester)) return false;
+  if (level.value != 'Any' && !level.value.some(l => project.data.levels.includes(l))) return false;
+  if (tech.value != 'Any' && !tech.value.some(t => project.data.techs.includes(t))) return false;
+  if (difficulty.value != 'Any' && !difficulty.value.some(d => project.data.difficulty.includes(d))) return false;
+
+  if (duration.value != 'Any' &&
+    !duration.value.some(dur =>
+      project.data.durationMins.some(d => dur == String(d))
+    )
+  ) return false;
+
+  const searchText = search_text.value.toLowerCase();
+  if (!searchText) return true;
+
+  return (
+    project.data.shortTitle?.toLowerCase().includes(searchText) ||
+    project.data.title?.toLowerCase().includes(searchText) ||
+    project.data.levels?.some(l => l.includes(searchText)) ||
+    project.data.semester == searchText ||
+    `${project.data.year}`.includes(searchText) ||
+    project.data.techs?.some(t => t.includes(searchText)) ||
+    project.data.instructors?.some(i => i.toLowerCase().includes(searchText)) ||
+    project.data.students?.some(s => s.toLowerCase().includes(searchText)) ||
+    project.data.curator?.some(c => c.toLowerCase().includes(searchText))
+  );
+}
+
+// Filtered and paginated results
 const filteredProjects = computed(() => {
-  return projects.filter((project) => matches(project));
-})
+  return props.projectList.filter(project => matches(project));
+});
 
+const paginatedProjects = ref([]);
+
+watchEffect(() => {
+  const start = (currentPage.value - 1) * pageSize.value;
+  const end = start + pageSize.value;
+  paginatedProjects.value = filteredProjects.value.slice(start, end);
+});
+
+const totalPages = computed(() => Math.ceil(filteredProjects.value.length / pageSize.value));
+
+// URL sync (optional)
+watch(currentPage, (newPage) => {
+  const url = new URL(window.location.href);
+  url.searchParams.set("page", newPage);
+  window.history.pushState({}, '', url);
+});
+
+// For Reset button
 const base = import.meta.env.BASE_URL;
+const paginationBaseUrl = `${base === '/' ? '' : base}/projects`;
 
+const projectsStatusText = computed(() => {
+  const hasFilters = (
+    search_text.value ||
+    !semester.value.includes('Any') ||
+    !year.value.includes('Any') ||
+    !level.value.includes('Any') ||
+    !tech.value.includes('Any') ||
+    !duration.value.includes('Any') ||
+    !difficulty.value.includes('Any')
+  );
+  return hasFilters ? 'Selected projects' : 'All Projects';
+});
 </script>
 
 <template>
-    <div>
-    
+  <div>
     <section class="mbe40">
+      <Input
+        id="project-search"
+        is-underlined
+        is-underlined-with-background
+        placeholder="Enter project name, student, technology…"
+        label="Search for projects"
+        type="text"
+        v-model="search_text"
+      />
 
-        <Input id="7" is-underlined is-underlined-with-background placeholder="Enter project name, student, technology…"
-            label="Search for projects" type="text" v-model="search_text" />
-        
-        <div class="project-filter-container">            
-            <div class="project-filter-dropdown">
-                <label>Tech:</label>
-                <Select unique-id="tec" :options="techOptions" :is-multiple="true" :multiple-size="3" @selected="(value) => { tech = value }">
-                </Select>
-
-            </div>
-            <div class="project-filter-dropdown">
-                <label>Levels:</label>
-                <Select unique-id="lev" :options="levelOptions" :is-multiple="true" :multiple-size="3" @selected="(value) => { level = value }">
-                </Select>
-            </div>
-
-            <div class="project-filter-dropdown">
-                <label>Difficulty:</label>
-                <Select unique-id="dif" :options="difficultyOptions" :is-multiple="true" :multiple-size="3"  @selected="(value) => { difficulty = value }">
-                </Select>
-            </div>
-
-            <div class="project-filter-dropdown">
-                <label>Duration:</label>
-                <Select unique-id="dur" :options="durationOptions" :is-multiple="true" :multiple-size="3" @selected="(value) => { duration = value }">
-                </Select>
-            </div>
-            <div class="project-filter-dropdown">
-                <label>Semester</label>
-                <Select name="semester" unique-id="sem" @selected="(value) => { semester = value }" 
-                    label-copy="Select a semester to filter results" 
-                    :options="semesterList" :is-multiple="true" :multiple-size="3"></Select>
-            </div>
-            <div class="project-filter-dropdown">
-                <label>Year</label>
-                <Select name="year" unique-id="year" @selected="(value) => { year = value }" 
-                    label-copy="Select a year to filter results" 
-                    :options="yearOptions" :is-multiple="true" :multiple-size="3"></Select>
-            </div>
-            <div class="project-filter-dropdown">
-                <a :href="`${base == '/' ? '' : base}/projects`">
-			<Button mode="primary" isRounded>Reset</button>
-			</a>
-            </div>
-        </div>        
-
+      <div class="project-filter-container">
+        <div class="project-filter-dropdown">
+          <label>Tech:</label>
+          <Select unique-id="tech" :options="techOptions" :is-multiple="true" :multiple-size="3" @selected="value => tech = value" />
+        </div>
+        <div class="project-filter-dropdown">
+          <label>Levels:</label>
+          <Select unique-id="level" :options="levelOptions" :is-multiple="true" :multiple-size="3" @selected="value => level = value" />
+        </div>
+        <div class="project-filter-dropdown">
+          <label>Difficulty:</label>
+          <Select unique-id="difficulty" :options="difficultyOptions" :is-multiple="true" :multiple-size="3" @selected="value => difficulty = value" />
+        </div>
+        <div class="project-filter-dropdown">
+          <label>Duration:</label>
+          <Select unique-id="duration" :options="durationOptions" :is-multiple="true" :multiple-size="3" @selected="value => duration = value" />
+        </div>
+        <div class="project-filter-dropdown">
+          <label>Semester</label>
+          <Select unique-id="semester" :options="semesterList" :is-multiple="true" :multiple-size="3" @selected="value => semester = value" />
+        </div>
+        <div class="project-filter-dropdown">
+          <label>Year</label>
+          <Select unique-id="year" :options="yearOptions" :is-multiple="true" :multiple-size="3" @selected="value => year = value" />
+        </div>
+        <div class="project-filter-dropdown">
+          <a :href="paginationBaseUrl">
+            <Button mode="primary" isRounded>Reset</Button>
+          </a>
+        </div>
+      </div>
     </section>
 
-    <h3> {{ ((search_text || !semester.includes('Any') || !year.includes('Any') || !level.includes('Any') || 
-              !tech.includes('Any') || !duration.includes('Any') || !difficulty.includes('Any')) ? 
-            `Selected projects` : 'All Projects') }} ({{ filteredProjects.length }})</h3>
+    <h3>{{ projectsStatusText }} ({{ filteredProjects.length }})</h3>
 
     <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
-        <template v-for="project in filteredProjects" :key="project.data.id">
-            <ProjectCard :item = "project" />
-        </template>
+      <template v-for="project in paginatedProjects" :key="project.data.id">
+        <ProjectCard :item="project" />
+      </template>
     </section>
 
+    <Pagination
+        v-model:currentPage="currentPage"
+        :totalItems="filteredProjects.length"
+        :pageSize="pageSize"
+    />
 
-    </div>
-</template>  
-  
+
+  </div>
+</template>
+
 <style scoped>
 .project-filter-container {
-    justify-content: space-around;
-    display: flex;
-    flex-flow: row wrap;
-    /* align-items: flex-start; */ 
-    justify-content: center;
-    align-items: center;
-}
-.project-filter-dropdown {
-    /* apply grid and flex here */
-    min-width: 10rem !important;
-    max-width: 20em;
-    margin: 0 auto;
-    padding: 1em;
-    flex: 1;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
-</style>  
+.project-filter-dropdown {
+  min-width: 10rem;
+  max-width: 20em;
+  margin: 0 auto;
+  padding: 1em;
+  flex: 1;
+}
+
+.project-cards-flex {
+  gap: 1.5rem;
+}
+</style>
