@@ -54,7 +54,11 @@ export async function getStaticPaths() {
 const { project} = Astro.props;
 const { Content } = await project.render();
 
+const allProjects = await getCollection('projects');
 
+const relatedProjects = project.data.relatedIds?.length
+  ? allProjects.filter(p => project.data.relatedIds.includes(p.data.id))
+  : [];
 
 // BreadCrumb variables
 const  projYear  = project.data.year;
@@ -93,6 +97,8 @@ import Students from '../students.astro';
 import studentIds from '../../components/astro/StudentIds';
 import facultyIds from '../../components/astro/FacultyIds';
 import { formatIDtoName } from '../../components/astro/formatNames';
+import ProjectCard from '../../components/ProjectCard.vue';
+import projectIds from '../../components/astro/ProjectIds';
 
 // Logos
 let imageLogoLight = project.data.imageLogoLight?.src;
@@ -209,6 +215,17 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 		<h2 style="text-align: center;">Gallery</h2>
 		<Gallery photos={project.data.images} />
 	  )}
+
+	{relatedProjects.length > 0 && (
+  <>
+    <h2 style="text-align: center; margin-top: 3rem;">Related Projects</h2>
+    <div class="related-projects-container">
+      {relatedProjects.map(project => (
+        <ProjectCard item={projectIds[project.data.id]} />
+      ))}
+    </div>
+  </>
+)}
 </div>
 	
 <style>
@@ -276,6 +293,14 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 		position: relative;
 		margin: 0 auto;
   }
+
+	.related-project-cards {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.5rem;
+		margin-top: 1rem;
+	}
 
   
 </style>
