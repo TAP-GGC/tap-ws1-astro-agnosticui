@@ -9,7 +9,7 @@ import { Button, ButtonGroup } from 'agnostic-vue';
 
 
 // Component Imports
-import ProjectCard from "./ProjectCard.vue";
+import ProjectPagination from "./vue/ProjectPagination.vue";
 
 // load content from props
 const props = defineProps({
@@ -70,7 +70,7 @@ function matches(project) {
 //sorting
 const sortField = ref("publishedDate");
 const sortAsc = ref(true);
-const fillteredAndSortedProjectsList = computed(() => {
+const filteredAndSortedProjectsList = computed(() => {
     const filtered = projects.filter((project) => matches(project));
 
     return [...filtered].sort((a, b) => {
@@ -120,12 +120,10 @@ const base = import.meta.env.BASE_URL;
 
     <h3> {{ ((search_text || advancedSearch || !level.includes('Any') ||
                 !tech.includes('Any') || !duration.includes('Any') || !difficulty.includes('Any')) ?
-                `Selected projects` : 'All Projects') }} ({{ fillteredAndSortedProjectsList.length }})</h3>
+                `Selected projects` : 'All Projects') }} ({{ filteredAndSortedProjectsList.length }})</h3>
 
     <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
-        <template v-for="project in fillteredAndSortedProjectsList" :key="project.data.id">
-            <ProjectCard :item = "project" />
-        </template>
+        <ProjectPagination client:load :projects="filteredAndSortedProjectsList" :itemsPerPage="10" />
     </section>
 
 
