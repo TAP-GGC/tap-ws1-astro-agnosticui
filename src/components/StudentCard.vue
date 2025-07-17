@@ -66,7 +66,7 @@ const truncatedDescription = computed(() => {
 }
 
 .studentCard {
-  min-width: 30rem !important;
+  min-width: 20rem !important;
   max-width: 35rem; /** */
   margin: 0.5em;
   padding: 1em 1em 1em;
@@ -121,6 +121,27 @@ const truncatedDescription = computed(() => {
   content: '';
   position: absolute;
   inset: 0; 
+}
+
+/* Don't remove makes adjusts for mobile */
+@media (max-width: 800px) {
+    .studentCard {
+    min-width: 10rem !important;
+    max-width: 20rem;
+    margin: 0.5em auto;
+    padding: 1em 1em 1em;
+    background-color: var(--agnostic-gray-mid);
+    transition: transform 0.2s ease-in;
+  }
+  .studentImage {
+      --project-logo-width: 10em;
+      float: left;
+      margin-right: 0.5em;
+      margin-top: 0.5em;
+      width: var(--project-logo-width);
+      height: 10em;
+  }
+  
 }
 
 </style>

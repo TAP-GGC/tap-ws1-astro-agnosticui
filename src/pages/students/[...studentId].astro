@@ -39,6 +39,7 @@ let title = `${student.data.name} - Student Profile`;
 import JohnDoeImage from '../../content/students/JohnDoe/johndoe.jpg'
 const studentImg = student.data.image || JohnDoeImage;
 import TAPDefaultLayout from "../../layouts/default.astro";
+
 const studentProjects = projects.filter(project =>
   project.data.students?.includes(student.data.id) ||
   project.data.curator?.includes(student.data.id) ||
@@ -76,7 +77,7 @@ const studentOnlyProjects = studentProjects.filter(project =>
     <Content />
     {studentOnlyProjects.length > 0 && (
       <>
-        <h2>Courses Taken</h2>
+        <h3>TAP Project Specifications</h3>
           <ul class="no-bullets">
             {studentOnlyProjects.map(project => {
                 const semester = project.data.semester?.toUpperCase();
@@ -110,7 +111,7 @@ const studentOnlyProjects = studentProjects.filter(project =>
     
         {studentOnlyProjects.some(p => p.data.events?.length > 0) && (
           <>
-            <h2>Events Attended</h2>
+            <h3>Events Attended</h3>
             <ul>
               {studentOnlyProjects.flatMap(p =>
                 p.data.events?.map(event => <li>{event}</li>) || []
@@ -122,7 +123,7 @@ const studentOnlyProjects = studentProjects.filter(project =>
     )}
 
     {studentProjects.length > 0 && (
-      <h2>Related Projects Included</h2>
+      <h3>Related Projects Included</h3>
       <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
         {studentProjects.map((project) => (      
           <ProjectCard item={projectIds[project.data.id]} />

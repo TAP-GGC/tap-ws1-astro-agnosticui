@@ -2,6 +2,8 @@
 
 import { ref } from 'vue'
 import '/src/styles/global.css';
+import 'vueperslides/dist/vueperslides.css'
+import { VueperSlides, VueperSlide } from 'vueperslides'
 
 interface ClipProps {
   src: string;
@@ -17,84 +19,66 @@ const props = defineProps<Props>();
 
 const { videos, showIframe } = props;
 
-let cIndex = ref(0);
-
-function next() {
-  cIndex.value = cIndex.value == videos.length - 1 ? 0 : cIndex.value + 1;
-}
-
-function prev() {
-  cIndex.value = cIndex.value == 0 ? videos.length - 1 : cIndex.value - 1;
-} 
 </script>
 
 <template>
 
-<section class="video-carousel">
-    <div v-if="showIframe">
-      <iframe
-        class="video-section"
-        :src="`https://www.youtube.com/embed/${videos[cIndex].src}`"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-      ></iframe>
-      <p v-if="videos[cIndex].caption">{{videos[cIndex].caption}}</p>
-        <a @click="prev()" class="prev">&#10094;</a>
-        <a @click="next()" class="next">&#10095;</a>
-    </div>
-</section>
+<div class="video-carousel">
+  <vueper-slides
+		:bullets-outside="true"
+		:dragging-distance="50">
+    <vueper-slide
+      v-for="(video, i) in videos"
+      :key="i"
+      :title="video.caption">
+      <template v-slot:content>
+        <div class="slide-content">
+          <iframe
+          class="video-section"
+          :src="`https://www.youtube.com/embed/${video.src}`"
+          title="YouTube video player"
+          frameborder="0"
+          allow="autoplay; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+          ></iframe>
+          <div v-if="video.caption" class="slide-title">{{video.caption}}</div>
+        </div>
+      </template>
+    </vueper-slide>
+  </vueper-slides>
+</div>
 
 </template>
 
 <style scoped>
-  section.video-carousel {
-    position: relative;
+  .slide-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .slide-title {
+    margin-top: 10px;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .video-carousel {
+    /* margin-top: 1rem; */
+    max-width: 1450px;
+    height: auto;
+	  margin: 0 auto;
+	  padding: 2rem 1rem;
   }
 
   .video-section {
     width: 100%;
-    max-width: 800px;
-    height: 450px;
+    max-width: 950px;
+    height: 500px;
   }
-
-  /* make these more specific! */
-  .video-carousel .prev,
-	.video-carousel .next {
-		cursor: pointer;
-		position: absolute;
-		top: 50%;
-		width: auto;
-		/*padding: 1.5rem;*/
-		margin-top: -50px;
-		color: var(--agnostic-font-color);
-		font-weight: bold;
-		font-size: 84px;
-		border-radius: 0 3px 3px 0;
-		/* user-select: none; */
-		/* -webkit-user-select: none; */
-	}
-
-	/* Position the "next button" to the right */
-	.video-carousel .next {
-	right: 0;
-	border-radius: 3px 0 0 3px;
-	}
-
-	/* On hover, add a black background color with a little bit see-through */
-	.video-carousel .prev:hover,
-	.video-carousel .next:hover {
-	text-decoration: none;
-	}
-
-	.video-carousel .prev:disabled,
-	.video-carousel .next:disabled {
-	cursor: not-allowed;
-	text-decoration: none;
-	color: #2f2c2c
-	}
 
 
 </style>
