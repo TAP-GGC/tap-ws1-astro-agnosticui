@@ -9,40 +9,28 @@ const eventCollection = defineCollection({
     title: z.string(),
     id: z.string(),
     tags: z.array(z.string()),
+    techs: z.array(z.string()).optional(),
     semester: z.string(),
     year: z.number(),
     eventDate: z.string().datetime().transform((str) => new Date(str)),
-    students: z.array(z.string().refine(
-      async (studentId) =>{
-        const students = await getCollection('students');
-
-        return students.some(student => student.data.id == studentId)
-      },
-      (studentId) => ({message: `Student '${studentId}' not found.`})
-    )).optional(), /* do a refine check like in projects */
-    instructors: z.array(z.string().refine(
-      async (facultyId) =>{
-        const instructors = await getCollection('instructors');
-
-        return instructors.some(instructor => instructor.data.id.toLowerCase() == facultyId)
-      },
-      (facultyId) => ({message: `Faculty '${facultyId}' not found.`})
-    )).optional(),
-    projects: z.array(z.string().refine(
-      async (projectId) => {
-        const projects = await getCollection('projects');
-
-        return projects.some(project => project.data.id.toLowerCase() == projectId)        
-      },
-      (projectId) => ({ message: `Project ID '${projectId}' not found.` }))).optional(),
-    image: z.string().optional(),
+    students: z.array(z.string()).optional(),
+    instructors: z.array(z.string()).optional(),
+    projects: z.array(z.string()).optional(),
+    awards: z.array(z.string()).optional(),
+    desc: z.string().optional().nullable(),
+    imageEvent:  image().refine(eventPhotoValidator, eventPhotoValidatorMsg).optional(),
     images: z.array(z.object({
-      src: image().refine((img) => img.width <= 1500, {
-          message: "Image too large! Convert images to be less than 1500 pixels wide.",
-        }), 
-      alt: z.string() })).optional(),
+    src: image().refine((img) => img.width <= 1500, {
+      message: `Image is too large! Convert images to be less than 1500 pixels wide.`,
+    }),
+    alt: z.string() })).optional(),
   }),
 });
+const eventPhotoValidator = (img) => img.width && Math.abs(img.width / img.height - 0.75) < 0.2;
+const eventPhotoValidatorMsg = (img) => ({
+  message: `Event photo image must 2x3 portrait aspect ratio!\n${img.src} is ${img.width}x${img.height}.`,
+});
+
 const imageLogoValidator = (img) => Math.abs(img.width / img.height - 1) < 0.2;
 const imageLogoValidatorMsg = (img) => ({
   message: `Logo image must be close to square aspect ratio!\n${img.src} is ${img.width}x${img.height}.`,
@@ -150,6 +138,50 @@ const technologyCollection = defineCollection({
 });
 
 
+const awardCollection = defineCollection({
+  type: 'content', // v2.5.0 and later
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    id: z.string(),
+    tags: z.array(z.string()),
+    semester: z.string(),
+    year: z.number(),
+    postDate: z.date().default(() => new Date()),
+    updateDate: z.date().optional(),
+    events: z.array(z.string()).optional(),
+    students: z.array(z.string().refine(
+      async (studentId) =>{
+        const students = await getCollection('students');
+
+        return students.some(student => student.data.id == studentId)
+      },
+      (studentId) => ({message: `Student '${studentId}' not found.`})
+    )).optional(), /* do a refine check like in projects */
+    instructors: z.array(z.string().refine(
+      async (facultyId) =>{
+        const instructors = await getCollection('instructors');
+
+        return instructors.some(instructor => instructor.data.id.toLowerCase() == facultyId)
+      },
+      (facultyId) => ({message: `Faculty '${facultyId}' not found.`})
+    )).optional(),
+    projects: z.array(z.string().refine(
+      async (projectId) => {
+        const projects = await getCollection('projects');
+
+        return projects.some(project => project.data.id.toLowerCase() == projectId)        
+      },
+      (projectId) => ({ message: `Project ID '${projectId}' not found.` }))).optional(),
+    image: z.string().optional(),
+    images: z.array(z.object({
+      src: image().refine((img) => img.width <= 1500, {
+          message: "Image too large! Convert images to be less than 1500 pixels wide.",
+        }), 
+      alt: z.string() })).optional(),
+  }),
+});
+
+
 // 3. Export a single `collections` object to register your collection(s)
 //    This key should match your collection directory name in "src/content"
 export const collections = {
@@ -158,4 +190,5 @@ export const collections = {
   'students': studentCollection,
   'instructors': facultyCollection,
   'technologies': technologyCollection,
+  'awards': awardCollection,
 };

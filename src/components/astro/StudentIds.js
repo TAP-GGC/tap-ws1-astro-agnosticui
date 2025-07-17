@@ -6,7 +6,6 @@ const base = import.meta.env.BASE_URL == '/' ? '' : import.meta.env.BASE_URL;
 // Fetch the projects and build the tech counts
 const students = await getCollection('students');
 let studentIds = {};
-// let studentNames = {};
 
 // Build tech counts from the projects
 students.forEach(student => {
@@ -24,7 +23,7 @@ projects.forEach(project => {
   //search every project for studentIDs
   project.data.students?.forEach(studentId => {
     if (!(studentId in studentIds)){
-      //name variable needs to be fixed 
+      //name convection if id doesn't exit
       studentIds[studentId] = { 
         id: studentId,
         slug: `students/${studentId}`,

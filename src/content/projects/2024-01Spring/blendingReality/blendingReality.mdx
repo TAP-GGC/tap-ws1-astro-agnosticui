@@ -4,12 +4,17 @@ title: Teaching 3D modelling and Augmented Reality with Blender and  Aero
 id: blending-reality
 desc : Teaching Art Creation with Augmented Reality and Aero
 github: https://github.com/TAP-GGC/QuantumQuirks
-students: ["kelechi-ariwodo", "thien-nghi-duong", "carina-george"]
-instructors: ["cindy-robertson", "anca-doloc-mihu"] 
+students: [
+    "kelechi-ariwodo", "thien-nghi-duong", "carina-george"
+]
+instructors: [
+    "cindy-robertson", "anca-doloc-mihu"
+] 
 techs: ["blender","adobe-aero"]
 videos: [
     {src: "NL7IVITbNt0?si=J7g7rHS-s1w-nra6", caption: "Building a Snowman in Blender"} ,
-    {src: "mwFiZGFVci4?si=ZHX5MNGEl0LWaXMr", caption: "Download Blender & Aero(Desktop & Mobile) - Video"}
+    {src: "mwFiZGFVci4?si=ZHX5MNGEl0LWaXMr", caption: "Download Blender & Aero(Desktop & Mobile) - Video"},
+    {src: "NL7IVITbNt0?si=YAO7HmlpqZBb7wRK", caption: "Blending Reality Full Workshop"}
 ]
 events: ["tap-expo-spring24"]
 semester: spring
@@ -35,73 +40,50 @@ import blenderLogo from './blenderLogo.jpg';
 import Clip from '/src/components/astro/Clip.astro';
 
 
-
-{/* Right text block, Project description */}	
-
 The primary goal of this project is educating others about Augmented Reality (AR) using Adobe Aero and 3D Modeling using Blender.
 
 This project showcases how to build a 3D snowmen in Blender, and then how to import it in Adobe Aero environment. The project is geared towards educating and creating interest in the IT field for non STEM majors. By engaging in our workshop, students will get to experiment with Blender, 3D modeling and AR, which allows them to learn about how to play with AR technology.
 
 The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to break the misconceptions of the IT field by providing fun workshops for students of all backgrounds. TAP students design engaging and fun outreach workshops to encourage interest in IT and STEM.
 
-{/* ## Workshop
-<iframe width="560" height="100%" src="https://www.youtube.com/embed/AOuorBHAStU?si=KyfqmvnR7CZnEDrS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
- gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width: 100%; height: 680px; margin-top: 2em;"></iframe> */}
 
-{/* content block, Activities, steps & materials */}
-
-{/* Video Ad */}
-{/* <Video src="_pExIUQkeek" showIframe={true}></Video> */}
-
-<div class="prj-txt">
 ## Team members
-<Image src={BrgroupPhoto} alt="Blending Reality Group Photo" />
-#### From left to right: Carina George,  Kelechi Ariwodo and Thien Nghi Duong
-</div>
+<Photo src={BrgroupPhoto.src} alt="Blending Reality Group Photo" caption="From left to right: Carina George,  Kelechi Ariwodo and Thien Nghi Duong" />
 
-<div class="prj-list">
+
 ## Outreach Activities: 
-
 1. Tap Expo, 2024, Georgia Gwinnett College
 2. [Atlanta Science Festivals](https://atlantasciencefestival.org/),2024, Piedmont Park
 3. Class Workshops – 2024, Georgia Gwinnett College
-</div>
-
 
 ## Technology
-<div class='gallery-list'>
-<Logo src= {aeroAppLogo.src} alt="Adobe Aero" link="https://www.adobe.com/products/aero.html"/>
-{/* <Logo src= {aeroDesktopLogo.src} alt="Desktop Logo"/> */}
+<Logo src= {aeroAppLogo.src} alt="Adobe Aero (Mobile)" link="https://www.adobe.com/products/aero.html"/>
+<Logo src= {aeroDesktopLogo.src} alt="Adobe Aero (Desktop)"/> 
 <Logo src={blenderLogo.src} alt="Blender" link="https://www.blender.org/" />
-</div>
-
-
-{/* <div  style='float: left; margin-right: 15px; vertical-align: bottom; display: inline-block;font-size: 1.125em;' >
-<div class="flex flex-row flex-wrap" >
-<div style="flex: 1; min-width: 25em; text-align: center"> */}
-<div class="prj-list">
 
 ## Steps:
-<b> STEP 1: BLENDER & AERO </b>
-
+##### <b> STEP 1: BLENDER & AERO </b>
 1. Download [Blender](https://www.blender.org/download/) and [Aero](https://helpx.adobe.com/aero/get-started.html)
 2. Open the blender app, click General to begin modelling
 3. Click the cube already present on the canvas and press the delete/backspace key
-
-<b> STEP 2: ADD MESH - ICO SPHERE </b>
+<br />
+<br />
+##### <b> STEP 2: ADD MESH - ICO SPHERE </b>
 
 1. Press Shift + A to open the Add menu.
 2. Select Mesh > Icosphere. This will add a regular-sized icosphere to your scene.
-
-<b> STEP 3: DUPLICATE ICO SPHERE (2x) </b>
+<br />
+<br />
+##### <b> STEP 3: DUPLICATE ICO SPHERE (2x) </b>
 
 1. Select the icosphere you just added by left-clicking on it.
 2. Press Shift + D to duplicate it.
 3. Press S to scale it smaller.
 4. Press G then Z to move it along the Z-axis.
 5. Scroll your mouse up to move it higher above the first icosphere.
-
-<b> STEP 4: EYES OF THE BEHOLDER </b>
+<br />
+<br />
+##### <b> STEP 4: EYES OF THE BEHOLDER </b>
 
 1. Add another icosphere by pressing Shift + A and selecting Mesh > Icosphere.
 2. Scale this icosphere as small as you’d like the snowman’s eyes to be:
@@ -109,8 +91,9 @@ The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to br
 4. Press X to scale along the X-axis to flatten the ovals.
 5. Shift D to duplicate it.
 6. Press G, then X to move the duplicate eye beside the first.
-
-<b> STEP 5: BUTTONS BUTTONS BUTTONS </b>
+<br />
+<br />
+##### <b> STEP 5: BUTTONS BUTTONS BUTTONS </b>
 
 1. Add another icosphere by pressing Shift + A and selecting Mesh > Icosphere.
 2. Scale this icosphere as small as you’d like the snowman’s buttons to be:
@@ -119,8 +102,9 @@ The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to br
 5. Press G, then Z to place along the z -axis.
 6. Shift D to duplicate it.
 7. Repeat steps until you’re satisfied with the number of buttons
-
-<b> STEP 6: A CONE FOR A NOSE </b>
+<br />
+<br />
+##### <b> STEP 6: A CONE FOR A NOSE </b>
 
 1. Add a cone by pressing Shift + A and selecting Mesh > Cone.
 2. Rotate the cone on the Y-axis by pressing R then Y and typing 90.
@@ -129,29 +113,14 @@ The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to br
 ### CONGRATULATIONS! 
 ### YOU BUILT A SNOWMAN!
 
-</div>
-
-
-{/* <div style='float: right; margin-right: 15px; vertical-align: bottom; display: inline-block; font-size: 1.25em;'> */}
-
 
 ## Materials List:
-<div class="materials-list">
-
 | Amount |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Materials | Dimension |
 |    :----:   |    :----:   |    :----:   |
 | 24 | Desktops (with Aero desktop & blender downloaded) | n/a |
 | 24 | Mobile Devices - cellphones or Tablets (with Aero mobile downloaded) | n/a |
 
-</div>
-
 ## Project Setup & Installation:
-{/* <div class='prj-list'> */}
-- [Download Blender & Aero(Desktop & Mobile) - PDF](https://github.com/TAP-GGC/QuantumQuirks/blob/main/Documents/How%20download%20Blender%20and%20Aero.pdf)
-- [Augmented Reality Integration with Adobe Aero](https://github.com/TAP-GGC/Jedi/blob/main/Media/CreatingaClassroomandAddingStudentsinSpheroEdu.pdf)
-- [Download Blender & Aero(Desktop & Mobile) - Video](https://youtu.be/mwFiZGFVci4?si=KqiPkp87MJ0s3GKK)
-<Clip src="mwFiZGFVci4" showIframe={true}/>
-- [Building a Snowman in Blender](https://youtu.be/NL7IVITbNt0?si=NV3Kq1guVl0LHK-f)
-<Clip src="NL7IVITbNt0" showIframe={true}/>
+
 
 

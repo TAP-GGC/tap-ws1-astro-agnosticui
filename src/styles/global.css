@@ -38,6 +38,16 @@
   --agnostic-gray-mid-dark-modedark: #111111d7; /*overlay color*/
   /* --agnostic-link-color-modedark: #709a06; */
 
+  /* for tables */
+  --table-bg: var(--agnostic-light) !important;
+  --table-accent-bg: var(--agnostic-gray-light) !important;
+  --table-striped-color: var(--agnostic-dark) !important;
+  --table-striped-bg: var(--agnostic-gray-mid) !important;
+  --table-active-color: var(--agnostic-dark) !important;
+  --table-active-bg: var(--agnostic-primary) !important;
+  --table-hoverable-color: var(--agnostic-light) !important;
+  --table-hoverable-bg: var(--agnostic-primary-hover) !important;
+
 
 
   --user-font-scale: 1.3em; /* Scale to apply to all fonts - slightly bigger for teachers' eyes */
@@ -68,8 +78,6 @@
  body {
   display: block; /* used to be grid */
   font-family: 'Work Sans', medium; 
-  /*font-size: 1em; unused, see root definition above. set --user-font-scale for changes*/ 
-
   /* Change the min and max sizing based on available space */
 /*  grid-template-columns: flex(auto-fit, minmax(100px,1fr)); /* need to remove this */
   /*grid-auto-rows: minmax(100px, auto);  /* need to remove this */
@@ -85,9 +93,9 @@
 .blog, .body-prj, .body-student, .body-faculty, .body-tech{
   background-color: var(--agnostic-light);
   max-width: 1440px;
-  min-width: 800px;
+  min-width: 500px;
   max-height: auto;
-  margin: 1rem;
+  margin: 1.5rem auto; /* don't remove centers body*/
   padding: 3rem;
 }
 
@@ -104,13 +112,13 @@
 .blog h1, .blog h2, .blog h3, .blog h4, 
 .body-student h1, .body-student h2, .body-student h3, .body-student h4, 
 .body-faculty h1, .body-faculty h2, .body-faculty h3, .body-faculty h4 {
-  padding-top: 0.75em;
+  padding-top: 0.85em;
   text-align: center;
 }
 
 .body-prj h3{
-  text-align: center;
-  padding-bottom: 0.5em;
+  text-align: left;
+  padding-top: 0.65em;
 }
 
 /* Project and blog pages show list bullets again, and also centered. */
@@ -152,8 +160,8 @@ main {
   justify-content: space-evenly;
   align-items: center;
   justify-items: center;
-  */
-  /* width: clamp(26ch, 90%, 100%); */
+  */ 
+  width: clamp(26ch, 100%, 100%);
   position: relative;
 }
 

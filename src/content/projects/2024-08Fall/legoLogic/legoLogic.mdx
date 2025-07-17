@@ -5,44 +5,37 @@ id: lego-logic
 desc : This project utilizes LEGO SPIKE sets to create an interactive, educational experience aimed at teaching basic coding concepts through a hands-on workshop. Participants build and program a catapult to hit color-coded targets, simulating a carnival game. This engaging approach helps learners understand fundamental coding concepts such as variables, conditionals, and loops.
 github: https://github.com/TAP-GGC/LegoLogic
 students: [
-  "jenna-vincent",
-  "miguel-leon",
-  "juan-guevara"
+  "jenna-vincent", "miguel-leon", "juan-guevara"
 ]
 instructors: [
-  "cindy-robertson",
-  "cengiz-gunay"
+  "cindy-robertson", "cengiz-gunay"
 ]
 techs: [
   "lego spike"
 ]
 videos: []
 events: [
-  "tap expo",
-  "super saturday series (s3)",
-  "class workshops",
-  "create"
+  "tap expo", "super saturday series (s3)", "class workshops", "create"
 ]
 semester: fall
 year: 2024
 levels: [
-  "middle-school",
-  "high-school",
-  "college"
+  "middle-school",  "high-school",  "college"
 ] 
-difficulty: [
-  "beginner"
-] 
-durationMins: [
-  60
-]
+difficulty: [  "beginner"] 
+durationMins: [  60]
 publishedDate: 2024-11-19
 relatedIds: []
 imageLogoLight: "./LegoLogic.png"
 imageLogoDark: "./LegoLogic.png"
+curator: ["kelechi-ariwodo"]
 
 ---
 import { Image } from "astro:assets";
+import Photo from '/src/components/astro/Photo.astro';
+import Logo from '/src/components/astro/Logo.astro';
+import Gallery from '/src/components/astro/Gallery.astro';
+import Clip from '/src/components/astro/Clip.astro';
 import TeamPhoto from './TeamPhoto.jpg';
 
 {/* Right text block, Project description */}	
@@ -51,21 +44,12 @@ This project utilizes LEGO SPIKE sets to create an interactive, educational expe
 
 {/* content block, Activities, steps & materials */}
 
-{/* content block, Activities, steps & materials */}
 
-{/* <Video src="8odVRHWLpv4" showIframe={true}></Video> */} 
-
-<div class="prj-txt">
 ## Team members
-<Image src={TeamPhoto} alt="Team Photo" />
-
-#### From left to right: Miguel Leon, Jenna Vincent, Juan Guevara
+<Photo src={TeamPhoto.src} alt="Team Photo" caption="From left to right: Miguel Leon, Jenna Vincent, Juan Guevara"/>
 <br />
-</div>
 
-<div class="prj-list">
 ## Outreach Activities:
 1. TAP Expo, October 8, 2024, Georgia Gwinnett College: to promote the IT field and encourage college students to sign up for TAP.
 2. Class Workshops, October 21-24, 2024, Georgia Gwinnett College: to promote the IT field to non-IT students.
 3. Super Saturday Series (S3), Nov 16, GGC - middle and high school boys to promote IT and STEM career
-</div>

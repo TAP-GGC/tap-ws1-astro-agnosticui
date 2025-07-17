@@ -1,0 +1,35 @@
+---
+// Style Imports
+import '../styles/global.css';
+
+// common.min.css is distributed with agnostic-react
+// and agnostic-svelte too. But, since we're using all
+// of these together, we only need to import global CSS
+// once and in one place.
+// common.min.css combines properties, resets, utilities
+// import "agnostic-vue/dist/common.min.css";
+// But!! Rob much prefers individual modular import ;)
+import "agnostic-vue/dist/common.properties.min.css";
+import "agnostic-vue/dist/common.resets.min.css";
+import "agnostic-vue/dist/common.utilities.min.css";
+import "agnostic-vue/dist/opinions.min.css";
+
+
+// Component Imports
+import "agnostic-vue/dist/index.css";
+import TAPDefaultLayout from "../layouts/default.astro";
+import NewsSearch from "../components/NewsSearch.vue"
+import { Input } from "agnostic-vue";
+import Crumbs from '../components/Crumbs.vue';
+import { getCollection } from 'astro:content';
+const events = (await getCollection('events')).sort((e1, e2) => e2.data.eventDate - e1.data.eventDate);  //list of news/events in most recent order
+---
+<TAPDefaultLayout title="All News & Events">
+
+    <Crumbs pageType="posts" pageUrl="/posts" />
+
+    <NewsSearch client:load eventsList={events}/>
+
+
+</TAPDefaultLayout>
+

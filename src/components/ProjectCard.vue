@@ -13,9 +13,13 @@ const projectProp = defineProps({
     });
 
 // Logos
-let imageLogoLight = projectProp.item.data.imageLogoLight?.src;
-const imageLogoDark = projectProp.item.data.imageLogoDark ? projectProp.item.data.imageLogoDark.src : imageLogoLight;
-imageLogoLight = imageLogoLight ? imageLogoLight : imageLogoDark; // in case only dark is provided
+const imageLogoLight = computed(() =>
+  projectProp.item.data.imageLogoLight?.src || projectProp.item.data.imageLogoDark?.src
+);
+
+const imageLogoDark = computed(() =>
+  projectProp.item.data.imageLogoDark?.src || projectProp.item.data.imageLogoLight?.src
+);
 
 // Truncate description to a fixed number of characters
 const maxDescriptionLength = 100; // Adjust the length as needed
@@ -39,8 +43,8 @@ const date_options = {
         <a :href="`/projects/${item.data.year}/${item.data.semester}/${item.data.id}`" class="card-link" isShadow></a>
         <div class="projectText">                        
 
-            <img :src="imageLogoLight" alt="Project Image" class="projectImage imageLight">
-            <img :src="imageLogoDark" alt="Project Image" class="projectImage imageDark">
+            <img :src="imageLogoLight" alt="Project Image Light" class="projectImage imageLight">
+            <img :src="imageLogoDark" alt="Project Image Dark" class="projectImage imageDark">
 
             <h4 class="projectTitle">{{ item.data.shortTitle ? item.data.shortTitle : item.data.title }}</h4>
 
@@ -92,7 +96,7 @@ const date_options = {
 }
 
 .projectCard {
-  min-width: 30rem !important;
+  min-width: 20rem !important;
   max-width: 35rem;
   margin: 0.5em;
   padding: 1em 1em 1em;
@@ -164,6 +168,31 @@ const date_options = {
   font-size: small;
   height: 0;
   margin: 0;
+}
+
+/* Don't remove makes adjusts for mobile */
+@media (max-width: 800px) {
+    .projectCard {
+    min-width: 10rem !important;
+    max-width: 20rem;
+    margin: 0.5em auto !important;
+    padding: 1em 1em 1em;
+    background-color: var(--agnostic-gray-mid);
+    transition: transform 0.2s ease-in;
+  }
+  .projectImage {
+      --project-logo-width: 7em;
+      float: inline-end; /* changed because of weird pacing on some project logos */
+      margin-right: 0.5em;
+      margin-top: 0.5em;
+      width: var(--project-logo-width);
+      height: 8em;
+  }
+  .projectText {
+    text-align: left; 
+    width: calc(100% ); /* - var(--project-logo-width) - 1em  */
+  }
+  
 }
 </style>
 

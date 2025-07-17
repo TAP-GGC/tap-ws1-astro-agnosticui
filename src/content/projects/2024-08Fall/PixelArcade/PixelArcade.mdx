@@ -1,21 +1,27 @@
 ---
 shortTitle: Pixel Arcade
 title: "Teaching Binary: A Comparison of Game-Based Learning Online vs In-Person"
-id: pixelarcade
+id: pixel-arcade
 desc: Pixel Arcade is an interactive 2D game that will instruct students about the basics of binary. It was built using Unity and C#. Binary is the basis of how computers, photo editing, RGB, audio, and many other technologies work, which is why we wanted to get students familiar with it early on. Participants will play a tutorial and then 3 mini-games.
 github: https://github.com/TAP-GGC/Pixel8
-students: ["celeste-echols", "shianne-lesure", "seohyeon-kim", "zuberi-thompson"]
-instructors: ["cindy-robertson",  "cengiz-gunay"]
+students: [
+    "celeste-echols", "shianne-lesure", "seohyeon-kim", "zuberi-thompson"
+]
+instructors: [
+    "cindy-robertson",  "cengiz-gunay"
+]
 techs: ["unity", "canva", "aseprite"]
 videos: []
-events: ["super saturday series (s3)", "tap expo", "class workshops", "CCSC", "CREATE"]
+events: [
+    "super saturday series (s3)", "tap expo", "class workshops", "CCSC", "CREATE"
+]
 semester: "fall"
 year: 2024
 levels: ["middle-school", "college", "non-stem", "undergraduate"]
 difficulty: ["beginner"]
 durationMins: [60, 90]
 publishedDate: 2024-11-24
-relatedIds: ["pizzaheist", "slice-IT"]
+relatedIds: ["pizza-heist", "slice-IT"]
 images:
   [
     { src: "./Tap Expo.jpg", alt: "Tap Expo" },
@@ -28,6 +34,8 @@ images:
     { src: "./S3.jpg", alt: "Super Saturday Series Event" },
   ]
 imageLogoLight: ./Pixel ArcadeTransparent.png
+curator: ["kelechi-ariwodo"]
+
 ---
 import { Image } from "astro:assets";
 import Photo from '/src/components/astro/Photo.astro';
@@ -53,22 +61,17 @@ The Technology Ambassador Program (TAP) at GGC strives to break the misconceptio
 <br />
 
 ## Team Members:
-
-<img src={team.src} alt="Team Photo" />
-(From Left to Right) Seohyeon Kim, Shianne Lesure, Celeste Echols, Zuberi Thompson
+<Photo src={team.src} alt="Team Photo" caption="(From Left to Right) Seohyeon Kim, Shianne Lesure, Celeste Echols, Zuberi Thompson"/>
 <br />
-## Outreach Activities:
 
+## Outreach Activities:
 1.  <b>TAP Expo:</b> October 8, 2024, Georgia Gwinnett College: to promote the IT
     field and encourage college students to sign up for TAP.
-
 2.  <b>Class Workshops:</b> October 22-25, 2024, Georgia Gwinnett College: to promote
     the IT field to non-IT students.
-
 3.  <b>Consortium for Computing Sciences in Colleges (CCSC):</b> November 1-2, 2024,
     Furman University: to promote tips for developing a successful project to introduction
     to programming and outreach.
-
 4.  <b>GGC CREATE Symposium:</b> November 14, 2024, Georgia Gwinnett College: to
     promote the IT field to non-IT students.
 5.  <b>Super Saturday Series(S3):</b> November 16, 2024, Georgia Gwinnett College:
@@ -83,17 +86,11 @@ The Technology Ambassador Program (TAP) at GGC strives to break the misconceptio
 
 <br />
 ## Instructions:
-
 1. Go to the [Pixel Arcade Website](https://slesure.itch.io/pixel-arcade)
-
 2. Read the description under the game to understand the details.​
-
 3. When you're ready to play, click the <b>"Run game"</b> button.​
-
 4. Once the game loads, hit the <b>full screen</b> icon at the bottom right corner of the game view for the best experience.​
-
 5. Start by playing the assigned game.​
-
 6. If you finish early, feel free to explore and play the RGB paint game.
 
 <br/>
@@ -104,22 +101,17 @@ The Technology Ambassador Program (TAP) at GGC strives to break the misconceptio
 <br />
 
 ## Technology:
-<div class='gallery-list'>
 <Logo src= {unity.src} alt="Unity" link="https://unity.com/"/>
 <Logo src= {canva.src} alt="Canva" link="https://www.canva.com/"/>
 <Logo src= {aesprite.src} alt="Aesprite" link="https://www.aseprite.org/"/>
-</div>
 
 ## Similar Projects:
 
 [Slice It!](https://tapggc.org/projects/2022/fall/slice-IT/)
-
 [Pizza Heist](https://tapggc.org/projects/2024/fall/pizzaheist/)
 
 ## Project Setup:
 
 [Project Installation](https://youtu.be/DCd296jpmJo)
-
 [Uploading game to itch.io](https://www.youtube.com/watch?v=skBEu32hGTg)
-
 [Project Usage](https://github.com/TAP-GGC/Pixel8?tab=readme-ov-file#project-usage)

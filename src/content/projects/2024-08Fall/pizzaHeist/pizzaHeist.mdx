@@ -1,57 +1,40 @@
 ---
 shortTitle: Pizza Heist
 title: A Cybersecurity Threat Awareness Game
-id: pizzaheist
+id: pizza-heist
 desc : A Cybersecurity Threat Awareness Game
 github: "https://github.com/TAP-GGC/TeamRocketPizza"
 students: [
-  "nikki-thao",
-  "daniel-to",
-  "brian-ramos-cazares"
+  "nikki-thao", "daniel-to", "brian-ramos-cazares"
 ]
 instructors: [
-  "cengiz-gunay",
-  "cindy-robertson"
+  "cengiz-gunay", "cindy-robertson"
 ] 
 techs: [
-  "unity",
-  "csharp",
-  "aseprite"
+  "unity", "csharp", "aseprite"
 ]
 
 videos: [
   {src: "QgSUc8iSpE0?si=cifM3RQChrPvImtC", caption: "PizzaHeist Demo"} ,
   {src: "SCNCaxgNzoY?si=5JNfaDqkHOo4ghmn", caption: "PizzaHeist Workshop"} ,
-  {src: "MSXw6c6GuhQ?si=btQ47aKCiQFxnigQ", caption: "PizzaHeist Unity Download"} ,
+  {src: "MSXw6c6GuhQ?si=btQ47aKCiQFxnigQ", caption: "PizzaHeist Unity Install"} ,
   {src: "9e8ZUquH_-0?si=1KpH6z0RJEqsY466", caption: "PizzaHeist Aesprite Tutorial"} 
 ]
 
 events: [
-  "create",
-  "super saturday series (S3)",
-  "tap expo",
-  "classroom workshop"
+  "create", "super saturday series (S3)", "tap expo", "classroom workshop"
 ]
 semester: fall
 year: 2024
 levels: [
-  "middle-school",
-  "high-school",
-  "college",
-  "non-stem",
-  "stem"
+  "middle-school",  "high-school",
+  "college",  "non-stem",  "stem"
 ] 
-difficulty: [
-  "beginner"
-] 
-durationMins: [
-  45,
-  60
-]
+difficulty: [  "beginner"] 
+durationMins: [  45,  60]
 publishedDate: 2024-11-19
 relatedIds: [
-  "SliceIT",
-  "Pixel Arcade"
+  "SliceIT",  "pixel-arcade"
 ]
 
 images: [
@@ -66,6 +49,9 @@ images: [
 
 imageLogoLight: ./TransparentPizzaHeist.png
 imageTeam: ./PizzaHeistTeam.jpeg
+curator: ["kelechi-ariwodo"]
+videoAd: "t6F2AzUeuyw?si=HDVacSi96D8BOW4q"
+
 ---
 
 import { Image } from "astro:assets";
@@ -95,24 +81,15 @@ import AsepriteLogo from './header-logo.png';
 * **Main Technology:** Unity, a versatile cross-platform game engine.  
 * [Technology Ambassador Program](https://tapggc.org/) (TAP) is a project-based class fostering a collaborative environment for students to develop semester-long projects. TAP promotes IT participation through outreach activities and workshops designed to showcase the creative and fun side of technology.
 
-{/* CONTENT BLOCK */}
-{/* <div class="prj-list"> */}
-<iframe width="560" class="youtube" src="https://www.youtube.com/embed/t6F2AzUeuyw?si=oH2ynfMDBeVydJtl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Rocket Pizza
 
 #### **Team Members:**  
-<Image src={GroupPhoto} alt="Pizza Heist team photo" />
-*Left to Right: Nikki Thao, Brian Ramos Cazares, Daniel To*
+<Photo src={GroupPhoto.src} alt="Pizza Heist team photo" caption="Left to Right: Nikki Thao, Brian Ramos Cazares, Daniel To"/>
 
-## Advisors
-
-* Dr. Cengiz Gunay  
-* Dr. Cindy Robertson  
 
 ## Publications
-
-1. **CCSC:SE Abstract**  
+1. **CCSC:SE Abstract**
    *Ramos Cazares, B., Thao, N., To, D.*  
    _Pizza Heist: Cybersecurity Threat Awareness Game,_  
    Consortium for Computing Sciences in Colleges: Southeastern Region (CCSC:SE), November 1-2, 2024, Greenville, SC.
@@ -140,14 +117,8 @@ Unity:
 * [PixelArcade](https://github.com/TAP-GGC/Pixel8)
 
 ## Technology
-
-#### Unity
-<Image src={UnityLogo} alt="UnityLogo"/>
-[Unity](https://unity.com/) is a versatile game engine enabling the creation of 2D and 3D interactive experiences. Unity's extensive asset library and user-friendly tools make it ideal for beginners and advanced developers alike.
-
-#### Aesprite
-<Image src={AsepriteLogo} alt="AsepriteLogo"/>
-[Aseprite](https://www.aseprite.org/) is a lightweight, user-friendly sprite editor and pixel art tool, ideal for creating 2D game assets, animations, and retro-style graphics.
+<Logo src={UnityLogo.src} alt="UnityLogo" link="https://unity.com/"/>
+<Logo src={AsepriteLogo.src} alt="AsepriteLogo" link="https://www.aseprite.org/"/>
 
 ## Project Setup
 
