@@ -3,7 +3,7 @@ import { computed, ref } from "vue";
 // Components CSS
 import "agnostic-vue/dist/index.css";
 import "agnostic-vue/dist/common.min.css";
-import { Input, Card, Select, Disclose } from "agnostic-vue";
+import { Input, Card, Select, Disclose, Tag } from "agnostic-vue";
 import { Button, ButtonGroup } from 'agnostic-vue';
 
 
@@ -35,6 +35,9 @@ const difficulty = props.filter?.difficulty ? ref([props.filter.difficulty]) : r
 const showAdvanced = ref(false);
 const advancedSearch = ref("");
 
+const advancedTerm = ref("");
+const advancedSearchTags = ref([]);
+
 // General search function - searches in basic project info
 function matchesGeneralSearch(project) {
     const general = search_text.value.toLowerCase();
@@ -51,14 +54,12 @@ function matchesGeneralSearch(project) {
 
 // Advanced search function - searches in technology, level, difficulty
 function matchesAdvancedSearch(project) {
-    const advancedTerms = advancedSearch.value.toLowerCase().split(/\s+/).filter(Boolean);
-    
-    if (advancedTerms.length === 0) return true; 
-    
-    return advancedTerms.every((term) =>
+    if (advancedSearchTags.value.length === 0) return true;
+
+    return advancedSearchTags.value.every(term =>
         project.data.techs?.some(t => t.toLowerCase().includes(term)) ||
         project.data.levels?.some(l => l.toLowerCase().includes(term)) ||
-        project.data.difficulty?.some(d =>d.toLowerCase().includes(term))
+        project.data.difficulty?.some(d => d.toLowerCase().includes(term))
     );
 }
 
@@ -66,6 +67,33 @@ function matchesAdvancedSearch(project) {
 function matches(project) {
     return matchesGeneralSearch(project) && matchesAdvancedSearch(project);
 }
+
+function addAdvancedTag() {
+    const term = advancedTerm.value.trim().toLowerCase();
+    if (term !== '' && !advancedSearchTags.value.includes(term)) {
+    advancedSearchTags.value.push(term);
+    }
+    advancedTerm.value = '';
+}
+
+function removeAdvancedTag(index) {
+    advancedSearchTags.value.splice(index, 1);
+}
+
+//Keyword option for advance search
+const keywordOptions = computed(() => {
+    const techNames = new Set();
+    const difficultyLevels = new Set();
+    const levels = new Set();
+
+    projects.forEach(project => {
+        (project.data.techs || []).forEach(t => techNames.add(t.toLowerCase()));
+        (project.data.difficulty || []).forEach(d => difficultyLevels.add(d.toLowerCase()));
+        (project.data.levels || []).forEach(l => levels.add(l.toLowerCase()));
+    });
+
+    return [...new Set([...techNames, ...difficultyLevels, ...levels])];
+});
 
 //sorting
 const sortField = ref("publishedDate");
@@ -103,13 +131,25 @@ const base = import.meta.env.BASE_URL;
             label="Search for projects" type="text" v-model="search_text" />
         
         <Disclose :is-open="showAdvanced" title="🔍 Advanced Search">
-            <Input v-model="advancedSearch" label="Search by Technology, Difficulty, Level" placeholder="Type tech, level, difficulty keyword here" class="mb-2"/>
+            <Input v-model="advancedTerm" @keydown.enter.prevent="addAdvancedTag" list="keyword-list"
+                placeholder="Type keyword or select from the dropdown option, then press Enter to search" class="w-full mb-2"/>
+            <datalist id="keyword-list">
+                <option v-for="option in keywordOptions" :key="option" :value="option" />
+            </datalist>
+
+            <div class="flex flex-wrap gap-2 mt-1">
+                <Tag v-for="(tag, index) in advancedSearchTags" :key="index" class="mie6" shape="round" type="success" is-uppercase>
+                    {{ tag }}
+                    <button @click="removeAdvancedTag(index)" class="delete">&#x2718;</button>
+                </Tag>
+            </div>
         </Disclose>
         
         <div class="d-flex align-items-center mt-3 mb-3">
             <label class="me-2">Sort by:</label>
             <select v-model="sortField" class="form-select me-2" style="width: auto;">
-                <option value="publishedDate">Published Date</option>
+                <option value="publishedDate">Update Date</option>
+                <option value="year">Published Date</option>
                 <option value="shortTitle">Title</option>
             </select>
             <Button @click="toggleSortDirection" variant="ghost">
