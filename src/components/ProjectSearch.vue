@@ -148,7 +148,8 @@ const base = import.meta.env.BASE_URL;
         <div class="d-flex align-items-center mt-3 mb-3">
             <label class="me-2">Sort by:</label>
             <select v-model="sortField" class="form-select me-2" style="width: auto;">
-                <option value="publishedDate">Published Date</option>
+                <option value="publishedDate">Update Date</option>
+                <option value="year">Published Date</option>
                 <option value="shortTitle">Title</option>
             </select>
             <Button @click="toggleSortDirection" variant="ghost">
