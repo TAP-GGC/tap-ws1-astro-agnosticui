@@ -242,14 +242,14 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 	  )}
 
 	{relatedProjects.length > 0 && (
-  <>
-    <h2 style="text-align: center; margin-top: 3rem;">Related Projects</h2>
-    <div class="related-projects-container">
-      {relatedProjects.map(project => (
-        <ProjectCard item={projectIds[project.data.id]} />
-      ))}
-    </div>
-  </>
+	<>
+		<h2 style="text-align: center; margin-top: 3rem;">Related Projects</h2>
+		<div class="related-projects-container">
+			{relatedProjects.map(project => (
+				<ProjectCard item={projectIds[project.data.id]} />
+			))}
+		</div>
+	</>
 )}
 </div>
 	
@@ -319,12 +319,12 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 		margin: 0 auto;
   }
 
-	.related-project-cards {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 0.5rem;
+	.related-projects-container {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 1.5rem;
 		margin-top: 1rem;
+		padding: 0 1rem;
 	}
 
 	.tech-card-grid {
@@ -333,6 +333,7 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 		gap: 1rem;
 		margin-top: 1rem;
 	}
+
   
 </style>
 </TAPDefaultLayout>
