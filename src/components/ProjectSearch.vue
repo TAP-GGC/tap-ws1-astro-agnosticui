@@ -129,9 +129,9 @@ function toggleSortDirection() {
 }
 
 // Filtered and paginated results
-const filteredProjects = computed(() => {
-  return props.projectList.filter(project => matches(project));
-});
+// const filteredProjects = computed(() => {
+//   return props.projectList.filter(project => matches(project));
+// }); => pointed to the filteredAndSortedProjectList
 
 const paginatedProjects = ref([]);
 
@@ -142,15 +142,24 @@ watchEffect(() => {
 });
 
 // Clamp current page when result size or pageSize changes
-watch([filteredProjects, pageSize], () => {
-  const tp = Math.max(1, Math.ceil(filteredProjects.value.length / pageSize.value));
+watch([filteredAndSortedProjectsList, pageSize], () => {
+  const tp = Math.max(1, Math.ceil(filteredAndSortedProjectsList.value.length / pageSize.value));
   if (currentPage.value > tp) currentPage.value = tp;
 });
 
 // reset to page 1 whenever any filter or search changes
-// need to write a new one for the advance search!
+watch(
+  [
+    search_text,          
+    sortField, sortAsc,  
+    () => advancedSearchTags.value.length, 
+    () => props.projectList              
+  ],
+  () => { currentPage.value = 1; },
+  { deep: true } // needed for props.projectList structure changes
+);
 
-const totalPages = computed(() => Math.ceil(filteredProjects.value.length / pageSize.value));
+const totalPages = computed(() => Math.ceil(filteredAndSortedProjectsList.value.length / pageSize.value));
 
 // URL sync (optional)
 watch(currentPage, (newPage) => {
