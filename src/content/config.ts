@@ -180,6 +180,28 @@ const awardCollection = defineCollection({
       alt: z.string() })).optional(),
   }),
 });
+const papersCollection = defineCollection({
+  type: 'content',
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    id: z.string(),
+    semester: z.string(),
+    year: z.number(),
+    techs: z.array(z.string()),
+    postDate: z.string().datetime().transform((str) => new Date(str)),
+    updateDate: z.date().optional(),
+    events: z.array(z.string()).optional(),
+    awards: z.array(z.string()).optional(),
+    students: z.array(z.string()),
+    instructors: z.array(z.string()),
+    projects: z.array(z.string()),
+    image: image().refine((img) => img.width <= 150, {
+      message: "Image too large! Convert images to be less than 150 pixels wide.",
+    }).optional(),
+    abstract: z.string().optional(),
+    paperLink: z.string(),
+  })
+});
 
 
 // 3. Export a single `collections` object to register your collection(s)
@@ -191,4 +213,5 @@ export const collections = {
   'instructors': facultyCollection,
   'technologies': technologyCollection,
   'awards': awardCollection,
+  'publications' : papersCollection
 };

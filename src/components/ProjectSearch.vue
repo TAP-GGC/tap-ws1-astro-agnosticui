@@ -1,22 +1,32 @@
 <script setup>
-import { computed, ref } from "vue";
-// Components CSS
+import { computed, ref, watchEffect, watch } from "vue";
 import "agnostic-vue/dist/index.css";
 import "agnostic-vue/dist/common.min.css";
 import { Input, Card, Select, Disclose, Tag } from "agnostic-vue";
 import { Button, ButtonGroup } from 'agnostic-vue';
 
+import ProjectCard from "./ProjectCard.vue";
+import Pagination from "./Pagination.vue";
 
-
-// Component Imports
-import ProjectPagination from "./vue/ProjectPagination.vue";
-
-// load content from props
+// Props
 const props = defineProps({
-        projectList: Object,
-        filter: Object
-    });
+  projectList: Object,
+  filter: Object,
+  currentPage: {
+    type: Number,
+    default: 1
+  },
+  pageSize: {
+    type: Number,
+    default: 10
+  }
+});
+
 const projects = props.projectList;
+// Reactive state
+const currentPage = ref(props.currentPage);
+const pageSize = ref(props.pageSize);
+
 const search_text = ref("");
 const student = props.filter?.student ? ref([props.filter.student]) : ref(['Any']);
 const instructor = props.filter?.instructor ? ref([props.filter.instructor]) : ref(['Any']);
@@ -118,13 +128,54 @@ function toggleSortDirection() {
     sortAsc.value = !sortAsc.value;
 }
 
+// Filtered and paginated results
+// const filteredProjects = computed(() => {
+//   return props.projectList.filter(project => matches(project));
+// }); => pointed to the filteredAndSortedProjectList
+
+const paginatedProjects = ref([]);
+
+watchEffect(() => {
+  const start = (currentPage.value - 1) * pageSize.value;
+  const end = start + pageSize.value;
+  paginatedProjects.value = filteredAndSortedProjectsList.value.slice(start, end);
+});
+
+// Clamp current page when result size or pageSize changes
+watch([filteredAndSortedProjectsList, pageSize], () => {
+  const tp = Math.max(1, Math.ceil(filteredAndSortedProjectsList.value.length / pageSize.value));
+  if (currentPage.value > tp) currentPage.value = tp;
+});
+
+// reset to page 1 whenever any filter or search changes
+watch(
+  [
+    search_text,          
+    sortField, sortAsc,  
+    () => advancedSearchTags.value.length, 
+    () => props.projectList              
+  ],
+  () => { currentPage.value = 1; },
+  { deep: true } // needed for props.projectList structure changes
+);
+
+const totalPages = computed(() => Math.ceil(filteredAndSortedProjectsList.value.length / pageSize.value));
+
+// URL sync (optional)
+watch(currentPage, (newPage) => {
+  const url = new URL(window.location.href);
+  url.searchParams.set("page", newPage);
+  window.history.pushState({}, '', url);
+});
+
+// For Reset button
 const base = import.meta.env.BASE_URL;
+const paginationBaseUrl = `${base === '/' ? '' : base}/projects`;
 
 </script>
 
 <template>
-    <div>
-    
+  <div>
     <section class="mbe40">
 
         <Input id="7" is-underlined is-underlined-with-background placeholder="Enter project name, student, technology…"
@@ -158,34 +209,45 @@ const base = import.meta.env.BASE_URL;
         </div> 
     </section>
 
-    <h3> {{ ((search_text || advancedSearch || !level.includes('Any') ||
+    <h3> {{ ((search_text || advancedSearchTags.length || !level.includes('Any') ||
                 !tech.includes('Any') || !duration.includes('Any') || !difficulty.includes('Any')) ?
                 `Selected projects` : 'All Projects') }} ({{ filteredAndSortedProjectsList.length }})</h3>
 
     <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
-        <ProjectPagination client:load :projects="filteredAndSortedProjectsList" :itemsPerPage="10" />
+      <template v-for="project in paginatedProjects" :key="project.data.id">
+        <ProjectCard :item="project" />
+      </template>
     </section>
 
+    <Pagination
+        v-model:currentPage="currentPage"
+        :totalItems="filteredAndSortedProjectsList.length"
+        :pageSize="pageSize"
+    />
 
-    </div>
-</template>  
-  
+  </div>
+</template>
+
 <style scoped>
 .project-filter-container {
-    justify-content: space-around;
-    display: flex;
-    flex-flow: row wrap;
-    /* align-items: flex-start; */ 
-    justify-content: center;
-    align-items: center;
-}
-.project-filter-dropdown {
-    /* apply grid and flex here */
-    min-width: 10rem !important;
-    max-width: 20em;
-    margin: 0 auto;
-    padding: 1em;
-    flex: 1;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
-</style>  
+.project-filter-dropdown {
+  min-width: 10rem;
+  max-width: 20em;
+  margin: 0 auto;
+  padding: 1em;
+  flex: 1;
+}
+
+.project-cards-flex {
+  gap: 1.5rem;
+}
+</style>
+
+
