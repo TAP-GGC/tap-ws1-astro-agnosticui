@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, watch, watchEffect } from "vue";
 // Components CSS
 import "agnostic-vue/dist/index.css";
 import "agnostic-vue/dist/common.min.css";
@@ -11,6 +11,7 @@ import { Button } from 'agnostic-vue';
 // Component Imports
 import EventCard from "./EventCard.vue";
 import PublicationCard from "./PublicationCard.vue";
+import Pagination from "./Pagination.vue";
 
 // load content from props
 const props = defineProps({
@@ -89,8 +90,30 @@ function matches(item) {
   }
 }
 
+// Pagination 
+const currentPage = ref(1); 
+const pageSize = ref(6);
+
 const filteredItems = computed(() => {
   return content.filter(item => matches(item));
+});
+
+// Paginated slice
+const paginatedItems = ref([]);
+watchEffect(() => {
+  const start = (currentPage.value - 1) * pageSize.value;
+  const end = start + pageSize.value;
+  paginatedItems.value = filteredItems.value.slice(start, end);
+});
+
+// Total pages
+const totalPages = computed(() =>
+  Math.max(1, Math.ceil((filteredItems.value.length || 0) / (pageSize.value || 1)))
+);
+
+// Clamp page when results shrink
+watch([filteredItems, pageSize], () => {
+  if (currentPage.value > totalPages.value) currentPage.value = totalPages.value;
 });
 
 const base = import.meta.env.BASE_URL;
@@ -148,11 +171,17 @@ const contextLabel = computed(() => props.context === 'events' ? 'Events' : 'Pub
     </h3>
 
     <section class="mbe40 event-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
-        <template v-for="item in filteredItems" :key="item.data.id">
+        <template v-for="item in paginatedItems" :key="item.data.id">
             <EventCard v-if="context === 'events'" :item = "item" />
             <PublicationCard  v-else :item="item"/>
         </template>
     </section>
+
+    <Pagination
+      v-model:currentPage="currentPage"
+      :totalItems="filteredItems.length"
+      :pageSize="pageSize"
+    />
     </div>
 </template>  
   
