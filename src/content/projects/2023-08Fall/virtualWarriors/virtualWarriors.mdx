@@ -33,13 +33,19 @@ images: [
     { src: './S3Photo3.jpg', alt: 'S3 Event Photo'},
     { src: './TapExpoPhoto.jpg', alt: 'TAP Expo Photo'},
     { src: './TapExpoPhoto2.jpg', alt: 'TAP Expo Photo'},
+    { src: './advancedWorkshop.PNG', alt: 'Advance Workshop Screenshot'},
+    { src: './codeRoblox.PNG', alt: 'Roblox Code'},
+    { src: './codeWorkshop.PNG', alt: 'Workshop Code'},
+    { src: './envRoblox.PNG', alt: 'Roblox Environment'},
+    { src: './metaQuestGame.PNG', alt: 'Meta Quest Game'},
+    { src: './robloxGame.PNG', alt: 'Roblox Game'},
 ]
 image: ./virtualWarriorsTransparentLogo.png
 imageLogoLight: ./virtualWarriorsTransparentLogo.png
 imageLogoDark: ./virtualWarriorsTransparentLogo.png
 imageLogoTrans: ./virtualWarriorsTransparentLogo.png
 imageTeam: ./virtualWarriorsTeamPhoto.png
-videoAd: "8odVRHWLpv4"
+videoAd: "OWpitdI-BEQ"
 curator: ["sean-nolan", "kelechi-ariwodo"]
 ---
 import { Image } from "astro:assets";
@@ -48,6 +54,7 @@ import Logo from '/src/components/astro/Logo.astro';
 import metaQuest2 from './MetaQuest2Image.jpg';
 import robloxStudioImage from './RobloxStudioImage.png';
 import virtualWarriorsTeamPhoto from './virtualWarriorsTeamPhoto.png';
+import Clip from '/src/components/astro/Clip.astro';
 
 
 
@@ -104,17 +111,28 @@ The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to br
 </div>
 
 {/* CONTENT BLOCK */}
-<div class='prj-list'>
-<iframe width="560" class="youtube" src="https://www.youtube.com/embed/fTHYSRMObBw?si=5DyCDRpUBAxpnLX8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+<div>
 ## Project Setup & Installation:
-- [Installing Roblox Studio](https://github.com/TAP-GGC/VirtualWarriors/blob/main/media/Installing%20Roblox%20Studio.pdf)
-- [Creating Roblox Account](https://github.com/TAP-GGC/VirtualWarriors/blob/main/media/Creating%20Roblox%20Account.pdf)
-- [Downloading Workshop File](https://github.com/TAP-GGC/VirtualWarriors/blob/main/media/Downloading%20Workshop%20File.pdf)
-- [Roblox Workshop Walkthrough](https://github.com/TAP-GGC/VirtualWarriors/blob/main/media/Roblox%20Workshop%20Walkthrough.pdf)
-- [Roblox Advanced Workshop Walkthrough](https://github.com/TAP-GGC/VirtualWarriors/blob/main/media/TapAdvancedWorkshopWalkthroughPDF.pdf)
-- [Workshop File Link](https://github.com/TAP-GGC/VirtualWarriors/blob/main/code/TAP%20Roblox%20Workshop%20File.rbxl)
-- [Advanced Workshop File Link](https://github.com/TAP-GGC/VirtualWarriors/blob/main/code/TAP%20Advanced%20Workshop.rbxl)
+  #### <a href="https://github.com/TAP-GGC/VirtualWarriors/blob/main/media/Installing%20Roblox%20Studio.pdf" target="_blank" rel="noopener noreferrer">Installing Roblox Studio</a>
+    <Clip src="V6Xhoc1E3XA" showIframe={true} />
+  
+  #### <a href="https://github.com/TAP-GGC/VirtualWarriors/blob/main/media/Creating%20Roblox%20Account.pdf" target="_blank" rel="noopener noreferrer">Creating Roblox Account</a>
+    <Clip src="Mu0E5oB6K0A" showIframe={true} />
+  
+  #### <a href="https://github.com/TAP-GGC/VirtualWarriors/blob/main/media/Downloading%20Workshop%20File.pdf" target="_blank" rel="noopener noreferrer">Downloading Workshop File</a>
+    <Clip src="G4GH3dAIq4E" showIframe={true} />
+
+  #### <a href="https://github.com/TAP-GGC/VirtualWarriors/blob/main/media/Roblox%20Workshop%20Walkthrough.pdf" target="_blank" rel="noopener noreferrer">Roblox Workshop Walkthrough</a>
+    <Clip src="jK-vUmt0tbs" showIframe={true} />
+
+  #### <a href="https://github.com/TAP-GGC/VirtualWarriors/blob/main/media/TapAdvancedWorkshopWalkthroughPDF.pdf" target="_blank" rel="noopener noreferrer">Roblox Advanced Workshop Walkthrough</a>
+    <Clip src="x82gl9WlWQ0" showIframe={true} />
+
+  #### Code Walkthrough for Workshop Files
+    <Clip src="OW56Lbc-IEs" showIframe={true} />
+  
+  #### <a href="https://github.com/TAP-GGC/VirtualWarriors/blob/main/code/TAP%20Roblox%20Workshop%20File.rbxl" target="_blank" rel="noopener noreferrer">Workshop File Link</a>
+  #### <a href="https://github.com/TAP-GGC/VirtualWarriors/blob/main/code/TAP%20Advanced%20Workshop.rbxl" target="_blank" rel="noopener noreferrer">Advanced Workshop File Link</a>
 
 
 </div>
