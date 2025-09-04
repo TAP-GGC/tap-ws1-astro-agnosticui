@@ -18,7 +18,7 @@ export default{
     background-color: var(--agnostic-gray-mid);
     color: var(--agnostic-dark);
     text-align: center;
-    padding: 2rem 1rem;
+    padding: 2rem 3rem;
     /* width: 100vw; - causing the left alignment problem in mobile*/
 }
 .banner-content{
@@ -39,7 +39,7 @@ export default{
 .banner h3{
     font-weight: 300 !important;
     /*font-size: 125%;*/ /* 1rem */
-    font-size: clamp(var(--agnostic-h5), 3vw, var(--agnostic-h3));
+    font-size: clamp(var(--agnostic-h5), 3vw, var(--agnostic-h4));
 }
 
 </style>

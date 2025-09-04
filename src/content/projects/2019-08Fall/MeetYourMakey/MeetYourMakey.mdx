@@ -5,42 +5,31 @@ id: meet-your-makey
 desc: Introduces students to the basics of circuits and coding by using the Makey Makey invention kit. Students build custom instruments layouts that interact with a computer, helping them understand inputs, outputs, and creative programming.
 github: https://github.com/TAP-GGC/meet-your-makey
 students: [
-  "james-broome",
-  "khadijah-nixon",
-  "alex-smyntyna",
-  "hieu-dinh"
+  "james-broome",  "khadijah-nixon",
+  "alex-smyntyna",  "hieu-dinh"
 ]
 instructors: [
-  "anca-doloc-mihu",
-  "cindy-robertson"
+  "anca-doloc-mihu",  "cindy-robertson"
 ]
 techs: [
-  "Makey-Makey",
-  "Godot"
+  "Makey-Makey",  "Godot"
 ]
 videos: [
 ]
 events: [
   "Super Saturday Series (S3)",
-  "Tap Expo",
-  "Class workshops"
+  "Tap Expo",  "Class workshops"
 ]
 semester: fall
 year: 2019
 levels: [
-  "K-12",
-  "Middle-school",
-  "High-school",
-  "College"
+  "K-12",  "Middle-school",
+  "High-school",  "College"
 ]
-difficulty: [
-  "Intermediate"
-]
+difficulty: [  "Intermediate"]
 durationMins: [60]
 publishedDate: 2025-05-12
-relatedIds: [
-  "Project M"
-]
+relatedIds: [  "Project M"]
 images: [
   { src: './MeetYourMakeyTeam.jpg', alt: 'Team Photo'},
   { src: './MakeyMakeyVisual.png', alt: 'Game Layout'},
@@ -48,10 +37,10 @@ images: [
   { src: './MakeyInstruments.PNG', alt: 'Makey Instruments'},
   { src: './MeetYourMakey.PNG', alt: 'Meet Your Makey'}
 ]
-imageLogoLight: ./MeetYourMakeyPlaceHolderLogo.png
-imageLogoDark: ./MeetYourMakeyPlaceHolderLogo.png
+imageLogoLight: ./meet-your-makey-light.png
+imageLogoDark: ./meet-your-makey-dark.png
 imageTeam: ./MeetYourMakeyTeam.jpg
-curator: ["elijah-santiago"]
+curator: ["elijah-santiago", "kelechi-ariwodo"]
 ---
 
 import { Image } from "astro:assets";
@@ -81,16 +70,15 @@ See Github for more details!
 {/* Team photo */}	
 
 ## Team members
-<Image src={GroupPhoto} alt="Team Photo" />
-#### James Broome, Khadijah Nixon, Alex Smyntyna, Hieu Dinh  
+<Photo src={GroupPhoto.src} alt="Team Photo" caption="James Broome, Khadijah Nixon, Alex Smyntyna, Hieu Dinh  " />
 <br />
 
 {/* Activities section */}	
 
 ## Outreach Activities:
-1. **Super Saturday Series** – November 9, 2019, GGC: Workshop for middle and high school girls to promote IT and STEM.
-2. **TAP Expo** – October 10, 2019, GGC: Outreach to college students about IT and the TAP program.
-3. **Class Workshops** – November 11, 13, and 15, 2019, GGC: In-class demos and coding with Makey Makey for college non-IT majors.
+1. **Super Saturday Series** – November 9, 2019, Georgia Gwinnett College
+2. **TAP Expo** – October 10, 2019, Georgia Gwinnett College
+3. **Class Workshops** – November 11, 13, and 15, 2019, Georgia Gwinnett College 
 
 ## Materials List:
 | Amount | Materials                     |
@@ -99,14 +87,8 @@ See Github for more details!
 | 1      | PlayDough Collection          |
 
 ## Technology
-<div className='gallery-list'>
-  <a href="https://godotengine.org" target="_blank" rel="noopener noreferrer">
-    <Logo src={GodotLogo.src} alt="Godot Logo" />
-  </a>
-  <a href="https://makeymakey.com" target="_blank" rel="noopener noreferrer">
-    <Logo src={MakeyLogo.src} alt="Makey Logo" />
-  </a>
-</div>
+    <Logo src={GodotLogo.src} alt="Godot Logo" link="https://godotengine.org" />
+    <Logo src={MakeyLogo.src} alt="Makey Logo" link="https://makeymakey.com"/>
 
 ## Project Setup & Installation:
 - <a href="https://github.com/TAP-GGC/meet-your-makey/blob/master/media/Meet-your-Makey%20Step-by-Step%20Installation.pdf" target="_blank" rel="noopener noreferrer">Meet-your-Makey Step-by-Step Setup Guide</a>
@@ -116,7 +98,6 @@ See Github for more details!
 {/* How to play the game */}
 
 ## Usage
-
 ### Instrument Controls
 - W, A, S, D, F, G, Left Arrow, Right Arrow — Play instrument notes and animate icons  
 - Pressing a key triggers a sound and visual response

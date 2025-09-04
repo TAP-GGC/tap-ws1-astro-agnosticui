@@ -4,12 +4,19 @@ title: Teaching Algorithms and Growing STEM with Sphero
 id: jedi-sphero
 desc: Teaches algorithmic thinking by programming a Sphero robot to navigate a maze.
 github: https://github.com/TAP-GGC/Jedi?tab=readme-ov-file
-students: [ tony-lam, etienne-laccruche, ammar-mehicevic ]
-instructors: [cindy-robertson, anca-doloc-mihu]
+students: [ 
+    tony-lam, etienne-laccruche, ammar-mehicevic
+]
+instructors: [
+    cindy-robertson, anca-doloc-mihu
+]
 techs: [sphero]
 videos: [
-    {src: "https://youtu.be/8odVRHWLpv4", caption: ""}, 
-    {src: "https://youtu.be/fTHYSRMObBw", caption: ""}
+    {src: "fTHYSRMObBw?si=d397dHuAz5jL4AnX", caption: " Short Sphero workshop "},
+    {src: "LAu1CeJtu_Q?si=9sGZ2T0Pe2HvM3mx" , caption: " Installing Sphero Edu "}, 
+    {src: "ej4uR7sUrAw?si=fhxp9aIXD1J4kcyd" , caption: " Creating a Teacher Sphero.edu Account "}, 
+    {src: "3PSOkOrgY9g?si=E8uA65XJDn2s55Mh" , caption: " Creating a Classroom and Adding Students in Sphero Edu "}, 
+    {src: "SYQ1Sk9o07E?si=FjBiG7TCT7iBvtg7", caption: " Creating a Program in Sphero Edu "}
 ]
 tags: []
 events: [tap-expo-fall23]
@@ -27,7 +34,7 @@ imageLogoLight: ./jedi-logo-light.png
 imageLogoDark: ./jedi-logo-dark.png
 imageTeam: ./JediGroupPhoto_cropped.jpg
 videoAd: "8odVRHWLpv4" 
-curator: [ebube-nwachukwu, kelechi-ariwodo, trung-dao]
+curator: ["ebube-nwachukwu", "kelechi-ariwodo", "trung-dao"]
 ---
 import { Image } from "astro:assets";
 import Photo from '/src/components/astro/Photo.astro';
@@ -52,28 +59,17 @@ The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to br
 
 {/* content block, Activities, steps & materials */}
 
-{/* <Video src="8odVRHWLpv4" showIframe={true}></Video> */} 
-
-<div class="prj-txt">
 ## Team members
-<Image src={JediGroupPhoto} alt="JediPhoto" />
-#### From left to right: Tony Lam, Ammar Mehicevic and Etienne Laccruche
+<Photo src={JediGroupPhoto.src} alt="JediPhoto" caption="From left to right: Tony Lam, Ammar Mehicevic and Etienne Laccruche"/>
 <br />
-</div>
 
-<div class="prj-list">
-## Outreach Activities:{/*TODO: Fix layout***/}
+## Outreach Activities:
 1. Tap Expo, Oct 10, GGC - To promote IT field and the TAP program to college students
 2. Super Saturday Series (S3), Nov 9, GGC - middle and high school girls to promote IT and STEM career
 3. Class Workshops - October 26th, November 13th, November 14th - promote IT field to non-IT college students
-</div>
 
-
-{/* <div class="flex flex-row flex-wrap"> */}
-<div class="prj-list">
 
 ## Steps:
-
 1. Create a SpheroEDU teacher account.
 2. Click on my content.
 3. Click on “Create a Program”.
@@ -86,12 +82,8 @@ The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to br
 10. Select both codes.
 11. Click submit.
 
-</div>
-
 
 ## Materials List:
-<div class="materials-list">
-
 | Amount | Materials | Dimension |
 | :----: | :------- | :-------- |
 | 6      | Foam Boards | 36 in. x 48 in. |
@@ -106,20 +98,12 @@ The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to br
 | 15     | Sphero Protractors | ------ |
 | ------ | Sphero EDU Desktop Application | ----- |
 
-</div>
-{/* </div> */}
-
-
-
 
 ## Technology
-<div class='gallery-list'>
 <Logo src= {spheroClassSet.src} alt="Class Set Of Sphero" link="https://sphero.com" />
 <Logo src= {spheroEduLogo.src} alt="Sphero Website Logo" link="https://sphero.com/pages/educators"/>
-</div>
 
 {/* CONTENT BLOCK */}
-<div class='prj-list'>
 <iframe width="560" class="youtube" src="https://www.youtube.com/embed/fTHYSRMObBw?si=5DyCDRpUBAxpnLX8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Project Setup & Installation:
@@ -129,9 +113,6 @@ The Technology Ambassador Program at [GGC](http://www.ggc.edu/tap) strives to br
 - [Creating a Program in Sphero Edu](https://github.com/TAP-GGC/Jedi/blob/main/Media/CreatingAProgramInSpheroEdu.pdf)
 - [Construction](https://github.com/TAP-GGC/Jedi/blob/main/Documents/Construction.pdf)
 
-<br />
-<br />
-</div>
 {/* 
 <div style='text-align:center; display: inline-block; font-size: 1.25em'>
 
