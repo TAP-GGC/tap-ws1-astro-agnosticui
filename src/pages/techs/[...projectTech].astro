@@ -1,75 +1,158 @@
 ---
-// Style Imports
 import '../../styles/global.css';
 import '@fontsource/source-sans-pro';
-import '@fontsource/pixelify-sans';
-import '@fontsource/ibm-plex-mono';
 import '@fontsource/work-sans';
 import '@fontsource/cormorant-garamond';
-import '@fontsource/spectral';
-import '@fontsource/crimson-pro';
-import '@fontsource/alfa-slab-one';
 
-// common.min.css is distributed with agnostic-react
-// and agnostic-svelte too. But, since we're using all
-// of these together, we only need to import global CSS
-// once and in one place.
-// common.min.css combines properties, resets, utilities
-// import "agnostic-vue/dist/common.min.css";
-// But!! Rob much prefers individual modular import ;)
-import "agnostic-vue/dist/common.properties.min.css";
-import "agnostic-vue/dist/common.resets.min.css";
-import "agnostic-vue/dist/common.utilities.min.css";
-import "agnostic-vue/dist/opinions.min.css";
-
-// Component Imports
 import "agnostic-vue/dist/index.css";
-
-// Read from content collection
 import { getCollection } from 'astro:content';
-import Crumbs from "../../components/Crumbs.vue"
-import ProjectSearch from '../../components/ProjectSearch.vue';
 import TAPDefaultLayout from "../../layouts/default.astro";
+import Crumbs from "../../components/Crumbs.vue";
+import { Disclose } from 'agnostic-vue';
+import ProjectCard from '../../components/ProjectCard.vue';
+import projectIds from '../../components/astro/ProjectIds';
+import EmptyImage from '/public/techs/empty.png';
 
+// 1. Generate a new path for every technology entry
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');  
-  let slugs = new Array();
-
-  
-  // New algorithm: find unique tech combinations
-  let projectTech = {};
-  projects.forEach(project => {
-    project.data.techs.forEach(tech => {
-      if (!projectTech[tech]) {
-        projectTech[tech] = [];
-      }
-      projectTech[tech].push(project);
-    });
-  });
-
-  Object.keys(projectTech).forEach(tech => {
-    slugs.push({	
-      params: { "projectTech": `${tech}` },
-      props: { "tech": tech, "projects": projectTech[tech] }
-    });
-  });
-
-  return slugs;  
+  const techs = await getCollection('technologies');
+  return techs.map(tech => ({
+    params: { "projectTech": `${tech.data.id}` },
+    props: { tech },
+  }));
 }
 
-// read to pass to ProjectSearch
-const projects = await getCollection('projects');
-
-// 2. For your template, you can get the entry directly from the prop
 const { tech } = Astro.props;
+const { Content } = await tech.render();
+const allProjects = await getCollection('projects');
 
-// Page title
-let title = `Projects with ${tech}`;
+const relatedProjects = allProjects.filter(project =>
+  project.data.techs?.some(techId => techId.toLowerCase() === tech.data.id.toLowerCase())
+);
+
+const groupedProjects = {};
+relatedProjects.forEach(project => {
+  const semester = project.data.semester?.toUpperCase() || "UNKNOWN";
+  const year = project.data.year || "UNKNOWN";
+  const key = `${semester} ${year}`;
+  if (!groupedProjects[key]) groupedProjects[key] = [];
+  groupedProjects[key].push(project);
+});
+
+const techImg = tech.data.image?.src || EmptyImage.src;
+let title = `${tech.data.name} - Technology Profile`;
 ---
-<TAPDefaultLayout title=`${title}`>
 
-	<Crumbs pageType="tech" pageUrl=`/techs/${tech}`/>
+<TAPDefaultLayout title={title}>
+  <Crumbs pageType="tech" pageUrl={`/techs/${tech.data.id}`} />
 
-	<ProjectSearch client:load projectList={projects} filter={Astro.props}/>
+  <div class="body-tech">
+    {tech.data.name && <h1 class="techName">{tech.data.name}</h1>}
 
-</TAPDefaultLayout> 
+    <div class="techDetails">
+      {techImg && <img src={techImg} alt="Technology Image" class="techImage" />}
+      
+    </div>
+
+    <Content />
+    <div style="clear: both; margin: 2rem;"></div>
+
+    {Object.keys(groupedProjects).length > 0 && (
+      <Disclose isBackground title="TAP Projects Using This Technology">
+        {Object.entries(groupedProjects).map(([term, projects]) => (
+          <div class="tap-class-line">
+            <b>{term}</b>:{" "}
+            <span class="green-text">
+              {(projects as typeof relatedProjects).map((p, index) => {
+                const url = `/projects/${p.data.year}/${p.data.semester?.toLowerCase()}/${p.data.id}`;
+                return (
+                  <>
+                    <a href={url} target="_blank" rel="noopener noreferrer">
+                      {p.data.shortTitle}
+                    </a>
+                    {index < (projects as typeof relatedProjects).length - 1 && ", "}
+                  </>
+                );
+              })}
+            </span>
+          </div>
+        ))}
+      </Disclose>
+    )}
+
+    {relatedProjects.length > 0 && (
+      <h2>Related Projects Included</h2>
+    )}
+
+    {relatedProjects.length > 0 && (
+      <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
+        {relatedProjects.map(project => (
+          <ProjectCard item={projectIds[project.data.id]} />
+        ))}
+      </section>
+    )}
+  </div>
+</TAPDefaultLayout>
+
+<style>
+.body-tech p,
+.body-tech ul,
+.body-tech ol,
+.body-tech li {
+  font-family: var(--agnostic-font-body, "Source Sans Pro", sans-serif);
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.body-tech ul,
+.body-tech ol {
+  padding-left: 1.5rem;
+}
+
+.techImage {
+  margin-right: 1em;
+	width: clamp(15em, 50%, 25em);
+	float: left;
+	padding-bottom: 0.5em;
+	padding-right: 0.5em;
+}
+
+.techDetails {
+  font-size: 1.25em;
+  text-align: left;
+  display: inline;
+  margin-bottom: 1em;
+  height: 100%;
+}
+
+.techDetails p {
+  margin-bottom: 0.5em;
+}
+
+h1.techName {
+  text-align: center;
+}
+
+.tap-class-line {
+  font-size: 1.15em;
+  margin-bottom: 0.75em;
+}
+
+.green-text {
+  color: limegreen;
+}
+
+@media (max-width: 768px) {
+  .techImage {
+    float: none;
+    margin-right: 0;
+    width: 100%;
+    display: block;
+  }
+
+  .techDetails {
+    margin-bottom: 0;
+  }
+}
+</style>

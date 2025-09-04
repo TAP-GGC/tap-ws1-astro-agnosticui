@@ -126,6 +126,18 @@ const facultyCollection = defineCollection({
   }),
 });
 
+//Define technology collections
+const technologyCollection = defineCollection({
+  type: 'content',
+  schema: ({ image }) => z.object({
+    id: z.string(),
+    name: z.string(),
+    description: z.string(),
+    image: image().optional().nullable(),
+  }),
+});
+
+
 const awardCollection = defineCollection({
   type: 'content', // v2.5.0 and later
   schema: ({ image }) => z.object({
@@ -199,6 +211,7 @@ export const collections = {
   'projects': projectCollection,
   'students': studentCollection,
   'instructors': facultyCollection,
+  'technologies': technologyCollection,
   'awards': awardCollection,
   'publications' : papersCollection
 };

@@ -225,7 +225,6 @@ const paginationBaseUrl = `${base === '/' ? '' : base}/projects`;
         :pageSize="pageSize"
     />
 
-
   </div>
 </template>
 
@@ -250,3 +249,5 @@ const paginationBaseUrl = `${base === '/' ? '' : base}/projects`;
   gap: 1.5rem;
 }
 </style>
+
+

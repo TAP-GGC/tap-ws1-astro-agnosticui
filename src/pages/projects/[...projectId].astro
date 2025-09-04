@@ -80,6 +80,18 @@ function getNameFromID(id, type = 'student') {
 	return match?.data?.name || formatIDtoName(id);
 }
 
+//Technologies card entries
+const allTechs = await getCollection('technologies');
+const techEntries = allTechs.filter(tech =>
+  project.data.techs.includes(tech.data.id)
+);
+
+const techProjectCountMap = {};
+for (const tech of techEntries) {
+  const techId = tech.data.id;
+  techProjectCountMap[techId] = allProjects.filter(p => p.data.techs?.includes(techId)).length;
+}
+
 //get student & instructor collections
 // const studentData = project.data.students ? await getEntries(project.data.students) : [];
 // const instructorData = project.data.instructors.slug ? await getEntries(project.data.instructors) : "Instructor-tbd";
@@ -95,6 +107,7 @@ import Students from '../students.astro';
 import studentIds from '../../components/astro/StudentIds';
 import facultyIds from '../../components/astro/FacultyIds';
 import { formatIDtoName } from '../../components/astro/formatNames';
+import TechCard from '../../components/TechCard.vue';
 import ProjectCard from '../../components/ProjectCard.vue';
 import projectIds from '../../components/astro/ProjectIds';
 
@@ -200,6 +213,18 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 	
 
     <Content />
+
+	{techEntries.length > 0 && (
+	<>
+		<h3 class="mt-5" style="text-align: center;">Technologies Used</h3>
+		<div class="tech-card-grid">
+		{techEntries.map(tech => (
+			<TechCard client:load tech={tech.data} projectCount={techProjectCountMap[tech.data.id] || 0}/>
+		))}
+		</div>
+	</>
+	)}
+
 	<div class="prj-setup-section">
 		{project.data?.videos?.[0] && (
 			// <h2>Project Setup & Installation:2</h2>
@@ -300,7 +325,12 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 		padding: 0 1rem;
 	}
 
-
+	.tech-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 1rem;
+		margin-top: 1rem;
+	}
   
 </style>
 </TAPDefaultLayout>
