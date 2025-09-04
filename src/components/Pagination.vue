@@ -37,12 +37,19 @@ const props = defineProps({
   pageSize: Number,
 });
 
-const totalPages = Math.ceil(props.totalItems / props.pageSize);
+const totalPages = computed(() => Math.ceil(props.totalItems / props.pageSize));
 
 const pages = computed(() => {
-  const count = Math.min(5, totalPages);
-  const start = Math.max(1, props.currentPage - 2);
-  return Array.from({ length: count }, (_, i) => start + i).filter(p => p <= totalPages);
+  const tp = totalPages.value;
+  if (!tp) return [];
+  const windowSize = Math.min(5, tp);
+  const half = Math.floor(windowSize / 2);
+
+  let start = props.currentPage - half;
+  start = Math.max(1, start);
+  start = Math.min(start, tp - windowSize + 1);
+
+  return Array.from({ length: windowSize }, (_, i) => start + i);
 });
 </script>
 
