@@ -107,6 +107,18 @@ watchEffect(() => {
   paginatedProjects.value = filteredProjects.value.slice(start, end);
 });
 
+// Clamp current page when result size or pageSize changes
+watch([filteredProjects, pageSize], () => {
+  const tp = Math.max(1, Math.ceil(filteredProjects.value.length / pageSize.value));
+  if (currentPage.value > tp) currentPage.value = tp;
+});
+
+// reset to page 1 whenever any filter or search changes
+watch(
+  [() => search_text.value, () => name.value, () => graduationYear.value, () => projects.value],
+  () => { currentPage.value = 1; }
+);
+
 const totalPages = computed(() => Math.ceil(filteredProjects.value.length / pageSize.value));
 
 // URL sync (optional)
