@@ -18,7 +18,7 @@ import "agnostic-vue/dist/opinions.min.css";
 // Component Imports
 import "agnostic-vue/dist/index.css";
 import TAPDefaultLayout from "../layouts/default.astro";
-import NewsSearch from "../components/NewsSearch.vue"
+import Search from "../components/Search.vue"
 import { Input } from "agnostic-vue";
 import Crumbs from '../components/Crumbs.vue';
 import { getCollection } from 'astro:content';
@@ -28,7 +28,7 @@ const events = (await getCollection('events')).sort((e1, e2) => e2.data.eventDat
 
     <Crumbs pageType="posts" pageUrl="/posts" />
 
-    <NewsSearch client:load eventsList={events}/>
+    <Search client:load eventsList={events} context='events'/>
 
 
 </TAPDefaultLayout>

@@ -1,8 +1,9 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, watchEffect, watch } from "vue";
 import "agnostic-vue/dist/index.css";
 import "agnostic-vue/dist/common.min.css";
 import { Input, Select, Button } from "agnostic-vue";
+import Pagination from "./Pagination.vue";
 
 import StudentCard from "./StudentCard.vue";
 
@@ -17,6 +18,10 @@ const search_text = ref("");
 const name = props.filter?.name ? ref([props.filter.name]) : ref(['Any']);
 const graduationYear = props.filter?.graduationYear ? ref([props.filter.graduationYear]) : ref(['Any']);
 const projects = props.filter?.projects ? ref([props.filter.projects]) : ref(['Any']);
+
+//Student pagination
+const currentPage = ref(1);
+const pageSize = ref(12);
 
 // Create options for dropdowns
 function createOptions(students, x) {
@@ -87,6 +92,25 @@ const filteredStudents = computed(() => {
     return students.filter((student) => matches(student));
 });
 
+const paginatedStudents = ref([]);
+
+watchEffect(() => {
+  const start = (currentPage.value - 1) * pageSize.value;
+  const end = start + pageSize.value;
+  paginatedStudents.value = filteredStudents.value.slice(start, end);
+});
+
+// Clamp current page when result size or pageSize changes
+watch([filteredStudents, pageSize], () => {
+  if (currentPage.value > totalPages.value) {
+    currentPage.value = totalPages.value;
+  }
+});
+
+const totalPages = computed(() =>
+  Math.max(1, Math.ceil((filteredStudents.value.length || 0) / (pageSize.value || 1)))
+);
+
 const base = import.meta.env.BASE_URL;
 </script>
 
@@ -156,10 +180,16 @@ const base = import.meta.env.BASE_URL;
 
         <!-- Display Student Cards for filtered students -->
         <section class="mbe40 project-cards-flex flex flex-row flex-grow-1 flex-shrink-1 flex-wrap flex-fill">
-            <template v-for="student in filteredStudents" :key="student.data.id">
+            <template v-for="student in paginatedStudents" :key="student.data.id">
                 <StudentCard :item="student" />
             </template>
         </section>
+
+        <Pagination
+            v-model:currentPage="currentPage"
+            :totalItems="filteredStudents.length"
+            :pageSize="pageSize"
+        />
     </div>
 </template>
 

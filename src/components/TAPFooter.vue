@@ -131,10 +131,10 @@ const year = ref(new Date().getFullYear());
 
 h4 {
   margin-bottom: 5px;
-  font-size: 1em;
+  font-size: clamp(1.25rem, 1.5vw + 0.5rem, 1.5rem); /* Scales between ~20-24px */
 }
 p, ul{
-  font-size: 11px;
+  font-size: clamp(0.875rem, 1vw + 0.5rem, 1rem); /* Scales between ~14-16px */
 }
 
 ul {
@@ -197,11 +197,11 @@ ul {
   height: 50px;
 }
   p, ul{
-    font-size: 10px;
+    font-size: clamp(0.8125rem, 2vw + 0.5rem, 0.9375rem); /*13-15px*/
     line-height: 1 !important;
   }
   h4{
-    font-size: 13px;
+    font-size: clamp(1rem, 3vw + 0.5rem, 1.25rem); /* Increase scaling 16 - 20px*/ 
     margin-bottom: 4px;
     line-height: 1 !important;
 
