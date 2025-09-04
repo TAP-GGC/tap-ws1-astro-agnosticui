@@ -5,6 +5,8 @@ import "agnostic-vue/dist/common.min.css";
 import "agnostic-vue/dist/index.css";
 import { Card } from "agnostic-vue";
 import { formatIDtoName } from './astro/formatNames';
+import placeholderLight from "../images/tap-news-placeholder-light.png";
+import placeholderDark  from "../images/tap-news-placeholder-dark.png";
 
 // import placeholderLight from '/src/images/tap-news-placeholder-light.png';
 // import placeholderDark from '/src/images/tap-news-placeholder-dark.png';
@@ -31,14 +33,14 @@ const eventProp = defineProps({
 
 
 // Event Photos
-let eventPhoto = eventProp.item.data.imageEvent?.src;
-let placeholderLight = {src: "./images/tap-news-placeholder-light.png"}
-let placeholderDark = {src: "./images/tap-news-placeholder-dark.png"}
+const eventPhoto = computed(() => {
+  const v = eventProp.item?.data?.imageEvent;
+  return typeof v === "string" ? v : v?.src;
+});
 
-let eventPhotoLight = eventPhoto? eventPhoto : placeholderLight.src
-let eventPhotoDark = eventPhoto? eventPhoto : placeholderDark.src
+const eventPhotoLight = computed(() => eventPhoto.value || placeholderLight.src);
+const eventPhotoDark  = computed(() => eventPhoto.value || placeholderDark.src);
 
- /* change placeholder based on light/dark mode if there's no eventPhoto - isn't working :( */
 // const finalEventPhoto = computed(() => eventPhoto? eventPhoto : eventPhotoLight.value || eventPhotoDark.value);
 
 
@@ -187,5 +189,3 @@ const date_options = {
   clear: none;
 }
 </style>
-
-export { Card };
