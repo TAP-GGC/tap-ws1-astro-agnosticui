@@ -5,9 +5,7 @@ import "agnostic-vue/dist/common.min.css";
 import { Input, Card, Select, Disclose, Tag } from "agnostic-vue";
 import { Button, ButtonGroup } from 'agnostic-vue';
 
-
-
-import ProjectPagination from "./vue/ProjectPagination.vue";
+import ProjectCard from "./ProjectCard.vue";
 import Pagination from "./Pagination.vue";
 
 // Props
@@ -24,6 +22,7 @@ const props = defineProps({
   }
 });
 
+const projects = props.projectList;
 // Reactive state
 const currentPage = ref(props.currentPage);
 const pageSize = ref(props.pageSize);
@@ -139,7 +138,7 @@ const paginatedProjects = ref([]);
 watchEffect(() => {
   const start = (currentPage.value - 1) * pageSize.value;
   const end = start + pageSize.value;
-  paginatedProjects.value = filteredProjects.value.slice(start, end);
+  paginatedProjects.value = filteredAndSortedProjectsList.value.slice(start, end);
 });
 
 // Clamp current page when result size or pageSize changes
@@ -149,10 +148,7 @@ watch([filteredProjects, pageSize], () => {
 });
 
 // reset to page 1 whenever any filter or search changes
-watch(
-  [() => search_text.value, () => name.value, () => graduationYear.value, () => projects.value],
-  () => { currentPage.value = 1; }
-);
+// need to write a new one for the advance search!
 
 const totalPages = computed(() => Math.ceil(filteredProjects.value.length / pageSize.value));
 
@@ -167,18 +163,6 @@ watch(currentPage, (newPage) => {
 const base = import.meta.env.BASE_URL;
 const paginationBaseUrl = `${base === '/' ? '' : base}/projects`;
 
-const projectsStatusText = computed(() => {
-  const hasFilters = (
-    search_text.value ||
-    !semester.value.includes('Any') ||
-    !year.value.includes('Any') ||
-    !level.value.includes('Any') ||
-    !tech.value.includes('Any') ||
-    !duration.value.includes('Any') ||
-    !difficulty.value.includes('Any')
-  );
-  return hasFilters ? 'Selected projects' : 'All Projects';
-});
 </script>
 
 <template>
@@ -216,7 +200,7 @@ const projectsStatusText = computed(() => {
         </div> 
     </section>
 
-    <h3> {{ ((search_text || advancedSearch || !level.includes('Any') ||
+    <h3> {{ ((search_text || advancedSearchTags.length || !level.includes('Any') ||
                 !tech.includes('Any') || !duration.includes('Any') || !difficulty.includes('Any')) ?
                 `Selected projects` : 'All Projects') }} ({{ filteredAndSortedProjectsList.length }})</h3>
 
@@ -228,7 +212,7 @@ const projectsStatusText = computed(() => {
 
     <Pagination
         v-model:currentPage="currentPage"
-        :totalItems="filteredProjects.length"
+        :totalItems="filteredAndSortedProjectsList.length"
         :pageSize="pageSize"
     />
 
