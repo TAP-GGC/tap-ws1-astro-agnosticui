@@ -26,12 +26,10 @@ import "agnostic-vue/dist/opinions.min.css";
 // Component Imports
 import "agnostic-vue/dist/index.css";
 import { Image } from "astro:assets";
-import TAPHeader from '../../components/TAPHeader.vue';
-import TAPFooter from '../../components/TAPFooter.vue';
-
 
 // Read from conten collection
-import { getCollection, getEntry, getEntries } from 'astro:content';
+import { getCollection, } from 'astro:content';
+
 import Crumbs from "../../components/Crumbs.vue"
 
 // 1. Generate a new path for every collection entry
