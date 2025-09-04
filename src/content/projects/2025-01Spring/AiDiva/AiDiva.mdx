@@ -61,12 +61,15 @@ imageTeam: ./aidivateam.jpg
 import { Image } from "astro:assets";
 import GroupPhoto from './aidivateam.jpg';
 import OpenAI from './openailogo.png'
+import Clip from '/src/components/astro/Clip.astro';
 
 ## About
 
-AI Diva is a bold, sassy chatbot that teaches students about AI through interactive conversations.
+* AI Diva is a bold, sassy chatbot that teaches students about AI through interactive conversations.
 She makes topics like ethics and prompt engineering fun and engaging. More than just a tool, she’s an
 unforgettable way to explore how AI really works.
+
+<Clip src="mJm2OKTWRPc" showIframe={true} />
 
 See Github for more details!
 
@@ -84,7 +87,7 @@ See Github for more details!
 
 ### Team Members:
 
-<Image src={GroupPhoto} alt="Ai Diva Group Photo" />
+<Image src={GroupPhoto} alt="Ai Diva Group Photo" style="height: 80vh; width: 80vw"/>
 *Left to Right: Gabe Sosa, Rebecca Rahim, My Tran*
 
 ## Advisors
@@ -107,7 +110,7 @@ March 13, 2025 - April 9, 2025, Georgia Gwinnett College: Engaged non-IT student
 ## Technology
 
 #### OpenAI API
-<Image src={OpenAI} alt="OpenAILogo"/>
+<Image src={OpenAI} alt="OpenAILogo" style="height: 40vh; width: 40vw;"/>
 [OpenAI](https://openai.com/) is an artificial intelligence research organization that develops advanced AI models, including the powerful language model ChatGPT. Its API allows developers to integrate natural language processing, image understanding, and code generation into their own applications using simple and scalable endpoints.
 
 ## Project Setup
@@ -116,8 +119,13 @@ March 13, 2025 - April 9, 2025, Georgia Gwinnett College: Engaged non-IT student
 
 Computer with Internet Access. No installation or download required.
 Our workshop game is hosted on a public website:
-#### [Ai Diva](https://tap-ggc.github.io/AiDiva/)
+#### <a href="https://tap-ggc.github.io/AiDiva/" target="_blank" rel="noopener noreferrer">Ai Diva</a>
 *This workshop is strongly recommended in a Computer Lab.*<br /><br />
 
 #### Workshop and Materials
-- [Ai Diva Slides PDF ](https://github.com/TAP-GGC/AiDiva/blob/main/documents/workshop%20materials/Ai%20Diva%20Slides.pdf)
+- <a href="https://github.com/TAP-GGC/AiDiva/blob/main/documents/workshop%20materials/Ai_Diva_Slides.pdf" target="_blank" rel="noopener noreferrer">Ai Diva Slides PDF</a>
+- Demo Video
+<Clip src="DXfXpEJkKxc" showIframe={true} />
+<div style="margin: 40px;"></div>
+- Workshop for Student Demo
+<Clip src="O4iwbVIdOGc" showIframe={true} />
