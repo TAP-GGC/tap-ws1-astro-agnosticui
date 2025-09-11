@@ -78,12 +78,7 @@
  body {
   display: block; /* used to be grid */
   font-family: 'Work Sans', medium; 
-  /* Change the min and max sizing based on available space */
-/*  grid-template-columns: flex(auto-fit, minmax(100px,1fr)); /* need to remove this */
-  /*grid-auto-rows: minmax(100px, auto);  /* need to remove this */
-  /*flex-direction: column; */
   align-content: space-evenly;
-  /*justify-content: space-between; only works for grid */
   align-items: center;
   justify-items: center;
   background: var(--agnostic-gray-light);
