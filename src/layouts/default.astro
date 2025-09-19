@@ -32,14 +32,25 @@ import TAPFooter from '../components/TAPFooter.vue';
 // It will run during the build, but never in the browser.
 // All variables are available to use in the HTML template below.
 let title = `${Astro.props.title} - GGC Technology Ambassadors Program`;
+let description = `The Technology Ambassadors Program (TAP) aims to increase the number of students who persist in technology fields, particularly those underrepresented in computing. We provide fun and engaging technology activities for K-12 and college classrooms and outreach events. These activities were developed in a college-level service learning course that provides scholarship, leadership, service, and creativity skills.`;
 let bodyClass = Astro.props.class;
 
 ---
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="keywords" content="k-12, college, outreach, technology, fun, enagaging, coding, programming, undergraduate">
+	<meta name="description" content={description}>
+	<meta name="author" content="Technology Ambassadors Program (TAP)">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{title}</title>
+
+	<meta property="og:title" content={title}>
+	<meta property="og:type" content="website">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:url" content="https://tapggc.org">
+	<meta property="og:description" content={description}>
+	<meta property="og:image" content="https://tapggc.org/images/tap-logo-light.png">
 
 	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
