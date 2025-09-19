@@ -19,7 +19,7 @@ const year = ref(new Date().getFullYear());
           <div class="tap-logo">
             <p style="justify-content: center;">
               <a :href="base" >
-                <img :src="`${base == '/' ? '' : base}/images/tap-logo-dark.jpg`"  class="imageDark">
+                <img :src="`${base == '/' ? '' : base}/images/tap-logo-dark.png`"  class="imageDark">
                 <img :src="`${base == '/' ? '' : base}/images/tap-logo-light.png`" class="imageLight">
               </a>
             </p>      
