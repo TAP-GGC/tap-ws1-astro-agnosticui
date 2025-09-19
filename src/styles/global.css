@@ -178,7 +178,7 @@ a, .header a{
 }
 a:hover, .header a:hover{
   color: var(--agnostic-primary-hover) !important;
-  font-weight: 700 !important;
+  /* font-weight: 700 !important; Do NOT change font weight as it shifts content */
 }
 
 .tag, .button{
