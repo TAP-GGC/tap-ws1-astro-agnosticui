@@ -22,6 +22,10 @@ const year = ref(new Date().getFullYear());
                 <img :src="`${base == '/' ? '' : base}/images/tap-logo-dark.png`"  class="imageDark">
                 <img :src="`${base == '/' ? '' : base}/images/tap-logo-light.png`" class="imageLight">
               </a>
+              <a href="https://www.ggc.edu" target="_blank">
+                <img src="/logos/ggc-logo-dark.png"  class="imageDark ggcLogo">
+                <img src="/logos/ggc-logo-light.png" class="imageLight ggcLogo">
+              </a>              
             </p>      
             <h4>
               <a href="https://www.ggc.edu/academics/school-of-science-and-technology/research-internships-service-learning/technology-ambassador-program/tap-application" target="_blank">Apply</a>
@@ -72,13 +76,7 @@ const year = ref(new Date().getFullYear());
                   1000 University Center Ln, </p>
                   <p>Lawrenceville, GA 30043
                 </p>
-              </li>
-              <li>
-                <a href="https://www.ggc.edu">
-                <img src="/logos/ggc-logo-dark.png"  class="imageDark">
-                <img src="/logos/ggc-logo-light.png" class="imageLight">
-              </a>
-              </li>
+              </li>              
             </ul>
           
             
@@ -156,6 +154,11 @@ ul {
   max-height: 100px;
   margin: 0 auto;
 }
+
+.tap-logo img.ggcLogo {
+  max-height: 80px;
+}
+
 .contact{
   margin-top: 30px;
   line-height: 0.5;
