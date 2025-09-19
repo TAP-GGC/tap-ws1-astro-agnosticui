@@ -11,7 +11,7 @@ const base = import.meta.env.BASE_URL;
   <Header isHeaderContentStart css="header">
     <template v-slot:logoleft >      
       <a  style="padding:0 20px;" :href="base" >
-        <img :src="`${base == '/' ? '' : base}/images/tap-logo-dark.jpg`" width="100px" class="imageDark">
+        <img :src="`${base == '/' ? '' : base}/images/tap-logo-dark.png`" width="100px" class="imageDark">
         <img :src="`${base == '/' ? '' : base}/images/tap-logo-light.png`" width="100px" class="imageLight">
       </a>
       <div class="flex-fill"></div>
