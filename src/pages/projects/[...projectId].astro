@@ -248,9 +248,26 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 			))}
 		</div>
 	</>
-)}
+	)}
+
+	<h2 style="text-align: center; margin-top: 3rem;">Comments & Feedback</h2>
+	<div id="discourse-comments"></div>
 </div>
-	
+
+<script is:inline>
+  var DiscourseEmbed = {
+    discourseUrl: "https://forum.tappgc.org/",
+    discourseEmbedUrl: "https://dev.tapggc.org/projects/" + `${projYear}/${projSemester}/${project.data.id}`
+  };
+
+  (function() {
+    var d = document.createElement("script"); d.type = "text/javascript"; d.async = true;
+    d.src = DiscourseEmbed.discourseUrl + "javascripts/embed.js";
+    (document.getElementsByTagName("head")[0] || 
+     document.getElementsByTagName("body")[0]).appendChild(d);
+  })();
+</script>
+
 <style>
 	
 
