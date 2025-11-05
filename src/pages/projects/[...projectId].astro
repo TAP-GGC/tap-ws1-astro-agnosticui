@@ -269,112 +269,59 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 </script>
 
 <script is:inline>
-  // Wait for Discourse embed to load
-  function fetchAndDisplayPolls() {
-    // Get the iframe created by Discourse
-    const iframe = document.querySelector('iframe[src*="forum.tapggc.org"]');
-    if (!iframe) {
-      console.log("[v0] Waiting for iframe...");
-      setTimeout(fetchAndDisplayPolls, 500);
-      return;
-    }
+(async () => {
+  const DISCOURSE = 'https://forum.tapggc.org';     
+  const PAGE_URL  = window.location.href.split('#')[0];
 
-    // Extract topic ID from the embed URL
-    // Format: https://forum.tapggc.org/t/topic-slug/ID/1
-    const src = iframe.src;
-    const topicMatch = src.match(/\/t\/[^/]+\/(\d+)/);
+  const container = document.createElement('div');
+  container.id = 'tap-poll';
+  container.style.cssText = 'margin:1rem 0;font:600 16px/1.2 system-ui,sans-serif';
+  container.textContent = 'Loading poll…';
+  document.getElementById('discourse-comments').before(container);
+
+  try {
+    // Resolve the topic created by the embed for THIS page URL
+    const r1 = await fetch(`${DISCOURSE}/embed.json?embed_url=${encodeURIComponent(PAGE_URL)}`,
+      { headers: { 'Accept': 'application/json' } });
+    if (!r1.ok) throw new Error(`embed.json HTTP ${r1.status}`);
+    const embed = await r1.json();
+    const topicId = embed?.topic_id;
+    if (!topicId) { container.textContent = 'Poll not found.'; return; }
+
+    //Fetch topic JSON to get the ordered list of post IDs
+    const r2 = await fetch(`${DISCOURSE}/t/${topicId}.json`,
+      { headers: { 'Accept': 'application/json' } });
+    if (!r2.ok) throw new Error(`topic.json HTTP ${r2.status}`);
+    const topic = await r2.json();
+
+    // post_stream.stream is an array of post_ids in order:
+    // [ first_post_id (post_number 1), first_reply_id (post_number 2), ... ]
+    const stream = topic?.post_stream?.stream || [];
+    const firstReplyId = stream[1]; // post_number === 2
     
-    if (!topicMatch) {
-      console.log("[v0] Could not extract topic ID from iframe");
+    const targetPostId = firstReplyId ?? stream[0];
+
+    if (!targetPostId) { container.textContent = 'Poll not found.'; return; }
+
+    //Fetch the specific post JSON (contains polls[])
+    const r3 = await fetch(`${DISCOURSE}/posts/${targetPostId}.json`,
+      { headers: { 'Accept': 'application/json' } });
+    if (!r3.ok) throw new Error(`posts.json HTTP ${r3.status}`);
+    const post = await r3.json();
+
+    const polls = post?.polls;
+    if (!polls || !polls.length) {
+      container.textContent = 'Poll not found.';
       return;
     }
-
-    const topicId = topicMatch[1];
-    const postNumber = 2; // First comment
-
-    console.log("[v0] Found topic ID:", topicId);
-
-    // Fetch post data from Discourse API
-    fetch(`https://forum.tapggc.org/posts/${postNumber}.json?topic_id=${topicId}`)
-      .then(response => response.json())
-      .then(data => {
-        console.log("[v0] Poll data:", data.polls);
-        if (data.polls) {
-          displayPollResults(data.polls, iframe);
-        }
-      })
-      .catch(error => console.error("[v0] Error fetching poll data:", error));
+	console.log(polls);
+	
+  } catch (err) {
+    console.error('[poll]', err);
+    container.textContent = 'Poll unavailable.';
   }
-
-  function displayPollResults(polls, iframe) {
-    // Wait a bit for iframe to render, then find the poll link
-    setTimeout(() => {
-      try {
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-        const pollLink = iframeDoc.querySelector('a[href*="poll"]') || 
-                        Array.from(iframeDoc.querySelectorAll('a'))
-                          .find(a => a.textContent.includes("Click to view the poll"));
-
-        if (!pollLink) {
-          console.log("[v0] Poll link not found in iframe");
-          return;
-        }
-
-        // Create poll results HTML
-        const pollContainer = document.createElement('div');
-        pollContainer.className = 'poll-results-container';
-        pollContainer.style.cssText = 'margin-top: 15px; padding: 15px; background: #f5f5f5; border-radius: 8px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;';
-
-        Object.values(polls).forEach(poll => {
-          const pollHTML = createPollHTML(poll);
-          pollContainer.innerHTML += pollHTML;
-        });
-
-        // Insert after the embedded post
-        const postContent = pollLink.closest('[class*="cooked"]');
-        if (postContent) {
-          postContent.parentElement.insertBefore(pollContainer, postContent.nextSibling);
-          pollLink.style.display = 'none'; // Hide the original link
-        }
-      } catch (e) {
-        console.log("[v0] Cannot access iframe content (cross-origin)");
-      }
-    }, 1000);
-  }
-
-  function createPollHTML(poll) {
-    const totalVotes = poll.voters || poll.options.reduce((sum, opt) => sum + opt.votes, 0);
-    const options = poll.options.map(option => {
-      const votes = option.votes || 0;
-      const percentage = totalVotes > 0 ? Math.round((votes / totalVotes) * 100) : 0;
-      return `
-        <div style="margin-bottom: 12px;">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-            <span style="font-weight: 500; font-size: 14px;">${option.html}</span>
-            <span style="font-size: 13px; color: #666;">${percentage}%</span>
-          </div>
-          <div style="width: 100%; background: #e0e0e0; border-radius: 4px; height: 20px; overflow: hidden;">
-            <div style="width: ${percentage}%; background: #0066cc; height: 100%; transition: width 0.3s;"></div>
-          </div>
-        </div>
-      `;
-    }).join('');
-
-    return `
-      <div style="margin-bottom: 15px;">
-        <h4 style="margin: 0 0 10px 0; font-size: 16px; font-weight: 600;">${poll.name}</h4>
-        ${options}
-        <div style="margin-top: 10px; font-size: 12px; color: #999;">Total votes: ${totalVotes}</div>
-      </div>
-    `;
-  }
-
-  // Start fetching when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', fetchAndDisplayPolls);
-  } else {
-    fetchAndDisplayPolls();
-  }
+    
+})();
 </script>
 
 <style>
