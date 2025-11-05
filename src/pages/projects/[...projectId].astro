@@ -281,7 +281,7 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 
   try {
     // Resolve the topic created by the embed for THIS page URL
-    const r1 = await fetch(`${DISCOURSE}/embed.json?embed_url=${encodeURIComponent(PAGE_URL)}`,
+    const r1 = await fetch("https://forum.tapggc.org/t/teaching-sound-editing-with-audacity-and-makey-makey/125/",
       { headers: { 'Accept': 'application/json' } });
     if (!r1.ok) throw new Error(`embed.json HTTP ${r1.status}`);
     const embed = await r1.json();
