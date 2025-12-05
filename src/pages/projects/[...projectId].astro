@@ -32,6 +32,9 @@ import { getCollection, } from 'astro:content';
 
 import Crumbs from "../../components/Crumbs.vue"
 
+import polls from '../../data/polls.json';
+import PollRating from '../../components/vue/PollRating.vue';
+
 // 1. Generate a new path for every collection entry
 // Goal 1: Make it redirect to the projects.astro page, using the parameters as values for 
 export async function getStaticPaths() {
@@ -79,6 +82,8 @@ function getNameFromID(id, type = 'student') {
 	const match = Object.values(collection).find(entry => entry?.data?.id === id);
 	return match?.data?.name || formatIDtoName(id);
 }
+
+const poll = polls[project.data.id] ?? null
 
 //Technologies card entries
 const allTechs = await getCollection('technologies');
@@ -250,6 +255,15 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 	</>
 	)}
 
+	<section class="rating-section">
+		<h2 style="text-align: center; margin-top: 3rem;">Rating</h2>
+		{poll ? (
+			<PollRating poll={poll} client:load />
+		) : (
+			<p>No rating available for this project yet.</p>
+		)}
+	</section>
+
 	<h2 style="text-align: center; margin-top: 3rem;">Comments</h2>
 	<div id="discourse-comments"></div>
 </div>
@@ -266,62 +280,6 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
     (document.getElementsByTagName("head")[0] || 
      document.getElementsByTagName("body")[0]).appendChild(d);
   })();
-</script>
-
-<script is:inline>
-(async () => {
-  const DISCOURSE = 'https://forum.tapggc.org';     
-  const PAGE_URL  = window.location.href.split('#')[0];
-
-  const container = document.createElement('div');
-  container.id = 'tap-poll';
-  container.style.cssText = 'margin:1rem 0;font:600 16px/1.2 system-ui,sans-serif';
-  container.textContent = 'Loading poll…';
-  document.getElementById('discourse-comments').before(container);
-
-  try {
-    // Resolve the topic created by the embed for THIS page URL
-    const r1 = await fetch(`${DISCOURSE}/embed.json?embed_url=${encodeURIComponent(PAGE_URL)}`,
-      { headers: { 'Accept': 'application/json' } });
-    if (!r1.ok) throw new Error(`embed.json HTTP ${r1.status}`);
-    const embed = await r1.json();
-    const topicId = embed?.topic_id;
-    if (!topicId) { container.textContent = 'Poll not found.'; return; }
-
-    //Fetch topic JSON to get the ordered list of post IDs
-    const r2 = await fetch(`${DISCOURSE}/t/${topicId}.json`,
-      { headers: { 'Accept': 'application/json' } });
-    if (!r2.ok) throw new Error(`topic.json HTTP ${r2.status}`);
-    const topic = await r2.json();
-
-    // post_stream.stream is an array of post_ids in order:
-    // [ first_post_id (post_number 1), first_reply_id (post_number 2), ... ]
-    const stream = topic?.post_stream?.stream || [];
-    const firstReplyId = stream[1]; // post_number === 2
-    
-    const targetPostId = firstReplyId ?? stream[0];
-
-    if (!targetPostId) { container.textContent = 'Poll not found.'; return; }
-
-    //Fetch the specific post JSON (contains polls[])
-    const r3 = await fetch(`${DISCOURSE}/posts/${targetPostId}.json`,
-      { headers: { 'Accept': 'application/json' } });
-    if (!r3.ok) throw new Error(`posts.json HTTP ${r3.status}`);
-    const post = await r3.json();
-
-    const polls = post?.polls;
-    if (!polls || !polls.length) {
-      container.textContent = 'Poll not found.';
-      return;
-    }
-	console.log(polls);
-	
-  } catch (err) {
-    console.error('[poll]', err);
-    container.textContent = 'Poll unavailable.';
-  }
-    
-})();
 </script>
 
 <style>
