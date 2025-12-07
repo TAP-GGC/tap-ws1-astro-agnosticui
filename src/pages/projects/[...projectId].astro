@@ -338,6 +338,28 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
   })();
 </script>
 
+<script is:inline>
+  function fixDiscourseIframe() {
+    const iframe = document.getElementById("discourse-embed-frame");
+    if (!iframe) return;
+
+    // allow scrolling instead of "no"
+    iframe.removeAttribute("scrolling");
+    iframe.style.overflow = "visible";
+
+    // enforce a minimum height
+    const h = parseInt(iframe.style.height || iframe.height || 0, 10);
+    if (!h || h < 800) {
+      iframe.style.height = "800px";
+    }
+  }
+
+  // run a few times because embed.js runs async
+  setTimeout(fixDiscourseIframe, 500);
+  setTimeout(fixDiscourseIframe, 1500);
+  setInterval(fixDiscourseIframe, 3000);
+</script>
+
 <style>
 	
 
@@ -421,9 +443,7 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 	/* ensure the discourse comment to show all */
 	#discourse-comments iframe {
 		width: 100% !important;
-		max-width: 100%;
-		height: auto !important;
-		min-height: 600px !important;
+		min-height: 800px !important;
 	}
 
 	#discourse-comments {
