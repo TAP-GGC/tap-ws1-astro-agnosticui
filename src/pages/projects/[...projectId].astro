@@ -422,7 +422,13 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 	#discourse-comments iframe {
 		width: 100% !important;
 		max-width: 100%;
-		height: auto;
+		height: auto !important;
+		min-width: 200px !important;
+	}
+
+	#discourse-comments {
+		width: 100%;
+		overflow: visible;
 	}
 
 	.tech-card-grid {
