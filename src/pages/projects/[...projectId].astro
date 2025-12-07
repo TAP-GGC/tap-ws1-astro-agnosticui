@@ -32,7 +32,6 @@ import { getCollection, } from 'astro:content';
 
 import Crumbs from "../../components/Crumbs.vue"
 
-import polls from '../../data/polls.json';
 import PollRating from '../../components/vue/PollRating.vue';
 
 // 1. Generate a new path for every collection entry
@@ -83,7 +82,6 @@ function getNameFromID(id, type = 'student') {
 	return match?.data?.name || formatIDtoName(id);
 }
 
-const poll = polls[project.data.id] ?? null
 
 //Technologies card entries
 const allTechs = await getCollection('technologies');
@@ -100,6 +98,64 @@ for (const tech of techEntries) {
 //get student & instructor collections
 // const studentData = project.data.students ? await getEntries(project.data.students) : [];
 // const instructorData = project.data.instructors.slug ? await getEntries(project.data.instructors) : "Instructor-tbd";
+
+const DISCOURSE_BASE = 'https://forum.tapggc.org';
+
+function makeForumSlug(shortTitle, title) {
+  const raw = `${shortTitle}-${title}`;
+
+  return raw
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')  // strip punctuation
+    .replace(/\s+/g, '-')          // spaces -> hyphens
+    .replace(/-+/g, '-')           // collapse multiple dashes
+}
+
+let poll: any = null;
+
+if (project) {
+	const shortTitle = project.data.shortTitle || project.data.id;
+	const title = project.data.title;
+
+	const slug = makeForumSlug(shortTitle, title);
+	const topicUrl = `${DISCOURSE_BASE}/t/${slug}.json`;
+
+	try {
+		const topic = await fetch(topicUrl).then((r) => r.json());
+		const stream = topic?.post_stream?.stream || [];
+
+		for (const postId of stream) {
+			const postUrl = `${DISCOURSE_BASE}/posts/${postId}.json`;
+			const post = await fetch(postUrl).then((r) => r.json());
+
+			if (Array.isArray(post.polls) && post.polls.length > 0) {
+				const p = post.polls[0];
+				const voters = p.voters || 0;
+
+				const options = p.options.map((opt) => {
+					const html = String(opt.html ?? '')
+					const imgMatches = html.match(/<img\b[^>]*>/g) || []
+					const stars = imgMatches.length || 0;
+
+					return {
+						stars,
+						votes: opt.votes,
+						percent: voters ? (opt.votes / voters) * 100 : 0,
+						}
+				});
+
+				const totalScore = options.reduce((sum, opt) => sum + opt.stars * opt.votes, 0);
+				const average = voters ? totalScore / voters : 0;
+
+				poll = { voters, average, options };
+				break;
+			}
+		}
+	} catch (err) {
+		console.error(`Failed to fetch poll for slug ${slug}:`, err)
+	}
+}
 
 
 // Github button
@@ -350,10 +406,23 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 
 	.related-projects-container {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		grid-template-columns: 1fr;
 		gap: 1.5rem;
 		margin-top: 1rem;
 		padding: 0 1rem;
+	}
+
+	@media (min-width: 700px) {
+    	.related-projects-container {
+        	grid-template-columns: repeat(2, 1fr); 
+    	}
+	}
+
+	/* ensure the discourse comment to show all */
+	#discourse-comments iframe {
+		width: 100% !important;
+		max-width: 100%;
+		height: auto;
 	}
 
 	.tech-card-grid {

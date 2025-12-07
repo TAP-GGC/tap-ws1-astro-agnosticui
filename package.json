@@ -12,7 +12,6 @@
   "scripts": {
     "dev": "astro dev --experimental-integrations",
     "start": "astro dev --experimental-integrations",
-    "prebuild": "node scripts/fetch-polls.mjs",
     "build": "astro build --experimental-integrations",
     "preview": "astro preview --experimental-integrations",
     "astro": "astro"
