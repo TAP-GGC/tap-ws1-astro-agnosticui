@@ -345,12 +345,12 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 
     // allow scrolling instead of "no"
     iframe.removeAttribute("scrolling");
-    //iframe.style.overflow = "visible";
+    iframe.style.overflow = "visible";
 
     // enforce a minimum height
     const h = parseInt(iframe.style.height || iframe.height || 0, 10);
-    if (!h || h < 800) {
-      iframe.style.height = "auto";
+    if (!h || h < 600) {
+      iframe.style.height = "800px";
     }
   }
 
@@ -444,10 +444,12 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 	#discourse-comments iframe {
 		width: 100% !important;
 		min-height: 800px !important;
+		background-color: black;
 	}
 
 	#discourse-comments {
 		width: 100%;
+		background-color: black;
 		overflow: visible;
 	}
 
