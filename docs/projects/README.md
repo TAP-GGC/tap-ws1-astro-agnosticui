@@ -100,7 +100,9 @@ Once you are inside your project’s forum topic, make sure you are logged in to
 
 Paste the following exactly as shown and click Reply (note: please choose Markdown option when reply)
 
+```yaml
 Testing comment for the first one.
+
 [poll type=regular results=always public=true chartType=bar]
 * ⭐
 * ⭐⭐
@@ -108,6 +110,7 @@ Testing comment for the first one.
 * ⭐⭐⭐⭐
 * ⭐⭐⭐⭐⭐
 [/poll]
+```
 
 ![Poll content](./pollContent.png)
 
