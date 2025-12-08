@@ -75,3 +75,46 @@ You can follow the examples of previous projects:
 ## Submitting your changes
 
 Make sure to create a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) from your branch or fork to submit your changes. See more details in the [Github Codespaces page](../github-codespace/README.md).
+
+## After Your Pull Request Is Merged (IMPORTANT)
+
+Once your pull request is approved and merged into the main branch, there are a few final required steps to activate the comment and rating for your project page.
+
+👀 Step 1 – Visit Your Project Page
+
+Go to the TAP website and open your project page n the browser at least once for Discourse bot generating your project topic discussion
+
+👀 Step 2 – Open the Forum Discussion
+
+Scroll to the Comments section at the bottom of your project page. Then, click the forum link (You may need to refresh the page for the first visit).
+
+![Open forum link](./forumLink.png)
+
+Then, you will be navigate to the forum thread discussion of your project.
+
+👀 Step 3 – Add the Rating Poll (REQUIRED)
+
+Once you are inside your project’s forum topic, make sure you are logged in to the forum then click Reply to the first post.
+
+![Reply to first post](./replyPost.png)
+
+Paste the following exactly as shown and click Reply (note: please choose Markdown option when reply)
+
+```yaml
+Testing comment for the first one.
+
+[poll type=regular results=always public=true chartType=bar]
+* ⭐
+* ⭐⭐
+* ⭐⭐⭐
+* ⭐⭐⭐⭐
+* ⭐⭐⭐⭐⭐
+[/poll]
+```
+
+![Poll content](./pollContent.png)
+
+
+After posting the poll, please allow at least 1 day for the website to update the content. Then, revisit your project page and confirm that the rating now show up.
+
+![Rating show up on project page](./ratingAvailable.png)

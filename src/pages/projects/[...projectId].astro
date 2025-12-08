@@ -32,6 +32,8 @@ import { getCollection, } from 'astro:content';
 
 import Crumbs from "../../components/Crumbs.vue"
 
+import PollRating from '../../components/vue/PollRating.vue';
+
 // 1. Generate a new path for every collection entry
 // Goal 1: Make it redirect to the projects.astro page, using the parameters as values for 
 export async function getStaticPaths() {
@@ -80,6 +82,7 @@ function getNameFromID(id, type = 'student') {
 	return match?.data?.name || formatIDtoName(id);
 }
 
+
 //Technologies card entries
 const allTechs = await getCollection('technologies');
 const techEntries = allTechs.filter(tech =>
@@ -95,6 +98,64 @@ for (const tech of techEntries) {
 //get student & instructor collections
 // const studentData = project.data.students ? await getEntries(project.data.students) : [];
 // const instructorData = project.data.instructors.slug ? await getEntries(project.data.instructors) : "Instructor-tbd";
+
+const DISCOURSE_BASE = 'https://forum.tapggc.org';
+
+function makeForumSlug(shortTitle, title) {
+  const raw = `${shortTitle}-${title}`;
+
+  return raw
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')  // strip punctuation
+    .replace(/\s+/g, '-')          // spaces -> hyphens
+    .replace(/-+/g, '-')           // collapse multiple dashes
+}
+
+let poll: any = null;
+
+if (project) {
+	const shortTitle = project.data.shortTitle || project.data.id;
+	const title = project.data.title;
+
+	const slug = makeForumSlug(shortTitle, title);
+	const topicUrl = `${DISCOURSE_BASE}/t/${slug}.json`;
+
+	try {
+		const topic = await fetch(topicUrl).then((r) => r.json());
+		const stream = topic?.post_stream?.stream || [];
+
+		for (const postId of stream) {
+			const postUrl = `${DISCOURSE_BASE}/posts/${postId}.json`;
+			const post = await fetch(postUrl).then((r) => r.json());
+
+			if (Array.isArray(post.polls) && post.polls.length > 0) {
+				const p = post.polls[0];
+				const voters = p.voters || 0;
+
+				const options = p.options.map((opt) => {
+					const html = String(opt.html ?? '')
+					const imgMatches = html.match(/<img\b[^>]*>/g) || []
+					const stars = imgMatches.length || 0;
+
+					return {
+						stars,
+						votes: opt.votes,
+						percent: voters ? (opt.votes / voters) * 100 : 0,
+						}
+				});
+
+				const totalScore = options.reduce((sum, opt) => sum + opt.stars * opt.votes, 0);
+				const average = voters ? totalScore / voters : 0;
+
+				poll = { voters, average, options };
+				break;
+			}
+		}
+	} catch (err) {
+		console.error(`Failed to fetch poll for slug ${slug}:`, err)
+	}
+}
 
 
 // Github button
@@ -248,9 +309,57 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 			))}
 		</div>
 	</>
-)}
+	)}
+
+	<section class="rating-section">
+		<h2 style="text-align: center; margin-top: 3rem;">Rating</h2>
+		{poll ? (
+			<PollRating poll={poll} client:load />
+		) : (
+			<p>No rating available for this project yet.</p>
+		)}
+	</section>
+
+	<h2 style="text-align: center; margin-top: 3rem;">Comments</h2>
+	<div id="discourse-comments"></div>
 </div>
-	
+
+<script is:inline>
+  var DiscourseEmbed = {
+    discourseUrl: "https://forum.tapggc.org/",
+    discourseEmbedUrl: window.location.href
+  };
+
+  (function() {
+    var d = document.createElement("script"); d.type = "text/javascript"; d.async = true;
+    d.src = DiscourseEmbed.discourseUrl + "javascripts/embed.js";
+    (document.getElementsByTagName("head")[0] || 
+     document.getElementsByTagName("body")[0]).appendChild(d);
+  })();
+</script>
+
+<script is:inline>
+  function fixDiscourseIframe() {
+    const iframe = document.getElementById("discourse-embed-frame");
+    if (!iframe) return;
+
+    // allow scrolling instead of "no"
+    iframe.removeAttribute("scrolling");
+    iframe.style.overflow = "visible";
+
+    // enforce a minimum height
+    const h = parseInt(iframe.style.height || iframe.height || 0, 10);
+    if (!h || h < 600) {
+      iframe.style.height = "800px";
+    }
+  }
+
+  // run a few times because embed.js runs async
+  setTimeout(fixDiscourseIframe, 500);
+  setTimeout(fixDiscourseIframe, 1500);
+  setInterval(fixDiscourseIframe, 3000);
+</script>
+
 <style>
 	
 
@@ -319,10 +428,29 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 
 	.related-projects-container {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		grid-template-columns: 1fr;
 		gap: 1.5rem;
 		margin-top: 1rem;
 		padding: 0 1rem;
+	}
+
+	@media (min-width: 700px) {
+    	.related-projects-container {
+        	grid-template-columns: repeat(2, 1fr); 
+    	}
+	}
+
+	/* ensure the discourse comment to show all */
+	#discourse-comments iframe {
+		width: 100% !important;
+		min-height: 800px !important;
+		background-color: black;
+	}
+
+	#discourse-comments {
+		width: 100%;
+		background-color: black;
+		overflow: visible;
 	}
 
 	.tech-card-grid {
@@ -333,7 +461,6 @@ imageLogoDark = imageLogoTrans ? imageLogoTrans : imageLogoDark;
 		margin-top: 1rem;
 		justify-items: center;
 	}
-  
 </style>
 </TAPDefaultLayout>
 
