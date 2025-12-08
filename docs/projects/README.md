@@ -78,7 +78,7 @@ Make sure to create a [pull request](https://docs.github.com/en/pull-requests/co
 
 ## After Your Pull Request Is Merged (IMPORTANT)
 
-Once your pull request is approved and merged into the main branch, there are a few final required steps to fully activate the comment and rating system for your project page.
+Once your pull request is approved and merged into the main branch, there are a few final required steps to activate the comment and rating for your project page.
 
 👀 Step 1 – Visit Your Project Page
 
