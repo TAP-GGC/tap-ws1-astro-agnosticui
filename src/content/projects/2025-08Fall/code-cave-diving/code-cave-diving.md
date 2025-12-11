@@ -37,4 +37,6 @@ relatedIds: [
   "monster-makey"
 ]
 image: "./cave_logo.jpg"
+imageLogoLight: "./cave_logo_light.jpg"
+imageLogoDark: "./cave_logo_dark.jpg"
 ---
