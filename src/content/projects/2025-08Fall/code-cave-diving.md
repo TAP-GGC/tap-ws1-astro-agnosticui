@@ -36,5 +36,5 @@ publishedDate: 2025-11-12
 relatedIds: [
   "monster-makey"
 ]
-image: "./cave_logo.png"
+image: "./cave_logo.jpg"
 ---
