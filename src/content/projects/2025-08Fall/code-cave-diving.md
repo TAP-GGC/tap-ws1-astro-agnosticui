@@ -1,4 +1,5 @@
-hortTitle: Code Cave Diving
+---
+shortTitle: Code Cave Diving
 title: Using A Fun Processing Game To Teach Programming Fundamentals
 id: code-cave-diving
 desc : We wanted to create a fun game that can teach about basic Game Design concepts such as If Statements and Arrays through the use of a fun platforming game that they can interact with the backend of.
